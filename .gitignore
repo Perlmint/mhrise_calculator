@@ -1,3 +1,4 @@
 **/node_modules/
 crawler/out/
 crawler/data/
+.vscode/
