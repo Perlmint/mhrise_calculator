@@ -3,60 +3,88 @@ import path from "path";
 
 import Crawler from "crawler";
 
-interface InvenArmorInfo {
+export interface InvenArmorInfo {
     name: string;
     part: string;
+    rarity: number;
 }
 
-export function parse() {
-    const c = new Crawler({ rateLimit: 1000 });
-    const url = "https://mhf.inven.co.kr/dataninfo/mhr/armor";
+const rarityRegex = new RegExp(/rare(\d+)/);
 
-    c.queue({
-        uri: url,
-        callback: (err, res, done) => {
-            if (err) {
-                console.error(err);
-                return done();
-            }
+const rarityNameMap = {
+    머리: "helm",
+    몸통: "torso",
+    팔: "arm",
+    허리: "waist",
+    다리: "feet",
+} as { [key: string]: string };
 
-            const $ = res.$;
+export async function parse() {
+    const prom = new Promise<void>((resolve, reject) => {
+        console.log("Inven parsing begin");
 
-            const infos = [] as InvenArmorInfo[];
+        const c = new Crawler({ rateLimit: 1000 });
+        const url = "https://mhf.inven.co.kr/dataninfo/mhr/armor";
 
-            const table = $("#mhrDb .mhr.board.board01 table tbody tr");
+        c.queue({
+            uri: url,
+            callback: (err, res, done) => {
+                if (err) {
+                    reject(err);
 
-            table.each((i, elem) => {
-                const cols = $(elem).children("td");
-
-                const name = $(cols[0])
-                    .children("a")
-                    .children("b")
-                    .children("span")
-                    .text();
-
-                const part = $(cols[1]).text().trim();
-
-                const info = { name, part } as InvenArmorInfo;
-
-                infos.push(info);
-            });
-
-            const resultStr = JSON.stringify(infos, null, 4);
-
-            fs.writeFile(
-                path.join("data", `inven_data.json`),
-                resultStr,
-                (err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-
-                    console.log("All data parsing done!");
+                    return done();
                 }
-            );
 
-            done();
-        },
+                const $ = res.$;
+
+                const infos = [] as InvenArmorInfo[];
+
+                const table = $("#mhrDb .mhr.board.board01 table tbody tr");
+
+                table.each((i, elem) => {
+                    const cols = $(elem).children("td");
+
+                    const nameSpan = $(cols[0])
+                        .children("a")
+                        .children("b")
+                        .children("span");
+
+                    const name = nameSpan.text();
+                    const rarityClass = nameSpan.attr("class");
+
+                    const rarity = Number.parseInt(
+                        rarityClass?.match(rarityRegex)![1]!
+                    );
+
+                    const part = rarityNameMap[$(cols[1]).text().trim()];
+
+                    const info = { name, part, rarity } as InvenArmorInfo;
+
+                    infos.push(info);
+                });
+
+                console.log("Inven parsing done");
+
+                const resultStr = JSON.stringify(infos, null, 4);
+
+                fs.writeFile(
+                    path.join("data", `inven_data.json`),
+                    resultStr,
+                    (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            console.log("Inven data file write done");
+
+                            resolve();
+                        }
+
+                        done();
+                    }
+                );
+            },
+        });
     });
+
+    return prom;
 }

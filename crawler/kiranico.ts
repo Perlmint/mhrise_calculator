@@ -9,7 +9,7 @@ interface UrlInfo {
     url: string;
 }
 
-interface ArmorInfo {
+export interface KiranicoArmorInfo {
     name: string;
     rarity: number;
     stat: ArmorStatInfo;
@@ -30,9 +30,9 @@ interface SkillInfo {
     level: number;
 }
 
-type AllInfo = { [key: string]: { [key: number]: ArmorInfo[] } };
+type AllInfo = { [key: string]: { [key: number]: KiranicoArmorInfo[] } };
 
-const langs = [
+export const langs = [
     "ja",
     "zh",
     "zh-Hant",
@@ -71,7 +71,7 @@ function crawlCallback(
         return done();
     }
 
-    const armorInfos = [] as ArmorInfo[];
+    const armorInfos = [] as KiranicoArmorInfo[];
 
     const $ = res.$;
     const armorRows = $("table tbody tr");
@@ -140,20 +140,20 @@ function crawlCallback(
             rarity,
             stat: statInfo,
             skills,
-        } as ArmorInfo;
+        } as KiranicoArmorInfo;
 
         armorInfos.push(info);
     });
 
     allInfos[lang][rarity] = armorInfos;
 
-    console.log(`Parsing (lang: ${lang}, rarity: ${rarity}) done`);
+    console.log(`Kiranico parsing (lang: ${lang}, rarity: ${rarity}) done`);
 
     return done();
 }
 
-export function parse() {
-    console.log("Parsing begin");
+export async function parse() {
+    console.log("Kiranico parsing begin");
 
     const c = new Crawler({ rateLimit: 1000 });
 
@@ -164,7 +164,7 @@ export function parse() {
     }
 
     for (const lang of langs) {
-        for (let rarity = 0; rarity < maxArmorRarity; ++rarity) {
+        for (let rarity = 7; rarity < maxArmorRarity; ++rarity) {
             const url = `https://mhrise.kiranico.com/${lang}/data/armors?view=${rarity}`;
             const info = {
                 lang,
@@ -185,21 +185,32 @@ export function parse() {
         });
     }
 
+    const proms = [] as Promise<void>[];
+
     c.on("drain", () => {
         for (const lang of langs) {
-            const resultStr = JSON.stringify(allInfos[lang], null, 4);
+            const prom = new Promise<void>((resolve, reject) => {
+                const resultStr = JSON.stringify(allInfos[lang], null, 4);
 
-            fs.writeFile(
-                path.join("data", `data.${lang}.json`),
-                resultStr,
-                (err) => {
-                    if (err) {
-                        console.error(err);
+                fs.writeFile(
+                    path.join("data", `kira_data.${lang}.json`),
+                    resultStr,
+                    (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            console.log(
+                                `Kiranico ${lang} data file write done`
+                            );
+                            resolve();
+                        }
                     }
+                );
+            });
 
-                    console.log("All data parsing done!");
-                }
-            );
+            proms.push(prom);
         }
     });
+
+    return Promise.all(proms);
 }
