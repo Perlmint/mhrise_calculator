@@ -68,7 +68,7 @@ export async function parse() {
                 const resultStr = JSON.stringify(infos, null, 4);
 
                 fs.writeFile(
-                    path.join("data", `inven_data.json`),
+                    path.join("temp_data", `inven_data.json`),
                     resultStr,
                     (err) => {
                         if (err) {

@@ -193,7 +193,7 @@ export async function parse() {
                 const resultStr = JSON.stringify(allInfos[lang], null, 4);
 
                 fs.writeFile(
-                    path.join("data", `kira_data.${lang}.json`),
+                    path.join("temp_data", `kira_data.${lang}.json`),
                     resultStr,
                     (err) => {
                         if (err) {

@@ -1,4 +1,4 @@
 **/node_modules/
 crawler/out/
-crawler/data/
+crawler/temp_data/
 .vscode/
