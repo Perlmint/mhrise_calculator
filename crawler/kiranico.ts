@@ -185,36 +185,41 @@ export async function parse() {
         });
     }
 
-    const proms = [] as Promise<void>[];
+    return new Promise<void>((resolve, reject) => {
+        c.on("drain", () => {
+            if (fs.existsSync("temp_data") === false) {
+                fs.mkdirSync("temp_data");
+            }
 
-    c.on("drain", () => {
-        if (fs.existsSync("temp_data") === false) {
-            fs.mkdirSync("temp_data");
-        }
+            const proms = [] as Promise<void>[];
 
-        for (const lang of langs) {
-            const prom = new Promise<void>((resolve, reject) => {
-                const resultStr = JSON.stringify(allInfos[lang], null, 4);
+            for (const lang of langs) {
+                const prom = new Promise<void>((resolve, reject) => {
+                    const resultStr = JSON.stringify(allInfos[lang], null, 4);
 
-                fs.writeFile(
-                    path.join("temp_data", `kira_data.${lang}.json`),
-                    resultStr,
-                    (err) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            console.log(
-                                `Kiranico ${lang} data file write done`
-                            );
-                            resolve();
+                    fs.writeFile(
+                        path.join("temp_data", `kira_data.${lang}.json`),
+                        resultStr,
+                        (err) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                console.log(
+                                    `Kiranico ${lang} data file write done`
+                                );
+                                resolve();
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                });
 
-            proms.push(prom);
-        }
+                proms.push(prom);
+            }
+
+            Promise.all(proms).then(
+                () => resolve(),
+                () => reject()
+            );
+        });
     });
-
-    return Promise.all(proms);
 }
