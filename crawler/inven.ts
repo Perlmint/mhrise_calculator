@@ -86,6 +86,10 @@ export async function parse() {
 
                 console.log("Inven parsing done");
 
+                if (fs.existsSync("temp_data") === false) {
+                    fs.mkdirSync("temp_data");
+                }
+
                 const resultStr = JSON.stringify(infos, null, 4);
 
                 fs.writeFile(

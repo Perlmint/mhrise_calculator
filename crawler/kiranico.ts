@@ -188,6 +188,10 @@ export async function parse() {
     const proms = [] as Promise<void>[];
 
     c.on("drain", () => {
+        if (fs.existsSync("temp_data") === false) {
+            fs.mkdirSync("temp_data");
+        }
+
         for (const lang of langs) {
             const prom = new Promise<void>((resolve, reject) => {
                 const resultStr = JSON.stringify(allInfos[lang], null, 4);
