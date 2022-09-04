@@ -6,7 +6,14 @@ import Crawler from "crawler";
 export interface InvenArmorInfo {
     name: string;
     part: string;
+    sexType: SexType;
     rarity: number;
+}
+
+enum SexType {
+    all = "all",
+    male = "man.",
+    female = "female",
 }
 
 const rarityRegex = new RegExp(/rare(\d+)/);
@@ -18,6 +25,12 @@ const rarityNameMap = {
     허리: "waist",
     다리: "feet",
 } as { [key: string]: string };
+
+const sexTypeDict = {
+    여성용: SexType.female,
+    남성용: SexType.male,
+    "": SexType.all,
+} as { [key: string]: SexType };
 
 export async function parse() {
     const prom = new Promise<void>((resolve, reject) => {
@@ -49,7 +62,10 @@ export async function parse() {
                         .children("b")
                         .children("span");
 
+                    const sexSpan = $(cols[0]).children("span.sextype");
+
                     const name = nameSpan.text();
+                    const sexType = sexTypeDict[sexSpan.text()];
                     const rarityClass = nameSpan.attr("class");
 
                     const rarity = Number.parseInt(
@@ -58,7 +74,12 @@ export async function parse() {
 
                     const part = rarityNameMap[$(cols[1]).text().trim()];
 
-                    const info = { name, part, rarity } as InvenArmorInfo;
+                    const info = {
+                        name,
+                        part,
+                        sexType,
+                        rarity,
+                    } as InvenArmorInfo;
 
                     infos.push(info);
                 });

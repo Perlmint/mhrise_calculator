@@ -11,6 +11,7 @@ import { parse as invenParse, InvenArmorInfo } from "./inven.js";
 interface FinalArmorInfo extends KiranicoArmorInfo {
     id: number;
     part: string;
+    sexType: string;
 }
 
 async function merge() {
@@ -44,6 +45,7 @@ async function merge() {
             if (info.name === invenData.name) {
                 info.id = invenIdx;
                 info.part = invenData.part;
+                info.sexType = invenData.sexType;
 
                 realArmorInfos.push({
                     rarity: invenData.rarity,
@@ -74,9 +76,11 @@ async function merge() {
 
         realArmorInfos.forEach((info) => {
             const otherArmor = otherLangDatas[info.rarity - 1][info.kiraId];
+            const koArmor = kiraKoDatas[info.rarity - 1][info.kiraId];
 
-            otherArmor.id = info.invenId;
-            otherArmor.part = kiraKoDatas[info.rarity - 1][info.kiraId].part;
+            otherArmor.id = koArmor.id;
+            otherArmor.part = koArmor.part;
+            otherArmor.sexType = koArmor.sexType;
         });
     }
 
@@ -116,7 +120,7 @@ async function merge() {
 
 async function main() {
     // await Promise.all([kiranicoParse(), invenParse()]);
-    // await invenParse();
+    await invenParse();
 
     await merge();
 }
