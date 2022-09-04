@@ -8,6 +8,8 @@ import {
 } from "./kiranico.js";
 import { parse as invenParse, InvenArmorInfo } from "./inven.js";
 
+import { parse as skillParse } from "./kiranico_skill.js";
+
 interface FinalArmorInfo extends KiranicoArmorInfo {
     id: number;
     part: string;
@@ -120,9 +122,11 @@ async function merge() {
 
 async function main() {
     // await Promise.all([kiranicoParse(), invenParse()]);
-    await invenParse();
+    // await invenParse();
 
-    await merge();
+    await skillParse();
+
+    // await merge();
 }
 
 await main();
