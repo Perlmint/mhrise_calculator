@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs-extra";
 import path from "path";
 
 import Crawler from "crawler";
@@ -164,7 +164,7 @@ export async function parse() {
     }
 
     for (const lang of langs) {
-        for (let rarity = 7; rarity < maxArmorRarity; ++rarity) {
+        for (let rarity = 0; rarity < maxArmorRarity; ++rarity) {
             const url = `https://mhrise.kiranico.com/${lang}/data/armors?view=${rarity}`;
             const info = {
                 lang,
@@ -185,11 +185,11 @@ export async function parse() {
         });
     }
 
+    const baseDir = path.join("temp_data", "armor");
+
     return new Promise<void>((resolve, reject) => {
         c.on("drain", () => {
-            if (fs.existsSync("temp_data") === false) {
-                fs.mkdirSync("temp_data");
-            }
+            fs.ensureDirSync(baseDir);
 
             const proms = [] as Promise<void>[];
 
@@ -198,7 +198,7 @@ export async function parse() {
                     const resultStr = JSON.stringify(allInfos[lang], null, 4);
 
                     fs.writeFile(
-                        path.join("temp_data", `kira_data.${lang}.json`),
+                        path.join(baseDir, `armor.${lang}.json`),
                         resultStr,
                         (err) => {
                             if (err) {

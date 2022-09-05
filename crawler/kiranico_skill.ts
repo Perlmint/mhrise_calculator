@@ -1,9 +1,9 @@
-import fs from "fs";
+import fs from "fs-extra";
 import path from "path";
 
 import Crawler from "crawler";
 
-import { langs } from "./kiranico.js";
+import { langs } from "./kiranico_armor.js";
 
 interface UrlInfo {
     url: string;
@@ -17,12 +17,18 @@ interface SkillInfo {
 
 const allInfos: { [key: string]: SkillInfo[] } = {};
 
-async function crawlCallback(
+function crawlCallback(
     lang: string,
     err: Error,
     res: Crawler.CrawlerRequestResponse,
     done: () => void
 ) {
+    if (err) {
+        console.error(err);
+
+        return done();
+    }
+
     const $ = res.$;
 
     const infos = [] as SkillInfo[];
@@ -90,20 +96,20 @@ export async function parse() {
         });
     });
 
+    const baseDir = path.join("temp_data", "skill");
+
     return new Promise<void>((resolve, reject) => {
         c.on("drain", () => {
             console.log();
 
-            if (fs.existsSync("temp_data") === false) {
-                fs.mkdirSync("temp_data");
-            }
+            fs.ensureDirSync(baseDir);
 
             const proms = [] as Promise<void>[];
 
             for (const lang of langs) {
                 const infos = allInfos[lang];
 
-                const filename = path.join("temp_data", `skill.${lang}.json`);
+                const filename = path.join(baseDir, `skill.${lang}.json`);
                 const dataStr = JSON.stringify(infos, null, 4);
 
                 const prom = new Promise<void>((resolve, reject) => {

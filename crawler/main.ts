@@ -1,14 +1,15 @@
 import path from "path";
-import fs from "fs";
+import fs from "fs-extra";
 
 import {
-    parse as kiranicoParse,
+    parse as armorParse,
     langs,
     KiranicoArmorInfo,
-} from "./kiranico.js";
+} from "./kiranico_armor.js";
 import { parse as invenParse, InvenArmorInfo } from "./inven.js";
 
 import { parse as skillParse } from "./kiranico_skill.js";
+import { parse as decoParse } from "./kiranico_deco.js";
 
 interface FinalArmorInfo extends KiranicoArmorInfo {
     id: number;
@@ -20,7 +21,11 @@ async function merge() {
     const kiranicoFiles: { [key: string]: string } = {};
 
     langs.forEach((lang) => {
-        kiranicoFiles[lang] = path.join("temp_data", `kira_data.${lang}.json`);
+        kiranicoFiles[lang] = path.join(
+            "temp_data",
+            "armor",
+            `armor.${lang}.json`
+        );
     });
 
     const invenFile = path.join("temp_data", "inven_data.json");
@@ -86,9 +91,7 @@ async function merge() {
         });
     }
 
-    if (fs.existsSync("data") === false) {
-        fs.mkdirSync("data");
-    }
+    fs.ensureDirSync("data");
 
     const proms = [] as Promise<void>[];
 
@@ -121,12 +124,16 @@ async function merge() {
 }
 
 async function main() {
-    // await Promise.all([kiranicoParse(), invenParse()]);
-    // await invenParse();
+    const kiranicoParses = async () => {
+        await armorParse();
+        await skillParse();
+        await decoParse();
+    };
 
-    await skillParse();
+    await Promise.all([kiranicoParses(), invenParse()]);
+    await merge();
 
-    // await merge();
+    console.log("All data parsing done!");
 }
 
 await main();
