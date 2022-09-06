@@ -4,6 +4,7 @@ import path from "path";
 import Crawler from "crawler";
 
 import { langs } from "./kiranico_armor.js";
+import { makeId } from "./util.js";
 
 interface UrlInfo {
     url: string;
@@ -13,6 +14,12 @@ interface UrlInfo {
 interface SkillInfo {
     name: string;
     text: string;
+}
+
+interface FinalSkillInfo {
+    id: string;
+    names: { [key: string]: string };
+    texts: { [key: string]: string };
 }
 
 const allInfos: { [key: string]: SkillInfo[] } = {};
@@ -96,7 +103,7 @@ export async function parse() {
         });
     });
 
-    const baseDir = path.join("temp_data", "skill");
+    const baseDir = path.join("temp_data");
 
     return new Promise<void>((resolve, reject) => {
         c.on("drain", () => {
@@ -104,34 +111,41 @@ export async function parse() {
 
             fs.ensureDirSync(baseDir);
 
-            const proms = [] as Promise<void>[];
+            const finalInfos = [] as FinalSkillInfo[];
 
-            for (const lang of langs) {
-                const infos = allInfos[lang];
+            const enInfos = allInfos["en"];
 
-                const filename = path.join(baseDir, `skill.${lang}.json`);
-                const dataStr = JSON.stringify(infos, null, 4);
+            enInfos.forEach((enInfo, index) => {
+                const names = {} as { [key: string]: string };
+                const texts = {} as { [key: string]: string };
 
-                const prom = new Promise<void>((resolve, reject) => {
-                    fs.writeFile(filename, dataStr, (err) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            console.log(
-                                `Kiranico ${lang} skill data file write done`
-                            );
-                            resolve();
-                        }
-                    });
+                langs.forEach((lang) => {
+                    const langInfo = allInfos[lang][index];
+
+                    names[lang] = langInfo.name;
+                    texts[lang] = langInfo.text;
                 });
 
-                proms.push(prom);
-            }
+                const finalInfo = {
+                    id: makeId(enInfo.name),
+                    names,
+                    texts,
+                } as FinalSkillInfo;
 
-            Promise.all(proms).then(
-                () => resolve(),
-                () => reject()
-            );
+                finalInfos.push(finalInfo);
+            });
+
+            const filename = path.join(baseDir, "skill.json");
+            const dataStr = JSON.stringify(finalInfos, null, 4);
+
+            fs.writeFile(filename, dataStr, (err) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                console.log(`Kiranico skill data file write done`);
+                resolve();
+            });
         });
     });
 }

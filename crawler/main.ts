@@ -8,7 +8,7 @@ import { parse as skillParse } from "./kiranico_skill.js";
 import { parse as decoParse } from "./kiranico_deco.js";
 
 async function merge() {
-    const kiraFile = path.join("temp_data", "armor", "armor.json");
+    const kiraFile = path.join("temp_data", "armor.json");
     const invenFile = path.join("temp_data", "inven_data.json");
 
     const invenDatas: InvenArmorInfo[] = JSON.parse(
@@ -59,14 +59,23 @@ async function merge() {
         });
     });
 
+    fs.copyFileSync(
+        path.join("temp_data", "skill.json"),
+        path.join("data", "skill.json")
+    );
+    fs.copyFileSync(
+        path.join("temp_data", "deco.json"),
+        path.join("data", "deco.json")
+    );
+
     return prom;
 }
 
 async function main() {
     const kiranicoParses = async () => {
         await armorParse();
-        //await skillParse();
-        //await decoParse();
+        await skillParse();
+        await decoParse();
     };
 
     await Promise.all([kiranicoParses(), invenParse()]);

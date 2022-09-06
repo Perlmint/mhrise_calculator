@@ -196,7 +196,7 @@ export async function parse() {
         });
     }
 
-    const baseDir = path.join("temp_data", "armor");
+    const baseDir = path.join("temp_data");
 
     return new Promise<void>((resolve, reject) => {
         c.on("drain", () => {

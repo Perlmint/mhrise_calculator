@@ -4,6 +4,7 @@ import path from "path";
 import Crawler from "crawler";
 
 import { langs } from "./kiranico_armor.js";
+import { makeId } from "./util.js";
 
 interface UrlInfo {
     url: string;
@@ -12,10 +13,19 @@ interface UrlInfo {
 
 interface DecoInfo {
     name: string;
-    slotSize: number;
     skillName: string;
-    skillLevel: number;
     text: string;
+    slotSize: number;
+    skillLevel: number;
+}
+
+interface FinalDecoInfo {
+    id: string;
+    names: { [key: string]: string };
+    skillNames: { [key: string]: string };
+    texts: { [key: string]: string };
+    slotSize: number;
+    skillLevel: number;
 }
 
 const allInfos: { [key: string]: DecoInfo[] } = {};
@@ -97,7 +107,7 @@ export async function parse() {
         });
     });
 
-    const baseDir = path.join("temp_data", "deco");
+    const baseDir = path.join("temp_data");
 
     return new Promise<void>((resolve, reject) => {
         c.on("drain", () => {
@@ -105,34 +115,45 @@ export async function parse() {
 
             fs.ensureDirSync(baseDir);
 
-            const proms = [] as Promise<void>[];
+            const finalInfos = [] as FinalDecoInfo[];
 
-            for (const lang of langs) {
-                const infos = allInfos[lang];
+            const enInfos = allInfos["en"];
 
-                const filename = path.join(baseDir, `deco.${lang}.json`);
-                const dataStr = JSON.stringify(infos, null, 4);
+            enInfos.forEach((enInfo, index) => {
+                const names = {} as { [key: string]: string };
+                const skillNames = {} as { [key: string]: string };
+                const texts = {} as { [key: string]: string };
 
-                const prom = new Promise<void>((resolve, reject) => {
-                    fs.writeFile(filename, dataStr, (err) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            console.log(
-                                `Kiranico ${lang} deco data file write done`
-                            );
-                            resolve();
-                        }
-                    });
+                langs.forEach((lang) => {
+                    const info = allInfos[lang][index];
+                    names[lang] = info.name;
+                    skillNames[lang] = info.skillName;
+                    texts[lang] = info.text;
                 });
 
-                proms.push(prom);
-            }
+                const finalInfo = {
+                    id: `${makeId(enInfo.name)}_${enInfo.skillLevel}`,
+                    names,
+                    skillNames,
+                    texts,
+                    skillLevel: enInfo.skillLevel,
+                    slotSize: enInfo.slotSize,
+                } as FinalDecoInfo;
 
-            Promise.all(proms).then(
-                () => resolve(),
-                () => reject()
-            );
+                finalInfos.push(finalInfo);
+            });
+
+            const filename = path.join(baseDir, "deco.json");
+            const dataStr = JSON.stringify(finalInfos, null, 4);
+
+            fs.writeFile(filename, dataStr, (err) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                console.log(`Kiranico deco data file write done`);
+                resolve();
+            });
         });
     });
 }
