@@ -1,0 +1,13 @@
+{
+    "folders": [
+		{
+			"name": "crawler",
+			"path": "crawler"
+		},
+		{
+			"name": "simulator",
+			"path": "simulator"
+		}
+	],
+    "settings": {}
+}
