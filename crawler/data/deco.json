@@ -43,6 +43,7 @@
             "it": "Mantenimento acutezza: +20%",
             "pl": "Przyznaje 20% szansę na brak utraty ostrości po aktywacji."
         },
+        "skillId": "master's_touch",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -90,6 +91,7 @@
             "it": "Acutezza arma: +10",
             "pl": "Ostrość broni +10"
         },
+        "skillId": "handicraft",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -137,6 +139,7 @@
             "it": "Aumenta leggermente la fortuna.",
             "pl": "Nieznacznie zwiększa szczęście."
         },
+        "skillId": "good_luck",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -184,6 +187,7 @@
             "it": "Riduce i danni da fuoco infernale.",
             "pl": "Zmniejsza obrażenia od piekielnego ognia."
         },
+        "skillId": "hellfire_cloak",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -231,6 +235,7 @@
             "it": "Annulla le respinte in salto.",
             "pl": "Neutralizuje odepchnięcia podczas skoków."
         },
+        "skillId": "jump_master",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -278,6 +283,7 @@
             "it": "Danni fuoco rapido: +5%",
             "pl": "Obrażenia od szybkiego ognia +5%"
         },
+        "skillId": "rapid_fire_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -325,6 +331,7 @@
             "it": "Si attiva il 3% delle volte.",
             "pl": "Szansa na aktywację wynosi 3%."
         },
+        "skillId": "spare_shot",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -372,6 +379,7 @@
             "it": "Si attiva il 10% delle volte.",
             "pl": "Szansa na aktywację wynosi 10%."
         },
+        "skillId": "razor_sharp",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -419,6 +427,7 @@
             "it": "Aumenta leggermente la potenza dei proiettili ventaglio, frammentari e delle frecce ventaglio.",
             "pl": "Nieznacznie zwiększa siłę amunicji rozrzutowej i odłamkowej oraz strzał typu rozrzutowego."
         },
+        "skillId": "spread_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -466,6 +475,7 @@
             "it": "Aumenta leggermente la potenza dei proiettili perforanti e delle frecce perforanti.",
             "pl": "Zwiększa nieco siłę amunicji przebijającej i strzał typu przebijającego."
         },
+        "skillId": "pierce_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -513,6 +523,7 @@
             "it": "Aumenta leggermente la potenza dei proiettili normali e delle frecce rapide.",
             "pl": "Zwiększa nieco siłę normalnej amunicji i strzał typu szybkiego."
         },
+        "skillId": "normal/rapid_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -560,6 +571,7 @@
             "it": "Durata effetto: 30 secondi.",
             "pl": "Efekt utrzymuje się przez 30 sekund."
         },
+        "skillId": "protective_polish",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -607,6 +619,7 @@
             "it": "Accumulo scoppio: +5% Bonus: +1",
             "pl": "Akumulacja wybuchu +5% Premia: +1"
         },
+        "skillId": "blast_attack",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -654,6 +667,7 @@
             "it": "Accumulo sonno: +5% Bonus: +1",
             "pl": "Akumulacja uśpienia +5% Premia: +1"
         },
+        "skillId": "sleep_attack",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -701,6 +715,7 @@
             "it": "Accumulo paralisi: +5% Bonus: +1",
             "pl": "Akumulacja paraliżu +5% Premia: +1"
         },
+        "skillId": "paralysis_attack",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -748,6 +763,7 @@
             "it": "Affinità: +10% Consumo resistenza: -30%",
             "pl": "Po aktywacji zwiększa zgodność o 10% i zmniejsza spadek wytrzymałości o 30%."
         },
+        "skillId": "latent_power",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -795,6 +811,7 @@
             "it": "ATT Fisico: +5",
             "pl": "Atak +5 po aktywacji."
         },
+        "skillId": "resuscitate",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -842,6 +859,7 @@
             "it": "ATT Fisico: +5",
             "pl": "Atak +5 po aktywacji."
         },
+        "skillId": "resentment",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -889,6 +907,7 @@
             "it": "ATT Fisico: +5",
             "pl": "Atak +5 po aktywacji."
         },
+        "skillId": "peak_performance",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -936,6 +955,7 @@
             "it": "ATT Fisico: +4% Affinità: +3%",
             "pl": "Atak +4 i zgodność +3% po aktywacji."
         },
+        "skillId": "agitator",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -983,6 +1003,7 @@
             "it": "Affinità: +15%",
             "pl": "Ataki, które trafiły w słaby punkt, mają o 15% większą zgodność."
         },
+        "skillId": "weakness_exploit",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1030,6 +1051,7 @@
             "it": "Danni inflitti: 130%",
             "pl": "Zwiększa obrażenia zadawane przez trafienia krytyczne o 30%."
         },
+        "skillId": "critical_boost",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1077,6 +1099,7 @@
             "it": "Aumenta il caricatore per alcuni tipi di munizioni.",
             "pl": "Zwiększa rozmiar magazynka dla niektórych typów amunicji."
         },
+        "skillId": "ammo_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -1124,6 +1147,7 @@
             "it": "Attacco +5%",
             "pl": "Atak +5% po aktywacji."
         },
+        "skillId": "offensive_guard",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -1171,6 +1195,7 @@
             "it": "Consente di digerire i funghi blu e i funghi velenosi.",
             "pl": "Pozwala ci trawić niebieskie grzyby i muchomory."
         },
+        "skillId": "mushroomancer",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -1218,6 +1243,7 @@
             "it": "Affinità: +10%",
             "pl": "Zgodność +10%"
         },
+        "skillId": "critical_draw",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -1265,6 +1291,7 @@
             "it": "Incrementa leggermente il raggio d'azione.",
             "pl": "Zwiększa nieco zasięg."
         },
+        "skillId": "ballistics",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1312,6 +1339,7 @@
             "it": "Danni elementali: +5%",
             "pl": "Przyznaje +5% obrażeń od żywiołów po aktywacji."
         },
+        "skillId": "critical_element",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1359,6 +1387,7 @@
             "it": "Attacchi: +10% Recupero fuoco wyvern: -15%",
             "pl": "Zwiększa siłę wszystkich ataków o 10% i skraca czas odnowienia ognia wiwerny o 15%."
         },
+        "skillId": "artillery",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1406,6 +1435,7 @@
             "it": "Consumo resistenza: -15%",
             "pl": "Zmniejsza rozciągnięty w czasie spadek wytrzymałości o 15%."
         },
+        "skillId": "marathon_runner",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1453,6 +1483,7 @@
             "it": "Accumulo barra: +5% Velocità carica: +5%",
             "pl": "Szybkość wypełniania paska większa o 5% i czas ładowania szybszy o 5%."
         },
+        "skillId": "focus",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1500,6 +1531,7 @@
             "it": "ATT non respinti: 50% di probabilità Danno obiettivi: +10%",
             "pl": "50% szansa, że twoje ataki nie zostaną odbite. (Po aktywacji +10% obrażeń trudnych celów)."
         },
+        "skillId": "mind's_eye",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1547,6 +1579,7 @@
             "it": "DIF fisica: +50",
             "pl": "Po aktywacji zwiększa obronę o 50 punktów."
         },
+        "skillId": "heroics",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1594,6 +1627,7 @@
             "it": "Potenza munizioni speciali: +10% Potenza perfora draghi: +10%",
             "pl": "Zwiększa moc specjalnej amunicji do łukodziałka i moc przebijacza smoków o 10%."
         },
+        "skillId": "special_ammo_boost",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1641,6 +1675,7 @@
             "it": "Aumenta la velocità di ricarica di proiettili e rivestimento.",
             "pl": "Zwiększa szybkość przeładowania amunicji i powłok."
         },
+        "skillId": "load_shells",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1688,6 +1723,7 @@
             "it": "Danni subiti: -30%",
             "pl": "Zmniejsza otrzymywane obrażenia o 30%."
         },
+        "skillId": "guard_up",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1735,6 +1771,7 @@
             "it": "Riduce minimamente la respinta.",
             "pl": "Bardzo nieznacznie zmniejsza energię ataków."
         },
+        "skillId": "guard",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1782,6 +1819,7 @@
             "it": "Recupero resistenza: +10%",
             "pl": "Szybkość regeneracji wytrzymałości +10%"
         },
+        "skillId": "stamina_surge",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1829,6 +1867,7 @@
             "it": "Durata dei potenziamenti migliorata leggermente.",
             "pl": "Wydłuża nieco czas działania wzmocnień broni."
         },
+        "skillId": "power_prolonger",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1876,6 +1915,7 @@
             "it": "Aumenta l'affinità del 10%.",
             "pl": "Po aktywacji zwiększa zgodność o 10%."
         },
+        "skillId": "maximum_might",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1923,6 +1963,7 @@
             "it": "ATT Fisico: +3",
             "pl": "Atak +3"
         },
+        "skillId": "attack_boost",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -1970,6 +2011,7 @@
             "it": "Affinità: +5%",
             "pl": "Zgodność +5%"
         },
+        "skillId": "critical_eye",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2017,6 +2059,7 @@
             "it": "Velocità: +10%",
             "pl": "Szybkość +10%"
         },
+        "skillId": "rapid_morph",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2064,6 +2107,7 @@
             "it": "Rinculo: -1",
             "pl": "Odrzut -1"
         },
+        "skillId": "recoil_down",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2111,6 +2155,7 @@
             "it": "ATT Barra acutezza gialla o meno: +5%",
             "pl": "+5% siły ataku, gdy twój pasek ostrości broni jest żółty lub niższy."
         },
+        "skillId": "bludgeoner",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2158,6 +2203,7 @@
             "it": "Velocità balestra: +1 Migliora le manovre.",
             "pl": "Szybkość łukodziałka +1. Poprawia funkcjonalność łuku."
         },
+        "skillId": "reload_speed",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2205,6 +2251,7 @@
             "it": "Durata stordimento: -60%",
             "pl": "Skraca czas trwania ogłuszenia o 60%."
         },
+        "skillId": "stun_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2252,6 +2299,7 @@
             "it": "Annulla i sussulti lievi.",
             "pl": "Neutralizuje słabe wstrząsy ziemi."
         },
+        "skillId": "tremor_resistance",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2299,6 +2347,7 @@
             "it": "Riduce leggermente gli effetti dei ruggiti deboli di mostro.",
             "pl": "Zmniejsza efekty słabych ryków potworów."
         },
+        "skillId": "earplugs",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -2346,6 +2395,7 @@
             "it": "Attacco: +10",
             "pl": "Atak +10 po aktywacji."
         },
+        "skillId": "counterstrike",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2393,6 +2443,7 @@
             "it": "Riduce gli effetti dei malus da bolle intensi.",
             "pl": "Zmniejsza efekty dużej bąblowej plagi."
         },
+        "skillId": "bubbly_dance",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2440,6 +2491,7 @@
             "it": "Deviazione: -1",
             "pl": "Odchylenie -1"
         },
+        "skillId": "steadiness",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2487,6 +2539,7 @@
             "it": "Gli attacchi in estrazione infliggono lievi danni da stordimento e aumentano l'attacco di 3.",
             "pl": "Ataki z dobyciem zadają niewielkie obrażenia od ogłuszenia i dają +3 ataku."
         },
+        "skillId": "punishing_draw",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2534,6 +2587,7 @@
             "it": "Incrementa leggermente la distanza di schivata.",
             "pl": "Zwiększa nieco zasięg uników."
         },
+        "skillId": "evade_extender",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2581,6 +2635,7 @@
             "it": "Incrementa minimamente l'invulnerabilità.",
             "pl": "Bardzo nieznacznie wydłuża czas nietykalności."
         },
+        "skillId": "evade_window",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2628,6 +2683,7 @@
             "it": "Previene le respinte.",
             "pl": "Zapobiega odepchnięciom."
         },
+        "skillId": "flinch_free",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2675,6 +2731,7 @@
             "it": "Accelera leggermente.",
             "pl": "Nieznacznie przyspiesza chowanie broni."
         },
+        "skillId": "quick_sheathe",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2722,6 +2779,7 @@
             "it": "Annulla la pressione del vento lieve.",
             "pl": "Neutralizuje delikatny napór wiatru."
         },
+        "skillId": "windproof",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -2769,6 +2827,7 @@
             "it": "Potenza stordimento: +20%",
             "pl": "Moc ogłuszenia +20%"
         },
+        "skillId": "slugger",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2816,6 +2875,7 @@
             "it": "Efficacia condivisa: +33%",
             "pl": "Przedmioty działają na pobliskich sojuszników z 33% efektywnością."
         },
+        "skillId": "wide-range",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2863,6 +2923,7 @@
             "it": "Danni parte : +10%",
             "pl": "Obrażenia części ciała +10%"
         },
+        "skillId": "partbreaker",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2910,6 +2971,7 @@
             "it": "Durata malus elementali: -50%",
             "pl": "Skraca czas trwania wszystkich plag żywiołów o 50%."
         },
+        "skillId": "blight_resistance",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -2957,6 +3019,7 @@
             "it": "Aumenta leggermente l'abilità pasto veloce.",
             "pl": "Nieznacznie przyspiesza jedzenie."
         },
+        "skillId": "speed_eating",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3004,6 +3067,7 @@
             "it": "Danni subiti: -15%",
             "pl": "Po aktywacji zmniejsza otrzymywane obrażenia o 15%."
         },
+        "skillId": "divine_blessing",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3051,6 +3115,7 @@
             "it": "Consumo resistenza: -25%",
             "pl": "Zmniejsza spadek wytrzymałości podczas biegania po ścianach o 25%."
         },
+        "skillId": "wall_runner",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3098,6 +3163,7 @@
             "it": "Prolunga il tempo a disposizione per tenere un insetto filo del 30%.",
             "pl": "Wydłuża potencjalny czas trzymania kablobaka o 30%."
         },
+        "skillId": "wirebug_whisperer",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3145,6 +3211,7 @@
             "it": "Rimuove un ciclo.",
             "pl": "Usuwa z procesu ostrzenia jeden cykl."
         },
+        "skillId": "speed_sharpening",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3192,6 +3259,7 @@
             "it": "Durata effetto oggetto: +10%",
             "pl": "Czas trwania efektów przedmiotu +10%"
         },
+        "skillId": "item_prolonger",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3239,6 +3307,7 @@
             "it": "Velocità di recupero: +100%",
             "pl": "Dwukrotnie zwiększa szybkość regeneracji odzyskiwalnego zdrowia."
         },
+        "skillId": "recovery_speed",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3286,6 +3355,7 @@
             "it": "Incrementa leggermente il recupero.",
             "pl": "Nieznacznie przyspiesza regenerację."
         },
+        "skillId": "recovery_up",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3333,6 +3403,7 @@
             "it": "Attiva gli effetti dell'abilità.",
             "pl": "Aktywuje efekt umiejętności."
         },
+        "skillId": "horn_maestro",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3380,6 +3451,7 @@
             "it": "Potenza assorbimento resistenza: +20%",
             "pl": "Moc wyczerpania +20%"
         },
+        "skillId": "stamina_thief",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3427,6 +3499,7 @@
             "it": "Consumo resistenza: -10%",
             "pl": "Zmniejsza stały spadek wytrzymałości o 10%."
         },
+        "skillId": "constitution",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3474,6 +3547,7 @@
             "it": "Accumulo veleno: +5% Bonus: +1",
             "pl": "Akumulacja trucizny +5% Premia: +1"
         },
+        "skillId": "poison_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3521,6 +3595,7 @@
             "it": "Permette di usare l'abilità.",
             "pl": "Umożliwia korzystanie z umiejętności."
         },
+        "skillId": "affinity_sliding",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3568,6 +3643,7 @@
             "it": "Potenza di fuoco: +10%",
             "pl": "Moc wybuchu +10%"
         },
+        "skillId": "bombardier",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3615,6 +3691,7 @@
             "it": "ATT Fuoco: +2",
             "pl": "Atak ogniem +2"
         },
+        "skillId": "fire_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3662,6 +3739,7 @@
             "it": "ATT Acqua: +2",
             "pl": "Atak wodą +2"
         },
+        "skillId": "water_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3709,6 +3787,7 @@
             "it": "ATT Tuono: +2",
             "pl": "Atak piorunem +2"
         },
+        "skillId": "thunder_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3756,6 +3835,7 @@
             "it": "ATT Ghiaccio: +2",
             "pl": "Atak lodem +2"
         },
+        "skillId": "ice_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3803,6 +3883,7 @@
             "it": "ATT Drago: +2",
             "pl": "Smoczy atak +2"
         },
+        "skillId": "dragon_attack",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3850,6 +3931,7 @@
             "it": "DIF Fisica: +5",
             "pl": "Obrona +5"
         },
+        "skillId": "defense_boost",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3897,6 +3979,7 @@
             "it": "Attiva gli effetti dell'abilità.",
             "pl": "Aktywuje efekt umiejętności."
         },
+        "skillId": "carving_pro",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -3944,6 +4027,7 @@
             "it": "Facilita la parata e il caricamento della barra cavalcatura wyvern.",
             "pl": "Ułatwia napełnienie paska jazdy i zwiększa łatwość parowania."
         },
+        "skillId": "master_mounter",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -3991,6 +4075,7 @@
             "it": "Estensione ritardo: +50%",
             "pl": "Przedłuża czas, po którym twoja maksymalna wytrzymałość zmniejsza się o 50%."
         },
+        "skillId": "hunger_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4038,6 +4123,7 @@
             "it": "Si attiva il 10% delle volte.",
             "pl": "Szansa na aktywację wynosi 10%."
         },
+        "skillId": "free_meal",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4085,6 +4171,7 @@
             "it": "Riduce le limitazioni di movimento.",
             "pl": "Zmniejsza ograniczenia szybkości ruchu."
         },
+        "skillId": "muck_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4132,6 +4219,7 @@
             "it": "Attiva gli effetti dell'abilità.",
             "pl": "Aktywuje efekt umiejętności."
         },
+        "skillId": "diversion",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4179,6 +4267,7 @@
             "it": "Permette di usare l'abilità.",
             "pl": "Umożliwia korzystanie z umiejętności."
         },
+        "skillId": "leap_of_faith",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4226,6 +4315,7 @@
             "it": "Per ogni uso: ATT Fisico: +10%  DIF Fisica: +15%",
             "pl": "Przy każdym użyciu zwiększa atak o 10% i obronę o 15%."
         },
+        "skillId": "fortify",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -4273,6 +4363,7 @@
             "it": "Estrazione da resti di ossa: +1",
             "pl": "Pozwala pozyskiwać zasoby ze stert kości jeden raz dodatkowo."
         },
+        "skillId": "geologist",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4320,6 +4411,7 @@
             "it": "Erbe consumabili raccolte: +1",
             "pl": "Jeden dodatkowy przedmiot przy pozyskiwaniu ziół."
         },
+        "skillId": "botanist",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4367,6 +4459,7 @@
             "it": "Ritarda il malus da scoppio. Riduce i danni da scoppio.",
             "pl": "Opóźnia wybuchoplagę i zmniejsza obrażenia od wybuchu."
         },
+        "skillId": "blast_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4414,6 +4507,7 @@
             "it": "Durata sonno: -30%",
             "pl": "Skraca czas trwania uśpienia o 30%."
         },
+        "skillId": "sleep_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4461,6 +4555,7 @@
             "it": "Durata paralisi: -30%",
             "pl": "Skraca czas trwania paraliżu o 30%."
         },
+        "skillId": "paralysis_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4508,6 +4603,7 @@
             "it": "Riduce il numero di volte in cui ricevi danni da avvelenamento.",
             "pl": "Zmniejsza liczbę razy otrzymywania obrażeń od trucizn."
         },
+        "skillId": "poison_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4555,6 +4651,7 @@
             "it": "DIF Fuoco: +6",
             "pl": "Odporność na ogień +6"
         },
+        "skillId": "fire_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4602,6 +4699,7 @@
             "it": "DIF Acqua: +6",
             "pl": "Odporność na wodę +6"
         },
+        "skillId": "water_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4649,6 +4747,7 @@
             "it": "DIF Tuono: +6",
             "pl": "Odporność na pioruny +6"
         },
+        "skillId": "thunder_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4696,6 +4795,7 @@
             "it": "DIF Ghiaccio: +6",
             "pl": "Odporność na lód +6"
         },
+        "skillId": "ice_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4743,6 +4843,7 @@
             "it": "DIF Drago: +6",
             "pl": "Odporność na smoki +6"
         },
+        "skillId": "dragon_resistance",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -4790,6 +4891,7 @@
             "it": "DIF Fuoco: +20 DIF Fisica: +10",
             "pl": "Odporność na ogień +20 Obrona +10"
         },
+        "skillId": "fire_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -4837,6 +4939,7 @@
             "it": "DIF Acqua: +20 DIF Fisica: +10",
             "pl": "Odporność na wodę +20 Obrona +10"
         },
+        "skillId": "water_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -4884,6 +4987,7 @@
             "it": "DIF Ghiaccio: +20 DIF Fisica: +10",
             "pl": "Odporność na lód +20 Obrona +10"
         },
+        "skillId": "ice_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -4931,6 +5035,7 @@
             "it": "DIF Tuono: +20 DIF Fisica: +10",
             "pl": "Odporność na pioruny +20 Obrona +10"
         },
+        "skillId": "thunder_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -4978,6 +5083,7 @@
             "it": "DIF Drago: +20 DIF Fisica: +10",
             "pl": "Odporność na smoki +20 Obrona +10"
         },
+        "skillId": "dragon_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5025,6 +5131,7 @@
             "it": "Erbe consumabili, frutti, noci, semi, insetti raccolti: +1",
             "pl": "Jeden dodatkowy przedmiot przy pozyskiwaniu ziół, owoców, orzechów, nasion lub owadów."
         },
+        "skillId": "botanist",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5072,6 +5179,7 @@
             "it": "Estrazione da depositi minerari: +1",
             "pl": "Pozwala pozyskiwać zasoby ze złóż górniczych jeden raz dodatkowo."
         },
+        "skillId": "geologist",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5119,6 +5227,7 @@
             "it": "Si attiva il 45% delle volte.",
             "pl": "Szansa na aktywację wynosi 45%."
         },
+        "skillId": "free_meal",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5166,6 +5275,7 @@
             "it": "Potenza assorbimento resistenza: +40%",
             "pl": "Moc wyczerpania +40%"
         },
+        "skillId": "stamina_thief",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5213,6 +5323,7 @@
             "it": "Durata effetto oggetto: +50%",
             "pl": "Czas trwania efektów przedmiotu +50%"
         },
+        "skillId": "item_prolonger",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5260,6 +5371,7 @@
             "it": "Previene la riduzione.",
             "pl": "Sprawia, że twoja maksymalna wytrzymałość nie będzie spadała."
         },
+        "skillId": "hunger_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5307,6 +5419,7 @@
             "it": "ATT Fuoco: +3",
             "pl": "Atak ogniem +3"
         },
+        "skillId": "fire_attack",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5354,6 +5467,7 @@
             "it": "ATT Fuoco: +5% Bonus addizionale: +4",
             "pl": "Atak ogniem +5% Premia: +4"
         },
+        "skillId": "fire_attack",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5401,6 +5515,7 @@
             "it": "ATT Acqua: +3",
             "pl": "Atak wodą +3"
         },
+        "skillId": "water_attack",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5448,6 +5563,7 @@
             "it": "ATT Acqua: +5% Bonus addizionale: +4",
             "pl": "Atak wodą +5% Premia: +4"
         },
+        "skillId": "water_attack",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5495,6 +5611,7 @@
             "it": "ATT Ghiaccio: +3",
             "pl": "Atak lodem +3"
         },
+        "skillId": "ice_attack",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5542,6 +5659,7 @@
             "it": "ATT Ghiaccio: +5% Bonus addizionale: +4",
             "pl": "Atak lodem +5% Premia: +4"
         },
+        "skillId": "ice_attack",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5589,6 +5707,7 @@
             "it": "ATT Tuono: +3",
             "pl": "Atak piorunem +3"
         },
+        "skillId": "thunder_attack",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5636,6 +5755,7 @@
             "it": "ATT Tuono: +5% Bonus addizionale: +4",
             "pl": "Atak piorunem +5% Premia: +4"
         },
+        "skillId": "thunder_attack",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5683,6 +5803,7 @@
             "it": "ATT Drago: +3",
             "pl": "Smoczy atak +3"
         },
+        "skillId": "dragon_attack",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5730,6 +5851,7 @@
             "it": "ATT Drago: +5% Bonus addizionale: +4",
             "pl": "Smoczy atak +5% Premia: +4"
         },
+        "skillId": "dragon_attack",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5777,6 +5899,7 @@
             "it": "DIF Fisica: +10",
             "pl": "Obrona +10"
         },
+        "skillId": "defense_boost",
         "skillLevel": 2,
         "slotSize": 2
     },
@@ -5824,6 +5947,7 @@
             "it": "DIF Fisica: +5% Bonus: +10",
             "pl": "Obrona +5% Premia: +10"
         },
+        "skillId": "defense_boost",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -5871,6 +5995,7 @@
             "it": "DIF Fisica: +8% Bonus: +20 DIF Elementale (tutte): +3",
             "pl": "Obrona +8% Premia: +20 Wszystkie odporności na żywioły +3"
         },
+        "skillId": "defense_boost",
         "skillLevel": 5,
         "slotSize": 4
     },
@@ -5918,6 +6043,7 @@
             "it": "Potenza di fuoco: +30%",
             "pl": "Moc wybuchu +30%"
         },
+        "skillId": "bombardier",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -5965,6 +6091,7 @@
             "it": "Rimuove tre cicli.",
             "pl": "Usuwa z procesu ostrzenia trzy cykle."
         },
+        "skillId": "speed_sharpening",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -6012,6 +6139,7 @@
             "it": "Incrementa il recupero.",
             "pl": "Przyspiesza regenerację."
         },
+        "skillId": "recovery_up",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6059,6 +6187,7 @@
             "it": "Consumo resistenza: -20%",
             "pl": "Zmniejsza stały spadek wytrzymałości o 20%."
         },
+        "skillId": "constitution",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6106,6 +6235,7 @@
             "it": "Aumenta anche il recupero della filocaduta.",
             "pl": "Zwiększa również tempo regeneracji kablopadu."
         },
+        "skillId": "wirebug_whisperer",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6153,6 +6283,7 @@
             "it": "Correndo sulle pareti, aumenta anche il potere d'attacco.",
             "pl": "Ponadto bieganie po ścianach czasowo zwiększa siłę ataku."
         },
+        "skillId": "wall_runner",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -6200,6 +6331,7 @@
             "it": "Velocità di recupero: +300%",
             "pl": "Czterokrotnie zwiększa szybkość regeneracji odzyskiwalnego zdrowia."
         },
+        "skillId": "recovery_speed",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -6247,6 +6379,7 @@
             "it": "Danni subiti: -30%",
             "pl": "Po aktywacji zmniejsza otrzymywane obrażenia o 30%."
         },
+        "skillId": "divine_blessing",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6294,6 +6427,7 @@
             "it": "Aumenta l'abilità pasto veloce.",
             "pl": "Przyspiesza jedzenie."
         },
+        "skillId": "speed_eating",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6341,6 +6475,7 @@
             "it": "Durata malus elementali: -75%",
             "pl": "Skraca czas trwania wszystkich plag żywiołów o 75%."
         },
+        "skillId": "blight_resistance",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6388,6 +6523,7 @@
             "it": "Efficacia condivisa: +66% Area più ampia.",
             "pl": "Przedmioty działają na sojuszników z 66% efektywnością na większym obszarze."
         },
+        "skillId": "wide-range",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -6435,6 +6571,7 @@
             "it": "Efficacia condivisa: +66% Area molto più ampia.",
             "pl": "Przedmioty działają na sojuszników z 66% efektywnością na znacznie większym obszarze."
         },
+        "skillId": "wide-range",
         "skillLevel": 4,
         "slotSize": 4
     },
@@ -6482,6 +6619,7 @@
             "it": "Incrementa leggermente l'invulnerabilità.",
             "pl": "Nieznacznie wydłuża czas nietykalności."
         },
+        "skillId": "evade_window",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6529,6 +6667,7 @@
             "it": "Gli attacchi in estrazione infliggono lievi danni da stordimento e aumentano l'attacco di 5.",
             "pl": "Ataki z dobyciem zadają niewielkie obrażenia od ogłuszenia i dają +5 ataku."
         },
+        "skillId": "punishing_draw",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6576,6 +6715,7 @@
             "it": "Previene le respinte e gli inciampi.",
             "pl": "Zapobiega odepchnięciom i powaleniom."
         },
+        "skillId": "flinch_free",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -6623,6 +6763,7 @@
             "it": "Indebolisce i malus da bolle intensi e aumenta la schivata.",
             "pl": "Zmniejsza dużą bąblową plagę do małej i zwiększa możliwość uników podczas działania jej efektów."
         },
+        "skillId": "bubbly_dance",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6670,6 +6811,7 @@
             "it": "Potenza stordimento: +30%",
             "pl": "Moc ogłuszenia +30%"
         },
+        "skillId": "slugger",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6717,6 +6859,7 @@
             "it": "Incrementa sensibilmente la distanza di schivata.",
             "pl": "Zwiększa zasięg uników."
         },
+        "skillId": "evade_extender",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6764,6 +6907,7 @@
             "it": "Annulla la pressione di tutti i tipi di vento. Riduce gli effetti della pressione del vento drago.",
             "pl": "Neutralizuje delikatny i silny napór wiatru i zmniejsza efekty naporu smoczego wiatru."
         },
+        "skillId": "windproof",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -6811,6 +6955,7 @@
             "it": "Recupero resistenza: +20%",
             "pl": "Szybkość regeneracji wytrzymałości +20%"
         },
+        "skillId": "stamina_surge",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6858,6 +7003,7 @@
             "it": "Riduce leggermente la respinta. Consumo resistenza: -15%",
             "pl": "Nieznacznie zmniejsza energię ataków i zmniejsza spadek wytrzymałości o 15%."
         },
+        "skillId": "guard",
         "skillLevel": 2,
         "slotSize": 3
     },
@@ -6905,6 +7051,7 @@
             "it": "Danni subiti: -50%",
             "pl": "Zmniejsza otrzymywane obrażenia o 50%."
         },
+        "skillId": "guard_up",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6952,6 +7099,7 @@
             "it": "Incrementa raggio d'azione.",
             "pl": "Zwiększa zasięg."
         },
+        "skillId": "ballistics",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -6999,6 +7147,7 @@
             "it": "Danni elementali: +10%",
             "pl": "Przyznaje +10% obrażeń od żywiołów po aktywacji."
         },
+        "skillId": "critical_element",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7046,6 +7195,7 @@
             "it": "Accumulo barra: +10% Velocità carica: +10%",
             "pl": "Szybkość wypełniania paska większa o 10% i czas ładowania szybszy o 10%."
         },
+        "skillId": "focus",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7093,6 +7243,7 @@
             "it": "Consumo resistenza: -30%",
             "pl": "Zmniejsza rozciągnięty w czasie spadek wytrzymałości o 30%."
         },
+        "skillId": "marathon_runner",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7140,6 +7291,7 @@
             "it": "Affinità: +20%",
             "pl": "Zgodność +20%"
         },
+        "skillId": "critical_draw",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7187,6 +7339,7 @@
             "it": "Consente anche di digerire funghi nitro e funghi paralizzanti.",
             "pl": "Dodatkowo pozwala ci trawić nitrogrzyby i paragrzyby."
         },
+        "skillId": "mushroomancer",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7234,6 +7387,7 @@
             "it": "Previene lo stordimento.",
             "pl": "Zapobiega ogłuszeniu."
         },
+        "skillId": "stun_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -7281,6 +7435,7 @@
             "it": "ATT non respinti: 100% di probabilità Danno obiettivi: +15%",
             "pl": "100% szansa, że twoje ataki nie zostaną odbite. (Po aktywacji +15% obrażeń trudnych celów)."
         },
+        "skillId": "mind's_eye",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7328,6 +7483,7 @@
             "it": "Annulla gli effetti dei ruggiti deboli di mostro.",
             "pl": "Neutralizuje słabe ryki potworów."
         },
+        "skillId": "earplugs",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7375,6 +7531,7 @@
             "it": "Durata dei potenziamenti migliorata.",
             "pl": "Wydłuża czas działania wzmocnień broni."
         },
+        "skillId": "power_prolonger",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7422,6 +7579,7 @@
             "it": "Annulla i sussulti lievi. Riduce quelli intensi.",
             "pl": "Neutralizuje słabe wstrząsy ziemi i zmniejsza efekty silnych wstrząsów ziemi."
         },
+        "skillId": "tremor_resistance",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7469,6 +7627,7 @@
             "it": "Incrementa i danni da esplosioni di fuoco infernale.",
             "pl": "Zwiększa obrażenia od wybuchów piekielnego ognia."
         },
+        "skillId": "hellfire_cloak",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7516,6 +7675,7 @@
             "it": "Aumenta la fortuna.",
             "pl": "Zwiększa szczęście."
         },
+        "skillId": "good_luck",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7563,6 +7723,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "quick_breath",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -7610,6 +7771,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "bladescale_hone",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -7657,6 +7819,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "redirection",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -7704,6 +7867,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "wall_runner_(boost)",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -7751,6 +7915,7 @@
             "it": "Attiva gli effetti dell'abilità.",
             "pl": "Aktywuje efekt umiejętności."
         },
+        "skillId": "bow_charge_plus",
         "skillLevel": 1,
         "slotSize": 4
     },
@@ -7798,6 +7963,7 @@
             "it": "Deviazione: -2",
             "pl": "Odchylenie -2"
         },
+        "skillId": "steadiness",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7845,6 +8011,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "steadiness",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -7892,6 +8059,7 @@
             "it": "Velocità +20% Danno ATT Trasforma: +10%",
             "pl": "Szybkość +20% Obrażenia od ataku transformacji +10%"
         },
+        "skillId": "rapid_morph",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7939,6 +8107,7 @@
             "it": "Capacità di carico lancia-fucile: +1 Aumenta boccette per lama caricata",
             "pl": "Pojemność magazynka lancopału +1 Zwiększa liczbę fiolek ładowanego ostrza"
         },
+        "skillId": "load_shells",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -7986,6 +8155,7 @@
             "it": "Potenza munizioni speciali: +20% Potenza perfora draghi: +20%",
             "pl": "Zwiększa moc specjalnej amunicji do łukodziałka i moc przebijacza smoków o 20%."
         },
+        "skillId": "special_ammo_boost",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8033,6 +8203,7 @@
             "it": "Attacchi: +20% Recupero fuoco wyvern: -30%",
             "pl": "Zwiększa siłę wszystkich ataków o 20% i skraca czas odnowienia ognia wiwerny o 30%."
         },
+        "skillId": "artillery",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8080,6 +8251,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "charge_master",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -8127,6 +8299,7 @@
             "it": "Accelera sensibilmente.",
             "pl": "Umiarkowanie przyspiesza chowanie broni."
         },
+        "skillId": "quick_sheathe",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8174,6 +8347,7 @@
             "it": "ATT Fisico: +10",
             "pl": "Atak +10 po aktywacji."
         },
+        "skillId": "resuscitate",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8221,6 +8395,7 @@
             "it": "Danni parte : +20%",
             "pl": "Obrażenia części ciała +20%"
         },
+        "skillId": "partbreaker",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8268,6 +8443,7 @@
             "it": "Attacco: +15",
             "pl": "Atak +15 po aktywacji."
         },
+        "skillId": "counterstrike",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8315,6 +8491,7 @@
             "it": "Durata effetto: 60 secondi.",
             "pl": "Efekt utrzymuje się przez 60 sekund."
         },
+        "skillId": "protective_polish",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8362,6 +8539,7 @@
             "it": "Accumulo veleno: +20% Bonus: +5",
             "pl": "Akumulacja trucizny +20% Premia: +5"
         },
+        "skillId": "poison_attack",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -8409,6 +8587,7 @@
             "it": "Si attiva il 25% delle volte.",
             "pl": "Szansa na aktywację wynosi 25%."
         },
+        "skillId": "razor_sharp",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8456,6 +8635,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "tune-up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -8503,6 +8683,7 @@
             "it": "Previene e riduce il veleno.",
             "pl": "Zapobiega zatruciu i zmniejsza działanie jadu."
         },
+        "skillId": "poison_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -8550,6 +8731,7 @@
             "it": "Previene la paralisi.",
             "pl": "Zapobiega paraliżowi."
         },
+        "skillId": "paralysis_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -8597,6 +8779,7 @@
             "it": "Previene il sonno.",
             "pl": "Zapobiega uśpieniu."
         },
+        "skillId": "sleep_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -8644,6 +8827,7 @@
             "it": "Previene il malus da scoppio.",
             "pl": "Zapobiega wybuchopladze."
         },
+        "skillId": "blast_resistance",
         "skillLevel": 3,
         "slotSize": 4
     },
@@ -8691,6 +8875,7 @@
             "it": "Mantenimento acutezza: +40%",
             "pl": "Przyznaje 40% szansę na brak utraty ostrości po aktywacji."
         },
+        "skillId": "master's_touch",
         "skillLevel": 2,
         "slotSize": 4
     },
@@ -8738,6 +8923,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "spiribird's_call",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -8785,6 +8971,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "grinder_(s)",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -8832,6 +9019,7 @@
             "it": "",
             "pl": ""
         },
+        "skillId": "coalescence",
         "skillLevel": 1,
         "slotSize": 2
     }

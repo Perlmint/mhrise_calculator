@@ -24,6 +24,7 @@ interface FinalDecoInfo {
     names: { [key: string]: string };
     skillNames: { [key: string]: string };
     texts: { [key: string]: string };
+    skillId: string;
     slotSize: number;
     skillLevel: number;
 }
@@ -136,6 +137,7 @@ export async function parse() {
                     names,
                     skillNames,
                     texts,
+                    skillId: makeId(enInfo.skillName),
                     skillLevel: enInfo.skillLevel,
                     slotSize: enInfo.slotSize,
                 } as FinalDecoInfo;
