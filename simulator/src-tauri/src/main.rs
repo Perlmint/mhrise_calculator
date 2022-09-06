@@ -8,7 +8,7 @@ use serde::de;
 use std::fs::File;
 use std::io::BufReader;
 
-use armor::AnomalyArmor;
+use armor::BaseArmor;
 use skill::Skill;
 
 mod armor;
@@ -40,7 +40,7 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 fn get_count() -> usize {
-    let armors = parse_data::<AnomalyArmor>("data/armor.json");
+    let armors = parse_data::<BaseArmor>("data/armor.json");
     let skills = parse_data::<Skill>("data/skill.json");
     let decos = parse_data::<Decoration>("data/deco.json");
 

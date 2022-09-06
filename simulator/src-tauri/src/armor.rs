@@ -48,7 +48,7 @@ struct ArmorSkill {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct AnomalyArmor {
+pub struct BaseArmor {
     id: String,
     part: ArmorPart,
 
