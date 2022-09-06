@@ -6,7 +6,7 @@ const greetMsg = ref("");
 const name = ref("");
 
 async function greet() {
-  greetMsg.value = await invoke("greet", { name: name.value });
+  greetMsg.value = await invoke("get_count", {});
 }
 </script>
 
