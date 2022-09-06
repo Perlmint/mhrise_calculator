@@ -2655,7 +2655,7 @@
     {
         "id": "skalda_vertex",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダテスタ",
             "zh": "毒蝎护头",
@@ -2689,7 +2689,7 @@
     {
         "id": "skalda_thorax",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダペット",
             "zh": "毒蝎上身",
@@ -2723,7 +2723,7 @@
     {
         "id": "skalda_brachia",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダマーノ",
             "zh": "毒蝎护袖",
@@ -2757,7 +2757,7 @@
     {
         "id": "skalda_elytra",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダアンカ",
             "zh": "毒蝎护腰具",
@@ -2791,7 +2791,7 @@
     {
         "id": "skalda_crura",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダガンバ",
             "zh": "毒蝎脚",
@@ -7029,7 +7029,7 @@
     {
         "id": "aelucanth_vertex",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガテスタ",
             "zh": "锹形护头",
@@ -7063,7 +7063,7 @@
     {
         "id": "aelucanth_thorax",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガペット",
             "zh": "锹形上身",
@@ -7101,7 +7101,7 @@
     {
         "id": "aelucanth_brachia",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガマーノ",
             "zh": "锹形护袖",
@@ -7135,7 +7135,7 @@
     {
         "id": "aelucanth_elytra",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガアンカ",
             "zh": "锹形护腰具",
@@ -7169,7 +7169,7 @@
     {
         "id": "aelucanth_crura",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガガンバ",
             "zh": "锹形脚",
@@ -7377,7 +7377,7 @@
     {
         "id": "utsushi_mask_(v)",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【覆面】",
             "zh": "倪泰表【蒙面】",
@@ -7415,7 +7415,7 @@
     {
         "id": "utsushi_chest_(v)",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【上衣】",
             "zh": "倪泰表【上衣】",
@@ -7449,7 +7449,7 @@
     {
         "id": "utsushi_braces_(v)",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【手甲】",
             "zh": "倪泰表【手甲】",
@@ -7483,7 +7483,7 @@
     {
         "id": "utsushi_tassets_(v)",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【腰巻】",
             "zh": "倪泰表【腰卷】",
@@ -7517,7 +7517,7 @@
     {
         "id": "utsushi_greaves_(v)",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【脚絆】",
             "zh": "倪泰表【绑腿】",
@@ -7737,7 +7737,7 @@
     {
         "id": "utsushi_mask_(h)",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【御面】",
             "zh": "倪泰里【刚面】",
@@ -7775,7 +7775,7 @@
     {
         "id": "utsushi_chest_(h)",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【上衣】",
             "zh": "倪泰里【上衣】",
@@ -7813,7 +7813,7 @@
     {
         "id": "utsushi_braces_(h)",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【手甲】",
             "zh": "倪泰里【手甲】",
@@ -7851,7 +7851,7 @@
     {
         "id": "utsushi_tassets_(h)",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【腰巻】",
             "zh": "倪泰里【腰卷】",
@@ -7885,7 +7885,7 @@
     {
         "id": "utsushi_greaves_(h)",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【脚絆】",
             "zh": "倪泰里【绑腿】",
@@ -11605,7 +11605,7 @@
     {
         "id": "skalda_vertex_s",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＳテスタ",
             "zh": "毒蝎S护头",
@@ -11639,7 +11639,7 @@
     {
         "id": "skalda_thorax_s",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＳペット",
             "zh": "毒蝎S上身",
@@ -11673,7 +11673,7 @@
     {
         "id": "skalda_brachia_s",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＳマーノ",
             "zh": "毒蝎S护袖",
@@ -11711,7 +11711,7 @@
     {
         "id": "skalda_elytra_s",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＳアンカ",
             "zh": "毒蝎S护腰具",
@@ -11745,7 +11745,7 @@
     {
         "id": "skalda_crura_s",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＳガンバ",
             "zh": "毒蝎S脚",
@@ -16163,7 +16163,7 @@
     {
         "id": "utsushi_mask_(v)_s",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【覆面】覇",
             "zh": "倪泰表【蒙面】霸",
@@ -16205,7 +16205,7 @@
     {
         "id": "utsushi_chest_(v)_s",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【上衣】覇",
             "zh": "倪泰表【上衣】霸",
@@ -16243,7 +16243,7 @@
     {
         "id": "utsushi_braces_(v)_s",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【手甲】覇",
             "zh": "倪泰表【手甲】霸",
@@ -16277,7 +16277,7 @@
     {
         "id": "utsushi_tassets_(v)_s",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【腰巻】覇",
             "zh": "倪泰表【腰卷】霸",
@@ -16315,7 +16315,7 @@
     {
         "id": "utsushi_greaves_(v)_s",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【脚絆】覇",
             "zh": "倪泰表【绑腿】霸",
@@ -16559,7 +16559,7 @@
     {
         "id": "utsushi_mask_(h)_s",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【御面】覇",
             "zh": "倪泰里【刚面】霸",
@@ -16601,7 +16601,7 @@
     {
         "id": "utsushi_chest_(h)_s",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【上衣】覇",
             "zh": "倪泰里【上衣】霸",
@@ -16647,7 +16647,7 @@
     {
         "id": "utsushi_braces_(h)_s",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【手甲】覇",
             "zh": "倪泰里【手甲】霸",
@@ -16685,7 +16685,7 @@
     {
         "id": "utsushi_tassets_(h)_s",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【腰巻】覇",
             "zh": "倪泰里【腰卷】霸",
@@ -16723,7 +16723,7 @@
     {
         "id": "utsushi_greaves_(h)_s",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【脚絆】覇",
             "zh": "倪泰里【绑腿】霸",
@@ -18963,7 +18963,7 @@
     {
         "id": "aelucanth_vertex_s",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＳテスタ",
             "zh": "锹形S护头",
@@ -18997,7 +18997,7 @@
     {
         "id": "aelucanth_thorax_s",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＳペット",
             "zh": "锹形S上身",
@@ -19039,7 +19039,7 @@
     {
         "id": "aelucanth_brachia_s",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＳマーノ",
             "zh": "锹形S护袖",
@@ -19073,7 +19073,7 @@
     {
         "id": "aelucanth_elytra_s",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＳアンカ",
             "zh": "锹形S护腰具",
@@ -19107,7 +19107,7 @@
     {
         "id": "aelucanth_crura_s",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＳガンバ",
             "zh": "锹形S脚",
@@ -28817,7 +28817,7 @@
     {
         "id": "skalda_vertex_x",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＸテスタ",
             "zh": "毒蝎X护头",
@@ -28855,7 +28855,7 @@
     {
         "id": "skalda_thorax_x",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＸペット",
             "zh": "毒蝎X上身",
@@ -28893,7 +28893,7 @@
     {
         "id": "skalda_brachia_x",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＸマーノ",
             "zh": "毒蝎X护袖",
@@ -28931,7 +28931,7 @@
     {
         "id": "skalda_elytra_x",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＸアンカ",
             "zh": "毒蝎X护腰具",
@@ -28969,7 +28969,7 @@
     {
         "id": "skalda_crura_x",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "スカルダＸガンバ",
             "zh": "毒蝎X脚",
@@ -33859,7 +33859,7 @@
     {
         "id": "aelucanth_vertex_x",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＸテスタ",
             "zh": "锹形X护头",
@@ -33897,7 +33897,7 @@
     {
         "id": "aelucanth_thorax_x",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＸペット",
             "zh": "锹形X上身",
@@ -33939,7 +33939,7 @@
     {
         "id": "aelucanth_brachia_x",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＸマーノ",
             "zh": "锹形X护袖",
@@ -33977,7 +33977,7 @@
     {
         "id": "aelucanth_elytra_x",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＸアンカ",
             "zh": "锹形X护腰具",
@@ -34015,7 +34015,7 @@
     {
         "id": "aelucanth_crura_x",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ロワーガＸガンバ",
             "zh": "锹形X脚",
@@ -34255,7 +34255,7 @@
     {
         "id": "guild_bard_lobos",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ギルドバードロポス",
             "zh": "公会诗人帽",
@@ -34293,7 +34293,7 @@
     {
         "id": "guild_bard_bolero",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ギルドバードスーツ",
             "zh": "公会诗人服装",
@@ -34335,7 +34335,7 @@
     {
         "id": "guild_bard_braces",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ギルドバードアーム",
             "zh": "公会诗人腕甲",
@@ -34377,7 +34377,7 @@
     {
         "id": "guild_bard_coil",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ギルドバードコイル",
             "zh": "公会诗人腰甲",
@@ -34419,7 +34419,7 @@
     {
         "id": "guild_bard_boots",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ギルドバードブーツ",
             "zh": "公会诗人靴",
@@ -37107,7 +37107,7 @@
     {
         "id": "utsushi_true_mask_(v)",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【覆面】真",
             "zh": "倪泰表【蒙面】真",
@@ -37149,7 +37149,7 @@
     {
         "id": "utsushi_true_chest_(v)",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【上衣】真",
             "zh": "倪泰表【上衣】真",
@@ -37191,7 +37191,7 @@
     {
         "id": "utsushi_true_braces_(v)",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【手甲】真",
             "zh": "倪泰表【手甲】真",
@@ -37229,7 +37229,7 @@
     {
         "id": "utsushi_true_tassets_(v)",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【腰巻】真",
             "zh": "倪泰表【腰卷】真",
@@ -37271,7 +37271,7 @@
     {
         "id": "utsushi_true_greaves_(v)",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ表【脚絆】真",
             "zh": "倪泰表【绑腿】真",
@@ -37531,7 +37531,7 @@
     {
         "id": "utsushi_true_mask_(h)",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【御面】真",
             "zh": "倪泰里【刚面】真",
@@ -37577,7 +37577,7 @@
     {
         "id": "utsushi_true_chest_(h)",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【上衣】真",
             "zh": "倪泰里【上衣】真",
@@ -37623,7 +37623,7 @@
     {
         "id": "utsushi_true_braces_(h)",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【手甲】真",
             "zh": "倪泰里【手甲】真",
@@ -37665,7 +37665,7 @@
     {
         "id": "utsushi_true_tassets_(h)",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【腰巻】真",
             "zh": "倪泰里【腰卷】真",
@@ -37707,7 +37707,7 @@
     {
         "id": "utsushi_true_greaves_(h)",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ウツシ裏【脚絆】真",
             "zh": "倪泰里【绑腿】真",
@@ -40487,7 +40487,7 @@
     {
         "id": "hawkhat",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ホークハット",
             "zh": "猎鹰皮帽",
@@ -40529,7 +40529,7 @@
     {
         "id": "hawksuit",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ホークスーツ",
             "zh": "猎鹰服装",
@@ -40571,7 +40571,7 @@
     {
         "id": "hawk_gloves",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ホークグラブ",
             "zh": "猎鹰手套",
@@ -40613,7 +40613,7 @@
     {
         "id": "hawkcoil",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ホークコイル",
             "zh": "猎鹰腰甲",
@@ -40651,7 +40651,7 @@
     {
         "id": "hawkboots",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "ホークブーツ",
             "zh": "猎鹰靴",
@@ -42719,7 +42719,7 @@
     {
         "id": "arc_helm",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "アークヘルム",
             "zh": "方舟头盔",
@@ -42757,7 +42757,7 @@
     {
         "id": "arc_mail",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "アークメイル",
             "zh": "方舟铠甲",
@@ -42799,7 +42799,7 @@
     {
         "id": "arc_vambraces",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "アークアーム",
             "zh": "方舟腕甲",
@@ -42837,7 +42837,7 @@
     {
         "id": "arc_coil",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "アークコイル",
             "zh": "方舟腰甲",
@@ -42879,7 +42879,7 @@
     {
         "id": "arc_greaves",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "アークグリーヴ",
             "zh": "方舟护腿",
@@ -43329,7 +43329,7 @@
     {
         "id": "professor's_goggles",
         "part": "helm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "プロフゴーグル",
             "zh": "教授护目镜",
@@ -43367,7 +43367,7 @@
     {
         "id": "professor's_jacket",
         "part": "torso",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "プロフジャケット",
             "zh": "教授外套",
@@ -43405,7 +43405,7 @@
     {
         "id": "professor's_mittens",
         "part": "arm",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "プロフミトン",
             "zh": "教授手套",
@@ -43443,7 +43443,7 @@
     {
         "id": "professor's_bottoms",
         "part": "waist",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "プロフベルト",
             "zh": "教授腰带",
@@ -43481,7 +43481,7 @@
     {
         "id": "professor's_boots",
         "part": "feet",
-        "sexType": "man.",
+        "sexType": "male",
         "names": {
             "ja": "プロフブーツ",
             "zh": "教授靴",

@@ -12,7 +12,7 @@ export interface InvenArmorInfo {
 
 enum SexType {
     all = "all",
-    male = "man.",
+    male = "male",
     female = "female",
 }
 
