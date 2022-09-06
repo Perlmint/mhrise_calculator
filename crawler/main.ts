@@ -14,6 +14,7 @@ async function merge() {
     const invenDatas: InvenArmorInfo[] = JSON.parse(
         fs.readFileSync(invenFile).toString()
     );
+
     const kiraDatas: FinalArmorInfo[] = JSON.parse(
         fs.readFileSync(kiraFile).toString()
     );
@@ -43,11 +44,19 @@ async function merge() {
         });
     });
 
+    const finalArmorDatas = kiraDatas.filter((armorInfo) => {
+        if (armorInfo.part === "" || armorInfo.sexType === "") {
+            return false;
+        }
+
+        return true;
+    });
+
     fs.ensureDirSync("data");
 
     const filename = path.join("data", `armor.json`);
 
-    const jsonStr = JSON.stringify(kiraDatas, null, 4);
+    const jsonStr = JSON.stringify(finalArmorDatas, null, 4);
 
     const prom = new Promise<void>((resolve, reject) => {
         fs.writeFile(filename, jsonStr, (err) => {
