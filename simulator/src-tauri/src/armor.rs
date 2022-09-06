@@ -60,3 +60,9 @@ pub struct BaseArmor {
     stat: ArmorStat,
     skills: Vec<ArmorSkill>,
 }
+
+pub struct AnomalyArmor {
+    original: BaseArmor,
+    stat_diff: ArmorStat,
+    skill_diffs: Vec<ArmorSkill>,
+}
