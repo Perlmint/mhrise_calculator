@@ -3,12 +3,35 @@
     windows_subsystem = "windows"
 )]
 
+use deco::Decoration;
+use serde::de;
 use std::fs::File;
 use std::io::BufReader;
 
 use armor::AnomalyArmor;
+use skill::Skill;
 
 mod armor;
+mod deco;
+mod skill;
+
+fn parse_data<T>(filename: &str) -> Vec<T>
+where
+    T: de::DeserializeOwned,
+{
+    let file = File::open(filename);
+
+    match file {
+        Ok(file) => {
+            let reader = BufReader::new(file);
+
+            let values: Vec<T> = serde_json::from_reader(reader).unwrap_or(Vec::new());
+
+            values
+        }
+        Err(_) => Vec::new(),
+    }
+}
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -17,12 +40,11 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 fn get_count() -> usize {
-    let file = File::open("data/armor.json").unwrap();
-    let reader = BufReader::new(file);
+    let armors = parse_data::<AnomalyArmor>("data/armor.json");
+    let skills = parse_data::<Skill>("data/skill.json");
+    let decos = parse_data::<Decoration>("data/deco.json");
 
-    let armors: Vec<AnomalyArmor> = serde_json::from_reader(reader).unwrap();
-
-    return armors.len();
+    return armors.len() + skills.len() + decos.len();
 }
 
 fn main() {
