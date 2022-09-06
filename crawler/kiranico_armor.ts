@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 
 import Crawler from "crawler";
+import { makeId } from "./util.js";
 
 interface UrlInfo {
     lang: string;
@@ -11,6 +12,16 @@ interface UrlInfo {
 
 export interface KiranicoArmorInfo {
     name: string;
+    rarity: number;
+    stat: ArmorStatInfo;
+    skills: SkillInfo[];
+}
+
+export interface FinalArmorInfo {
+    id: string;
+    part: string;
+    sexType: string;
+    names: { [key: string]: string };
     rarity: number;
     stat: ArmorStatInfo;
     skills: SkillInfo[];
@@ -191,34 +202,52 @@ export async function parse() {
         c.on("drain", () => {
             fs.ensureDirSync(baseDir);
 
-            const proms = [] as Promise<void>[];
+            const finalInfos = [] as FinalArmorInfo[];
 
-            for (const lang of langs) {
-                const prom = new Promise<void>((resolve, reject) => {
-                    const resultStr = JSON.stringify(allInfos[lang], null, 4);
+            const enData = allInfos["en"];
 
-                    fs.writeFile(
-                        path.join(baseDir, `armor.${lang}.json`),
-                        resultStr,
-                        (err) => {
-                            if (err) {
-                                reject(err);
-                            } else {
-                                console.log(
-                                    `Kiranico ${lang} data file write done`
-                                );
-                                resolve();
-                            }
-                        }
-                    );
+            for (let i = 0; i < maxArmorRarity; ++i) {
+                const enRarityArmors = enData[i];
+
+                enRarityArmors.forEach((enArmorInfo, armorIndex) => {
+                    const names = {} as { [key: string]: string };
+
+                    for (const lang of langs) {
+                        const langName =
+                            allInfos[lang][enArmorInfo.rarity][armorIndex].name;
+                        names[lang] = langName;
+                    }
+
+                    const finalInfo = {
+                        id: makeId(enArmorInfo.name),
+                        part: "",
+                        sexType: "",
+                        names,
+                        rarity: enArmorInfo.rarity,
+                        stat: enArmorInfo.stat,
+                        skills: enArmorInfo.skills.map(
+                            (info) =>
+                                ({
+                                    ...info,
+                                    name: makeId(info.name),
+                                } as SkillInfo)
+                        ),
+                    } as FinalArmorInfo;
+
+                    finalInfos.push(finalInfo);
                 });
-
-                proms.push(prom);
             }
 
-            Promise.all(proms).then(
-                () => resolve(),
-                () => reject()
+            fs.writeFile(
+                path.join(baseDir, "armor.json"),
+                JSON.stringify(finalInfos, null, 4),
+                (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                }
             );
         });
     });
