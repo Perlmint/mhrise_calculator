@@ -1,6 +1,7 @@
 **/node_modules/
 crawler/out/
 crawler/temp_data/
+simulator/src-tauri/target/
 
 # Logs
 logs
