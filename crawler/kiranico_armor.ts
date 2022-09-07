@@ -15,6 +15,7 @@ export interface KiranicoArmorInfo {
     rarity: number;
     stat: ArmorStatInfo;
     skills: SkillInfo[];
+    slots: number[];
 }
 
 export interface FinalArmorInfo {
@@ -25,6 +26,7 @@ export interface FinalArmorInfo {
     rarity: number;
     stat: ArmorStatInfo;
     skills: SkillInfo[];
+    slots: number[];
 }
 
 interface ArmorStatInfo {
@@ -98,19 +100,23 @@ function crawlCallback(
 
         const armorName = $(nameCol).children("a").text();
 
-        const slots = [];
+        const slots = [] as number[];
 
         $(slotCol)
             .children("img")
             .each((i, img) => {
                 const imgSrc = $(img).attr("src");
-                const level = imgSrc?.substring(
+                const levelStr = imgSrc?.substring(
                     imgSrc.length - 4,
                     imgSrc.length - 5
                 );
 
+                const level = Number.parseInt(levelStr!);
+
                 slots.push(level);
             });
+
+        slots.reverse();
 
         const defVals1 = $(defCol1).children("div");
         const defVals2 = $(defCol2).children("div");
@@ -151,6 +157,7 @@ function crawlCallback(
             rarity,
             stat: statInfo,
             skills,
+            slots,
         } as KiranicoArmorInfo;
 
         armorInfos.push(info);
@@ -232,6 +239,7 @@ export async function parse() {
                                     name: makeId(info.name),
                                 } as SkillInfo)
                         ),
+                        slots: enArmorInfo.slots,
                     } as FinalArmorInfo;
 
                     finalInfos.push(finalInfo);
