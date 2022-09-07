@@ -3,15 +3,15 @@
     windows_subsystem = "windows"
 )]
 
+use armor::{BaseArmor, Talisman, TalismanSkill};
 use csv::StringRecord;
 use deco::Decoration;
 use serde::de;
+use skill::Skill;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
-
-use armor::{BaseArmor, Talisman, TalismanSkill};
-use skill::Skill;
+use tauri::{App, CustomMenuItem, Menu, MenuItem, Submenu, WindowBuilder};
 
 use crate::armor::{AnomalyArmor, ArmorSkill, ArmorStat};
 
@@ -267,7 +267,37 @@ fn get_count() -> usize {
 }
 
 fn main() {
+    // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let close = CustomMenuItem::new("close".to_string(), "Close");
+    let submenu = Submenu::new("File", Menu::new().add_item(quit).add_item(close));
+    let menu = Menu::new()
+        .add_native_item(MenuItem::Copy)
+        .add_item(CustomMenuItem::new("hide", "Hide"))
+        .add_submenu(submenu);
+
+    let sub_window_builder = |app: &mut App| {
+        WindowBuilder::new(
+            app,
+            "main-window".to_string(),
+            tauri::WindowUrl::App("index.html".into()),
+        )
+        .build()?;
+        Ok(())
+    };
+
     tauri::Builder::default()
+        .setup(sub_window_builder)
+        .menu(menu)
+        .on_menu_event(|event| match event.menu_item_id() {
+            "quit" => {
+                std::process::exit(0);
+            }
+            "close" => {
+                event.window().close().unwrap();
+            }
+            _ => {}
+        })
         .invoke_handler(tauri::generate_handler![greet, get_count])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
