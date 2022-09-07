@@ -10,7 +10,7 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
 
-use armor::BaseArmor;
+use armor::{BaseArmor, Talisman, TalismanSkill};
 use skill::Skill;
 
 use crate::armor::{AnomalyArmor, ArmorSkill, ArmorStat};
@@ -64,10 +64,6 @@ fn parse_anomaly<'a>(
 
                 records.push(record);
             }
-
-            let length = records.len();
-
-            println!("Anomaly armor count: {}", length);
 
             let mut anomaly_armors = Vec::new();
 
@@ -137,6 +133,73 @@ fn parse_anomaly<'a>(
     }
 }
 
+fn parse_talisman(filename: &str, skill_name_dict: &HashMap<&str, &str>) -> Vec<Talisman> {
+    let file = File::open(filename);
+
+    match file {
+        Ok(file) => {
+            let reader = BufReader::new(file);
+
+            let mut csv_reader = csv::ReaderBuilder::new()
+                .has_headers(false)
+                .from_reader(reader);
+
+            let mut records = Vec::new();
+
+            for result in csv_reader.records() {
+                let record = result.unwrap();
+
+                records.push(record);
+            }
+
+            let mut talismans = Vec::new();
+
+            for record in records {
+                let skill_name1 = &record[0];
+                let skill_level1 = to_i32(&record, 1);
+                let skill_name2 = &record[2];
+                let skill_level2 = to_i32(&record, 3);
+
+                let slot_size1 = to_i32(&record, 4);
+                let slot_size2 = to_i32(&record, 5);
+                let slot_size3 = to_i32(&record, 6);
+
+                let slot_sizes = vec![slot_size1, slot_size2, slot_size3];
+
+                let mut talisman_skills = Vec::new();
+
+                if skill_name1 != "" {
+                    let skill_id = skill_name_dict.get(skill_name1).unwrap();
+
+                    talisman_skills.push(TalismanSkill {
+                        id: skill_id.to_string(),
+                        level: skill_level1,
+                    });
+                }
+
+                if skill_name2 != "" {
+                    let skill_id = skill_name_dict.get(skill_name2).unwrap();
+
+                    talisman_skills.push(TalismanSkill {
+                        id: skill_id.to_string(),
+                        level: skill_level2,
+                    });
+                }
+
+                let talisman = Talisman {
+                    skills: talisman_skills,
+                    slot_sizes,
+                };
+
+                talismans.push(talisman);
+            }
+
+            talismans
+        }
+        Err(_) => Vec::new(),
+    }
+}
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
@@ -185,11 +248,19 @@ fn get_count() -> usize {
     let mut qu_armor_filename = "";
     let mut tali_filename = "";
 
-    parse_anomaly(
+    let anomaly_armors = parse_anomaly(
         qu_armor_filename,
         &armors,
         &armor_name_dict,
         &skill_name_dict,
+    );
+
+    let talismans = parse_talisman(tali_filename, &skill_name_dict);
+
+    println!(
+        "Anomaly armor count: {}, talisman count: {}",
+        anomaly_armors.len(),
+        talismans.len()
     );
 
     return armors.len() + skills.len() + decos_vec.len();

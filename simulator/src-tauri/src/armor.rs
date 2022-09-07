@@ -67,3 +67,13 @@ pub struct AnomalyArmor<'a> {
     pub slot_diffs: Vec<i32>,
     pub skill_diffs: Vec<ArmorSkill>,
 }
+
+pub struct TalismanSkill {
+    pub id: String,
+    pub level: i32,
+}
+
+pub struct Talisman {
+    pub skills: Vec<TalismanSkill>,
+    pub slot_sizes: Vec<i32>,
+}
