@@ -33,6 +33,31 @@ where
     }
 }
 
+fn parse_anomaly(filename: &str) {
+    let file = File::open(filename);
+
+    match file {
+        Ok(file) => {
+            let reader = BufReader::new(file);
+
+            let mut csv_reader = csv::ReaderBuilder::new()
+                .has_headers(false)
+                .from_reader(reader);
+
+            let mut records = Vec::new();
+
+            for result in csv_reader.records() {
+                let record = result.unwrap();
+
+                records.push(record);
+            }
+
+            println!("{}", records.len());
+        }
+        Err(_) => {}
+    }
+}
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
