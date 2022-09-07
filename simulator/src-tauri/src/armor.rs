@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
-enum ArmorPart {
+pub enum ArmorPart {
     #[serde(rename = "helm")]
     Helm,
     #[serde(rename = "torso")]
@@ -17,7 +17,7 @@ enum ArmorPart {
 }
 
 #[derive(Deserialize, Debug)]
-enum SexType {
+pub enum SexType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "male")]
@@ -27,42 +27,43 @@ enum SexType {
 }
 
 #[derive(Deserialize, Debug)]
-struct ArmorStat {
-    defense: i32,
+pub struct ArmorStat {
+    pub defense: i32,
     #[serde(rename = "fireRes")]
-    fire_res: i32,
+    pub fire_res: i32,
     #[serde(rename = "waterRes")]
-    water_res: i32,
+    pub water_res: i32,
     #[serde(rename = "iceRes")]
-    ice_res: i32,
+    pub ice_res: i32,
     #[serde(rename = "elecRes")]
-    elec_res: i32,
+    pub elec_res: i32,
     #[serde(rename = "dragonRes")]
-    dragon_res: i32,
+    pub dragon_res: i32,
 }
 
 #[derive(Deserialize, Debug)]
-struct ArmorSkill {
-    name: String,
-    level: i32,
+pub struct ArmorSkill {
+    pub name: String,
+    pub level: i32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct BaseArmor {
-    id: String,
-    part: ArmorPart,
+    pub id: String,
+    pub part: ArmorPart,
 
     #[serde(rename = "sexType")]
-    sex_type: SexType,
+    pub sex_type: SexType,
 
-    names: HashMap<String, String>,
-    rarity: i32,
-    stat: ArmorStat,
-    skills: Vec<ArmorSkill>,
+    pub names: HashMap<String, String>,
+    pub rarity: i32,
+    pub stat: ArmorStat,
+    pub skills: Vec<ArmorSkill>,
 }
 
-pub struct AnomalyArmor {
-    original: BaseArmor,
-    stat_diff: ArmorStat,
-    skill_diffs: Vec<ArmorSkill>,
+pub struct AnomalyArmor<'a> {
+    pub original: &'a BaseArmor,
+    pub stat_diff: ArmorStat,
+    pub slot_diffs: Vec<i32>,
+    pub skill_diffs: Vec<ArmorSkill>,
 }
