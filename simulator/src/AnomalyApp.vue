@@ -16,6 +16,8 @@ interface AnomalyArmorInfo {
 
 let anomaly_filename = ref("");
 let anomaly_armors = ref([] as AnomalyArmorInfo[]);
+let lang_data = ref("ko");
+let max_anomaly_skills = ref(0);
 
 async function get_anomaly_file() {
   const file = await open({
@@ -37,10 +39,10 @@ async function parse_anomaly_file() {
   console.log(`Anomaly filename: ${anomaly_filename.value}`);
 
   anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename : anomaly_filename.value });
-
-  anomaly_armors.value.forEach(val => {
-      console.log(val.statDiff.defense);
-  });
+  
+  for(const armor of anomaly_armors.value) {
+    max_anomaly_skills.value = Math.max(max_anomaly_skills.value, armor.skillDiffs.length);
+  }
 }
 
 </script>
@@ -54,6 +56,17 @@ async function parse_anomaly_file() {
     <input v-model="anomaly_filename" placeholder="Anomaly crafting filename (exported via mod)" />
 
     <button @click="parse_anomaly_file()">Parse</button>
+
+    <table>
+      <tr v-for="armor in anomaly_armors">
+        <td>{{ armor.original.names[lang_data] }}</td>
+
+        <template v-for="skillDiff in armor.skillDiffs">
+          <td>{{ skillDiff.name }}</td>
+          <td>Lv {{ skillDiff.level }}</td>
+        </template>
+      </tr>
+    </table>
 
 
   </div>
