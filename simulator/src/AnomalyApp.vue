@@ -17,10 +17,17 @@ interface AnomalyArmorInfo {
 }
 
 onBeforeMount(async () => {
-  skills.value = await invoke("cmd_get_skill_names");
+  skills.value = await invoke("cmd_get_skill_names") as {[key: string]: FinalSkillInfo};
+  
+  for(const id in skills.value) {
+    skillsVec.push(skills.value[id]);
+  }
+
+  skillsVec.sort((info1, info2) => info1.names[lang_data.value] > info2.names[lang_data.value] ? 1 : -1);
 });
 
 let skills = ref({} as {[key: string]: FinalSkillInfo});
+let skillsVec = [] as FinalSkillInfo[];
 
 let anomaly_filename = ref("");
 let anomaly_armors = ref([] as AnomalyArmorInfo[]);
@@ -48,6 +55,8 @@ async function parse_anomaly_file(filename: string) {
   console.log(`Anomaly filename: ${filename}`);
 
   anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename });
+
+  anomaly_armors.value.sort((armor1, armor2) => armor1.original.names[lang_data.value] > armor2.original.names[lang_data.value] ? 1 : -1);
   
   for(const armor of anomaly_armors.value) {
     max_anomaly_skills.value = Math.max(max_anomaly_skills.value, armor.skillDiffs.length);
@@ -73,14 +82,14 @@ async function parse_anomaly_file(filename: string) {
           <th colspan="2">Skill {{ i }}</th>
         </template>
       </tr>
-      <tr v-for="armor in anomaly_armors">
+      <tr v-for="(armor, armorIdx) in anomaly_armors">
         <td>{{ armor.original.names[lang_data] }}</td>
 
         <template v-for="(skillDiff, skillIdx) in armor.skillDiffs">
           <td>
-            <select name="skill{{ skillIdx }}" v-model="skills[skillDiff.name].id">
+            <select :name="`anomaly${armorIdx}-skill${skillIdx}`" v-model="skills[skillDiff.name].id">
               <option value="" disabled>---</option>
-              <option v-for="skillInfo in skills" v-bind:value="skillInfo.id">
+              <option v-for="skillInfo in skillsVec" v-bind:value="skillInfo.id">
                 {{ skillInfo.names[lang_data] }}
               </option>
             </select>
