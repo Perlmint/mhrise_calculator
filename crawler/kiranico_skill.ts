@@ -5,6 +5,7 @@ import Crawler from "crawler";
 
 import { langs } from "./kiranico_armor.js";
 import { makeId } from "./util.js";
+import { FinalSkillInfo } from "./definition/skill_define.js";
 
 interface UrlInfo {
     url: string;
@@ -14,12 +15,6 @@ interface UrlInfo {
 interface SkillInfo {
     name: string;
     text: string;
-}
-
-interface FinalSkillInfo {
-    id: string;
-    names: { [key: string]: string };
-    texts: { [key: string]: string };
 }
 
 const allInfos: { [key: string]: SkillInfo[] } = {};

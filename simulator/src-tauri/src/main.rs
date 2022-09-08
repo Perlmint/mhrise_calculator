@@ -5,6 +5,7 @@
 
 use std::collections::HashMap;
 use std::fs::File;
+use std::hash::Hash;
 use std::io::BufReader;
 use std::sync::Mutex;
 
@@ -237,6 +238,13 @@ fn cmd_parse_anomaly(
     return anomalies;
 }
 
+#[tauri::command]
+fn cmd_get_skill_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<String, Skill> {
+    let dm = mutex_dm.lock().unwrap();
+
+    return dm.skills.clone();
+}
+
 fn main() {
     let armors_vec = parse_data::<BaseArmor>("data/armor.json");
     let skills_vec = parse_data::<Skill>("data/skill.json");
@@ -299,7 +307,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             greet,
             get_count,
-            cmd_parse_anomaly
+            cmd_parse_anomaly,
+            cmd_get_skill_names
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

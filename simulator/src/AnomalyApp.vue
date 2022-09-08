@@ -1,11 +1,13 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
-import {FinalArmorInfo, ArmorStatInfo, SkillInfo } from "./definition/armor_define";
+import { FinalArmorInfo, ArmorStatInfo, SkillInfo } from "./definition/armor_define";
+import { FinalSkillInfo } from "./definition/skill_define";
+
 
 interface AnomalyArmorInfo {
     original: FinalArmorInfo,
@@ -13,6 +15,12 @@ interface AnomalyArmorInfo {
     slotDiffs: number[],
     skillDiffs: SkillInfo[],
 }
+
+onBeforeMount(async () => {
+  skills.value = await invoke("cmd_get_skill_names");
+});
+
+let skills = ref({} as {[key: string]: FinalSkillInfo});
 
 let anomaly_filename = ref("");
 let anomaly_armors = ref([] as AnomalyArmorInfo[]);
@@ -25,20 +33,21 @@ async function get_anomaly_file() {
     directory: false,
     filters: [{
       name: "anomaly_crafting_list",
-      extensions: ["txt", "*"]
+      extensions: ["txt"]
     }]
   });
 
   if(file !== null && !Array.isArray(file)) {
     anomaly_filename.value = file;
-    parse_anomaly_file();
+    
+    parse_anomaly_file(file);
   }
 }
 
-async function parse_anomaly_file() {
-  console.log(`Anomaly filename: ${anomaly_filename.value}`);
+async function parse_anomaly_file(filename: string) {
+  console.log(`Anomaly filename: ${filename}`);
 
-  anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename : anomaly_filename.value });
+  anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename });
   
   for(const armor of anomaly_armors.value) {
     max_anomaly_skills.value = Math.max(max_anomaly_skills.value, armor.skillDiffs.length);
@@ -55,14 +64,27 @@ async function parse_anomaly_file() {
 
     <input v-model="anomaly_filename" placeholder="Anomaly crafting filename (exported via mod)" />
 
-    <button @click="parse_anomaly_file()">Parse</button>
+    <button @click="parse_anomaly_file(anomaly_filename)">Parse</button>
 
     <table>
+      <tr>
+        <th>Name</th>
+        <template v-for="i in max_anomaly_skills">
+          <th colspan="2">Skill {{ i }}</th>
+        </template>
+      </tr>
       <tr v-for="armor in anomaly_armors">
         <td>{{ armor.original.names[lang_data] }}</td>
 
-        <template v-for="skillDiff in armor.skillDiffs">
-          <td>{{ skillDiff.name }}</td>
+        <template v-for="(skillDiff, skillIdx) in armor.skillDiffs">
+          <td>
+            <select name="skill{{ skillIdx }}" v-model="skills[skillDiff.name].id">
+              <option value="" disabled>---</option>
+              <option v-for="skillInfo in skills" v-bind:value="skillInfo.id">
+                {{ skillInfo.names[lang_data] }}
+              </option>
+            </select>
+          </td>
           <td>Lv {{ skillDiff.level }}</td>
         </template>
       </tr>
