@@ -5,7 +5,40 @@ import { ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
+interface ArmorStatInfo {
+    defense: number;
+    fireRes: number;
+    waterRes: number;
+    iceRes: number;
+    elecRes: number;
+    dragonRes: number;
+}
+
+interface SkillInfo {
+    name: string;
+    level: number;
+}
+
+interface FinalArmorInfo {
+    id: string;
+    part: string;
+    sexType: string;
+    names: { [key: string]: string };
+    rarity: number;
+    stat: ArmorStatInfo;
+    skills: SkillInfo[];
+    slots: number[];
+}
+
+interface AnomalyArmorInfo {
+    original: FinalArmorInfo,
+    statDiff: ArmorStatInfo,
+    slotDiffs: number[],
+    skillDiffs: SkillInfo[],
+}
+
 let anomaly_filename = ref("");
+let anomaly_armors = ref([] as AnomalyArmorInfo[]);
 
 async function get_anomaly_file() {
   const file = await open({
@@ -23,9 +56,14 @@ async function get_anomaly_file() {
   }
 }
 
-function parse_anomaly_file() {
+async function parse_anomaly_file() {
   console.log(`Anomaly filename: ${anomaly_filename.value}`);
-  invoke("cmd_parse_anomaly", { filename : anomaly_filename.value });
+
+  anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename : anomaly_filename.value });
+
+  anomaly_armors.value.forEach(val => {
+      console.log(val.statDiff.defense);
+  });
 }
 
 </script>
@@ -39,6 +77,7 @@ function parse_anomaly_file() {
     <input v-model="anomaly_filename" placeholder="Anomaly crafting filename (exported via mod)" />
 
     <button @click="parse_anomaly_file()">Parse</button>
+
 
   </div>
 </template>

@@ -1,9 +1,8 @@
 use std::collections::HashMap;
-use std::hash::Hash;
 
 use super::armor::{AnomalyArmor, BaseArmor, Talisman};
 use super::deco::Decoration;
-use super::skill::{self, Skill};
+use super::skill::Skill;
 
 #[derive(Default)]
 pub struct DataManager {
@@ -48,7 +47,7 @@ impl DataManager {
             }
         }
 
-        let mut dm = DataManager {
+        let dm = DataManager {
             armors,
             skills,
             decos,

@@ -219,7 +219,10 @@ fn get_count(mutex_dm: tauri::State<Mutex<DataManager>>) -> usize {
 }
 
 #[tauri::command]
-fn cmd_parse_anomaly(filename: &str, mutex_dm: tauri::State<Mutex<DataManager>>) {
+fn cmd_parse_anomaly(
+    filename: &str,
+    mutex_dm: tauri::State<Mutex<DataManager>>,
+) -> Vec<AnomalyArmor> {
     let mut dm = mutex_dm.lock().unwrap();
 
     let anomalies = parse_anomaly(
@@ -229,7 +232,9 @@ fn cmd_parse_anomaly(filename: &str, mutex_dm: tauri::State<Mutex<DataManager>>)
         &dm.skill_name_dict,
     );
 
-    dm.anomaly_armors = anomalies;
+    dm.anomaly_armors = anomalies.clone();
+
+    return anomalies;
 }
 
 fn main() {
@@ -253,22 +258,7 @@ fn main() {
         decos.insert(deco.id.clone(), deco);
     }
 
-    let mut dm = DataManager::new(armors, skills, decos);
-
-    let mut qu_armor_filename = "";
-    let mut tali_filename = "";
-
-    let anomaly_armors = parse_anomaly(
-        qu_armor_filename,
-        &dm.armors,
-        &dm.armor_name_dict,
-        &dm.skill_name_dict,
-    );
-
-    let talismans = parse_talisman(tali_filename, &dm.skill_name_dict);
-
-    dm.anomaly_armors = anomaly_armors;
-    dm.talismans = talismans;
+    let dm = DataManager::new(armors, skills, decos);
 
     println!(
         "Anomaly armor count: {}, talisman count: {}",
@@ -291,14 +281,18 @@ fn main() {
             "anomaly_crafting" => {
                 let handle = event.window().app_handle();
 
-                WindowBuilder::new(
-                    &handle,
-                    "anomaly-list".to_string(),
-                    tauri::WindowUrl::App("anomaly_list.html".into()),
-                )
-                .title("Anomaly Crafting List")
-                .build()
-                .unwrap();
+                let existing = event.window().get_window("anomaly_list");
+
+                if existing.is_none() {
+                    WindowBuilder::new(
+                        &handle,
+                        "anomaly_list".to_string(),
+                        tauri::WindowUrl::App("anomaly_list.html".into()),
+                    )
+                    .title("Anomaly Crafting List")
+                    .build()
+                    .unwrap();
+                }
             }
             _ => {}
         })

@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum ArmorPart {
     #[serde(rename = "helm")]
     Helm,
@@ -16,7 +16,7 @@ pub enum ArmorPart {
     Feet,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum SexType {
     #[serde(rename = "all")]
     All,
@@ -26,7 +26,7 @@ pub enum SexType {
     Female,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ArmorStat {
     pub defense: i32,
     #[serde(rename = "fireRes")]
@@ -41,13 +41,13 @@ pub struct ArmorStat {
     pub dragon_res: i32,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ArmorSkill {
     pub name: String,
     pub level: i32,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct BaseArmor {
     pub id: String,
     pub part: ArmorPart,
@@ -61,10 +61,17 @@ pub struct BaseArmor {
     pub skills: Vec<ArmorSkill>,
 }
 
+#[derive(Serialize, Clone)]
 pub struct AnomalyArmor {
     pub original: BaseArmor,
+
+    #[serde(rename = "statDiff")]
     pub stat_diff: ArmorStat,
+
+    #[serde(rename = "slotDiffs")]
     pub slot_diffs: Vec<i32>,
+
+    #[serde(rename = "skillDiffs")]
     pub skill_diffs: Vec<ArmorSkill>,
 }
 
