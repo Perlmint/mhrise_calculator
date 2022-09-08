@@ -235,48 +235,19 @@ fn main() {
         decos.insert(deco.id.clone(), deco);
     }
 
-    let mut dm = DataManager {
-        armors,
-        skills,
-        decos,
-        talismans: Vec::new(),
-        anomaly_armors: Vec::new(),
-    };
+    let mut dm = DataManager::new(armors, skills, decos);
 
     let mut qu_armor_filename = "";
     let mut tali_filename = "";
 
-    let mut armor_name_dict = HashMap::<&str, &str>::new();
-    let mut skill_name_dict = HashMap::<&str, &str>::new();
-
-    for pair in &dm.armors {
-        let armor = pair.1;
-
-        for lang_name in &armor.names {
-            let name = lang_name.1;
-
-            armor_name_dict.insert(name, &armor.id);
-        }
-    }
-
-    for pair in &dm.skills {
-        let skill = pair.1;
-
-        for lang_name in &skill.names {
-            let name = lang_name.1;
-
-            skill_name_dict.insert(name, &skill.id);
-        }
-    }
-
     let anomaly_armors = parse_anomaly(
         qu_armor_filename,
         &dm.armors,
-        &armor_name_dict,
-        &skill_name_dict,
+        &dm.armor_name_dict,
+        &dm.skill_name_dict,
     );
 
-    let talismans = parse_talisman(tali_filename, &skill_name_dict);
+    let talismans = parse_talisman(tali_filename, &dm.skill_name_dict);
 
     dm.anomaly_armors = anomaly_armors;
     dm.talismans = talismans;
