@@ -296,12 +296,13 @@ fn main() {
         .add_item(CustomMenuItem::new("hide", "Hide"))
         .add_submenu(submenu);
 
-    let sub_window_builder = |app: &mut App| {
+    let sub_window_builder = |app: &mut App| -> Result<(), Box<dyn std::error::Error>> {
         WindowBuilder::new(
             app,
-            "main-window".to_string(),
-            tauri::WindowUrl::App("index.html".into()),
+            "anomaly-list".to_string(),
+            tauri::WindowUrl::App("anomaly_list.html".into()),
         )
+        .title("Anomaly Crafting List")
         .build()?;
         Ok(())
     };
