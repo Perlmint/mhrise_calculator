@@ -3,21 +3,22 @@
     windows_subsystem = "windows"
 )]
 
-use armor::{BaseArmor, Talisman, TalismanSkill};
 use csv::StringRecord;
-use deco::Decoration;
 use serde::de;
-use skill::Skill;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
 use tauri::{App, CustomMenuItem, Menu, MenuItem, Submenu, WindowBuilder};
 
-use crate::armor::{AnomalyArmor, ArmorSkill, ArmorStat};
+mod data {
+    pub mod armor;
+    pub mod deco;
+    pub mod skill;
+}
 
-mod armor;
-mod deco;
-mod skill;
+use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
+use crate::data::deco::Decoration;
+use crate::data::skill::Skill;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {
     return record[index].parse().unwrap();
