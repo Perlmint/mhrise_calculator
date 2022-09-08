@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub enum ArmorPart {
     #[serde(rename = "helm")]
     Helm,
@@ -16,7 +16,7 @@ pub enum ArmorPart {
     Feet,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub enum SexType {
     #[serde(rename = "all")]
     All,
@@ -26,7 +26,7 @@ pub enum SexType {
     Female,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct ArmorStat {
     pub defense: i32,
     #[serde(rename = "fireRes")]
@@ -41,13 +41,13 @@ pub struct ArmorStat {
     pub dragon_res: i32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct ArmorSkill {
     pub name: String,
     pub level: i32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct BaseArmor {
     pub id: String,
     pub part: ArmorPart,
@@ -61,8 +61,8 @@ pub struct BaseArmor {
     pub skills: Vec<ArmorSkill>,
 }
 
-pub struct AnomalyArmor<'a> {
-    pub original: &'a BaseArmor,
+pub struct AnomalyArmor {
+    pub original: BaseArmor,
     pub stat_diff: ArmorStat,
     pub slot_diffs: Vec<i32>,
     pub skill_diffs: Vec<ArmorSkill>,

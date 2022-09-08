@@ -3,15 +3,18 @@
     windows_subsystem = "windows"
 )]
 
-use csv::StringRecord;
-use serde::de;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
+
+use csv::StringRecord;
+use data::data_manager::DataManager;
+use serde::de;
 use tauri::{App, CustomMenuItem, Menu, MenuItem, Submenu, WindowBuilder};
 
 mod data {
     pub mod armor;
+    pub mod data_manager;
     pub mod deco;
     pub mod skill;
 }
@@ -42,12 +45,12 @@ where
     }
 }
 
-fn parse_anomaly<'a>(
+fn parse_anomaly(
     filename: &str,
-    armors: &'a HashMap<String, BaseArmor>,
+    armors: &HashMap<String, BaseArmor>,
     armor_name_dict: &HashMap<&str, &str>,
     skill_name_dict: &HashMap<&str, &str>,
-) -> Vec<AnomalyArmor<'a>> {
+) -> Vec<AnomalyArmor> {
     let file = File::open(filename);
 
     match file {
@@ -119,7 +122,7 @@ fn parse_anomaly<'a>(
                 let armor_info = armors.get(armor_id).unwrap();
 
                 let anomaly_armor = AnomalyArmor {
-                    original: &armor_info,
+                    original: armor_info.clone(),
                     stat_diff: stat,
                     slot_diffs: slot_sizes,
                     skill_diffs: anomaly_skills,
@@ -207,13 +210,18 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn get_count() -> usize {
+fn get_count(dm: tauri::State<DataManager>) -> usize {
+    return dm.armors.len() + dm.skills.len() + dm.decos.len();
+}
+
+fn main() {
     let armors_vec = parse_data::<BaseArmor>("data/armor.json");
     let skills_vec = parse_data::<Skill>("data/skill.json");
     let decos_vec = parse_data::<Decoration>("data/deco.json");
 
     let mut armors = HashMap::<String, BaseArmor>::new();
     let mut skills = HashMap::<String, Skill>::new();
+    let mut decos = HashMap::<String, Decoration>::new();
 
     for armor in armors_vec {
         armors.insert(armor.id.clone(), armor);
@@ -223,10 +231,25 @@ fn get_count() -> usize {
         skills.insert(skill.id.clone(), skill);
     }
 
+    for deco in decos_vec {
+        decos.insert(deco.id.clone(), deco);
+    }
+
+    let mut dm = DataManager {
+        armors,
+        skills,
+        decos,
+        talismans: Vec::new(),
+        anomaly_armors: Vec::new(),
+    };
+
+    let mut qu_armor_filename = "";
+    let mut tali_filename = "";
+
     let mut armor_name_dict = HashMap::<&str, &str>::new();
     let mut skill_name_dict = HashMap::<&str, &str>::new();
 
-    for pair in &armors {
+    for pair in &dm.armors {
         let armor = pair.1;
 
         for lang_name in &armor.names {
@@ -236,7 +259,7 @@ fn get_count() -> usize {
         }
     }
 
-    for pair in &skills {
+    for pair in &dm.skills {
         let skill = pair.1;
 
         for lang_name in &skill.names {
@@ -246,28 +269,24 @@ fn get_count() -> usize {
         }
     }
 
-    let mut qu_armor_filename = "";
-    let mut tali_filename = "";
-
     let anomaly_armors = parse_anomaly(
         qu_armor_filename,
-        &armors,
+        &dm.armors,
         &armor_name_dict,
         &skill_name_dict,
     );
 
     let talismans = parse_talisman(tali_filename, &skill_name_dict);
 
+    dm.anomaly_armors = anomaly_armors;
+    dm.talismans = talismans;
+
     println!(
         "Anomaly armor count: {}, talisman count: {}",
-        anomaly_armors.len(),
-        talismans.len()
+        dm.anomaly_armors.len(),
+        dm.talismans.len()
     );
 
-    return armors.len() + skills.len() + decos_vec.len();
-}
-
-fn main() {
     // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let close = CustomMenuItem::new("close".to_string(), "Close");
@@ -288,6 +307,7 @@ fn main() {
     };
 
     tauri::Builder::default()
+        .manage(dm)
         .setup(sub_window_builder)
         .menu(menu)
         .on_menu_event(|event| match event.menu_item_id() {
