@@ -11,7 +11,7 @@ use std::sync::Mutex;
 use csv::StringRecord;
 use data::data_manager::DataManager;
 use serde::de;
-use tauri::{App, CustomMenuItem, Menu, MenuItem, Submenu, WindowBuilder};
+use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
 
 mod data {
     pub mod armor;
@@ -276,36 +276,29 @@ fn main() {
         dm.talismans.len()
     );
 
-    // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
-    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-    let close = CustomMenuItem::new("close".to_string(), "Close");
-    let submenu = Submenu::new("File", Menu::new().add_item(quit).add_item(close));
+    let anomaly_submenu = CustomMenuItem::new("anomaly_crafting".to_string(), "Anomaly Crafting");
+
+    let data_submenu = Submenu::new("Data", Menu::new().add_item(anomaly_submenu));
+
     let menu = Menu::new()
         .add_native_item(MenuItem::Copy)
-        .add_item(CustomMenuItem::new("hide", "Hide"))
-        .add_submenu(submenu);
-
-    let sub_window_builder = |app: &mut App| -> Result<(), Box<dyn std::error::Error>> {
-        WindowBuilder::new(
-            app,
-            "anomaly-list".to_string(),
-            tauri::WindowUrl::App("anomaly_list.html".into()),
-        )
-        .title("Anomaly Crafting List")
-        .build()?;
-        Ok(())
-    };
+        .add_submenu(data_submenu);
 
     tauri::Builder::default()
         .manage(Mutex::new(dm))
-        .setup(sub_window_builder)
         .menu(menu)
         .on_menu_event(|event| match event.menu_item_id() {
-            "quit" => {
-                std::process::exit(0);
-            }
-            "close" => {
-                event.window().close().unwrap();
+            "anomaly_crafting" => {
+                let handle = event.window().app_handle();
+
+                WindowBuilder::new(
+                    &handle,
+                    "anomaly-list".to_string(),
+                    tauri::WindowUrl::App("anomaly_list.html".into()),
+                )
+                .title("Anomaly Crafting List")
+                .build()
+                .unwrap();
             }
             _ => {}
         })
