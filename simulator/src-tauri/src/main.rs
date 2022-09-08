@@ -6,6 +6,7 @@
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
+use std::sync::Mutex;
 
 use csv::StringRecord;
 use data::data_manager::DataManager;
@@ -48,8 +49,8 @@ where
 fn parse_anomaly(
     filename: &str,
     armors: &HashMap<String, BaseArmor>,
-    armor_name_dict: &HashMap<&str, &str>,
-    skill_name_dict: &HashMap<&str, &str>,
+    armor_name_dict: &HashMap<String, String>,
+    skill_name_dict: &HashMap<String, String>,
 ) -> Vec<AnomalyArmor> {
     let file = File::open(filename);
 
@@ -118,7 +119,7 @@ fn parse_anomaly(
                     anomaly_skills.push(anomaly_skill);
                 }
 
-                let armor_id = *armor_name_dict.get(armor_name).unwrap();
+                let armor_id = armor_name_dict.get(armor_name).unwrap();
                 let armor_info = armors.get(armor_id).unwrap();
 
                 let anomaly_armor = AnomalyArmor {
@@ -131,13 +132,15 @@ fn parse_anomaly(
                 anomaly_armors.push(anomaly_armor);
             }
 
+            println!("Anomaly parsed - count : {}", anomaly_armors.len());
+
             anomaly_armors
         }
         Err(_) => Vec::new(),
     }
 }
 
-fn parse_talisman(filename: &str, skill_name_dict: &HashMap<&str, &str>) -> Vec<Talisman> {
+fn parse_talisman(filename: &str, skill_name_dict: &HashMap<String, String>) -> Vec<Talisman> {
     let file = File::open(filename);
 
     match file {
@@ -210,8 +213,23 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn get_count(dm: tauri::State<DataManager>) -> usize {
+fn get_count(mutex_dm: tauri::State<Mutex<DataManager>>) -> usize {
+    let dm = mutex_dm.lock().unwrap();
     return dm.armors.len() + dm.skills.len() + dm.decos.len();
+}
+
+#[tauri::command]
+fn cmd_parse_anomaly(filename: &str, mutex_dm: tauri::State<Mutex<DataManager>>) {
+    let mut dm = mutex_dm.lock().unwrap();
+
+    let anomalies = parse_anomaly(
+        filename,
+        &dm.armors,
+        &dm.armor_name_dict,
+        &dm.skill_name_dict,
+    );
+
+    dm.anomaly_armors = anomalies;
 }
 
 fn main() {
@@ -279,7 +297,7 @@ fn main() {
     };
 
     tauri::Builder::default()
-        .manage(dm)
+        .manage(Mutex::new(dm))
         .setup(sub_window_builder)
         .menu(menu)
         .on_menu_event(|event| match event.menu_item_id() {
@@ -291,7 +309,11 @@ fn main() {
             }
             _ => {}
         })
-        .invoke_handler(tauri::generate_handler![greet, get_count])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            get_count,
+            cmd_parse_anomaly
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

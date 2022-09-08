@@ -25,7 +25,7 @@ async function get_anomaly_file() {
 
 function parse_anomaly_file() {
   console.log(`Anomaly filename: ${anomaly_filename.value}`);
-  invoke("", { filename : anomaly_filename.value });
+  invoke("cmd_parse_anomaly", { filename : anomaly_filename.value });
 }
 
 </script>
