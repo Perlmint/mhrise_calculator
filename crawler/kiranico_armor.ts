@@ -4,43 +4,17 @@ import path from "path";
 import Crawler from "crawler";
 import { makeId } from "./util.js";
 
+import {
+    KiranicoArmorInfo,
+    SkillInfo,
+    ArmorStatInfo,
+    FinalArmorInfo,
+} from "./definition/armor_define.js";
+
 interface UrlInfo {
     lang: string;
     rarity: number;
     url: string;
-}
-
-export interface KiranicoArmorInfo {
-    name: string;
-    rarity: number;
-    stat: ArmorStatInfo;
-    skills: SkillInfo[];
-    slots: number[];
-}
-
-export interface FinalArmorInfo {
-    id: string;
-    part: string;
-    sexType: string;
-    names: { [key: string]: string };
-    rarity: number;
-    stat: ArmorStatInfo;
-    skills: SkillInfo[];
-    slots: number[];
-}
-
-interface ArmorStatInfo {
-    defense: number;
-    fireRes: number;
-    waterRes: number;
-    iceRes: number;
-    elecRes: number;
-    dragonRes: number;
-}
-
-interface SkillInfo {
-    name: string;
-    level: number;
 }
 
 type AllInfo = { [key: string]: { [key: number]: KiranicoArmorInfo[] } };

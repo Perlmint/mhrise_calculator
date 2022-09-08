@@ -5,30 +5,7 @@ import { ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
-interface ArmorStatInfo {
-    defense: number;
-    fireRes: number;
-    waterRes: number;
-    iceRes: number;
-    elecRes: number;
-    dragonRes: number;
-}
-
-interface SkillInfo {
-    name: string;
-    level: number;
-}
-
-interface FinalArmorInfo {
-    id: string;
-    part: string;
-    sexType: string;
-    names: { [key: string]: string };
-    rarity: number;
-    stat: ArmorStatInfo;
-    skills: SkillInfo[];
-    slots: number[];
-}
+import {FinalArmorInfo, ArmorStatInfo, SkillInfo } from "./definition/armor_define";
 
 interface AnomalyArmorInfo {
     original: FinalArmorInfo,

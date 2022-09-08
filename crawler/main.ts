@@ -1,11 +1,13 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { parse as armorParse, FinalArmorInfo } from "./kiranico_armor.js";
+import { parse as armorParse } from "./kiranico_armor.js";
 import { parse as invenParse, InvenArmorInfo } from "./inven.js";
 
 import { parse as skillParse } from "./kiranico_skill.js";
 import { parse as decoParse } from "./kiranico_deco.js";
+
+import { FinalArmorInfo } from "./definition/armor_define.js";
 
 async function merge() {
     const kiraFile = path.join("temp_data", "armor.json");
