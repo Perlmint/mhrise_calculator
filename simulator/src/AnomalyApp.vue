@@ -23,7 +23,7 @@ interface AnomalyArmorInfo {
 
 let lang_data = ref("ko");
 
-let skills = ref({} as {[key: string]: FinalSkillInfo});
+let skills = ref({}) as Ref<{[key: string]: FinalSkillInfo}>;
 
 let skillsVec = ref(SkillsVec as FinalSkillInfo[]) as Ref<FinalSkillInfo[]>;
 let armorsVec = ref(ArmorsVec as FinalArmorInfo[]) as Ref<FinalArmorInfo[]>;
@@ -35,8 +35,32 @@ for(const skill of skillsVec.value) {
   skills.value[skill.id] = skill;
 }
 
+const parts = ref(["helm", "torso", "arm", "waist", "feet"]);
+
+let armorsByPart = ref({} as {[key: string]: {[key: string]: FinalArmorInfo}});
+let armorsByPartVec = ref({} as {[key: string]: FinalArmorInfo[]});
+
+for (const part of parts.value) {
+  armorsByPart.value[part] = {};
+  armorsByPartVec.value[part] = [];
+}
+
+for(const armor of armorsVec.value) {
+  const id = armor.id;
+  const part = armor.part;
+
+  armorsByPart.value[part][id] = armor;
+  armorsByPartVec.value[part].push(armor);
+}
+
+for(const part in armorsByPartVec.value) {
+  const subArmors = armorsByPartVec.value[part];
+  subArmors.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
+}
+
 let anomaly_filename = ref("");
-let anomaly_armors = ref([] as AnomalyArmorInfo[]);
+let anomalyArmors = ref([]) as Ref<AnomalyArmorInfo[]>;
+let anomalyArmorsByPart = ref({}) as {[key: string]: AnomalyArmorInfo[]};
 let max_anomaly_skills = ref(5);
 
 let selectedArmorId = ref("");
@@ -61,17 +85,24 @@ async function get_anomaly_file() {
 async function parse_anomaly_file(filename: string) {
   console.log(`Anomaly filename: ${filename}`);
 
-  anomaly_armors.value = await invoke("cmd_parse_anomaly", { filename });
+  anomalyArmors.value = await invoke("cmd_parse_anomaly", { filename });
+  anomalyArmors.value.sort((armor1, armor2) => armor1.original.names[lang_data.value] > armor2.original.names[lang_data.value] ? 1 : -1);
 
-  anomaly_armors.value.sort((armor1, armor2) => armor1.original.names[lang_data.value] > armor2.original.names[lang_data.value] ? 1 : -1);
+  for(const armor of anomalyArmors.value) {
+    const part = armor.original.part;
+
+    if (anomalyArmorsByPart.value[part] === undefined) {
+      anomalyArmorsByPart.value[part] = [];
+    }
+
+    anomalyArmorsByPart.value[part].push(armor);
+  }
+
+  console.log(anomalyArmorsByPart.value);
   
-  for(const armor of anomaly_armors.value) {
+  for(const armor of anomalyArmors.value) {
     max_anomaly_skills.value = Math.max(max_anomaly_skills.value, armor.skillDiffs.length);
   }
-}
-
-function onSkillChange(index: number, selectedSkillId: string) {
-  const skillInfo = skills.value[selectedSkillId];
 }
 
 </script>
@@ -86,22 +117,26 @@ function onSkillChange(index: number, selectedSkillId: string) {
 
     <button @click="parse_anomaly_file(anomaly_filename)">Parse</button>
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <template v-for="i in max_anomaly_skills">
-          <th colspan="2">Skill {{ i }}</th>
-        </template>
-      </tr>
-      <tr v-for="(armor, armorIdx) in anomaly_armors">
-        <td>{{ armor.original.names[lang_data] }}</td>
+    <template v-for="part in parts">
+      <table>
+        <tr>
+          <th><h1>{{ part }}</h1></th>
+          <template v-for="i in max_anomaly_skills">
+            <th colspan="2">Skill {{ i }}</th>
+          </template>
+        </tr>
 
-        <template v-for="(skillDiff, skillIdx) in armor.skillDiffs">
-          <td>{{ skills[skillDiff.id].names[lang_data] }}</td>
-          <td>Lv {{ skillDiff.level }}</td>
-        </template>
-      </tr>
-    </table>
+        <tr v-for="armor in anomalyArmorsByPart[part]">
+          {{ armor.id }}
+          <td>{{ armor.original.names[lang_data] }}</td>
+
+          <template v-for="skillDiff in armor.skillDiffs">
+            <td>{{ skills[skillDiff.id].names[lang_data] }}</td>
+            <td>Lv {{ skillDiff.level }}</td>
+          </template>
+        </tr>
+      </table>
+    </template>
 
     <table>
       <tr>
@@ -119,7 +154,7 @@ function onSkillChange(index: number, selectedSkillId: string) {
           </option>
         </select>
         </td>
-        <NewAnomalyArmor :index="0" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" @on-skill-change="onSkillChange" />
+        <NewAnomalyArmor :index="0" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
         <NewAnomalyArmor :index="1" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
         <NewAnomalyArmor :index="2" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
         <NewAnomalyArmor :index="3" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
