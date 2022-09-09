@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { onBeforeMount, ref } from "vue";
+import { ref, Ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
@@ -25,13 +25,13 @@ let lang_data = ref("ko");
 
 let skills = ref({} as {[key: string]: FinalSkillInfo});
 
-let skillsVec = ref(SkillsVec as FinalSkillInfo[]);
-let armorsVec = ref(ArmorsVec as FinalArmorInfo[]);
+let skillsVec = ref(SkillsVec as FinalSkillInfo[]) as Ref<FinalSkillInfo[]>;
+let armorsVec = ref(ArmorsVec as FinalArmorInfo[]) as Ref<FinalArmorInfo[]>;
 
 skillsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
 armorsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
 
-for(const skill of SkillsVec) {
+for(const skill of skillsVec.value) {
   skills.value[skill.id] = skill;
 }
 
@@ -70,8 +70,8 @@ async function parse_anomaly_file(filename: string) {
   }
 }
 
-function onArmorChange(event: Event) {
-  console.log(event.target);
+function onSkillChange(index: number, selectedSkillId: string) {
+  const skillInfo = skills.value[selectedSkillId];
 }
 
 </script>
@@ -119,16 +119,11 @@ function onArmorChange(event: Event) {
           </option>
         </select>
         </td>
-        <NewAnomalyArmor :index="0" :skillsVec="skillsVec" :lang_data="lang_data" />
-        <td>Level1 dropdown</td>
-        <NewAnomalyArmor :index="1" :skillsVec="skillsVec" :lang_data="lang_data" />
-        <td>Level2 dropdown</td>
-        <NewAnomalyArmor :index="2" :skillsVec="skillsVec" :lang_data="lang_data" />
-        <td>Level3 dropdown</td>
-        <NewAnomalyArmor :index="3" :skillsVec="skillsVec" :lang_data="lang_data" />
-        <td>Level4 dropdown</td>
-        <NewAnomalyArmor :index="4" :skillsVec="skillsVec" :lang_data="lang_data" />
-        <td>Level5 dropdown</td>
+        <NewAnomalyArmor :index="0" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" @on-skill-change="onSkillChange" />
+        <NewAnomalyArmor :index="1" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
+        <NewAnomalyArmor :index="2" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
+        <NewAnomalyArmor :index="3" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
+        <NewAnomalyArmor :index="4" :skillsVec="skillsVec" :skills="skills" :lang_data="lang_data" />
       </tr>
     </table>
 
