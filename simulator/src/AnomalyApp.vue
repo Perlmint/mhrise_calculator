@@ -8,7 +8,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import ArmorsVec from "./data/armor.json";
 import SkillsVec from "./data/skill.json";
 
-import { FinalArmorInfo, ArmorStatInfo } from "./definition/armor_define";
+import { FinalArmorInfo, ArmorStatInfo, ArmorParts } from "./definition/armor_define";
 import { FinalSkillInfo } from "./definition/skill_define";
 
 import NewAnomalyArmor from "./components/NewAnomalyArmor.vue";
@@ -35,7 +35,7 @@ for(const skill of skillsVec.value) {
   skills.value[skill.id] = skill;
 }
 
-const parts = ref(["helm", "torso", "arm", "waist", "feet"]);
+const parts = ref(ArmorParts);
 
 let armorsByPart = ref({} as {[key: string]: {[key: string]: FinalArmorInfo}});
 let armorsByPartVec = ref({} as {[key: string]: FinalArmorInfo[]});

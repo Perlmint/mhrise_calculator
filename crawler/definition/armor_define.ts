@@ -35,3 +35,5 @@ export interface FinalSkillInfo {
     id: string;
     level: number;
 }
+
+export const ArmorParts = ["helm", "torso", "arm", "waist", "feet"];
