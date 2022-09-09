@@ -1,0 +1,90 @@
+[
+    {
+        "id": "blood_rite",
+        "maxLevel": 3
+    },
+    {
+        "id": "dereliction",
+        "maxLevel": 3
+    },
+    {
+        "id": "furious",
+        "maxLevel": 3
+    },
+    {
+        "id": "mail_of_hellfire",
+        "maxLevel": 3
+    },
+    {
+        "id": "coalescence",
+        "maxLevel": 3
+    },
+    {
+        "id": "bloodlust",
+        "maxLevel": 3
+    },
+    {
+        "id": "defiance",
+        "maxLevel": 5
+    },
+    {
+        "id": "sneak_attack",
+        "maxLevel": 3
+    },
+    {
+        "id": "adrenaline_rush",
+        "maxLevel": 3
+    },
+    {
+        "id": "redirection",
+        "maxLevel": 2
+    },
+    {
+        "id": "spiribird's_call",
+        "maxLevel": 1
+    },
+    {
+        "id": "charge_master",
+        "maxLevel": 3
+    },
+    {
+        "id": "foray",
+        "maxLevel": 3
+    },
+    {
+        "id": "tune-up",
+        "maxLevel": 2
+    },
+    {
+        "id": "grinder_(s)",
+        "maxLevel": 3
+    },
+    {
+        "id": "bladescale_hone",
+        "maxLevel": 3
+    },
+    {
+        "id": "wall_runner_(boost)",
+        "maxLevel": 1
+    },
+    {
+        "id": "quick_breath",
+        "maxLevel": 1
+    },
+    {
+        "id": "element_exploit",
+        "maxLevel": 3
+    },
+    {
+        "id": "chain_crit",
+        "maxLevel": 3
+    },
+    {
+        "id": "guts",
+        "maxLevel": 3
+    },
+    {
+        "id": "status_trigger",
+        "maxLevel": 3
+    }
+]

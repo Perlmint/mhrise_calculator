@@ -3553,7 +3553,7 @@
     },
     {
         "id": "blood_rite",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "血氣",
             "zh": "气血",
@@ -3585,7 +3585,7 @@
     },
     {
         "id": "dereliction",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "伏魔響命",
             "zh": "伏魔耗命",
@@ -3617,7 +3617,7 @@
     },
     {
         "id": "furious",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "激昂",
             "zh": "激昂",
@@ -3649,7 +3649,7 @@
     },
     {
         "id": "mail_of_hellfire",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "業鎧【修羅】",
             "zh": "业铠【修罗】",
@@ -3681,7 +3681,7 @@
     },
     {
         "id": "coalescence",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "災禍転福",
             "zh": "因祸得福",
@@ -3713,7 +3713,7 @@
     },
     {
         "id": "bloodlust",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "狂竜症【蝕】",
             "zh": "狂龙症【蚀】",
@@ -3745,7 +3745,7 @@
     },
     {
         "id": "defiance",
-        "maxLevel": 1,
+        "maxLevel": 5,
         "names": {
             "ja": "顕如盤石",
             "zh": "坚如磐石",
@@ -3777,7 +3777,7 @@
     },
     {
         "id": "sneak_attack",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "闇討ち",
             "zh": "偷袭",
@@ -3809,7 +3809,7 @@
     },
     {
         "id": "adrenaline_rush",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "巧撃",
             "zh": "巧击",
@@ -3841,7 +3841,7 @@
     },
     {
         "id": "redirection",
-        "maxLevel": 1,
+        "maxLevel": 2,
         "names": {
             "ja": "合気",
             "zh": "合气",
@@ -3905,7 +3905,7 @@
     },
     {
         "id": "charge_master",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "チャージマスター",
             "zh": "蓄力大师",
@@ -3937,7 +3937,7 @@
     },
     {
         "id": "foray",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "攻勢",
             "zh": "攻势",
@@ -3969,7 +3969,7 @@
     },
     {
         "id": "tune-up",
-        "maxLevel": 1,
+        "maxLevel": 2,
         "names": {
             "ja": "チューンアップ",
             "zh": "零件改造",
@@ -4001,7 +4001,7 @@
     },
     {
         "id": "grinder_(s)",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "研磨術【鋭】",
             "zh": "打磨术【锐】",
@@ -4033,7 +4033,7 @@
     },
     {
         "id": "bladescale_hone",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "刃鱗磨き",
             "zh": "刃鳞打磨",
@@ -4129,7 +4129,7 @@
     },
     {
         "id": "element_exploit",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "弱点特効【属性】",
             "zh": "弱点特效【属性】",
@@ -4161,7 +4161,7 @@
     },
     {
         "id": "chain_crit",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "連撃",
             "zh": "连击",
@@ -4193,7 +4193,7 @@
     },
     {
         "id": "guts",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "根性",
             "zh": "毅力",
@@ -4225,7 +4225,7 @@
     },
     {
         "id": "status_trigger",
-        "maxLevel": 1,
+        "maxLevel": 3,
         "names": {
             "ja": "状態異常確定蓄積",
             "zh": "状态异常必定累积",

@@ -8,6 +8,7 @@ import { parse as skillParse } from "./kiranico_skill.js";
 import { parse as decoParse } from "./kiranico_deco.js";
 
 import { FinalArmorInfo } from "./definition/armor_define.js";
+import { FinalSkillInfo } from "./definition/skill_define.js";
 
 async function merge() {
     const kiraFile = path.join("temp_data", "armor.json");
@@ -56,12 +57,42 @@ async function merge() {
 
     fs.ensureDirSync("data");
 
-    const filename = path.join("data", `armor.json`);
+    const armorFilename = path.join("data", `armor.json`);
 
-    const jsonStr = JSON.stringify(finalArmorDatas, null, 4);
+    const armorJsonStr = JSON.stringify(finalArmorDatas, null, 4);
 
-    const prom = new Promise<void>((resolve, reject) => {
-        fs.writeFile(filename, jsonStr, (err) => {
+    const armorProm = new Promise<void>((resolve, reject) => {
+        fs.writeFile(armorFilename, armorJsonStr, (err) => {
+            if (err) {
+                return reject(err);
+            }
+
+            resolve();
+        });
+    });
+
+    const skillDatas = JSON.parse(
+        fs.readFileSync(path.join("temp_data", "skill.json")).toString()
+    ) as FinalSkillInfo[];
+
+    const overrideSkillDatas = JSON.parse(
+        fs.readFileSync(path.join("data", "skill_override.json")).toString()
+    ) as { id: string; maxLevel: number }[];
+
+    for (const overInfo of overrideSkillDatas) {
+        for (const skillInfo of skillDatas) {
+            if (skillInfo.id === overInfo.id) {
+                skillInfo.maxLevel = overInfo.maxLevel;
+                break;
+            }
+        }
+    }
+
+    const skillFilename = path.join("data", "skill.json");
+    const skillJsonStr = JSON.stringify(skillDatas, null, 4);
+
+    const skillProm = new Promise<void>((resolve, reject) => {
+        fs.writeFile(skillFilename, skillJsonStr, (err) => {
             if (err) {
                 return reject(err);
             }
@@ -71,15 +102,11 @@ async function merge() {
     });
 
     fs.copyFileSync(
-        path.join("temp_data", "skill.json"),
-        path.join("data", "skill.json")
-    );
-    fs.copyFileSync(
         path.join("temp_data", "deco.json"),
         path.join("data", "deco.json")
     );
 
-    return prom;
+    return Promise.all([armorProm, skillProm]);
 }
 
 async function main() {
