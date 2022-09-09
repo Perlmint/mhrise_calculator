@@ -17,7 +17,7 @@ interface SkillInfo {
     text: string;
 }
 
-const maxLevelRegex = new RegExp(/\\nLv\s*(\d+)/);
+const maxLevelRegex = new RegExp(/Lv\s*(\d+)/g);
 
 const allInfos: { [key: string]: SkillInfo[] } = {};
 
@@ -123,12 +123,17 @@ export async function parse() {
                     texts[lang] = langInfo.text;
                 });
 
-                const maxLevelMatch = enInfo.text.match(maxLevelRegex);
+                const maxLevelMatchAll = enInfo.text.matchAll(maxLevelRegex);
 
                 let maxLevel = 1;
 
-                if (maxLevelMatch !== null) {
-                    maxLevel = Number.parseInt(maxLevelMatch[1]);
+                if (maxLevelMatchAll !== null) {
+                    for (const maxLevelMatch of maxLevelMatchAll) {
+                        maxLevel = Math.max(
+                            maxLevel,
+                            Number.parseInt(maxLevelMatch[1])
+                        );
+                    }
                 }
 
                 const finalInfo = {

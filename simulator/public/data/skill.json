@@ -1,6 +1,7 @@
 [
     {
         "id": "attack_boost",
+        "maxLevel": 7,
         "names": {
             "ja": "攻撃",
             "zh": "攻击",
@@ -32,6 +33,7 @@
     },
     {
         "id": "agitator",
+        "maxLevel": 5,
         "names": {
             "ja": "挑戦者",
             "zh": "挑战者",
@@ -63,6 +65,7 @@
     },
     {
         "id": "peak_performance",
+        "maxLevel": 3,
         "names": {
             "ja": "フルチャージ",
             "zh": "无伤",
@@ -94,6 +97,7 @@
     },
     {
         "id": "resentment",
+        "maxLevel": 5,
         "names": {
             "ja": "逆恨み",
             "zh": "怨恨",
@@ -125,6 +129,7 @@
     },
     {
         "id": "resuscitate",
+        "maxLevel": 3,
         "names": {
             "ja": "死中に活",
             "zh": "死里逃生",
@@ -156,6 +161,7 @@
     },
     {
         "id": "critical_eye",
+        "maxLevel": 7,
         "names": {
             "ja": "見切り",
             "zh": "看破",
@@ -187,6 +193,7 @@
     },
     {
         "id": "critical_boost",
+        "maxLevel": 3,
         "names": {
             "ja": "超会心",
             "zh": "超会心",
@@ -218,6 +225,7 @@
     },
     {
         "id": "weakness_exploit",
+        "maxLevel": 3,
         "names": {
             "ja": "弱点特効",
             "zh": "弱点特效",
@@ -249,6 +257,7 @@
     },
     {
         "id": "latent_power",
+        "maxLevel": 5,
         "names": {
             "ja": "力の解放",
             "zh": "力量解放",
@@ -280,6 +289,7 @@
     },
     {
         "id": "maximum_might",
+        "maxLevel": 3,
         "names": {
             "ja": "渾身",
             "zh": "精神抖擞",
@@ -311,6 +321,7 @@
     },
     {
         "id": "critical_element",
+        "maxLevel": 3,
         "names": {
             "ja": "会心撃【属性】",
             "zh": "会心击【属性】",
@@ -342,6 +353,7 @@
     },
     {
         "id": "master's_touch",
+        "maxLevel": 3,
         "names": {
             "ja": "達人芸",
             "zh": "达人艺",
@@ -373,6 +385,7 @@
     },
     {
         "id": "fire_attack",
+        "maxLevel": 5,
         "names": {
             "ja": "火属性攻撃強化",
             "zh": "火属性攻击强化",
@@ -404,6 +417,7 @@
     },
     {
         "id": "water_attack",
+        "maxLevel": 5,
         "names": {
             "ja": "水属性攻撃強化",
             "zh": "水属性攻击强化",
@@ -435,6 +449,7 @@
     },
     {
         "id": "ice_attack",
+        "maxLevel": 5,
         "names": {
             "ja": "氷属性攻撃強化",
             "zh": "冰属性攻击强化",
@@ -466,6 +481,7 @@
     },
     {
         "id": "thunder_attack",
+        "maxLevel": 5,
         "names": {
             "ja": "雷属性攻撃強化",
             "zh": "雷属性攻击强化",
@@ -497,6 +513,7 @@
     },
     {
         "id": "dragon_attack",
+        "maxLevel": 5,
         "names": {
             "ja": "龍属性攻撃強化",
             "zh": "龙属性攻击强化",
@@ -528,6 +545,7 @@
     },
     {
         "id": "poison_attack",
+        "maxLevel": 3,
         "names": {
             "ja": "毒属性強化",
             "zh": "毒属性强化",
@@ -559,6 +577,7 @@
     },
     {
         "id": "paralysis_attack",
+        "maxLevel": 3,
         "names": {
             "ja": "麻痺属性強化",
             "zh": "麻痹属性强化",
@@ -590,6 +609,7 @@
     },
     {
         "id": "sleep_attack",
+        "maxLevel": 3,
         "names": {
             "ja": "睡眠属性強化",
             "zh": "睡眠属性强化",
@@ -621,6 +641,7 @@
     },
     {
         "id": "blast_attack",
+        "maxLevel": 3,
         "names": {
             "ja": "爆破属性強化",
             "zh": "爆破属性强化",
@@ -652,6 +673,7 @@
     },
     {
         "id": "handicraft",
+        "maxLevel": 5,
         "names": {
             "ja": "匠",
             "zh": "匠",
@@ -683,6 +705,7 @@
     },
     {
         "id": "razor_sharp",
+        "maxLevel": 3,
         "names": {
             "ja": "業物",
             "zh": "利刃",
@@ -714,6 +737,7 @@
     },
     {
         "id": "spare_shot",
+        "maxLevel": 3,
         "names": {
             "ja": "弾丸節約",
             "zh": "弹丸节约",
@@ -745,6 +769,7 @@
     },
     {
         "id": "protective_polish",
+        "maxLevel": 3,
         "names": {
             "ja": "剛刃研磨",
             "zh": "刚刃打磨",
@@ -776,6 +801,7 @@
     },
     {
         "id": "mind's_eye",
+        "maxLevel": 3,
         "names": {
             "ja": "心眼",
             "zh": "心眼",
@@ -807,6 +833,7 @@
     },
     {
         "id": "ballistics",
+        "maxLevel": 3,
         "names": {
             "ja": "弾導強化",
             "zh": "弹道强化",
@@ -838,6 +865,7 @@
     },
     {
         "id": "bludgeoner",
+        "maxLevel": 3,
         "names": {
             "ja": "鈍器使い",
             "zh": "钝器能手",
@@ -869,6 +897,7 @@
     },
     {
         "id": "bow_charge_plus",
+        "maxLevel": 1,
         "names": {
             "ja": "弓溜め段階解放",
             "zh": "解放弓的蓄力阶段",
@@ -900,6 +929,7 @@
     },
     {
         "id": "focus",
+        "maxLevel": 3,
         "names": {
             "ja": "集中",
             "zh": "集中",
@@ -931,6 +961,7 @@
     },
     {
         "id": "power_prolonger",
+        "maxLevel": 3,
         "names": {
             "ja": "強化持続",
             "zh": "强化持续",
@@ -962,6 +993,7 @@
     },
     {
         "id": "marathon_runner",
+        "maxLevel": 3,
         "names": {
             "ja": "ランナー",
             "zh": "跑者",
@@ -993,6 +1025,7 @@
     },
     {
         "id": "constitution",
+        "maxLevel": 5,
         "names": {
             "ja": "体術",
             "zh": "体术",
@@ -1024,6 +1057,7 @@
     },
     {
         "id": "stamina_surge",
+        "maxLevel": 3,
         "names": {
             "ja": "スタミナ急速回復",
             "zh": "耐力急速回复",
@@ -1055,6 +1089,7 @@
     },
     {
         "id": "guard",
+        "maxLevel": 5,
         "names": {
             "ja": "ガード性能",
             "zh": "防御性能",
@@ -1086,6 +1121,7 @@
     },
     {
         "id": "guard_up",
+        "maxLevel": 3,
         "names": {
             "ja": "ガード強化",
             "zh": "防御强化",
@@ -1117,6 +1153,7 @@
     },
     {
         "id": "offensive_guard",
+        "maxLevel": 3,
         "names": {
             "ja": "攻めの守勢",
             "zh": "攻击守势",
@@ -1148,6 +1185,7 @@
     },
     {
         "id": "critical_draw",
+        "maxLevel": 3,
         "names": {
             "ja": "抜刀術【技】",
             "zh": "拔刀术【技】",
@@ -1179,6 +1217,7 @@
     },
     {
         "id": "punishing_draw",
+        "maxLevel": 3,
         "names": {
             "ja": "抜刀術【力】",
             "zh": "拔刀术【力】",
@@ -1210,6 +1249,7 @@
     },
     {
         "id": "quick_sheathe",
+        "maxLevel": 3,
         "names": {
             "ja": "納刀術",
             "zh": "纳刀术",
@@ -1241,6 +1281,7 @@
     },
     {
         "id": "slugger",
+        "maxLevel": 3,
         "names": {
             "ja": "ＫＯ術",
             "zh": "击晕术",
@@ -1272,6 +1313,7 @@
     },
     {
         "id": "stamina_thief",
+        "maxLevel": 3,
         "names": {
             "ja": "スタミナ奪取",
             "zh": "夺取耐力",
@@ -1303,6 +1345,7 @@
     },
     {
         "id": "affinity_sliding",
+        "maxLevel": 1,
         "names": {
             "ja": "滑走強化",
             "zh": "滑走强化",
@@ -1334,6 +1377,7 @@
     },
     {
         "id": "horn_maestro",
+        "maxLevel": 1,
         "names": {
             "ja": "笛吹き名人",
             "zh": "吹笛名人",
@@ -1365,6 +1409,7 @@
     },
     {
         "id": "artillery",
+        "maxLevel": 3,
         "names": {
             "ja": "砲術",
             "zh": "炮术",
@@ -1396,6 +1441,7 @@
     },
     {
         "id": "load_shells",
+        "maxLevel": 2,
         "names": {
             "ja": "砲弾装填",
             "zh": "炮弹装填",
@@ -1427,6 +1473,7 @@
     },
     {
         "id": "special_ammo_boost",
+        "maxLevel": 2,
         "names": {
             "ja": "特殊射撃強化",
             "zh": "特殊射击强化",
@@ -1458,6 +1505,7 @@
     },
     {
         "id": "normal/rapid_up",
+        "maxLevel": 3,
         "names": {
             "ja": "通常弾・連射矢強化",
             "zh": "通常弹・连射箭强化",
@@ -1489,6 +1537,7 @@
     },
     {
         "id": "pierce_up",
+        "maxLevel": 3,
         "names": {
             "ja": "貫通弾・貫通矢強化",
             "zh": "贯穿弹・贯穿箭强化",
@@ -1520,6 +1569,7 @@
     },
     {
         "id": "spread_up",
+        "maxLevel": 3,
         "names": {
             "ja": "散弾・拡散矢強化",
             "zh": "散弹・扩散箭强化",
@@ -1551,6 +1601,7 @@
     },
     {
         "id": "ammo_up",
+        "maxLevel": 3,
         "names": {
             "ja": "装填拡張",
             "zh": "装填扩充",
@@ -1582,6 +1633,7 @@
     },
     {
         "id": "reload_speed",
+        "maxLevel": 3,
         "names": {
             "ja": "装填速度",
             "zh": "装填速度",
@@ -1613,6 +1665,7 @@
     },
     {
         "id": "recoil_down",
+        "maxLevel": 3,
         "names": {
             "ja": "反動軽減",
             "zh": "减轻后坐力",
@@ -1644,6 +1697,7 @@
     },
     {
         "id": "steadiness",
+        "maxLevel": 2,
         "names": {
             "ja": "ブレ抑制",
             "zh": "抑制偏移",
@@ -1675,6 +1729,7 @@
     },
     {
         "id": "rapid_fire_up",
+        "maxLevel": 3,
         "names": {
             "ja": "速射強化",
             "zh": "速射强化",
@@ -1706,6 +1761,7 @@
     },
     {
         "id": "defense_boost",
+        "maxLevel": 7,
         "names": {
             "ja": "防御",
             "zh": "防御",
@@ -1737,6 +1793,7 @@
     },
     {
         "id": "divine_blessing",
+        "maxLevel": 3,
         "names": {
             "ja": "精霊の加護",
             "zh": "精灵加护",
@@ -1768,6 +1825,7 @@
     },
     {
         "id": "recovery_up",
+        "maxLevel": 3,
         "names": {
             "ja": "体力回復量ＵＰ",
             "zh": "体力回复量提升",
@@ -1799,6 +1857,7 @@
     },
     {
         "id": "recovery_speed",
+        "maxLevel": 3,
         "names": {
             "ja": "回復速度",
             "zh": "回复速度",
@@ -1830,6 +1889,7 @@
     },
     {
         "id": "speed_eating",
+        "maxLevel": 3,
         "names": {
             "ja": "早食い",
             "zh": "快吃",
@@ -1861,6 +1921,7 @@
     },
     {
         "id": "earplugs",
+        "maxLevel": 5,
         "names": {
             "ja": "耳栓",
             "zh": "耳塞",
@@ -1892,6 +1953,7 @@
     },
     {
         "id": "windproof",
+        "maxLevel": 3,
         "names": {
             "ja": "風圧耐性",
             "zh": "风压耐性",
@@ -1923,6 +1985,7 @@
     },
     {
         "id": "tremor_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "耐震",
             "zh": "耐震",
@@ -1954,6 +2017,7 @@
     },
     {
         "id": "bubbly_dance",
+        "maxLevel": 3,
         "names": {
             "ja": "泡沫の舞",
             "zh": "泡沫之舞",
@@ -1985,6 +2049,7 @@
     },
     {
         "id": "evade_window",
+        "maxLevel": 5,
         "names": {
             "ja": "回避性能",
             "zh": "回避性能",
@@ -2016,6 +2081,7 @@
     },
     {
         "id": "evade_extender",
+        "maxLevel": 3,
         "names": {
             "ja": "回避距離ＵＰ",
             "zh": "回避距离提升",
@@ -2047,6 +2113,7 @@
     },
     {
         "id": "fire_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "火耐性",
             "zh": "火耐性",
@@ -2078,6 +2145,7 @@
     },
     {
         "id": "water_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "水耐性",
             "zh": "水耐性",
@@ -2109,6 +2177,7 @@
     },
     {
         "id": "ice_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "氷耐性",
             "zh": "冰耐性",
@@ -2140,6 +2209,7 @@
     },
     {
         "id": "thunder_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "雷耐性",
             "zh": "雷耐性",
@@ -2171,6 +2241,7 @@
     },
     {
         "id": "dragon_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "龍耐性",
             "zh": "龙耐性",
@@ -2202,6 +2273,7 @@
     },
     {
         "id": "blight_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "属性やられ耐性",
             "zh": "属性异常状态的耐性",
@@ -2233,6 +2305,7 @@
     },
     {
         "id": "poison_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "毒耐性",
             "zh": "毒耐性",
@@ -2264,6 +2337,7 @@
     },
     {
         "id": "paralysis_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "麻痺耐性",
             "zh": "麻痹耐性",
@@ -2295,6 +2369,7 @@
     },
     {
         "id": "sleep_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "睡眠耐性",
             "zh": "睡眠耐性",
@@ -2326,6 +2401,7 @@
     },
     {
         "id": "stun_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "気絶耐性",
             "zh": "昏厥耐性",
@@ -2357,6 +2433,7 @@
     },
     {
         "id": "muck_resistance",
+        "maxLevel": 2,
         "names": {
             "ja": "泥雪耐性",
             "zh": "泥雪耐性",
@@ -2388,6 +2465,7 @@
     },
     {
         "id": "blast_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "爆破やられ耐性",
             "zh": "爆破异常状态的耐性",
@@ -2419,6 +2497,7 @@
     },
     {
         "id": "botanist",
+        "maxLevel": 4,
         "names": {
             "ja": "植生学",
             "zh": "植生学",
@@ -2450,6 +2529,7 @@
     },
     {
         "id": "geologist",
+        "maxLevel": 3,
         "names": {
             "ja": "地質学",
             "zh": "地质学",
@@ -2481,6 +2561,7 @@
     },
     {
         "id": "partbreaker",
+        "maxLevel": 3,
         "names": {
             "ja": "破壊王",
             "zh": "破坏王",
@@ -2512,6 +2593,7 @@
     },
     {
         "id": "capture_master",
+        "maxLevel": 1,
         "names": {
             "ja": "捕獲名人",
             "zh": "捕获名人",
@@ -2543,6 +2625,7 @@
     },
     {
         "id": "carving_master",
+        "maxLevel": 1,
         "names": {
             "ja": "剥ぎ取り名人",
             "zh": "剥取名人",
@@ -2574,6 +2657,7 @@
     },
     {
         "id": "good_luck",
+        "maxLevel": 3,
         "names": {
             "ja": "幸運",
             "zh": "幸运",
@@ -2605,6 +2689,7 @@
     },
     {
         "id": "speed_sharpening",
+        "maxLevel": 3,
         "names": {
             "ja": "砥石使用高速化",
             "zh": "砥石使用高速化",
@@ -2636,6 +2721,7 @@
     },
     {
         "id": "bombardier",
+        "maxLevel": 3,
         "names": {
             "ja": "ボマー",
             "zh": "炸弹客",
@@ -2667,6 +2753,7 @@
     },
     {
         "id": "mushroomancer",
+        "maxLevel": 3,
         "names": {
             "ja": "キノコ大好き",
             "zh": "最爱蘑菇",
@@ -2698,6 +2785,7 @@
     },
     {
         "id": "item_prolonger",
+        "maxLevel": 3,
         "names": {
             "ja": "アイテム使用強化",
             "zh": "道具使用强化",
@@ -2729,6 +2817,7 @@
     },
     {
         "id": "wide-range",
+        "maxLevel": 5,
         "names": {
             "ja": "広域化",
             "zh": "广域化",
@@ -2760,6 +2849,7 @@
     },
     {
         "id": "free_meal",
+        "maxLevel": 3,
         "names": {
             "ja": "満足感",
             "zh": "满足感",
@@ -2791,6 +2881,7 @@
     },
     {
         "id": "heroics",
+        "maxLevel": 5,
         "names": {
             "ja": "火事場力",
             "zh": "火场怪力",
@@ -2822,6 +2913,7 @@
     },
     {
         "id": "fortify",
+        "maxLevel": 1,
         "names": {
             "ja": "不屈",
             "zh": "不屈",
@@ -2853,6 +2945,7 @@
     },
     {
         "id": "flinch_free",
+        "maxLevel": 3,
         "names": {
             "ja": "ひるみ軽減",
             "zh": "减轻胆怯",
@@ -2884,6 +2977,7 @@
     },
     {
         "id": "jump_master",
+        "maxLevel": 1,
         "names": {
             "ja": "ジャンプ鉄人",
             "zh": "跳跃铁人",
@@ -2915,6 +3009,7 @@
     },
     {
         "id": "carving_pro",
+        "maxLevel": 1,
         "names": {
             "ja": "剥ぎ取り鉄人",
             "zh": "剥取铁人",
@@ -2946,6 +3041,7 @@
     },
     {
         "id": "hunger_resistance",
+        "maxLevel": 3,
         "names": {
             "ja": "腹減り耐性",
             "zh": "饥饿耐性",
@@ -2977,6 +3073,7 @@
     },
     {
         "id": "leap_of_faith",
+        "maxLevel": 1,
         "names": {
             "ja": "飛び込み",
             "zh": "飞身跃入",
@@ -3008,6 +3105,7 @@
     },
     {
         "id": "diversion",
+        "maxLevel": 1,
         "names": {
             "ja": "陽動",
             "zh": "佯动",
@@ -3039,6 +3137,7 @@
     },
     {
         "id": "master_mounter",
+        "maxLevel": 1,
         "names": {
             "ja": "乗り名人",
             "zh": "骑乘名人",
@@ -3070,6 +3169,7 @@
     },
     {
         "id": "chameleos_blessing",
+        "maxLevel": 4,
         "names": {
             "ja": "霞皮の恩恵",
             "zh": "霞皮的恩惠",
@@ -3101,6 +3201,7 @@
     },
     {
         "id": "kushala_blessing",
+        "maxLevel": 4,
         "names": {
             "ja": "鋼殻の恩恵",
             "zh": "钢壳的恩惠",
@@ -3132,6 +3233,7 @@
     },
     {
         "id": "teostra_blessing",
+        "maxLevel": 4,
         "names": {
             "ja": "炎鱗の恩恵",
             "zh": "炎鳞的恩惠",
@@ -3163,6 +3265,7 @@
     },
     {
         "id": "dragonheart",
+        "maxLevel": 5,
         "names": {
             "ja": "龍気活性",
             "zh": "龙气活性",
@@ -3194,6 +3297,7 @@
     },
     {
         "id": "wirebug_whisperer",
+        "maxLevel": 3,
         "names": {
             "ja": "翔蟲使い",
             "zh": "翔虫使",
@@ -3225,6 +3329,7 @@
     },
     {
         "id": "wall_runner",
+        "maxLevel": 3,
         "names": {
             "ja": "壁面移動",
             "zh": "墙面移动",
@@ -3256,6 +3361,7 @@
     },
     {
         "id": "counterstrike",
+        "maxLevel": 3,
         "names": {
             "ja": "逆襲",
             "zh": "逆袭",
@@ -3287,6 +3393,7 @@
     },
     {
         "id": "rapid_morph",
+        "maxLevel": 3,
         "names": {
             "ja": "高速変形",
             "zh": "高速变形",
@@ -3318,6 +3425,7 @@
     },
     {
         "id": "hellfire_cloak",
+        "maxLevel": 4,
         "names": {
             "ja": "鬼火纏",
             "zh": "鬼火缠",
@@ -3349,6 +3457,7 @@
     },
     {
         "id": "wind_alignment",
+        "maxLevel": 5,
         "names": {
             "ja": "風紋の一致",
             "zh": "风纹一致",
@@ -3380,6 +3489,7 @@
     },
     {
         "id": "thunder_alignment",
+        "maxLevel": 5,
         "names": {
             "ja": "雷紋の一致",
             "zh": "雷纹一致",
@@ -3411,6 +3521,7 @@
     },
     {
         "id": "stormsoul",
+        "maxLevel": 5,
         "names": {
             "ja": "風雷合一",
             "zh": "风雷合一",
@@ -3442,6 +3553,7 @@
     },
     {
         "id": "blood_rite",
+        "maxLevel": 1,
         "names": {
             "ja": "血氣",
             "zh": "气血",
@@ -3473,6 +3585,7 @@
     },
     {
         "id": "dereliction",
+        "maxLevel": 1,
         "names": {
             "ja": "伏魔響命",
             "zh": "伏魔耗命",
@@ -3504,6 +3617,7 @@
     },
     {
         "id": "furious",
+        "maxLevel": 1,
         "names": {
             "ja": "激昂",
             "zh": "激昂",
@@ -3535,6 +3649,7 @@
     },
     {
         "id": "mail_of_hellfire",
+        "maxLevel": 1,
         "names": {
             "ja": "業鎧【修羅】",
             "zh": "业铠【修罗】",
@@ -3566,6 +3681,7 @@
     },
     {
         "id": "coalescence",
+        "maxLevel": 1,
         "names": {
             "ja": "災禍転福",
             "zh": "因祸得福",
@@ -3597,6 +3713,7 @@
     },
     {
         "id": "bloodlust",
+        "maxLevel": 1,
         "names": {
             "ja": "狂竜症【蝕】",
             "zh": "狂龙症【蚀】",
@@ -3628,6 +3745,7 @@
     },
     {
         "id": "defiance",
+        "maxLevel": 1,
         "names": {
             "ja": "顕如盤石",
             "zh": "坚如磐石",
@@ -3659,6 +3777,7 @@
     },
     {
         "id": "sneak_attack",
+        "maxLevel": 1,
         "names": {
             "ja": "闇討ち",
             "zh": "偷袭",
@@ -3690,6 +3809,7 @@
     },
     {
         "id": "adrenaline_rush",
+        "maxLevel": 1,
         "names": {
             "ja": "巧撃",
             "zh": "巧击",
@@ -3721,6 +3841,7 @@
     },
     {
         "id": "redirection",
+        "maxLevel": 1,
         "names": {
             "ja": "合気",
             "zh": "合气",
@@ -3752,6 +3873,7 @@
     },
     {
         "id": "spiribird's_call",
+        "maxLevel": 1,
         "names": {
             "ja": "供応",
             "zh": "提供",
@@ -3783,6 +3905,7 @@
     },
     {
         "id": "charge_master",
+        "maxLevel": 1,
         "names": {
             "ja": "チャージマスター",
             "zh": "蓄力大师",
@@ -3814,6 +3937,7 @@
     },
     {
         "id": "foray",
+        "maxLevel": 1,
         "names": {
             "ja": "攻勢",
             "zh": "攻势",
@@ -3845,6 +3969,7 @@
     },
     {
         "id": "tune-up",
+        "maxLevel": 1,
         "names": {
             "ja": "チューンアップ",
             "zh": "零件改造",
@@ -3876,6 +4001,7 @@
     },
     {
         "id": "grinder_(s)",
+        "maxLevel": 1,
         "names": {
             "ja": "研磨術【鋭】",
             "zh": "打磨术【锐】",
@@ -3907,6 +4033,7 @@
     },
     {
         "id": "bladescale_hone",
+        "maxLevel": 1,
         "names": {
             "ja": "刃鱗磨き",
             "zh": "刃鳞打磨",
@@ -3938,6 +4065,7 @@
     },
     {
         "id": "wall_runner_(boost)",
+        "maxLevel": 1,
         "names": {
             "ja": "壁面移動【翔】",
             "zh": "走壁移动【翔】",
@@ -3969,6 +4097,7 @@
     },
     {
         "id": "quick_breath",
+        "maxLevel": 1,
         "names": {
             "ja": "疾之息吹",
             "zh": "迅之气息",
@@ -4000,6 +4129,7 @@
     },
     {
         "id": "element_exploit",
+        "maxLevel": 1,
         "names": {
             "ja": "弱点特効【属性】",
             "zh": "弱点特效【属性】",
@@ -4031,6 +4161,7 @@
     },
     {
         "id": "chain_crit",
+        "maxLevel": 1,
         "names": {
             "ja": "連撃",
             "zh": "连击",
@@ -4062,6 +4193,7 @@
     },
     {
         "id": "guts",
+        "maxLevel": 1,
         "names": {
             "ja": "根性",
             "zh": "毅力",
@@ -4093,6 +4225,7 @@
     },
     {
         "id": "status_trigger",
+        "maxLevel": 1,
         "names": {
             "ja": "状態異常確定蓄積",
             "zh": "状态异常必定累积",
