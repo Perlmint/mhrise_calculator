@@ -1,13 +1,15 @@
 {
     "folders": [
-		{
-			"name": "crawler",
-			"path": "crawler"
-		},
-		{
-			"name": "simulator",
-			"path": "simulator"
-		}
-	],
-    "settings": {}
+        {
+            "name": "crawler",
+            "path": "crawler"
+        },
+        {
+            "name": "simulator",
+            "path": "simulator"
+        }
+    ],
+    "settings": {
+        "editor.formatOnSave": true
+    }
 }
