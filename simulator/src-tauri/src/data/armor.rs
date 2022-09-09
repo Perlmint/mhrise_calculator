@@ -43,7 +43,7 @@ pub struct ArmorStat {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ArmorSkill {
-    pub name: String,
+    pub id: String,
     pub level: i32,
 }
 

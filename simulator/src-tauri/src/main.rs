@@ -113,7 +113,7 @@ fn parse_anomaly(
                     let skill_id = skill_name_dict.get(skill_name).unwrap();
 
                     let anomaly_skill = ArmorSkill {
-                        name: skill_id.to_string(),
+                        id: skill_id.to_string(),
                         level: skill_level,
                     };
 

@@ -9,6 +9,7 @@ import {
     SkillInfo,
     ArmorStatInfo,
     FinalArmorInfo,
+    FinalSkillInfo,
 } from "./definition/armor_define.js";
 
 interface UrlInfo {
@@ -209,9 +210,9 @@ export async function parse() {
                         skills: enArmorInfo.skills.map(
                             (info) =>
                                 ({
-                                    ...info,
-                                    name: makeId(info.name),
-                                } as SkillInfo)
+                                    id: makeId(info.name),
+                                    level: info.level,
+                                } as FinalSkillInfo)
                         ),
                         slots: enArmorInfo.slots,
                     } as FinalArmorInfo;

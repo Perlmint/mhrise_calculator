@@ -17,6 +17,8 @@ interface SkillInfo {
     text: string;
 }
 
+const maxLevelRegex = new RegExp(/\\nLv\s*(\d+)/);
+
 const allInfos: { [key: string]: SkillInfo[] } = {};
 
 function crawlCallback(
@@ -121,8 +123,17 @@ export async function parse() {
                     texts[lang] = langInfo.text;
                 });
 
+                const maxLevelMatch = enInfo.text.match(maxLevelRegex);
+
+                let maxLevel = 1;
+
+                if (maxLevelMatch !== null) {
+                    maxLevel = Number.parseInt(maxLevelMatch[1]);
+                }
+
                 const finalInfo = {
                     id: makeId(enInfo.name),
+                    maxLevel,
                     names,
                     texts,
                 } as FinalSkillInfo;

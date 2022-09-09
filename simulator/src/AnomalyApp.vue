@@ -5,21 +5,23 @@ import { onBeforeMount, ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
-import { FinalArmorInfo, ArmorStatInfo, SkillInfo } from "./definition/armor_define";
+import { FinalArmorInfo, ArmorStatInfo } from "./definition/armor_define";
 import { FinalSkillInfo } from "./definition/skill_define";
+
+import NewAnomalyArmor from "./components/NewAnomalyArmor.vue";
 
 
 interface AnomalyArmorInfo {
     original: FinalArmorInfo,
     statDiff: ArmorStatInfo,
     slotDiffs: number[],
-    skillDiffs: SkillInfo[],
+    skillDiffs: FinalSkillInfo[],
 }
 
 onBeforeMount(async () => {
   skills.value = await invoke("cmd_get_skill_names") as {[key: string]: FinalSkillInfo};
   
-  for(const id in skills.value) {
+  for(const id in skills.value) { 
     skillsVec.push(skills.value[id]);
   }
 
@@ -86,14 +88,7 @@ async function parse_anomaly_file(filename: string) {
         <td>{{ armor.original.names[lang_data] }}</td>
 
         <template v-for="(skillDiff, skillIdx) in armor.skillDiffs">
-          <td>
-            <select :name="`anomaly${armorIdx}-skill${skillIdx}`" v-model="skills[skillDiff.name].id">
-              <option value="" disabled>---</option>
-              <option v-for="skillInfo in skillsVec" v-bind:value="skillInfo.id">
-                {{ skillInfo.names[lang_data] }}
-              </option>
-            </select>
-          </td>
+          <NewAnomalyArmor :index="armorIdx" :skillsVec="skillsVec" :lang_data="lang_data" />
           <td>Lv {{ skillDiff.level }}</td>
         </template>
       </tr>
