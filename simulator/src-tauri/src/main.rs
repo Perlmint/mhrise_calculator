@@ -245,10 +245,17 @@ fn cmd_get_skill_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<St
     return dm.skills.clone();
 }
 
+#[tauri::command]
+fn cmd_get_armor_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<String, BaseArmor> {
+    let dm = mutex_dm.lock().unwrap();
+
+    return dm.armors.clone();
+}
+
 fn main() {
-    let armors_vec = parse_data::<BaseArmor>("data/armor.json");
-    let skills_vec = parse_data::<Skill>("data/skill.json");
-    let decos_vec = parse_data::<Decoration>("data/deco.json");
+    let armors_vec = parse_data::<BaseArmor>("../src/data/armor.json");
+    let skills_vec = parse_data::<Skill>("../src/data/skill.json");
+    let decos_vec = parse_data::<Decoration>("../src/data/deco.json");
 
     let mut armors = HashMap::<String, BaseArmor>::new();
     let mut skills = HashMap::<String, Skill>::new();
@@ -308,7 +315,8 @@ fn main() {
             greet,
             get_count,
             cmd_parse_anomaly,
-            cmd_get_skill_names
+            cmd_get_skill_names,
+            cmd_get_armor_names
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

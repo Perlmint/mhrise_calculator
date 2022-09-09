@@ -5,6 +5,9 @@ import { onBeforeMount, ref } from "vue";
 import { open } from '@tauri-apps/api/dialog';
 import { invoke } from "@tauri-apps/api/tauri";
 
+import ArmorsVec from "./data/armor.json";
+import SkillsVec from "./data/skill.json";
+
 import { FinalArmorInfo, ArmorStatInfo } from "./definition/armor_define";
 import { FinalSkillInfo } from "./definition/skill_define";
 
@@ -18,23 +21,25 @@ interface AnomalyArmorInfo {
     skillDiffs: FinalSkillInfo[],
 }
 
-onBeforeMount(async () => {
-  skills.value = await invoke("cmd_get_skill_names") as {[key: string]: FinalSkillInfo};
-  
-  for(const id in skills.value) { 
-    skillsVec.push(skills.value[id]);
-  }
-
-  skillsVec.sort((info1, info2) => info1.names[lang_data.value] > info2.names[lang_data.value] ? 1 : -1);
-});
+let lang_data = ref("ko");
 
 let skills = ref({} as {[key: string]: FinalSkillInfo});
-let skillsVec = [] as FinalSkillInfo[];
+
+let skillsVec = ref(SkillsVec as FinalSkillInfo[]);
+let armorsVec = ref(ArmorsVec as FinalArmorInfo[]);
+
+skillsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
+armorsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
+
+for(const skill of SkillsVec) {
+  skills.value[skill.id] = skill;
+}
 
 let anomaly_filename = ref("");
 let anomaly_armors = ref([] as AnomalyArmorInfo[]);
-let lang_data = ref("ko");
-let max_anomaly_skills = ref(0);
+let max_anomaly_skills = ref(5);
+
+let selectedArmorId = ref("");
 
 async function get_anomaly_file() {
   const file = await open({
@@ -65,6 +70,10 @@ async function parse_anomaly_file(filename: string) {
   }
 }
 
+function onArmorChange(event: Event) {
+  console.log(event.target);
+}
+
 </script>
 
 <template>
@@ -88,9 +97,38 @@ async function parse_anomaly_file(filename: string) {
         <td>{{ armor.original.names[lang_data] }}</td>
 
         <template v-for="(skillDiff, skillIdx) in armor.skillDiffs">
-          <NewAnomalyArmor :index="armorIdx" :skillsVec="skillsVec" :lang_data="lang_data" />
+          <td>{{ skills[skillDiff.id].names[lang_data] }}</td>
           <td>Lv {{ skillDiff.level }}</td>
         </template>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <template v-for="i in max_anomaly_skills">
+          <th colspan="2">Skill {{ i }}</th>
+        </template>
+      </tr>
+      <tr>
+        <td>
+          <select :name="`armor_select`" v-model="selectedArmorId">
+          <option value="" disabled>---</option>
+          <option v-for="armorInfo in armorsVec" :value="armorInfo.id">
+            {{ armorInfo.names[lang_data] }}
+          </option>
+        </select>
+        </td>
+        <NewAnomalyArmor :index="0" :skillsVec="skillsVec" :lang_data="lang_data" />
+        <td>Level1 dropdown</td>
+        <NewAnomalyArmor :index="1" :skillsVec="skillsVec" :lang_data="lang_data" />
+        <td>Level2 dropdown</td>
+        <NewAnomalyArmor :index="2" :skillsVec="skillsVec" :lang_data="lang_data" />
+        <td>Level3 dropdown</td>
+        <NewAnomalyArmor :index="3" :skillsVec="skillsVec" :lang_data="lang_data" />
+        <td>Level4 dropdown</td>
+        <NewAnomalyArmor :index="4" :skillsVec="skillsVec" :lang_data="lang_data" />
+        <td>Level5 dropdown</td>
       </tr>
     </table>
 
