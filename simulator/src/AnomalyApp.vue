@@ -8,7 +8,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import ArmorsVec from "./data/armor.json";
 import SkillsVec from "./data/skill.json";
 
-import { FinalArmorInfo, ArmorStatInfo, ArmorParts } from "./definition/armor_define";
+import { FinalArmorInfo, ArmorStatInfo, ArmorParts, FinalSkillInfo as ArmorFinalSkillInfo } from "./definition/armor_define";
 import { FinalSkillInfo } from "./definition/skill_define";
 
 import NewAnomalyArmor from "./components/NewAnomalyArmor.vue";
@@ -18,7 +18,7 @@ interface AnomalyArmorInfo {
     original: FinalArmorInfo,
     statDiff: ArmorStatInfo,
     slotDiffs: number[],
-    skillDiffs: {[key: string]: FinalSkillInfo},
+    skillDiffs: {[key: string]: ArmorFinalSkillInfo},
 }
 
 let lang_data = ref("ko");
