@@ -1,44 +1,145 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Greet from "./components/Greet.vue";
+import { ref, Ref } from "vue";
+import { invoke } from "@tauri-apps/api/tauri";
+
+import SkillCategories from "./data/skill_category.json";
+import SkillsVec from "./data/skill.json";
+
+import { SkillCategory } from "./definition/skill_category_define";
+import { FinalSkillInfo } from "./definition/skill_define";
+
+const lang_data = ref("ko");
+
+const skillCats = ref(SkillCategories) as Ref<SkillCategory[]>;
+const skillsVec = ref(SkillsVec) as Ref<FinalSkillInfo[]>;
+
+const skills = ref({}) as Ref<{[key: string]: FinalSkillInfo}>;
+
+const weaponSlots = ref([0,0,0]) as Ref<number[]>;
+const allSkillSelections = ref({}) as Ref<{[key: string]: number}>;
+const freeSlots = ref([0,0,0,0]) as Ref<number[]>;
+
+for(const skill of skillsVec.value) {
+  skills.value[skill.id] = skill;
+  allSkillSelections.value[skill.id] = 0;
+}
+
+for(const cat of skillCats.value) {
+  cat.skills.sort((id1, id2) => skills.value[id1].names[lang_data.value] > skills.value[id2].names[lang_data.value] ? 1 : -1);
+}
+
+async function calculate()
+{
+  const selectedSkills = new Map<string, number>();
+
+  for(const skillId in allSkillSelections.value) {
+    let level = allSkillSelections.value[skillId];
+    
+    if(level !== 0) {
+      selectedSkills.set(skillId, level);
+    }
+  }
+  
+  const calcInput = {
+    weaponSlots: weaponSlots.value,
+    selectedSkills,
+    freeSlots: freeSlots.value
+  };
+
+  console.log(calcInput);
+
+  const result = await invoke("cmd_calculate_skillset", calcInput);
+
+  console.log(result);
+}
+
 </script>
 
 <template>
-  <div class="container">
-    <h1>Welcome to Tauri!</h1>
+  <table>
+    <tr>
+      <td>
+        무기 슬롯
+      </td>
+      <td>
+        Slot 1
+        <input type="radio" v-model="weaponSlots[0]" :value="0">
+        <input type="radio" v-for="level in 4" v-model="weaponSlots[0]" :value="level">
+      </td>
+      <td>
+        Slot 2
+        <input type="radio" v-model="weaponSlots[1]" :value="0">
+        <input type="radio" v-for="level in 4" v-model="weaponSlots[1]" :value="level">
+      </td>
+      <td>
+        Slot 3
+        <input type="radio" v-model="weaponSlots[2]" :value="0">
+        <input type="radio" v-for="level in 4" v-model="weaponSlots[2]" :value="level">
+      </td>
+    </tr>
+  </table>
 
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
+  <br />
 
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
+  <table v-for="cat in skillCats">
+    <tr>
+      {{ cat.names[lang_data] }}
+    </tr>
+    <tr>
+      <div>
+        <span v-for="id in cat.skills">
+          {{ skills[id].names[lang_data] }}
+          <select :name="id" v-model="allSkillSelections[id]" >
+            <option :value="0" selected>---</option>
+            <option v-for="level in skills[id].maxLevel" :value="level">
+              Lv {{ level }}
+            </option>
+          </select>
+        </span>
+      </div>
+      <br />
+    </tr>
+  </table>
 
-    <p>
-      Recommended IDE setup:
-      <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-      +
-      <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-      +
-      <a href="https://github.com/tauri-apps/tauri-vscode" target="_blank"
-        >Tauri</a
-      >
-      +
-      <a href="https://github.com/rust-lang/rust-analyzer" target="_blank"
-        >rust-analyzer</a
-      >
-    </p>
+  <table>
+    <tr>
+      <td>Free slots count</td>
+      <td>
+        <select name="slots_lv1" v-model.number="freeSlots[0]">
+          <option :value="0">0</option>
+          <option v-for="count in 10" :value="count">
+            {{ count }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select name="slots_lv2" v-model.number="freeSlots[1]">
+          <option :value="0">0</option>
+          <option v-for="count in 10" :value="count">
+            {{ count }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select name="slots_lv3" v-model.number="freeSlots[2]">
+          <option :value="0">0</option>
+          <option v-for="count in 10" :value="count">
+            {{ count }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select name="slots_lv4" v-model="freeSlots[3]">
+          <option :value="0">0</option>
+          <option v-for="count in 10" :value="count">
+            {{ count }}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </table>
 
-    <Greet />
-  </div>
+  <button @click="calculate">Calculate</button>
 </template>
 
 <style scoped>

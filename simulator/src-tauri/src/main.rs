@@ -252,6 +252,22 @@ fn cmd_get_armor_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<St
     return dm.armors.clone();
 }
 
+#[tauri::command]
+fn cmd_calculate_skillset(
+    weapon_slots: Vec<i32>,
+    selected_skills: HashMap<String, i32>,
+    free_slots: Vec<i32>,
+    mutex_dm: tauri::State<Mutex<DataManager>>,
+) -> HashMap<String, i32> {
+    let dm = mutex_dm.lock().unwrap();
+
+    let mut ret = HashMap::<String, i32>::new();
+    ret.insert("test1".to_string(), 1);
+    ret.insert("test2".to_string(), 3);
+
+    return ret;
+}
+
 fn main() {
     let armors_vec = parse_data::<BaseArmor>("../src/data/armor.json");
     let skills_vec = parse_data::<Skill>("../src/data/skill.json");
@@ -316,7 +332,8 @@ fn main() {
             get_count,
             cmd_parse_anomaly,
             cmd_get_skill_names,
-            cmd_get_armor_names
+            cmd_get_armor_names,
+            cmd_calculate_skillset
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
