@@ -18,7 +18,7 @@ interface AnomalyArmorInfo {
     original: FinalArmorInfo,
     statDiff: ArmorStatInfo,
     slotDiffs: number[],
-    skillDiffs: FinalSkillInfo[],
+    skillDiffs: {[key: string]: FinalSkillInfo},
 }
 
 let lang_data = ref("ko");
@@ -60,7 +60,7 @@ for(const part in armorsByPartVec.value) {
 
 let anomaly_filename = ref("");
 let anomalyArmors = ref([]) as Ref<AnomalyArmorInfo[]>;
-let anomalyArmorsByPart = ref({}) as {[key: string]: AnomalyArmorInfo[]};
+let anomalyArmorsByPart = ref({}) as Ref<{[key: string]: AnomalyArmorInfo[]}>;
 let max_anomaly_skills = ref(5);
 
 let selectedArmorId = ref("");
@@ -101,7 +101,7 @@ async function parse_anomaly_file(filename: string) {
   console.log(anomalyArmorsByPart.value);
   
   for(const armor of anomalyArmors.value) {
-    max_anomaly_skills.value = Math.max(max_anomaly_skills.value, armor.skillDiffs.length);
+    max_anomaly_skills.value = Math.max(max_anomaly_skills.value, Object.keys(armor.skillDiffs).length);
   }
 }
 
@@ -127,12 +127,11 @@ async function parse_anomaly_file(filename: string) {
         </tr>
 
         <tr v-for="armor in anomalyArmorsByPart[part]">
-          {{ armor.id }}
           <td>{{ armor.original.names[lang_data] }}</td>
 
-          <template v-for="skillDiff in armor.skillDiffs">
-            <td>{{ skills[skillDiff.id].names[lang_data] }}</td>
-            <td>Lv {{ skillDiff.level }}</td>
+          <template v-for="(skillInfo, skillId) in armor.skillDiffs">
+            <td>{{ skills[skillId].names[lang_data] }}</td>
+            <td>Lv {{ skillInfo.level }}</td>
           </template>
         </tr>
       </table>
