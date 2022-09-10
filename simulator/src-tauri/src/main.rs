@@ -202,17 +202,6 @@ fn parse_talisman(filename: &str, skill_name_dict: &HashMap<String, String>) -> 
 }
 
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
-#[tauri::command]
-fn get_count(mutex_dm: tauri::State<Mutex<DataManager>>) -> usize {
-    let dm = mutex_dm.lock().unwrap();
-    return dm.armors.len() + dm.skills.len() + dm.decos.len();
-}
-
-#[tauri::command]
 fn cmd_parse_anomaly(
     filename: &str,
     mutex_dm: tauri::State<Mutex<DataManager>>,
@@ -321,8 +310,6 @@ fn main() {
             _ => {}
         })
         .invoke_handler(tauri::generate_handler![
-            greet,
-            get_count,
             cmd_parse_anomaly,
             cmd_get_skill_names,
             cmd_get_armor_names,
