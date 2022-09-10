@@ -58,9 +58,10 @@ pub struct BaseArmor {
     pub rarity: i32,
     pub stat: ArmorStat,
     pub skills: HashMap<String, ArmorSkill>,
+    pub slots: Vec<i32>,
 }
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, Debug)]
 pub struct AnomalyArmor {
     pub original: BaseArmor,
     pub affected: BaseArmor,
@@ -101,7 +102,31 @@ impl AnomalyArmor {
         affected.stat.elec_res += stat_diff.elec_res;
         affected.stat.dragon_res += stat_diff.dragon_res;
 
-        // TODO slot diff, skill diff
+        for (id, skill_info) in &skill_diffs {
+            let diff_level = skill_info.level;
+
+            let new_value;
+            let existing_skill = affected.skills.get(id);
+
+            if existing_skill.is_some() {
+                let old_value = existing_skill.unwrap();
+                new_value = ArmorSkill {
+                    level: old_value.level + diff_level,
+                };
+            } else {
+                new_value = ArmorSkill { level: diff_level }
+            }
+
+            affected.skills.insert(id.clone(), new_value);
+        }
+
+        for (index, slot_diff) in slot_diffs.iter().enumerate() {
+            if affected.slots.len() <= index {
+                affected.slots[index] += slot_diff;
+            } else {
+                affected.slots.push(*slot_diff);
+            }
+        }
 
         AnomalyArmor {
             original,
