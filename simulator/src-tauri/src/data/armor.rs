@@ -57,7 +57,7 @@ pub struct BaseArmor {
     pub names: HashMap<String, String>,
     pub rarity: i32,
     pub stat: ArmorStat,
-    pub skills: Vec<ArmorSkill>,
+    pub skills: HashMap<String, ArmorSkill>,
 }
 
 #[derive(Serialize, Clone)]
