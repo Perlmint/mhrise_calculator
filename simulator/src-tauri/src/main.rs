@@ -123,12 +123,8 @@ fn parse_anomaly(
                 let armor_id = armor_name_dict.get(armor_name).unwrap();
                 let armor_info = armors.get(armor_id).unwrap();
 
-                let anomaly_armor = AnomalyArmor {
-                    original: armor_info.clone(),
-                    stat_diff: stat,
-                    slot_diffs: slot_sizes,
-                    skill_diffs: anomaly_skills,
-                };
+                let anomaly_armor =
+                    AnomalyArmor::new(armor_info.clone(), stat, slot_sizes, anomaly_skills);
 
                 anomaly_armors.push(anomaly_armor);
             }

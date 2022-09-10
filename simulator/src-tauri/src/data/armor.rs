@@ -64,6 +64,7 @@ pub struct BaseArmor {
 #[derive(Serialize, Clone)]
 pub struct AnomalyArmor {
     pub original: BaseArmor,
+    pub affected: BaseArmor,
 
     #[serde(rename = "statDiff")]
     pub stat_diff: ArmorStat,
@@ -83,4 +84,32 @@ pub struct TalismanSkill {
 pub struct Talisman {
     pub skills: Vec<TalismanSkill>,
     pub slot_sizes: Vec<i32>,
+}
+
+impl AnomalyArmor {
+    pub fn new(
+        original: BaseArmor,
+        stat_diff: ArmorStat,
+        slot_diffs: Vec<i32>,
+        skill_diffs: Vec<ArmorSkill>,
+    ) -> AnomalyArmor {
+        let mut affected = original.clone();
+
+        affected.stat.defense += stat_diff.defense;
+        affected.stat.fire_res += stat_diff.fire_res;
+        affected.stat.water_res += stat_diff.water_res;
+        affected.stat.ice_res += stat_diff.ice_res;
+        affected.stat.elec_res += stat_diff.elec_res;
+        affected.stat.dragon_res += stat_diff.dragon_res;
+
+        // TODO slot diff, skill diff
+
+        AnomalyArmor {
+            original,
+            affected,
+            stat_diff,
+            slot_diffs,
+            skill_diffs,
+        }
+    }
 }
