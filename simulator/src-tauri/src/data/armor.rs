@@ -43,7 +43,6 @@ pub struct ArmorStat {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ArmorSkill {
-    pub id: String,
     pub level: i32,
 }
 
@@ -73,7 +72,7 @@ pub struct AnomalyArmor {
     pub slot_diffs: Vec<i32>,
 
     #[serde(rename = "skillDiffs")]
-    pub skill_diffs: Vec<ArmorSkill>,
+    pub skill_diffs: HashMap<String, ArmorSkill>,
 }
 
 pub struct TalismanSkill {
@@ -91,7 +90,7 @@ impl AnomalyArmor {
         original: BaseArmor,
         stat_diff: ArmorStat,
         slot_diffs: Vec<i32>,
-        skill_diffs: Vec<ArmorSkill>,
+        skill_diffs: HashMap<String, ArmorSkill>,
     ) -> AnomalyArmor {
         let mut affected = original.clone();
 

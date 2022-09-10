@@ -13,7 +13,7 @@ export interface FinalArmorInfo {
     names: { [key: string]: string };
     rarity: number;
     stat: ArmorStatInfo;
-    skills: FinalSkillInfo[];
+    skills: { [key: string]: FinalSkillInfo };
     slots: number[];
 }
 
@@ -32,7 +32,6 @@ export interface SkillInfo {
 }
 
 export interface FinalSkillInfo {
-    id: string;
     level: number;
 }
 

@@ -99,7 +99,7 @@ fn parse_anomaly(
                     dragon_res,
                 };
 
-                let mut anomaly_skills = Vec::new();
+                let mut anomaly_skills = HashMap::new();
 
                 for i in (10..record.len()).step_by(2) {
                     let skill_name = &record[i];
@@ -112,12 +112,9 @@ fn parse_anomaly(
 
                     let skill_id = skill_name_dict.get(skill_name).unwrap();
 
-                    let anomaly_skill = ArmorSkill {
-                        id: skill_id.to_string(),
-                        level: skill_level,
-                    };
+                    let anomaly_skill = ArmorSkill { level: skill_level };
 
-                    anomaly_skills.push(anomaly_skill);
+                    anomaly_skills.insert(skill_id.to_string(), anomaly_skill);
                 }
 
                 let armor_id = armor_name_dict.get(armor_name).unwrap();

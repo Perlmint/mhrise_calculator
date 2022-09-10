@@ -200,6 +200,14 @@ export async function parse() {
                         names[lang] = langName;
                     }
 
+                    const skills = {} as { [key: string]: FinalSkillInfo };
+
+                    enArmorInfo.skills.forEach((info) => {
+                        const id = makeId(info.name);
+
+                        skills[id] = { level: info.level };
+                    });
+
                     const finalInfo = {
                         id: makeId(enArmorInfo.name),
                         part: "",
@@ -207,13 +215,7 @@ export async function parse() {
                         names,
                         rarity: enArmorInfo.rarity,
                         stat: enArmorInfo.stat,
-                        skills: enArmorInfo.skills.map(
-                            (info) =>
-                                ({
-                                    id: makeId(info.name),
-                                    level: info.level,
-                                } as FinalSkillInfo)
-                        ),
+                        skills,
                         slots: enArmorInfo.slots,
                     } as FinalArmorInfo;
 
