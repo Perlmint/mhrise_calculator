@@ -215,7 +215,7 @@ fn cmd_parse_anomaly(
         &dm.skill_name_dict,
     );
 
-    dm.anomaly_armors = anomalies.clone();
+    dm.set_anomalies(anomalies.clone());
 
     return anomalies;
 }
