@@ -26,7 +26,13 @@ let lang_data = ref("ko");
 let skills = ref({}) as Ref<{[key: string]: FinalSkillInfo}>;
 
 let skillsVec = ref(SkillsVec as FinalSkillInfo[]) as Ref<FinalSkillInfo[]>;
-let armorsVec = ref(ArmorsVec as FinalArmorInfo[]) as Ref<FinalArmorInfo[]>;
+let armorsVec = ref([]) as Ref<FinalArmorInfo[]>;
+
+for(const armor of ArmorsVec) {
+  if(7 <= armor.rarity) {
+    armorsVec.value.push(armor);
+  }
+}
 
 skillsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
 armorsVec.value.sort((elem1, elem2) => elem1.names[lang_data.value] > elem2.names[lang_data.value] ? 1 : -1);
