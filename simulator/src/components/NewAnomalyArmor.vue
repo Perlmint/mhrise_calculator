@@ -8,7 +8,7 @@ const props = defineProps<{
   index: number,
   skillsVec: FinalSkillInfo[],
   skills: {[key: string]: FinalSkillInfo},
-  lang_data: String
+  lang_data: string
 }>();
 
 const selectedSkillId = ref("");
@@ -38,8 +38,8 @@ function onSkillChange(index: number, id: string) {
 <template>
   <td>
     <select :name="`anomaly${index}`" v-model="selectedSkillId" @change="onSkillChange(index, selectedSkillId)">
-      <option value="" selected="selected">---</option>
-      <option v-for="skillInfo in skillsVec" v-bind:value="skillInfo.id" :value="skillInfo.id">
+      <option value="">---</option>
+      <option v-for="skillInfo in skillsVec" :value="skillInfo.id">
         {{ skillInfo.names[lang_data] }}
       </option>
     </select>
