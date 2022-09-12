@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::hash::Hash;
 
 use super::armor::{AnomalyArmor, ArmorPart, BaseArmor, Talisman};
 use super::deco::Decoration;
@@ -9,6 +10,8 @@ pub struct DataManager {
     pub armors: HashMap<String, BaseArmor>,
     pub skills: HashMap<String, Skill>,
     pub decos: HashMap<String, Decoration>,
+
+    pub decos_by_skill: HashMap<String, Vec<Decoration>>,
 
     pub anomaly_armors: Vec<AnomalyArmor>,
 
@@ -50,6 +53,26 @@ impl DataManager {
             }
         }
 
+        let mut decos_by_skill = HashMap::<String, Vec<Decoration>>::new();
+
+        for pair in &decos {
+            let deco = pair.1;
+            let skill_id = &deco.skill_id;
+
+            let existing = decos_by_skill.get_mut(skill_id);
+
+            match existing {
+                Some(vec) => vec.push(deco.clone()),
+                None => {
+                    decos_by_skill.insert(skill_id.clone(), vec![deco.clone()]);
+                }
+            }
+        }
+
+        for pair in decos_by_skill.iter_mut() {
+            pair.1.sort_by_key(|a| a.skill_level);
+        }
+
         let mut bases_by_part = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
         bases_by_part.insert(ArmorPart::Helm, Vec::new());
@@ -69,6 +92,7 @@ impl DataManager {
             armors,
             skills,
             decos,
+            decos_by_skill,
             armor_name_dict,
             skill_name_dict,
             bases_by_part,
@@ -93,6 +117,37 @@ impl DataManager {
                 .get_mut(part)
                 .unwrap()
                 .push(anomaly.affected.clone());
+        }
+    }
+
+    pub fn get_parts(&self, part: ArmorPart) -> Vec<&BaseArmor> {
+        let mut ret = Vec::new();
+
+        for part_armors in self.bases_by_part.get(&part).unwrap() {
+            ret.push(part_armors);
+        }
+
+        for part_anomaly in self.anomalies_by_part.get(&part).unwrap() {
+            ret.push(part_anomaly);
+        }
+
+        ret
+    }
+
+    pub fn get_deco_by_skill_id(&self, skill_id: &String) -> Vec<&Decoration> {
+        let existing = self.decos_by_skill.get(skill_id);
+
+        match existing {
+            Some(vec) => {
+                let mut ret = Vec::<&Decoration>::new();
+
+                for deco in vec {
+                    ret.push(deco);
+                }
+
+                ret
+            }
+            None => Vec::new(),
         }
     }
 }

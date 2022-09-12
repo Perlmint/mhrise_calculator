@@ -30,13 +30,13 @@ for(const cat of skillCats.value) {
 
 async function calculate()
 {
-  const selectedSkills = new Map<string, number>();
+  const selectedSkills = {} as {[key:string]: number};
 
   for(const skillId in allSkillSelections.value) {
     let level = allSkillSelections.value[skillId];
     
     if(level !== 0) {
-      selectedSkills.set(skillId, level);
+      selectedSkills[skillId] = level;
     }
   }
   

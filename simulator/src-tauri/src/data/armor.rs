@@ -81,6 +81,7 @@ pub struct TalismanSkill {
     pub level: i32,
 }
 
+#[derive(Default)]
 pub struct Talisman {
     pub skills: Vec<TalismanSkill>,
     pub slot_sizes: Vec<i32>,

@@ -5,11 +5,11 @@
 
 use std::collections::HashMap;
 use std::fs::File;
-use std::hash::Hash;
 use std::io::BufReader;
 use std::sync::Mutex;
 
 use csv::StringRecord;
+use data::armor::ArmorPart;
 use data::data_manager::DataManager;
 use serde::de;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
@@ -21,9 +21,12 @@ mod data {
     pub mod skill;
 }
 
+mod full_equipments;
+
 use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
 use crate::data::deco::Decoration;
 use crate::data::skill::Skill;
+use crate::full_equipments::FullEquipments;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {
     return record[index].parse().unwrap();
@@ -241,11 +244,148 @@ fn cmd_calculate_skillset(
     free_slots: Vec<i32>,
     mutex_dm: tauri::State<Mutex<DataManager>>,
 ) -> HashMap<String, i32> {
+    println!("Start calculating...");
+
     let dm = mutex_dm.lock().unwrap();
+
+    let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
+
+    for (skill_id, _) in &selected_skills {
+        let decos = dm.get_deco_by_skill_id(skill_id);
+
+        if 0 < decos.len() {
+            decos_possible.insert(skill_id.clone(), decos);
+        }
+    }
+
+    let mut all_combinations = Vec::<FullEquipments>::new();
+
+    let helms = dm.get_parts(ArmorPart::Helm);
+    let torsos = dm.get_parts(ArmorPart::Torso);
+    let arms = dm.get_parts(ArmorPart::Arm);
+    let waists = dm.get_parts(ArmorPart::Waist);
+    let feets = dm.get_parts(ArmorPart::Feet);
+
+    let mut mr_helms = Vec::new();
+    let mut mr_torsos = Vec::new();
+    let mut mr_arms = Vec::new();
+    let mut mr_waists = Vec::new();
+    let mut mr_feets = Vec::new();
+
+    for helm in helms {
+        if 7 <= helm.rarity {
+            mr_helms.push(helm);
+        }
+    }
+
+    for torso in torsos {
+        if 7 <= torso.rarity {
+            mr_torsos.push(torso);
+        }
+    }
+
+    for arm in arms {
+        if 7 <= arm.rarity {
+            mr_arms.push(arm);
+        }
+    }
+
+    for waist in waists {
+        if 7 <= waist.rarity {
+            mr_waists.push(waist);
+        }
+    }
+
+    for feet in feets {
+        if 7 <= feet.rarity {
+            mr_feets.push(feet);
+        }
+    }
+
+    println!(
+        "Parts size: {} {} {} {} {}, total case: {}",
+        mr_helms.len(),
+        mr_torsos.len(),
+        mr_arms.len(),
+        mr_waists.len(),
+        mr_feets.len(),
+        mr_helms.len() * mr_torsos.len() * mr_arms.len() * mr_waists.len() * mr_feets.len()
+    );
+
+    let mut index = 0;
+
+    for helm in &mr_helms {
+        if helm.rarity < 7 {
+            continue;
+        }
+
+        for torso in &mr_torsos {
+            if torso.rarity < 7 {
+                continue;
+            }
+
+            for arm in &mr_arms {
+                if arm.rarity < 7 {
+                    continue;
+                }
+
+                for waist in &mr_waists {
+                    if waist.rarity < 7 {
+                        continue;
+                    }
+
+                    for feet in &mr_feets {
+                        if feet.rarity < 7 {
+                            continue;
+                        }
+
+                        let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
+
+                        armors.insert(ArmorPart::Helm, helm);
+                        armors.insert(ArmorPart::Torso, &torso);
+                        armors.insert(ArmorPart::Arm, &arm);
+                        armors.insert(ArmorPart::Waist, &waist);
+                        armors.insert(ArmorPart::Feet, &feet);
+
+                        let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
+
+                        all_combinations.push(full_equip);
+
+                        index += 1;
+                    }
+                }
+                break;
+            }
+            break;
+        }
+        break;
+    }
+
+    if 0 < dm.talismans.len() {
+        let mut talisman_combinations = Vec::<FullEquipments>::new();
+
+        for talisman in &dm.talismans {
+            for comb in all_combinations.iter_mut() {
+                comb.talisman.replace(&talisman);
+
+                talisman_combinations.push(comb.clone());
+            }
+        }
+
+        all_combinations = talisman_combinations;
+    }
+
+    println!("All combinations size: {}", all_combinations.len());
+
+    for comb in all_combinations {
+        let is_possible = comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
+    }
 
     let mut ret = HashMap::<String, i32>::new();
     ret.insert("test1".to_string(), 1);
     ret.insert("test2".to_string(), 3);
+
+    println!("Calculation done");
 
     return ret;
 }
