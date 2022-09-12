@@ -36,6 +36,8 @@ impl<'a> SlotSkillCalculation<'a> {
 
         let mut is_possible = true;
 
+        let final_combinations = Vec::<SubSlotSkillCalculator>::new();
+
         for (id, req_level) in &self.req_skills {
             let req_level = *req_level;
 
@@ -68,8 +70,9 @@ impl<'a> SlotSkillCalculation<'a> {
             return;
         }
 
-        let mut temp_combinations = Vec::<SubSlotSkillCalculator>::new();
-        let mut all_deco_combinations = Vec::<SubSlotSkillCalculator>::new();
+        let mut local_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
+        let mut local_done_combinations = Vec::<SubSlotSkillCalculator>::new();
+
         for (id, req_level) in &self.req_skills {
             println!("Calculate skill {} begin", id);
 
@@ -99,16 +102,16 @@ impl<'a> SlotSkillCalculation<'a> {
             );
 
             for (slot_size_index, max_deco_count) in max_deco_counts.iter().enumerate() {
-                temp_combinations.push(self.get_sub());
+                local_temp_combinations.push(self.get_sub());
 
                 println!("Max deco: {}", max_deco_count);
                 println!(
                     "{:?}, {:?}",
-                    temp_combinations
+                    local_temp_combinations
                         .iter()
                         .map(|val| &val.combinations)
                         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    temp_combinations
+                    local_temp_combinations
                         .iter()
                         .map(|val| &val.avail_slots)
                         .collect::<Vec<&Vec<i32>>>(),
@@ -116,9 +119,9 @@ impl<'a> SlotSkillCalculation<'a> {
 
                 let deco = decos[slot_size_index];
 
-                let mut next_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
+                let mut temp_combinations = Vec::<SubSlotSkillCalculator>::new();
 
-                for temp_comb in &temp_combinations {
+                for temp_comb in &local_temp_combinations {
                     for count in (0..max_deco_count + 1).rev() {
                         println!(
                             "Count: {}, Max Deco: {}, Avail slots: {:?}",
@@ -133,41 +136,24 @@ impl<'a> SlotSkillCalculation<'a> {
                             id, cur_level_sum, deco.slot_size
                         );
 
-                        // TODO whether this skill is satified or not
+                        let mut next_temp_comb = temp_comb.clone();
+                        next_temp_comb.combinations.get_mut(id).unwrap()[slot_size_index] = count;
+
                         if req_level <= cur_level_sum {
-                            let mut next_temp_comb = temp_comb.clone();
-                            next_temp_comb.combinations.get_mut(id).unwrap()[slot_size_index] =
-                                count;
-
-                            next_temp_combinations.push(next_temp_comb);
+                            local_done_combinations.push(next_temp_comb);
                         } else {
-                        }
-                    }
-                }
-
-                temp_combinations.clear();
-
-                for temp_comb in next_temp_combinations.iter_mut() {
-                    for local_slot_size_index in deco.slot_size - 1..MAX_SLOT_LEVEL - 1 {
-                        let local_slot_size_index = local_slot_size_index as usize;
-
-                        let left_slots = temp_comb.avail_slots[local_slot_size_index]
-                            - temp_comb.combinations.get(id).unwrap()[slot_size_index];
-
-                        if 0 <= left_slots {
-                            temp_comb.avail_slots[local_slot_size_index] = left_slots;
-                            temp_combinations.push(temp_comb.clone());
+                            temp_combinations.push(next_temp_comb);
                         }
                     }
                 }
 
                 println!(
                     "{:?}, {:?}",
-                    next_temp_combinations
+                    temp_combinations
                         .iter()
                         .map(|val| &val.combinations)
                         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    next_temp_combinations
+                    temp_combinations
                         .iter()
                         .map(|val| &val.avail_slots)
                         .collect::<Vec<&Vec<i32>>>(),
@@ -175,17 +161,44 @@ impl<'a> SlotSkillCalculation<'a> {
 
                 println!(
                     "{:?}, {:?}",
-                    temp_combinations
+                    local_temp_combinations
                         .iter()
                         .map(|val| &val.combinations)
                         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    temp_combinations
+                    local_temp_combinations
                         .iter()
                         .map(|val| &val.avail_slots)
                         .collect::<Vec<&Vec<i32>>>(),
                 );
             }
 
+            local_temp_combinations = local_temp_combinations
+                .iter_mut()
+                .filter_map(|comb| {
+                    for (slot_size_index, deco) in decos.iter().enumerate() {
+                        let mut required = comb.combinations.get(id).unwrap()[slot_size_index];
+
+                        for avail_slot_size_index in deco.slot_size - 1..MAX_SLOT_LEVEL - 1 {
+                            let avail_slot_size_index = avail_slot_size_index as usize;
+
+                            let taken = required.min(comb.avail_slots[avail_slot_size_index]);
+
+                            comb.avail_slots[avail_slot_size_index] -= taken;
+                            required -= taken;
+
+                            if required == 0 {
+                                break;
+                            }
+                        }
+
+                        if 0 < required {
+                            return None;
+                        }
+                    }
+
+                    return Some(comb.clone());
+                })
+                .collect();
             println!();
 
             // println!("{:?}", all_deco_combinations);
