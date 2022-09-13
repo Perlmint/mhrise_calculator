@@ -23,6 +23,8 @@ mod data {
 
 mod full_equipments;
 
+mod test;
+
 use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
 use crate::data::deco::Decoration;
 use crate::data::skill::Skill;
