@@ -219,6 +219,10 @@ impl<'a> SlotSkillCalculation<'a> {
 
             let decos = self.decos_possible.get(id);
 
+            if decos.is_none() {
+                continue;
+            }
+
             for _ in decos.unwrap() {
                 skill_combs.push(0);
             }
