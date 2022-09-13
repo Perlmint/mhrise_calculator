@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::hash::Hash;
 
 use super::armor::{AnomalyArmor, ArmorPart, BaseArmor, Talisman};
 use super::deco::Decoration;
@@ -43,9 +42,7 @@ impl DataManager {
             }
         }
 
-        for pair in &skills {
-            let skill = pair.1;
-
+        for (_, skill) in &skills {
             for lang_name in &skill.names {
                 let name = lang_name.1;
 
@@ -149,5 +146,9 @@ impl DataManager {
             }
             None => Vec::new(),
         }
+    }
+
+    pub fn has_decoration(&self, skill_id: &String) -> bool {
+        self.decos_by_skill.contains_key(skill_id)
     }
 }
