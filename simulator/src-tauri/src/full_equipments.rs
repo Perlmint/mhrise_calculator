@@ -32,11 +32,9 @@ struct SubSlotSkillCalculator {
 
 impl<'a> SlotSkillCalculation<'a> {
     pub fn calculate(&mut self) {
-        println!("Calculate begin...");
+        println!("Calculate begin... {:?}", self.avail_slots);
 
         let mut is_possible = true;
-
-        let final_combinations = Vec::<SubSlotSkillCalculator>::new();
 
         for (id, req_level) in &self.req_skills {
             let req_level = *req_level;
@@ -70,12 +68,13 @@ impl<'a> SlotSkillCalculation<'a> {
             return;
         }
 
-        let mut local_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
-        let mut local_done_combinations = Vec::<SubSlotSkillCalculator>::new();
+        let mut all_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
+
+        all_temp_combinations.push(self.get_sub());
+
+        let mut idx = 0;
 
         for (id, req_level) in &self.req_skills {
-            println!("Calculate skill {} begin", id);
-
             let req_level = *req_level;
 
             if req_level <= 0 {
@@ -96,102 +95,73 @@ impl<'a> SlotSkillCalculation<'a> {
                 max_deco_counts.push(max_required);
             }
 
-            println!(
-                "Required level: {}, Max deco counts: {} {:?}",
-                req_level, id, max_deco_counts
-            );
+            let mut skill_temp_combs = all_temp_combinations.clone();
+            let mut skill_done_combs = Vec::new();
 
             for (slot_size_index, max_deco_count) in max_deco_counts.iter().enumerate() {
-                local_temp_combinations.push(self.get_sub());
-
-                println!("Max deco: {}", max_deco_count);
-                println!(
-                    "{:?}, {:?}",
-                    local_temp_combinations
-                        .iter()
-                        .map(|val| &val.combinations)
-                        .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    local_temp_combinations
-                        .iter()
-                        .map(|val| &val.avail_slots)
-                        .collect::<Vec<&Vec<i32>>>(),
-                );
-
                 let deco = decos[slot_size_index];
 
-                let mut temp_combinations = Vec::<SubSlotSkillCalculator>::new();
+                let deco_temp_combs = skill_temp_combs.clone();
 
-                for temp_comb in &local_temp_combinations {
-                    for count in (0..max_deco_count + 1).rev() {
-                        println!(
-                            "Count: {}, Max Deco: {}, Avail slots: {:?}",
-                            count, max_deco_count, temp_comb.avail_slots
-                        );
-
+                for temp_comb in &deco_temp_combs {
+                    for count in (1..max_deco_count + 1).rev() {
                         let mut cur_level_sum: i32 = temp_comb.combinations[id].iter().sum();
                         cur_level_sum += count * deco.skill_level;
-
-                        println!(
-                            "Current level: {}, {}, slot size: {}",
-                            id, cur_level_sum, deco.slot_size
-                        );
 
                         let mut next_temp_comb = temp_comb.clone();
                         next_temp_comb.combinations.get_mut(id).unwrap()[slot_size_index] = count;
 
                         if req_level <= cur_level_sum {
-                            local_done_combinations.push(next_temp_comb);
+                            skill_done_combs.push(next_temp_comb);
                         } else {
-                            temp_combinations.push(next_temp_comb);
+                            skill_temp_combs.push(next_temp_comb);
                         }
                     }
                 }
-
-                println!(
-                    "{:?}, {:?}",
-                    temp_combinations
-                        .iter()
-                        .map(|val| &val.combinations)
-                        .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    temp_combinations
-                        .iter()
-                        .map(|val| &val.avail_slots)
-                        .collect::<Vec<&Vec<i32>>>(),
-                );
-
-                println!(
-                    "{:?}, {:?}",
-                    local_temp_combinations
-                        .iter()
-                        .map(|val| &val.combinations)
-                        .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                    local_temp_combinations
-                        .iter()
-                        .map(|val| &val.avail_slots)
-                        .collect::<Vec<&Vec<i32>>>(),
-                );
             }
 
-            local_temp_combinations = local_temp_combinations
+            println!(
+                "{} {} skill end check: req_level - {}, {:?}, {:?}",
+                idx,
+                id,
+                req_level,
+                skill_done_combs
+                    .iter()
+                    .map(|val| &val.combinations)
+                    .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
+                skill_done_combs
+                    .iter()
+                    .map(|val| &val.avail_slots)
+                    .collect::<Vec<&Vec<i32>>>(),
+            );
+
+            all_temp_combinations = skill_done_combs
                 .iter_mut()
                 .filter_map(|comb| {
-                    for (slot_size_index, deco) in decos.iter().enumerate() {
-                        let mut required = comb.combinations.get(id).unwrap()[slot_size_index];
+                    let skill_combs = comb.combinations.get(id).unwrap();
 
-                        for avail_slot_size_index in deco.slot_size - 1..MAX_SLOT_LEVEL - 1 {
+                    for (slot_size_index, deco) in decos.iter().enumerate() {
+                        let mut deco_count_required = skill_combs[slot_size_index];
+
+                        if deco_count_required == 0 {
+                            continue;
+                        }
+
+                        for avail_slot_size_index in deco.slot_size - 1..MAX_SLOT_LEVEL {
                             let avail_slot_size_index = avail_slot_size_index as usize;
 
-                            let taken = required.min(comb.avail_slots[avail_slot_size_index]);
+                            let taken =
+                                deco_count_required.min(comb.avail_slots[avail_slot_size_index]);
 
                             comb.avail_slots[avail_slot_size_index] -= taken;
-                            required -= taken;
+                            deco_count_required -= taken;
 
-                            if required == 0 {
+                            if deco_count_required == 0 {
                                 break;
                             }
                         }
 
-                        if 0 < required {
+                        if 0 < deco_count_required {
                             return None;
                         }
                     }
@@ -199,9 +169,22 @@ impl<'a> SlotSkillCalculation<'a> {
                     return Some(comb.clone());
                 })
                 .collect();
-            println!();
 
-            // println!("{:?}", all_deco_combinations);
+            println!(
+                "{} {} skill end check: {:?}, {:?}",
+                idx,
+                id,
+                all_temp_combinations
+                    .iter()
+                    .map(|val| &val.combinations)
+                    .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
+                all_temp_combinations
+                    .iter()
+                    .map(|val| &val.avail_slots)
+                    .collect::<Vec<&Vec<i32>>>(),
+            );
+
+            idx += 1;
         }
 
         for (_, level) in &self.req_skills {
@@ -211,13 +194,17 @@ impl<'a> SlotSkillCalculation<'a> {
             }
         }
 
-        // println!("{:?}, {:?}", self.all_skills, req_skills);
+        println!();
     }
 
     fn get_sub(&self) -> SubSlotSkillCalculator {
         let mut combinations = HashMap::<String, Vec<i32>>::new();
 
-        for (id, _) in &self.req_skills {
+        for (id, count) in &self.req_skills {
+            if *count == 0 {
+                continue;
+            }
+
             let mut skill_combs = Vec::new();
 
             let decos = self.decos_possible.get(id);
@@ -262,22 +249,27 @@ impl<'a> FullEquipments<'a> {
     ) -> bool {
         let mut avail_slots = self.avail_slots.clone();
 
-        for (req_idx, req_slot) in req_slots.iter().enumerate() {
-            let mut leftover_slot = *req_slot;
+        for (req_idx, req_slot_count) in req_slots.iter().enumerate() {
+            let mut req_count = *req_slot_count;
+
+            if req_count == 0 {
+                continue;
+            }
 
             for existing_idx in req_idx..avail_slots.len() {
-                let existing_slot = avail_slots[existing_idx];
+                let avail_count = avail_slots[existing_idx];
 
-                if leftover_slot <= existing_slot {
-                    avail_slots[existing_idx] -= leftover_slot;
+                let taken_count = req_count.min(avail_count);
+
+                req_count -= taken_count;
+                avail_slots[existing_idx] -= taken_count;
+
+                if req_count == 0 {
                     break;
-                } else {
-                    avail_slots[existing_idx] = 0;
-                    leftover_slot -= existing_slot;
                 }
             }
 
-            if 0 < leftover_slot {
+            if 0 < req_count {
                 return false;
             }
         }
