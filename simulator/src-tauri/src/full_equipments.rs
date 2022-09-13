@@ -32,7 +32,7 @@ pub struct SubSlotSkillCalculator {
 
 impl<'a> SlotSkillCalculation<'a> {
     pub fn calculate(&mut self) -> Vec<SubSlotSkillCalculator> {
-        println!("Calculate begin... {:?}", self.avail_slots);
+        // println!("Calculate begin... {:?}", self.avail_slots);
 
         let mut is_possible = true;
 

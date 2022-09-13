@@ -389,10 +389,20 @@ fn calculate_skillset(
     println!("All combinations size: {}", all_combinations.len());
 
     for comb in all_combinations {
-        let all_combs = comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
+        let all_possible_combs =
+            comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
 
-        for comb in &all_combs {
-            println!("Possible comb: {:?}", comb);
+        if all_possible_combs.len() != 0 {
+            println!(
+                "Initial slots: {:?}, all skills: {:?}",
+                comb.avail_slots, comb.all_skills
+            );
+
+            for comb in &all_possible_combs {
+                println!("Possible comb: {:?}", comb);
+            }
+
+            println!();
         }
     }
 
