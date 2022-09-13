@@ -112,7 +112,24 @@ impl<'a> SlotSkillCalculation<'a> {
                         next_temp_comb.combinations.get_mut(id).unwrap()[slot_size_index] = count;
 
                         if req_level <= cur_level_sum {
-                            skill_done_combs.push(next_temp_comb);
+                            let mut has_better_slot_answer = false;
+
+                            for lower_deco_size in 0..slot_size_index {
+                                let lower_deco = decos[lower_deco_size];
+
+                                let mut lower_level_sum: i32 =
+                                    temp_comb.combinations[id].iter().sum();
+                                lower_level_sum += count * lower_deco.skill_level;
+
+                                if req_level <= lower_level_sum {
+                                    has_better_slot_answer = true;
+                                    break;
+                                }
+                            }
+
+                            if has_better_slot_answer == false {
+                                skill_done_combs.push(next_temp_comb);
+                            }
                         } else {
                             skill_temp_combs.push(next_temp_comb);
                         }
