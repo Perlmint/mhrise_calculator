@@ -389,7 +389,11 @@ fn calculate_skillset(
     println!("All combinations size: {}", all_combinations.len());
 
     for comb in all_combinations {
-        let is_possible = comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
+        let all_combs = comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
+
+        for comb in &all_combs {
+            println!("Possible comb: {:?}", comb);
+        }
     }
 
     let mut ret = HashMap::<String, i32>::new();

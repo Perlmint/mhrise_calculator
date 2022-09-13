@@ -24,14 +24,14 @@ struct SlotSkillCalculation<'a> {
 }
 
 #[derive(Clone, Debug)]
-struct SubSlotSkillCalculator {
+pub struct SubSlotSkillCalculator {
     pub avail_slots: Vec<i32>,
 
     pub combinations: HashMap<String, Vec<i32>>,
 }
 
 impl<'a> SlotSkillCalculation<'a> {
-    pub fn calculate(&mut self) {
+    pub fn calculate(&mut self) -> Vec<SubSlotSkillCalculator> {
         println!("Calculate begin... {:?}", self.avail_slots);
 
         let mut is_possible = true;
@@ -65,7 +65,7 @@ impl<'a> SlotSkillCalculation<'a> {
         }
 
         if is_possible == false {
-            return;
+            return Vec::new();
         }
 
         let mut all_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
@@ -120,20 +120,20 @@ impl<'a> SlotSkillCalculation<'a> {
                 }
             }
 
-            println!(
-                "{} {} skill end check: req_level - {}, {:?}, {:?}",
-                idx,
-                id,
-                req_level,
-                skill_done_combs
-                    .iter()
-                    .map(|val| &val.combinations)
-                    .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                skill_done_combs
-                    .iter()
-                    .map(|val| &val.avail_slots)
-                    .collect::<Vec<&Vec<i32>>>(),
-            );
+            // println!(
+            //     "{} {} skill end check: req_level - {}, {:?}, {:?}",
+            //     idx,
+            //     id,
+            //     req_level,
+            //     skill_done_combs
+            //         .iter()
+            //         .map(|val| &val.combinations)
+            //         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
+            //     skill_done_combs
+            //         .iter()
+            //         .map(|val| &val.avail_slots)
+            //         .collect::<Vec<&Vec<i32>>>(),
+            // );
 
             all_temp_combinations = skill_done_combs
                 .iter_mut()
@@ -170,31 +170,24 @@ impl<'a> SlotSkillCalculation<'a> {
                 })
                 .collect();
 
-            println!(
-                "{} {} skill end check: {:?}, {:?}",
-                idx,
-                id,
-                all_temp_combinations
-                    .iter()
-                    .map(|val| &val.combinations)
-                    .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-                all_temp_combinations
-                    .iter()
-                    .map(|val| &val.avail_slots)
-                    .collect::<Vec<&Vec<i32>>>(),
-            );
+            // println!(
+            //     "{} {} skill end check: {:?}, {:?}",
+            //     idx,
+            //     id,
+            //     all_temp_combinations
+            //         .iter()
+            //         .map(|val| &val.combinations)
+            //         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
+            //     all_temp_combinations
+            //         .iter()
+            //         .map(|val| &val.avail_slots)
+            //         .collect::<Vec<&Vec<i32>>>(),
+            // );
 
             idx += 1;
         }
 
-        for (_, level) in &self.req_skills {
-            if 0 < *level {
-                // TODO sone false condition
-                break;
-            }
-        }
-
-        println!();
+        return all_temp_combinations;
     }
 
     fn get_sub(&self) -> SubSlotSkillCalculator {
@@ -246,7 +239,7 @@ impl<'a> FullEquipments<'a> {
         mut req_skills: HashMap<String, i32>,
         req_slots: &Vec<i32>,
         decos_possible: &HashMap<String, Vec<&Decoration>>,
-    ) -> bool {
+    ) -> Vec<SubSlotSkillCalculator> {
         let mut avail_slots = self.avail_slots.clone();
 
         for (req_idx, req_slot_count) in req_slots.iter().enumerate() {
@@ -270,7 +263,7 @@ impl<'a> FullEquipments<'a> {
             }
 
             if 0 < req_count {
-                return false;
+                return Vec::new();
             }
         }
 
@@ -288,9 +281,9 @@ impl<'a> FullEquipments<'a> {
             decos_possible,
         };
 
-        calculator.calculate();
+        let all_combs = calculator.calculate();
 
-        return true;
+        return all_combs;
     }
 
     fn sum(&self) -> (HashMap<String, i32>, Vec<i32>) {
