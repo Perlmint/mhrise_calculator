@@ -9,9 +9,9 @@ mod tests {
     #[test]
     fn it_works() {
         let dm = create_data_manager(
-            "../src/data/armor.json",
-            "../src/data/armor.json",
-            "../src/data/armor.json",
+            "./data/armor.json",
+            "./data/armor.json",
+            "./data/armor.json",
         );
 
         let mut selected_skills = HashMap::<String, i32>::new();

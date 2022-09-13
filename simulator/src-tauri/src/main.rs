@@ -446,11 +446,7 @@ fn create_data_manager(
 }
 
 fn main() {
-    let dm = create_data_manager(
-        "../src/data/armor.json",
-        "../src/data/skill.json",
-        "../src/data/deco.json",
-    );
+    let dm = create_data_manager("./data/armor.json", "./data/skill.json", "./data/deco.json");
 
     println!(
         "Anomaly armor count: {}, talisman count: {}",
