@@ -250,6 +250,15 @@ fn cmd_calculate_skillset(
 
     let dm = mutex_dm.lock().unwrap();
 
+    calculate_skillset(weapon_slots, selected_skills, free_slots, &dm)
+}
+
+fn calculate_skillset(
+    weapon_slots: Vec<i32>,
+    selected_skills: HashMap<String, i32>,
+    free_slots: Vec<i32>,
+    dm: &DataManager,
+) -> HashMap<String, i32> {
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
 
     for (skill_id, _) in &selected_skills {
