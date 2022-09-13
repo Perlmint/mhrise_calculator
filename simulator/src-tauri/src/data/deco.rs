@@ -9,8 +9,7 @@ pub struct Decoration {
 
     #[serde(rename = "skillNames")]
     pub skill_names: HashMap<String, String>,
-    pub texts: HashMap<String, String>,
-
+    // pub texts: HashMap<String, String>,
     #[serde(rename = "skillId")]
     pub skill_id: String,
 

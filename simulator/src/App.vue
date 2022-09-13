@@ -19,6 +19,8 @@ const weaponSlots = ref([0,0,0]) as Ref<number[]>;
 const allSkillSelections = ref({}) as Ref<{[key: string]: number}>;
 const freeSlots = ref([0,0,0,0]) as Ref<number[]>;
 
+const calc_answers = ref("");
+
 for(const skill of skillsVec.value) {
   skills.value[skill.id] = skill;
   allSkillSelections.value[skill.id] = 0;
@@ -48,7 +50,9 @@ async function calculate()
 
   console.log(calcInput);
 
-  const result = await invoke("cmd_calculate_skillset", calcInput);
+  const result = await invoke("cmd_calculate_skillset", calcInput) as {};
+
+  calc_answers.value = JSON.stringify(result, null, 4);
 
   console.log(result);
 }
@@ -140,6 +144,8 @@ async function calculate()
   </table>
 
   <button @click="calculate">Calculate</button>
+
+  <textarea v-model="calc_answers"></textarea>
 </template>
 
 <style scoped>

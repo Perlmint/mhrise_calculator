@@ -11,6 +11,7 @@ use std::sync::Mutex;
 use csv::StringRecord;
 use data::armor::ArmorPart;
 use data::data_manager::DataManager;
+use full_equipments::SubSlotSkillCalculator;
 use serde::de;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
 
@@ -245,7 +246,7 @@ fn cmd_calculate_skillset(
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     mutex_dm: tauri::State<Mutex<DataManager>>,
-) -> HashMap<String, i32> {
+) -> Vec<Vec<SubSlotSkillCalculator>> {
     println!("Start calculating...");
 
     let dm = mutex_dm.lock().unwrap();
@@ -258,7 +259,7 @@ fn calculate_skillset(
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     dm: &DataManager,
-) -> HashMap<String, i32> {
+) -> Vec<Vec<SubSlotSkillCalculator>> {
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
 
     for (skill_id, _) in &selected_skills {
@@ -268,8 +269,6 @@ fn calculate_skillset(
             decos_possible.insert(skill_id.clone(), decos);
         }
     }
-
-    let mut all_combinations = Vec::<FullEquipments>::new();
 
     let helms = dm.get_parts(ArmorPart::Helm);
     let torsos = dm.get_parts(ArmorPart::Torso);
@@ -323,33 +322,18 @@ fn calculate_skillset(
         mr_helms.len() * mr_torsos.len() * mr_arms.len() * mr_waists.len() * mr_feets.len()
     );
 
+    let ten_percent =
+        mr_helms.len() * mr_torsos.len() * mr_arms.len() * mr_waists.len() * mr_feets.len() / 10;
+
     let mut index = 0;
 
-    for helm in &mr_helms {
-        if helm.rarity < 7 {
-            continue;
-        }
+    let mut answers = Vec::new();
 
+    'outer: for helm in &mr_helms {
         for torso in &mr_torsos {
-            if torso.rarity < 7 {
-                continue;
-            }
-
             for arm in &mr_arms {
-                if arm.rarity < 7 {
-                    continue;
-                }
-
                 for waist in &mr_waists {
-                    if waist.rarity < 7 {
-                        continue;
-                    }
-
                     for feet in &mr_feets {
-                        if feet.rarity < 7 {
-                            continue;
-                        }
-
                         let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
 
                         armors.insert(ArmorPart::Helm, helm);
@@ -359,60 +343,45 @@ fn calculate_skillset(
                         armors.insert(ArmorPart::Feet, &feet);
 
                         let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
+                        let all_possible_combs = full_equip.is_possible(
+                            selected_skills.clone(),
+                            &free_slots,
+                            &decos_possible,
+                        );
 
-                        all_combinations.push(full_equip);
+                        if 0 < all_possible_combs.len() {
+                            // println!(
+                            //     "Initial slots: {:?}, all skills: {:?}",
+                            //     full_equip.avail_slots, full_equip.all_skills
+                            // );
+
+                            // for comb in &all_possible_combs {
+                            //     println!("Possible comb: {:?}", comb);
+                            // }
+
+                            // println!();
+
+                            answers.push(all_possible_combs);
+                        }
+
+                        if 200 <= answers.len() {
+                            break 'outer;
+                        }
 
                         index += 1;
+
+                        if index % ten_percent == 0 {
+                            println!("{}% passed", index / ten_percent);
+                        }
                     }
                 }
-                break;
             }
-            break;
-        }
-        break;
-    }
-
-    if 0 < dm.talismans.len() {
-        let mut talisman_combinations = Vec::<FullEquipments>::new();
-
-        for talisman in &dm.talismans {
-            for comb in all_combinations.iter_mut() {
-                comb.talisman.replace(&talisman);
-
-                talisman_combinations.push(comb.clone());
-            }
-        }
-
-        all_combinations = talisman_combinations;
-    }
-
-    println!("All combinations size: {}", all_combinations.len());
-
-    for comb in all_combinations {
-        let all_possible_combs =
-            comb.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
-
-        if all_possible_combs.len() != 0 {
-            println!(
-                "Initial slots: {:?}, all skills: {:?}",
-                comb.avail_slots, comb.all_skills
-            );
-
-            for comb in &all_possible_combs {
-                println!("Possible comb: {:?}", comb);
-            }
-
-            println!();
         }
     }
 
-    let mut ret = HashMap::<String, i32>::new();
-    ret.insert("test1".to_string(), 1);
-    ret.insert("test2".to_string(), 3);
+    println!("All combinations size: {}", index + 1);
 
-    println!("Calculation done");
-
-    return ret;
+    return answers;
 }
 
 fn create_data_manager(

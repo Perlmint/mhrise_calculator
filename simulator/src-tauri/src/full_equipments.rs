@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use serde::Serialize;
+
 use crate::data::{
     armor::{ArmorPart, BaseArmor, Talisman},
     deco::Decoration,
@@ -23,7 +25,7 @@ struct SlotSkillCalculation<'a> {
     pub decos_possible: &'a HashMap<String, Vec<&'a Decoration>>,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Serialize, Clone, Debug)]
 pub struct SubSlotSkillCalculator {
     pub avail_slots: Vec<i32>,
 
