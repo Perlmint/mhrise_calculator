@@ -390,10 +390,14 @@ fn cmd_calculate_skillset(
     return ret;
 }
 
-fn main() {
-    let armors_vec = parse_data::<BaseArmor>("../src/data/armor.json");
-    let skills_vec = parse_data::<Skill>("../src/data/skill.json");
-    let decos_vec = parse_data::<Decoration>("../src/data/deco.json");
+fn create_data_manager(
+    armors_filename: &str,
+    skills_filename: &str,
+    decos_filename: &str,
+) -> DataManager {
+    let armors_vec = parse_data::<BaseArmor>(armors_filename);
+    let skills_vec = parse_data::<Skill>(skills_filename);
+    let decos_vec = parse_data::<Decoration>(decos_filename);
 
     let mut armors = HashMap::<String, BaseArmor>::new();
     let mut skills = HashMap::<String, Skill>::new();
@@ -412,6 +416,16 @@ fn main() {
     }
 
     let dm = DataManager::new(armors, skills, decos);
+
+    dm
+}
+
+fn main() {
+    let dm = create_data_manager(
+        "../src/data/armor.json",
+        "../src/data/skill.json",
+        "../src/data/deco.json",
+    );
 
     println!(
         "Anomaly armor count: {}, talisman count: {}",
