@@ -206,6 +206,19 @@ impl<'a> SlotSkillCalculation<'a> {
             idx += 1;
         }
 
+        for comb in all_temp_combinations.iter_mut() {
+            comb.combinations = comb
+                .combinations
+                .clone()
+                .into_iter()
+                .filter(|sub_comb| {
+                    let sum: i32 = sub_comb.1.iter().sum();
+
+                    return sum != 0;
+                })
+                .collect::<HashMap<String, Vec<i32>>>();
+        }
+
         return all_temp_combinations;
     }
 

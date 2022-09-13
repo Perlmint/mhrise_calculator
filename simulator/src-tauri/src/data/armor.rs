@@ -87,6 +87,42 @@ pub struct Talisman {
     pub slot_sizes: Vec<i32>,
 }
 
+impl BaseArmor {
+    pub fn subtract_skills(&mut self, outer_skills: &mut HashMap<String, i32>) {
+        let mut diffs = HashMap::new();
+
+        for (id, skill) in self.skills.clone() {
+            let outer_skill = outer_skills.get_mut(&id);
+
+            if outer_skill.is_none() {
+                continue;
+            }
+
+            let outer_skill = outer_skill.unwrap();
+
+            let taken = skill.level.min(*outer_skill);
+
+            *outer_skill -= taken;
+
+            if *outer_skill == 0 {
+                outer_skills.remove(&id);
+            }
+
+            diffs.insert(id, taken);
+        }
+
+        for (id, taken) in diffs {
+            let skill = self.skills.get_mut(&id).unwrap();
+
+            skill.level -= taken;
+
+            if skill.level == 0 {
+                self.skills.remove(&id);
+            }
+        }
+    }
+}
+
 impl AnomalyArmor {
     pub fn new(
         original: BaseArmor,

@@ -131,6 +131,20 @@ impl DataManager {
         ret
     }
 
+    pub fn get_parts_clone(&self, part: ArmorPart) -> Vec<BaseArmor> {
+        let mut ret = Vec::<BaseArmor>::new();
+
+        for part_armors in self.bases_by_part.get(&part).unwrap() {
+            ret.push(part_armors.clone());
+        }
+
+        for part_anomaly in self.anomalies_by_part.get(&part).unwrap() {
+            ret.push(part_anomaly.clone());
+        }
+
+        ret
+    }
+
     pub fn get_deco_by_skill_id(&self, skill_id: &String) -> Vec<&Decoration> {
         let existing = self.decos_by_skill.get(skill_id);
 

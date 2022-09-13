@@ -270,11 +270,11 @@ fn calculate_skillset(
         }
     }
 
-    let helms = dm.get_parts(ArmorPart::Helm);
-    let torsos = dm.get_parts(ArmorPart::Torso);
-    let arms = dm.get_parts(ArmorPart::Arm);
-    let waists = dm.get_parts(ArmorPart::Waist);
-    let feets = dm.get_parts(ArmorPart::Feet);
+    let mut helms = dm.get_parts_clone(ArmorPart::Helm);
+    let mut torsos = dm.get_parts_clone(ArmorPart::Torso);
+    let mut arms = dm.get_parts_clone(ArmorPart::Arm);
+    let mut waists = dm.get_parts_clone(ArmorPart::Waist);
+    let mut feets = dm.get_parts_clone(ArmorPart::Feet);
 
     let mut mr_helms = Vec::new();
     let mut mr_torsos = Vec::new();
@@ -329,14 +329,26 @@ fn calculate_skillset(
 
     let mut answers = Vec::new();
 
-    'outer: for helm in &mr_helms {
-        for torso in &mr_torsos {
-            for arm in &mr_arms {
-                for waist in &mr_waists {
-                    for feet in &mr_feets {
+    'outer: for helm in mr_helms.iter_mut() {
+        let mut selected_skills = selected_skills.clone();
+
+        helm.subtract_skills(&mut selected_skills);
+
+        for torso in mr_torsos.iter_mut() {
+            torso.subtract_skills(&mut selected_skills);
+
+            for arm in mr_arms.iter_mut() {
+                arm.subtract_skills(&mut selected_skills);
+
+                for waist in mr_waists.iter_mut() {
+                    waist.subtract_skills(&mut selected_skills);
+
+                    for feet in mr_feets.iter_mut() {
+                        // feet.subtract_skills(&mut selected_skills);
+
                         let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
 
-                        armors.insert(ArmorPart::Helm, helm);
+                        armors.insert(ArmorPart::Helm, &helm);
                         armors.insert(ArmorPart::Torso, &torso);
                         armors.insert(ArmorPart::Arm, &arm);
                         armors.insert(ArmorPart::Waist, &waist);
@@ -365,6 +377,7 @@ fn calculate_skillset(
                         }
 
                         if 200 <= answers.len() {
+                            println!("Iteration size too large, breaking at 200");
                             break 'outer;
                         }
 
