@@ -36,3 +36,4 @@ export interface FinalSkillInfo {
 }
 
 export const ArmorParts = ["helm", "torso", "arm", "waist", "feet"];
+export const ArmorSlotCount = 3;

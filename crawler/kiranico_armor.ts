@@ -10,6 +10,7 @@ import {
     ArmorStatInfo,
     FinalArmorInfo,
     FinalSkillInfo,
+    ArmorSlotCount,
 } from "./definition/armor_define.js";
 
 interface UrlInfo {
@@ -208,6 +209,16 @@ export async function parse() {
                         skills[id] = { level: info.level };
                     });
 
+                    const slots = [] as number[];
+
+                    for (let i = 0; i < ArmorSlotCount; ++i) {
+                        slots.push(0);
+                    }
+
+                    for (const i in enArmorInfo.slots) {
+                        slots[i] = enArmorInfo.slots[i];
+                    }
+
                     const finalInfo = {
                         id: makeId(enArmorInfo.name),
                         part: "",
@@ -216,7 +227,7 @@ export async function parse() {
                         rarity: enArmorInfo.rarity,
                         stat: enArmorInfo.stat,
                         skills,
-                        slots: enArmorInfo.slots,
+                        slots,
                     } as FinalArmorInfo;
 
                     finalInfos.push(finalInfo);
