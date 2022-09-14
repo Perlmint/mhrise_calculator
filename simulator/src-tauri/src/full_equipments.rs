@@ -37,6 +37,7 @@ impl<'a> SlotSkillCalculation<'a> {
         // println!("Calculate begin... {:?}", self.avail_slots);
 
         let mut is_possible = true;
+        let mut single_deco_skills = Vec::new();
 
         for (id, req_level) in &self.req_skills {
             let req_level = *req_level;
@@ -63,6 +64,8 @@ impl<'a> SlotSkillCalculation<'a> {
                     is_possible = false;
                     break;
                 }
+
+                single_deco_skills.push(id);
             }
         }
 
@@ -217,6 +220,13 @@ impl<'a> SlotSkillCalculation<'a> {
                     return sum != 0;
                 })
                 .collect::<HashMap<String, Vec<i32>>>();
+
+            for skill_id in &single_deco_skills {
+                let req_level = self.req_skills.get(*skill_id).unwrap();
+
+                comb.combinations
+                    .insert(skill_id.to_string(), vec![*req_level]);
+            }
         }
 
         return all_temp_combinations;
