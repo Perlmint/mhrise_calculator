@@ -31,7 +31,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_garb",
@@ -65,7 +69,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_braces",
@@ -99,7 +107,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_obi",
@@ -133,7 +145,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_leggings",
@@ -167,7 +183,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "leather_headgear",
@@ -201,7 +221,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "leather_vest",
@@ -235,7 +259,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "leather_gloves",
@@ -269,7 +297,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "leather_belt",
@@ -303,7 +335,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "leather_pants",
@@ -337,7 +373,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chainmail_headgear",
@@ -374,7 +414,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chainmail_vest",
@@ -411,7 +455,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chainmail_gloves",
@@ -445,7 +493,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chainmail_belt",
@@ -479,7 +531,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chainmail_pants",
@@ -513,7 +569,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hunter's_helm",
@@ -547,7 +607,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hunter's_mail",
@@ -581,7 +645,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hunter's_vambraces",
@@ -615,7 +683,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hunter's_coil",
@@ -649,7 +721,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hunter's_greaves",
@@ -686,7 +762,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "izuchi_helm",
@@ -720,7 +800,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "izuchi_mail",
@@ -757,7 +841,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "izuchi_braces",
@@ -791,7 +879,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "izuchi_coil",
@@ -825,7 +917,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "izuchi_greaves",
@@ -859,7 +955,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "baggi_helm",
@@ -893,7 +993,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "baggi_mail",
@@ -927,7 +1031,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "baggi_vambraces",
@@ -964,7 +1072,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "baggi_coil",
@@ -998,7 +1110,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "baggi_greaves",
@@ -1032,7 +1148,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "arzuros_helm",
@@ -1066,7 +1186,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "arzuros_mail",
@@ -1100,7 +1224,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "arzuros_vambraces",
@@ -1134,7 +1262,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "arzuros_coil",
@@ -1168,7 +1300,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "arzuros_greaves",
@@ -1202,7 +1338,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "lagombi_helm",
@@ -1236,7 +1376,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "lagombi_mail",
@@ -1270,7 +1414,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "lagombi_vambraces",
@@ -1304,7 +1452,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "lagombi_coil",
@@ -1338,7 +1490,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "lagombi_greaves",
@@ -1372,7 +1528,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "alloy_helm",
@@ -1406,7 +1566,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "alloy_mail",
@@ -1440,7 +1604,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "alloy_vambraces",
@@ -1474,7 +1642,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "alloy_coil",
@@ -1511,7 +1683,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "alloy_greaves",
@@ -1545,7 +1721,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ingot_helm",
@@ -1579,7 +1759,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ingot_mail",
@@ -1613,7 +1797,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ingot_vambraces",
@@ -1647,7 +1835,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ingot_coil",
@@ -1681,7 +1873,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ingot_greaves",
@@ -1718,7 +1914,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "melahoa_hat",
@@ -1752,7 +1952,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "melahoa_jacket",
@@ -1789,7 +1993,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "melahoa_branch",
@@ -1826,7 +2034,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "melahoa_folia",
@@ -1863,7 +2075,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "melahoa_roots",
@@ -1897,7 +2113,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "death_stench_brain",
@@ -1931,7 +2151,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "death_stench_muscle",
@@ -1965,7 +2189,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "death_stench_grip",
@@ -1999,7 +2227,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "death_stench_bowels",
@@ -2033,7 +2265,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "death_stench_heel",
@@ -2067,7 +2303,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mosgharl_vizor",
@@ -2101,7 +2341,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mosgharl_ribplate",
@@ -2135,7 +2379,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mosgharl_creeper",
@@ -2169,7 +2417,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mosgharl_folia",
@@ -2203,7 +2455,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mosgharl_roots",
@@ -2237,7 +2493,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "vaik_helm",
@@ -2271,7 +2531,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "vaik_mail",
@@ -2305,7 +2569,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "vaik_braces",
@@ -2339,7 +2607,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "vaik_coil",
@@ -2373,7 +2645,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "vaik_greaves",
@@ -2407,7 +2683,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chaoshroom",
@@ -2441,7 +2721,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "chaos_plate",
@@ -2471,7 +2755,11 @@
             "dragonRes": 0
         },
         "skills": {},
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_vizor",
@@ -2505,7 +2793,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_ribplate",
@@ -2539,7 +2831,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_creeper",
@@ -2573,7 +2869,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_folia",
@@ -2607,7 +2907,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_roots",
@@ -2641,7 +2945,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_vertex",
@@ -2675,7 +2983,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_thorax",
@@ -2709,7 +3021,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_brachia",
@@ -2743,7 +3059,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_elytra",
@@ -2777,7 +3097,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_crura",
@@ -2811,7 +3135,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_vertex",
@@ -2845,7 +3173,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_thorax",
@@ -2879,7 +3211,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_brachia",
@@ -2913,7 +3249,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_elytra",
@@ -2947,7 +3287,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_crura",
@@ -2981,7 +3325,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "s._studded_hat",
@@ -3015,7 +3363,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "s._studded_vest",
@@ -3049,7 +3401,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "s._studded_gloves",
@@ -3083,7 +3439,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "s._studded_sash",
@@ -3117,7 +3477,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "s._studded_sandals",
@@ -3151,7 +3515,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bishaten_helm",
@@ -3188,7 +3556,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bishaten_mail",
@@ -3222,7 +3594,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bishaten_vambraces",
@@ -3256,7 +3632,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bishaten_coil",
@@ -3290,7 +3670,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bishaten_greaves",
@@ -3324,7 +3708,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aknosom_helm",
@@ -3358,7 +3746,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aknosom_mail",
@@ -3392,7 +3784,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aknosom_braces",
@@ -3426,7 +3822,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aknosom_coil",
@@ -3460,7 +3860,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aknosom_greaves",
@@ -3494,7 +3898,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tetranadon_helm",
@@ -3528,7 +3936,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tetranadon_mail",
@@ -3562,7 +3974,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tetranadon_braces",
@@ -3596,7 +4012,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tetranadon_coil",
@@ -3630,7 +4050,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tetranadon_greaves",
@@ -3664,7 +4088,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "somnacanth_helm",
@@ -3698,7 +4126,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "somnacanth_mail",
@@ -3732,7 +4164,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "somnacanth_braces",
@@ -3769,7 +4205,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "somnacanth_coil",
@@ -3803,7 +4243,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "somnacanth_greaves",
@@ -3837,7 +4281,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "gargwa_mask",
@@ -3871,7 +4319,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "slagtoth_hood",
@@ -3905,7 +4357,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "slagtoth_cloak",
@@ -3939,7 +4395,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhenoplos_helm",
@@ -3973,7 +4433,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhenoplos_mail",
@@ -4010,7 +4474,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhenoplos_braces",
@@ -4044,7 +4512,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhenoplos_coil",
@@ -4078,7 +4550,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhenoplos_greaves",
@@ -4112,7 +4588,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jaggi_gauntlets",
@@ -4146,7 +4626,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jaggi_shinguards",
@@ -4180,7 +4664,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bnahabra_hat",
@@ -4214,7 +4702,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bnahabra_suit",
@@ -4248,7 +4740,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bnahabra_gloves",
@@ -4282,7 +4778,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bnahabra_coil",
@@ -4316,7 +4816,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bnahabra_boots",
@@ -4350,7 +4854,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bullfango_mask",
@@ -4384,7 +4892,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "remobra_headgear",
@@ -4418,7 +4930,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "remobra_suit",
@@ -4452,7 +4968,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "remobra_gloves",
@@ -4489,7 +5009,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "remobra_belt",
@@ -4523,7 +5047,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "remobra_feet",
@@ -4557,7 +5085,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "droth_mail",
@@ -4591,7 +5123,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "droth_coil",
@@ -4625,7 +5161,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "droth_greaves",
@@ -4659,7 +5199,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "uroktor_torso",
@@ -4693,7 +5237,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "uroktor_coil",
@@ -4727,7 +5275,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "wroggi_helm",
@@ -4761,7 +5313,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "wroggi_mail",
@@ -4795,7 +5351,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "wroggi_vambraces",
@@ -4829,7 +5389,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "wroggi_coil",
@@ -4863,7 +5427,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "wroggi_greaves",
@@ -4897,7 +5465,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "volvidon_helm",
@@ -4931,7 +5503,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "volvidon_mail",
@@ -4965,7 +5541,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "volvidon_vambraces",
@@ -4999,7 +5579,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "volvidon_coil",
@@ -5033,7 +5617,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "volvidon_greaves",
@@ -5067,7 +5655,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ludroth_helm",
@@ -5101,7 +5693,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ludroth_mail",
@@ -5135,7 +5731,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ludroth_braces",
@@ -5169,7 +5769,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ludroth_coil",
@@ -5203,7 +5807,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ludroth_greaves",
@@ -5237,7 +5845,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barroth_helm",
@@ -5271,7 +5883,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barroth_mail",
@@ -5308,7 +5924,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barroth_vambraces",
@@ -5342,7 +5962,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barroth_coil",
@@ -5376,7 +6000,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barroth_greaves",
@@ -5410,7 +6038,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "khezu_helm",
@@ -5444,7 +6076,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "khezu_mail",
@@ -5478,7 +6114,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "khezu_vambraces",
@@ -5518,7 +6158,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "khezu_coil",
@@ -5555,7 +6199,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "khezu_greaves",
@@ -5589,7 +6237,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barioth_helm",
@@ -5623,7 +6275,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barioth_mail",
@@ -5657,7 +6313,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barioth_vambraces",
@@ -5691,7 +6351,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barioth_coil",
@@ -5725,7 +6389,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "barioth_greaves",
@@ -5759,7 +6427,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathian_helm",
@@ -5793,7 +6465,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathian_mail",
@@ -5827,7 +6503,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathian_braces",
@@ -5861,7 +6541,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathian_coil",
@@ -5898,7 +6582,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathian_greaves",
@@ -5932,7 +6620,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "basarios_helm",
@@ -5966,7 +6658,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "basarios_mail",
@@ -6000,7 +6696,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "basarios_vambraces",
@@ -6037,7 +6737,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "basarios_coil",
@@ -6074,7 +6778,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "basarios_greaves",
@@ -6111,7 +6819,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kulu-ya-ku_helm",
@@ -6145,7 +6857,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kulu-ya-ku_mail",
@@ -6179,7 +6895,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kulu-ya-ku_braces",
@@ -6213,7 +6933,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kulu-ya-ku_coil",
@@ -6247,7 +6971,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kulu-ya-ku_greaves",
@@ -6284,7 +7012,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "pukei-pukei_helm",
@@ -6318,7 +7050,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "pukei-pukei_mail",
@@ -6352,7 +7088,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "pukei-pukei_braces",
@@ -6386,7 +7126,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "pukei-pukei_coil",
@@ -6420,7 +7164,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "pukei_greaves",
@@ -6454,7 +7202,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kadachi_helm",
@@ -6488,7 +7240,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tobi-kadachi_mail",
@@ -6522,7 +7278,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tobi-kadachi_braces",
@@ -6556,7 +7316,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tobi-kadachi_coil",
@@ -6590,7 +7354,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kadachi_greaves",
@@ -6627,7 +7395,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jaggi_mask",
@@ -6661,7 +7433,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bone_helm",
@@ -6695,7 +7471,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bone_mail",
@@ -6729,7 +7509,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bone_vambraces",
@@ -6763,7 +7547,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bone_coil",
@@ -6797,7 +7585,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "bone_greaves",
@@ -6831,7 +7623,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "makluva_hood",
@@ -6865,7 +7661,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "makluva_cover",
@@ -6899,7 +7699,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "makluva_sleeves",
@@ -6933,7 +7737,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "makluva_coil",
@@ -6967,7 +7775,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "makluva_pants",
@@ -7001,7 +7813,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aelucanth_vertex",
@@ -7035,7 +7851,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aelucanth_thorax",
@@ -7072,7 +7892,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aelucanth_brachia",
@@ -7106,7 +7930,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aelucanth_elytra",
@@ -7140,7 +7968,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "aelucanth_crura",
@@ -7174,7 +8006,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhopessa_vertex",
@@ -7208,7 +8044,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhopessa_thorax",
@@ -7245,7 +8085,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhopessa_brachia",
@@ -7279,7 +8123,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhopessa_elytra",
@@ -7313,7 +8161,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rhopessa_crura",
@@ -7347,7 +8199,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_mask_(v)",
@@ -7384,7 +8240,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_chest_(v)",
@@ -7418,7 +8278,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_braces_(v)",
@@ -7452,7 +8316,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_tassets_(v)",
@@ -7486,7 +8354,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_greaves_(v)",
@@ -7520,7 +8392,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "channeler's_hair-tie",
@@ -7557,7 +8433,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "channeler's_robe",
@@ -7594,7 +8474,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "channeler's_hope",
@@ -7631,7 +8515,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "channeler's_obi",
@@ -7665,7 +8553,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "channeler's_hakama",
@@ -7702,7 +8594,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_mask_(h)",
@@ -7739,7 +8635,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_chest_(h)",
@@ -7776,7 +8676,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_braces_(h)",
@@ -7813,7 +8717,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_tassets_(h)",
@@ -7847,7 +8755,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "utsushi_greaves_(h)",
@@ -7884,7 +8796,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "medium's_hair-tie",
@@ -7921,7 +8837,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "medium's_robe",
@@ -7955,7 +8875,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "medium's_prayer",
@@ -7989,7 +8913,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "medium's_obi",
@@ -8023,7 +8951,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "medium's_hakama",
@@ -8057,7 +8989,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jelly_hat",
@@ -8091,7 +9027,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jelly_vest",
@@ -8125,7 +9065,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jelly_gloves",
@@ -8159,7 +9103,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jelly_coil",
@@ -8193,7 +9141,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "jelly_boots",
@@ -8227,7 +9179,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "goss_harag_helm",
@@ -8261,7 +9217,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "goss_harag_mail",
@@ -8295,7 +9255,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "goss_harag_braces",
@@ -8332,7 +9296,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "goss_harag_coil",
@@ -8369,7 +9337,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "goss_harag_greaves",
@@ -8403,7 +9375,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "almudron_helm",
@@ -8437,7 +9413,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "almudron_mail",
@@ -8471,7 +9451,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "almudron_vambraces",
@@ -8508,7 +9492,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "almudron_coil",
@@ -8542,7 +9530,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "almudron_greaves",
@@ -8576,7 +9568,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_helm",
@@ -8610,7 +9606,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_mail",
@@ -8644,7 +9644,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_braces",
@@ -8681,7 +9685,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_coil",
@@ -8715,7 +9723,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_greaves",
@@ -8752,7 +9764,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathalos_helm",
@@ -8789,7 +9805,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathalos_mail",
@@ -8826,7 +9846,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathalos_braces",
@@ -8860,7 +9884,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathalos_coil",
@@ -8897,7 +9925,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "rathalos_greaves",
@@ -8934,7 +9966,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tigrex_helm",
@@ -8971,7 +10007,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tigrex_mail",
@@ -9008,7 +10048,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tigrex_braces",
@@ -9042,7 +10086,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tigrex_coil",
@@ -9076,7 +10124,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "tigrex_greaves",
@@ -9110,7 +10162,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "diablos_helm",
@@ -9147,7 +10203,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "diablos_mail",
@@ -9181,7 +10241,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "diablos_vambraces",
@@ -9215,7 +10279,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "diablos_coil",
@@ -9249,7 +10317,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "diablos_greaves",
@@ -9286,7 +10358,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "zinogre_helm",
@@ -9323,7 +10399,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "zinogre_mail",
@@ -9360,7 +10440,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "zinogre_braces",
@@ -9394,7 +10478,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "zinogre_coil",
@@ -9428,7 +10516,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "zinogre_greaves",
@@ -9462,7 +10554,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "anjanath_helm",
@@ -9499,7 +10595,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "anjanath_mail",
@@ -9536,7 +10636,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "anjanath_vambraces",
@@ -9573,7 +10677,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "anjanath_coil",
@@ -9607,7 +10715,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "anjanath_greaves",
@@ -9641,7 +10753,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skull_visage",
@@ -9675,7 +10791,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_helm",
@@ -9712,7 +10832,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_garb",
@@ -9749,7 +10873,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_gauntlets",
@@ -9783,7 +10911,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_tassets",
@@ -9820,7 +10952,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_greaves",
@@ -9854,7 +10990,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mizutsune_helm",
@@ -9888,7 +11028,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mizutsune_mail",
@@ -9925,7 +11069,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mizutsune_braces",
@@ -9962,7 +11110,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mizutsune_coil",
@@ -9996,7 +11148,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "mizutsune_greaves",
@@ -10030,7 +11186,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "brigade_lobos",
@@ -10064,7 +11224,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "brigade_suit",
@@ -10098,7 +11262,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "brigade_vambraces",
@@ -10132,7 +11300,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "brigade_coil",
@@ -10166,7 +11338,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "brigade_boots",
@@ -10200,7 +11376,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_head_scarf_s",
@@ -10238,7 +11418,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10280,7 +11462,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10319,7 +11503,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10359,7 +11545,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10398,7 +11585,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10438,7 +11627,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10474,7 +11664,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10514,7 +11706,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10553,7 +11746,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10589,7 +11784,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10628,7 +11825,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10667,7 +11866,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10707,7 +11908,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10747,7 +11949,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10787,7 +11990,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10823,7 +12027,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10862,7 +12068,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -10898,7 +12106,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -10935,7 +12145,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -10974,7 +12185,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11013,7 +12226,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -11049,7 +12264,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11088,7 +12305,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -11128,7 +12347,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11167,7 +12387,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11204,7 +12426,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11241,7 +12464,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11277,7 +12501,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -11313,7 +12539,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11352,7 +12580,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -11389,7 +12619,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11424,7 +12655,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_vizor_s",
@@ -11460,7 +12695,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -11497,7 +12733,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11532,7 +12769,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "edel_folia_s",
@@ -11567,7 +12808,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11604,7 +12847,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11640,7 +12884,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11676,7 +12922,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11716,7 +12964,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11751,7 +13000,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "skalda_crura_s",
@@ -11792,7 +13045,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -11828,7 +13083,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11864,7 +13121,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -11904,7 +13163,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -11939,7 +13199,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "spio_crura_s",
@@ -11980,7 +13244,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12019,7 +13285,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -12058,7 +13326,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12098,7 +13368,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12135,7 +13406,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12174,7 +13446,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12213,7 +13487,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12252,7 +13528,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12292,7 +13570,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12328,7 +13607,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -12367,7 +13648,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12404,7 +13687,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12443,7 +13727,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12480,7 +13766,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12517,7 +13804,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12557,7 +13845,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12596,7 +13885,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -12633,7 +13924,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12672,7 +13964,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -12712,7 +14006,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12749,7 +14044,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12786,7 +14082,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12826,7 +14123,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12863,7 +14161,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12900,7 +14199,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -12939,7 +14239,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -12979,7 +14281,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13018,7 +14321,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13058,7 +14363,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13098,7 +14404,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13134,7 +14441,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13171,7 +14480,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13208,7 +14518,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13244,7 +14555,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -13283,7 +14596,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13322,7 +14637,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13358,7 +14675,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -13397,7 +14716,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13437,7 +14758,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13474,7 +14796,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13513,7 +14836,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13553,7 +14878,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13592,7 +14918,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13629,7 +14957,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13669,7 +14998,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13705,7 +15035,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -13744,7 +15076,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -13784,7 +15118,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13858,7 +15193,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -13897,7 +15233,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -13978,7 +15316,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14018,7 +15357,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14058,7 +15398,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14094,7 +15435,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -14171,7 +15514,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -14207,7 +15552,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -14250,7 +15597,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14289,7 +15637,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -14329,7 +15679,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14368,7 +15719,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -14411,7 +15764,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14450,7 +15804,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -14490,7 +15846,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14533,7 +15890,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14573,7 +15931,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14616,7 +15975,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14653,7 +16013,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14692,7 +16053,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -14731,7 +16094,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -14771,7 +16136,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14810,7 +16176,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -14846,7 +16214,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -14885,7 +16255,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -14925,7 +16297,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -14965,7 +16338,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15001,7 +16375,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15041,7 +16417,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15080,7 +16457,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -15119,7 +16498,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -15159,7 +16540,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15196,7 +16578,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15235,7 +16618,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15278,7 +16663,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15323,7 +16709,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -15403,7 +16791,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15445,7 +16835,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15482,7 +16874,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -15522,7 +16915,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15565,7 +16959,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15604,7 +16999,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15644,7 +17041,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15681,7 +17079,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -15717,7 +17116,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -15756,7 +17157,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15792,7 +17195,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -15832,7 +17237,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -15868,7 +17274,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15907,7 +17315,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -15943,7 +17353,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -15983,7 +17395,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16023,7 +17436,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16060,7 +17474,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -16096,7 +17511,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -16173,7 +17590,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16210,7 +17629,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16247,7 +17667,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16318,7 +17739,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16354,7 +17776,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -16391,7 +17815,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16433,7 +17858,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16473,7 +17900,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16509,7 +17937,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -16548,7 +17978,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -16590,7 +18022,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16632,7 +18066,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16677,7 +18113,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16716,7 +18154,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -16755,7 +18195,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16795,7 +18237,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -16837,7 +18280,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16882,7 +18327,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -16921,7 +18368,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -16960,7 +18409,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -17000,7 +18451,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17042,7 +18494,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -17082,7 +18536,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17118,7 +18573,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -17157,7 +18614,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -17199,7 +18658,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -17236,7 +18697,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17276,7 +18738,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17316,7 +18779,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17353,7 +18817,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17393,7 +18858,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17435,7 +18901,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -17471,7 +18939,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -17510,7 +18980,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -17550,7 +19022,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17625,7 +19098,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17665,7 +19139,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17704,7 +19179,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -17743,7 +19220,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -17780,7 +19259,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17816,7 +19296,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -17853,7 +19335,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17892,7 +19375,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -17929,7 +19414,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -17966,7 +19452,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18002,7 +19489,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18039,7 +19528,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18075,7 +19565,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -18158,7 +19650,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18197,7 +19691,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -18234,7 +19730,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18271,7 +19768,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18352,7 +19850,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18391,7 +19890,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18430,7 +19931,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18470,7 +19973,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18510,7 +20014,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18550,7 +20055,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18589,7 +20095,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18628,7 +20136,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -18667,7 +20177,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18706,7 +20218,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -18745,7 +20259,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -18785,7 +20301,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18866,7 +20383,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -18984,7 +20502,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19065,7 +20584,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19104,7 +20624,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -19140,7 +20662,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -19177,7 +20701,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19217,7 +20742,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19287,7 +20813,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -19324,7 +20852,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -19360,7 +20889,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19402,7 +20933,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19438,7 +20971,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -19474,7 +21009,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19514,7 +21051,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19550,7 +21088,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19592,7 +21132,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19628,7 +21170,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -19664,7 +21208,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -19704,7 +21250,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19743,7 +21290,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -19780,7 +21329,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19817,7 +21367,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19854,7 +21405,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19891,7 +21443,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19931,7 +21484,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -19971,7 +21525,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20010,7 +21565,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -20047,7 +21604,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -20086,7 +21644,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -20126,7 +21686,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20166,7 +21727,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20205,7 +21767,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -20245,7 +21809,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20284,7 +21849,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -20321,7 +21888,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -20360,7 +21928,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -20400,7 +21970,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20440,7 +22011,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20477,7 +22049,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20515,7 +22088,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "nargacuga_helm_s",
@@ -20550,7 +22127,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -20590,7 +22169,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20630,7 +22210,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20669,7 +22250,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -20708,7 +22291,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -20748,7 +22333,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20790,7 +22376,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -20826,7 +22414,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -20865,7 +22455,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -20905,7 +22497,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20945,7 +22538,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -20985,7 +22579,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21024,7 +22619,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -21061,7 +22658,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21100,7 +22698,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21139,7 +22739,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21178,7 +22780,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21215,7 +22819,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21255,7 +22860,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21294,7 +22900,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21333,7 +22941,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21372,7 +22982,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21411,7 +23023,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21448,7 +23062,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21487,7 +23102,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21526,7 +23143,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21566,7 +23185,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -21605,7 +23225,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -21679,7 +23301,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21715,7 +23339,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -21752,7 +23378,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -21787,7 +23414,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "sinister_helm_s",
@@ -21828,7 +23459,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21867,7 +23500,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21906,7 +23541,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -21942,7 +23579,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -21985,7 +23624,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22022,7 +23662,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22061,7 +23702,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -22100,7 +23743,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -22140,7 +23785,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22215,7 +23861,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22254,7 +23901,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -22291,7 +23940,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22328,7 +23978,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22407,7 +24058,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "damascus_mail",
@@ -22446,7 +24101,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22483,7 +24139,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -22522,7 +24179,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -22558,7 +24217,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -22599,7 +24260,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ibushi's_breastplate",
@@ -22639,7 +24304,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ibushi's_pauldrons",
@@ -22679,7 +24348,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ibushi's_fauld",
@@ -22719,7 +24392,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "ibushi's_foot",
@@ -22759,7 +24436,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "narwa's_helm",
@@ -22799,7 +24480,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "narwa's_breastplate",
@@ -22839,7 +24524,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "narwa's_pauldrons",
@@ -22879,7 +24568,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "narwa's_fauld",
@@ -22919,7 +24612,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "narwa's_foot",
@@ -22959,7 +24656,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kushala_glare",
@@ -22997,7 +24698,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23039,7 +24742,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23081,7 +24786,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23126,7 +24833,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23168,7 +24877,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23210,7 +24921,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23255,7 +24968,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23297,7 +25012,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23339,7 +25056,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23378,7 +25097,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23417,7 +25138,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23459,7 +25182,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23501,7 +25226,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23540,7 +25267,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -23579,7 +25308,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23619,7 +25350,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -23661,7 +25393,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23701,7 +25435,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -23743,7 +25478,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -23783,7 +25520,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -23823,7 +25561,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -23863,7 +25602,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -23902,7 +25642,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23944,7 +25686,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -23984,7 +25728,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24023,7 +25768,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -24063,7 +25810,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24103,7 +25851,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -24143,7 +25892,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -24182,7 +25932,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -24217,7 +25969,11 @@
                 "level": 4
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "shadow_shades",
@@ -24254,7 +26010,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "feather_of_mastery",
@@ -24288,7 +26048,11 @@
                 "level": 1
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "kamura_legacy_head_scarf",
@@ -24326,7 +26090,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -24369,7 +26135,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24411,7 +26178,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -24451,7 +26220,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24493,7 +26263,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -24536,7 +26308,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24575,7 +26348,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -24615,7 +26390,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24655,7 +26431,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24695,7 +26472,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24734,7 +26512,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -24776,7 +26556,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -24816,7 +26598,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -24940,7 +26723,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -24982,7 +26767,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -25024,7 +26811,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -25067,7 +26856,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25109,7 +26899,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -25151,7 +26943,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25190,7 +26984,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -25230,7 +27026,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25270,7 +27067,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25306,7 +27104,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25345,7 +27145,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25384,7 +27186,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -25427,7 +27231,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25467,7 +27272,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25509,7 +27315,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -25548,7 +27356,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25590,7 +27400,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -25630,7 +27442,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25673,7 +27486,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -25715,7 +27529,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25754,7 +27570,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -25793,7 +27611,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -25830,7 +27650,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -25870,7 +27691,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25907,7 +27729,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25947,7 +27770,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -25987,7 +27811,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26026,7 +27851,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26066,7 +27893,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26106,7 +27934,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26145,7 +27974,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -26184,7 +28015,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26224,7 +28057,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -26263,7 +28097,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26306,7 +28142,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -26345,7 +28182,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26385,7 +28224,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26424,7 +28264,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -26464,7 +28306,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26503,7 +28346,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26540,7 +28385,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26580,7 +28426,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26620,7 +28467,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26660,7 +28508,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26700,7 +28549,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26737,7 +28587,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26776,7 +28627,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -26816,7 +28669,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -26856,7 +28710,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26898,7 +28753,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -26938,7 +28795,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -26978,7 +28836,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27021,7 +28880,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27061,7 +28921,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27100,7 +28961,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -27140,7 +29003,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27179,7 +29043,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -27219,7 +29085,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27262,7 +29129,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27302,7 +29170,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27345,7 +29214,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27385,7 +29255,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27424,7 +29295,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -27463,7 +29336,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -27505,7 +29380,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -27547,7 +29424,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -27586,7 +29465,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -27622,7 +29503,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -27705,7 +29588,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -27748,7 +29633,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27791,7 +29677,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27874,7 +29761,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -27920,7 +29809,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27960,7 +29850,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -27996,7 +29887,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -28041,7 +29934,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -28124,7 +30019,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -28204,7 +30101,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -28243,7 +30142,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -28285,7 +30186,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -28328,7 +30231,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28412,7 +30316,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28455,7 +30360,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28498,7 +30404,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28537,7 +30444,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -28620,7 +30529,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -28659,7 +30570,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -28705,7 +30618,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28747,7 +30661,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -28793,7 +30709,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28832,7 +30749,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -28875,7 +30794,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -28914,7 +30834,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -28959,7 +30881,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -29001,7 +30925,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -29044,7 +30970,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -29086,7 +31013,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -29125,7 +31054,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -29167,7 +31098,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -29210,7 +31143,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -29249,7 +31183,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -29291,7 +31227,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -29331,7 +31269,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -29371,7 +31310,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -29408,7 +31348,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -29447,7 +31388,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -29487,7 +31430,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -29526,7 +31470,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -29565,7 +31511,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -29645,7 +31593,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -29687,7 +31637,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -29726,7 +31678,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -29765,7 +31719,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -29845,7 +31801,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -29887,7 +31845,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -29968,7 +31928,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30008,7 +31969,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -30048,7 +32010,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30088,7 +32051,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30128,7 +32092,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -30168,7 +32133,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30211,7 +32177,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30254,7 +32221,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30294,7 +32262,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30334,7 +32303,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30374,7 +32344,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30414,7 +32385,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -30457,7 +32429,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30500,7 +32473,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -30543,7 +32517,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -30586,7 +32561,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30628,7 +32604,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -30667,7 +32645,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -30706,7 +32686,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -30745,7 +32727,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -30784,7 +32768,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -30823,7 +32809,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -30866,7 +32854,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30906,7 +32895,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -30948,7 +32938,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -30988,7 +32980,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31030,7 +33023,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -31069,7 +33064,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -31153,7 +33150,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31195,7 +33193,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -31238,7 +33238,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -31278,7 +33279,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31320,7 +33322,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -31404,7 +33408,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31488,7 +33493,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31531,7 +33537,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31567,7 +33574,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -31609,7 +33618,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -31652,7 +33663,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31739,7 +33751,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -31823,7 +33836,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31865,7 +33879,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -31908,7 +33924,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -31950,7 +33967,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -31992,7 +34011,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -32031,7 +34052,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -32071,7 +34094,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -32155,7 +34179,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32283,7 +34308,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32367,7 +34393,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32410,7 +34437,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32450,7 +34478,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32495,7 +34524,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -32540,7 +34571,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -32583,7 +34616,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -32669,7 +34703,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -32711,7 +34747,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -32751,7 +34789,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32791,7 +34830,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -32830,7 +34870,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -32873,7 +34915,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32913,7 +34956,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -32956,7 +35000,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -32999,7 +35044,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33086,7 +35132,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33128,7 +35175,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -33170,7 +35219,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -33213,7 +35264,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33255,7 +35307,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -33294,7 +35348,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -33337,7 +35393,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33380,7 +35437,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33422,7 +35480,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -33465,7 +35525,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33507,7 +35568,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -33584,7 +35647,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -33623,7 +35688,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -33669,7 +35736,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33714,7 +35782,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -33800,7 +35870,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -33842,7 +35914,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -33882,7 +35956,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -33963,7 +36038,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34005,7 +36081,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -34045,7 +36123,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34088,7 +36167,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -34128,7 +36208,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34214,7 +36295,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -34254,7 +36337,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -34296,7 +36380,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -34338,7 +36424,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -34377,7 +36465,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -34420,7 +36510,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34463,7 +36554,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34506,7 +36598,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -34549,7 +36642,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34592,7 +36686,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -34635,7 +36730,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -34678,7 +36774,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34717,7 +36814,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -34760,7 +36859,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34799,7 +36899,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -34838,7 +36940,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -34881,7 +36985,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -34920,7 +37025,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -34963,7 +37070,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35002,7 +37110,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -35041,7 +37151,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -35084,7 +37196,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35123,7 +37236,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -35165,7 +37280,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -35208,7 +37325,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35251,7 +37369,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35290,7 +37409,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -35329,7 +37450,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -35371,7 +37494,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -35414,7 +37539,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35457,7 +37583,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35496,7 +37623,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -35538,7 +37667,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -35581,7 +37712,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35709,7 +37841,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35749,7 +37882,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -35792,7 +37926,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -35835,7 +37970,8 @@
         },
         "slots": [
             3,
-            3
+            3,
+            0
         ]
     },
     {
@@ -35872,7 +38008,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -35959,7 +38096,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36043,7 +38181,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36085,7 +38224,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -36128,7 +38269,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36170,7 +38312,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -36212,7 +38356,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -36254,7 +38400,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -36293,7 +38441,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -36336,7 +38486,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36378,7 +38529,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -36421,7 +38574,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36464,7 +38618,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36506,7 +38661,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -36548,7 +38705,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -36591,7 +38750,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36631,7 +38791,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36673,7 +38834,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -36759,7 +38922,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -36802,7 +38967,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -36927,7 +39093,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -37011,7 +39178,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -37053,7 +39221,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -37098,7 +39268,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -37140,7 +39312,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -37185,7 +39359,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -37225,7 +39401,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -37264,7 +39441,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -37304,7 +39483,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37347,7 +39527,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37390,7 +39571,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -37433,7 +39615,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37476,7 +39659,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37515,7 +39699,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -37558,7 +39744,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -37598,7 +39785,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37640,7 +39828,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -37680,7 +39870,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37722,7 +39913,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -37762,7 +39955,8 @@
         },
         "slots": [
             3,
-            3
+            3,
+            0
         ]
     },
     {
@@ -37802,7 +39996,8 @@
         },
         "slots": [
             3,
-            3
+            3,
+            0
         ]
     },
     {
@@ -37845,7 +40040,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -37931,7 +40127,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -37970,7 +40168,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -38053,7 +40253,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38096,7 +40298,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -38135,7 +40338,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -38177,7 +40382,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -38219,7 +40426,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38264,7 +40473,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -38309,7 +40520,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -38351,7 +40564,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38393,7 +40608,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38482,7 +40699,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -38527,7 +40746,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -38569,7 +40790,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38611,7 +40834,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38697,7 +40922,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38740,7 +40967,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -38779,7 +41007,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -38821,7 +41051,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -38863,7 +41095,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -38937,7 +41171,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -39023,7 +41259,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -39186,7 +41424,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -39226,7 +41465,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39269,7 +41509,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39311,7 +41552,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -39395,7 +41638,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39481,7 +41725,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -39523,7 +41769,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -39562,7 +41810,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -39604,7 +41854,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -39647,7 +41899,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39689,7 +41942,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -39775,7 +42030,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -39818,7 +42075,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39860,7 +42118,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -39900,7 +42160,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39940,7 +42201,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -39985,7 +42247,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -40025,7 +42289,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40067,7 +42332,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40106,7 +42373,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40145,7 +42414,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40188,7 +42459,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40228,7 +42500,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40267,7 +42540,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40307,7 +42582,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -40347,7 +42623,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40386,7 +42663,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -40426,7 +42705,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -40506,7 +42786,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40545,7 +42827,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -40580,7 +42864,11 @@
                 "level": 3
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "regios_coil",
@@ -40659,7 +42947,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -40740,7 +43030,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40783,7 +43074,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40823,7 +43115,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40866,7 +43159,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -40906,7 +43200,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -40945,7 +43240,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -40985,7 +43282,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41024,7 +43322,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -41105,7 +43405,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -41144,7 +43445,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -41186,7 +43489,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -41226,7 +43531,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41269,7 +43575,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41311,7 +43618,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -41354,7 +43663,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41396,7 +43706,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -41437,7 +43749,11 @@
                 "level": 2
             }
         },
-        "slots": []
+        "slots": [
+            0,
+            0,
+            0
+        ]
     },
     {
         "id": "hoplite's_greaves",
@@ -41478,7 +43794,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -41520,7 +43838,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -41563,7 +43883,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41605,7 +43926,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -41689,7 +44012,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41731,7 +44055,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -41774,7 +44100,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41816,7 +44143,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -41900,7 +44229,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -41942,7 +44272,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -41985,7 +44317,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -42027,7 +44360,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42069,7 +44404,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42111,7 +44448,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -42153,7 +44492,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42327,7 +44668,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42369,7 +44712,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -42412,7 +44757,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -42498,7 +44844,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42540,7 +44888,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -42580,7 +44930,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -42622,7 +44973,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42664,7 +45017,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -42750,7 +45105,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42793,7 +45150,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -42836,7 +45194,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -42879,7 +45238,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -42921,7 +45281,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -42960,7 +45322,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -43003,7 +45367,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -43043,7 +45408,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -43088,7 +45454,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -43130,7 +45498,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -43169,7 +45539,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -43212,7 +45584,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -43251,7 +45624,9 @@
             }
         },
         "slots": [
-            1
+            1,
+            0,
+            0
         ]
     },
     {
@@ -43290,7 +45665,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -43333,7 +45710,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -43375,7 +45753,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -43462,7 +45842,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -43548,7 +45929,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -43632,7 +46015,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -43674,7 +46058,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -43713,7 +46099,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -43756,7 +46144,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -43795,7 +46184,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -43837,7 +46228,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -43876,7 +46269,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -43918,7 +46313,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -43961,7 +46358,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -44000,7 +46398,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -44042,7 +46442,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -44081,7 +46483,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -44123,7 +46527,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -44166,7 +46572,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -44206,7 +46613,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -44249,7 +46657,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44291,7 +46700,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -44334,7 +46745,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44459,7 +46871,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44581,7 +46994,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44662,7 +47076,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44784,7 +47199,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -44823,7 +47239,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -44985,7 +47403,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -45024,7 +47444,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -45064,7 +47486,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -45145,7 +47568,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45184,7 +47608,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -45227,7 +47653,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45270,7 +47697,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -45313,7 +47741,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45353,7 +47782,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45396,7 +47826,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45474,7 +47905,8 @@
         },
         "slots": [
             1,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45513,7 +47945,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -45555,7 +47989,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -45594,7 +48030,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -45633,7 +48071,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -45672,7 +48112,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -45714,7 +48156,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -45754,7 +48198,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -45793,7 +48238,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -45833,7 +48280,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -45876,7 +48324,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -45915,7 +48364,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -45954,7 +48405,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -46040,7 +48493,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46085,7 +48540,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46130,7 +48587,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46175,7 +48634,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46220,7 +48681,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46265,7 +48728,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46310,7 +48775,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46355,7 +48822,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46400,7 +48869,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46445,7 +48916,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -46526,7 +48999,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -46565,7 +49039,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -46608,7 +49084,8 @@
         },
         "slots": [
             2,
-            1
+            1,
+            0
         ]
     },
     {
@@ -46648,7 +49125,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -46737,7 +49215,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -46776,7 +49256,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -46821,7 +49303,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -46860,7 +49344,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -46902,7 +49388,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -46942,7 +49430,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -46985,7 +49474,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47068,7 +49558,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -47107,7 +49599,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -47147,7 +49641,8 @@
         },
         "slots": [
             3,
-            3
+            3,
+            0
         ]
     },
     {
@@ -47187,7 +49682,8 @@
         },
         "slots": [
             4,
-            1
+            1,
+            0
         ]
     },
     {
@@ -47226,7 +49722,9 @@
             }
         },
         "slots": [
-            4
+            4,
+            0,
+            0
         ]
     },
     {
@@ -47266,7 +49764,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47302,7 +49801,9 @@
             }
         },
         "slots": [
-            2
+            2,
+            0,
+            0
         ]
     },
     {
@@ -47345,7 +49846,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47387,7 +49889,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     },
     {
@@ -47430,7 +49934,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -47517,7 +50022,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47560,7 +50066,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47603,7 +50110,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47690,7 +50198,8 @@
         },
         "slots": [
             3,
-            2
+            2,
+            0
         ]
     },
     {
@@ -47733,7 +50242,8 @@
         },
         "slots": [
             4,
-            2
+            2,
+            0
         ]
     },
     {
@@ -48040,7 +50550,8 @@
         },
         "slots": [
             3,
-            1
+            1,
+            0
         ]
     },
     {
@@ -48080,7 +50591,8 @@
         },
         "slots": [
             2,
-            2
+            2,
+            0
         ]
     },
     {
@@ -48169,7 +50681,9 @@
             }
         },
         "slots": [
-            3
+            3,
+            0,
+            0
         ]
     }
 ]
