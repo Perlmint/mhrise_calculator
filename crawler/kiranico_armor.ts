@@ -141,13 +141,15 @@ function crawlCallback(
 
     allInfos[lang][rarity] = armorInfos;
 
-    console.log(`Kiranico parsing (lang: ${lang}, rarity: ${rarity}) done`);
+    console.log(
+        `Kiranico armor parsing (lang: ${lang}, rarity: ${rarity}) done`
+    );
 
     return done();
 }
 
 export async function parse() {
-    console.log("Kiranico parsing begin");
+    console.log("Kiranico armor parsing begin");
 
     const c = new Crawler({ rateLimit: 1000 });
 
