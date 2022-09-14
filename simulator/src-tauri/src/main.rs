@@ -291,6 +291,25 @@ fn calculate_skillset(
     all_armors.insert(ArmorPart::Waist, &mut waists);
     all_armors.insert(ArmorPart::Feet, &mut feets);
 
+    for (_, armors) in all_armors.iter_mut() {
+        armors.sort_by_key(|armor| std::cmp::Reverse(armor.rarity));
+        armors.sort_by(|a1, a2| {
+            let slots1 = &a1.slots;
+            let slots2 = &a2.slots;
+
+            for i in (0..slots1.len()).rev() {
+                let slot_count1 = slots1[i];
+                let slot_count2 = slots2[i];
+
+                if slot_count1 != slot_count2 {
+                    return slot_count2.cmp(&slot_count1);
+                }
+            }
+
+            return std::cmp::Ordering::Equal;
+        });
+    }
+
     let mut all_unique_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
     for (part, armors) in &all_armors {
@@ -353,6 +372,25 @@ fn calculate_skillset(
         }
     }
 
+    let get_not_empty_count = |armors: &HashMap<ArmorPart, &BaseArmor>| -> i32 {
+        let mut count = 0;
+
+        for (_, armor) in armors {
+            if armor.id.starts_with("_empty_") == false {
+                count += 1;
+            }
+        }
+
+        count
+    };
+
+    possible_unique_armors.sort_by(|a1, a2| {
+        let empty_count1 = get_not_empty_count(a1);
+        let empty_count2 = get_not_empty_count(a2);
+
+        empty_count2.cmp(&empty_count1)
+    });
+
     let mut mr_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
     for (part, armors) in &all_armors {
@@ -388,6 +426,14 @@ fn calculate_skillset(
         local_armors.insert(ArmorPart::Arm, &mut arms);
         local_armors.insert(ArmorPart::Waist, &mut waists);
         local_armors.insert(ArmorPart::Feet, &mut feets);
+
+        println!(
+            "Base armors ids: {:?}",
+            &local_armors
+                .iter()
+                .map(|(_, armor)| armor[0].id.clone())
+                .collect::<Vec<String>>()
+        );
 
         let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<BaseArmor>| {
             if part_armors.len() == 1 && part_armors[0].id.starts_with("_empty_") {
