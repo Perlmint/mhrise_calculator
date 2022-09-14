@@ -16,6 +16,18 @@ pub enum ArmorPart {
     Feet,
 }
 
+impl ArmorPart {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            ArmorPart::Helm => "helm",
+            ArmorPart::Torso => "torso",
+            ArmorPart::Arm => "arm",
+            ArmorPart::Waist => "waist",
+            ArmorPart::Feet => "feet",
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum SexType {
     #[serde(rename = "all")]
@@ -87,6 +99,12 @@ pub struct Talisman {
     pub slot_sizes: Vec<i32>,
 }
 
+impl ArmorPart {
+    pub fn get_all() -> Vec<Self> {
+        return vec![Self::Helm, Self::Torso, Self::Arm, Self::Waist, Self::Feet];
+    }
+}
+
 impl BaseArmor {
     pub fn subtract_skills(&mut self, outer_skills: &mut HashMap<String, i32>) {
         let mut diffs = HashMap::new();
@@ -119,6 +137,26 @@ impl BaseArmor {
             if skill.level == 0 {
                 self.skills.remove(&id);
             }
+        }
+    }
+
+    pub fn create_empty(part: ArmorPart) -> BaseArmor {
+        Self {
+            id: format!("_empty_{}", part.as_str()),
+            names: HashMap::new(),
+            part,
+            rarity: 10,
+            sex_type: SexType::All,
+            skills: HashMap::new(),
+            slots: vec![0, 0, 0],
+            stat: ArmorStat {
+                defense: 0,
+                fire_res: 0,
+                water_res: 0,
+                ice_res: 0,
+                elec_res: 0,
+                dragon_res: 0,
+            },
         }
     }
 }

@@ -3,8 +3,9 @@
     windows_subsystem = "windows"
 )]
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
+use std::hash::Hash;
 use std::io::BufReader;
 use std::sync::Mutex;
 
@@ -12,6 +13,7 @@ use csv::StringRecord;
 use data::armor::ArmorPart;
 use data::data_manager::DataManager;
 use full_equipments::SubSlotSkillCalculator;
+use itertools::iproduct;
 use serde::de;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
 
@@ -261,14 +263,19 @@ fn calculate_skillset(
     dm: &DataManager,
 ) -> Vec<Vec<SubSlotSkillCalculator>> {
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
+    let mut no_deco_skills = HashMap::<String, i32>::new();
 
-    for (skill_id, _) in &selected_skills {
+    for (skill_id, level) in &selected_skills {
         let decos = dm.get_deco_by_skill_id(skill_id);
 
         if 0 < decos.len() {
             decos_possible.insert(skill_id.clone(), decos);
+        } else {
+            no_deco_skills.insert(skill_id.clone(), *level);
         }
     }
+
+    println!("Skills with no deco: {:?}", no_deco_skills);
 
     let mut helms = dm.get_parts_clone(ArmorPart::Helm);
     let mut torsos = dm.get_parts_clone(ArmorPart::Torso);
@@ -276,123 +283,202 @@ fn calculate_skillset(
     let mut waists = dm.get_parts_clone(ArmorPart::Waist);
     let mut feets = dm.get_parts_clone(ArmorPart::Feet);
 
-    let mut mr_helms = Vec::new();
-    let mut mr_torsos = Vec::new();
-    let mut mr_arms = Vec::new();
-    let mut mr_waists = Vec::new();
-    let mut mr_feets = Vec::new();
+    let mut all_armors = HashMap::new();
 
-    for helm in helms {
-        if 7 <= helm.rarity {
-            mr_helms.push(helm);
+    all_armors.insert(ArmorPart::Helm, &mut helms);
+    all_armors.insert(ArmorPart::Torso, &mut torsos);
+    all_armors.insert(ArmorPart::Arm, &mut arms);
+    all_armors.insert(ArmorPart::Waist, &mut waists);
+    all_armors.insert(ArmorPart::Feet, &mut feets);
+
+    let mut all_unique_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+
+    for (part, armors) in &all_armors {
+        all_unique_armors.insert(
+            part.clone(),
+            armors
+                .iter()
+                .filter_map(|armor| {
+                    for (skill_id, _) in &no_deco_skills {
+                        if armor.skills.contains_key(skill_id) {
+                            return Some(armor.clone());
+                        }
+                    }
+
+                    return None;
+                })
+                .collect(),
+        );
+
+        all_unique_armors
+            .get_mut(part)
+            .unwrap()
+            .push(BaseArmor::create_empty(part.clone()));
+    }
+
+    let mut possible_unique_armors = Vec::new();
+
+    for (helm, torso, arm, waist, feet) in iproduct!(
+        all_unique_armors[&ArmorPart::Helm].iter(),
+        all_unique_armors[&ArmorPart::Torso].iter(),
+        all_unique_armors[&ArmorPart::Arm].iter(),
+        all_unique_armors[&ArmorPart::Waist].iter(),
+        all_unique_armors[&ArmorPart::Feet].iter()
+    ) {
+        let mut armors = HashMap::new();
+        armors.insert(ArmorPart::Helm, helm);
+        armors.insert(ArmorPart::Torso, torso);
+        armors.insert(ArmorPart::Arm, arm);
+        armors.insert(ArmorPart::Waist, waist);
+        armors.insert(ArmorPart::Feet, feet);
+
+        let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
+        let possible_combs =
+            full_equip.is_possible(no_deco_skills.clone(), &free_slots, &decos_possible);
+
+        if 0 < possible_combs.len() {
+            println!(
+                "Unique skills possible: {:?}, {:?}",
+                possible_combs,
+                vec![
+                    helm.id.clone(),
+                    torso.id.clone(),
+                    arm.id.clone(),
+                    waist.id.clone(),
+                    feet.id.clone()
+                ]
+            );
+
+            possible_unique_armors.push(armors);
         }
     }
 
-    for torso in torsos {
-        if 7 <= torso.rarity {
-            mr_torsos.push(torso);
-        }
+    let mut mr_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+
+    for (part, armors) in &all_armors {
+        mr_armors.insert(
+            part.clone(),
+            armors
+                .iter()
+                .filter_map(|armor| {
+                    if 7 <= armor.rarity {
+                        return Some(armor.clone());
+                    } else {
+                        return None;
+                    }
+                })
+                .collect(),
+        );
     }
 
-    for arm in arms {
-        if 7 <= arm.rarity {
-            mr_arms.push(arm);
-        }
-    }
-
-    for waist in waists {
-        if 7 <= waist.rarity {
-            mr_waists.push(waist);
-        }
-    }
-
-    for feet in feets {
-        if 7 <= feet.rarity {
-            mr_feets.push(feet);
-        }
-    }
-
-    println!(
-        "Parts size: {} {} {} {} {}, total case: {}",
-        mr_helms.len(),
-        mr_torsos.len(),
-        mr_arms.len(),
-        mr_waists.len(),
-        mr_feets.len(),
-        mr_helms.len() * mr_torsos.len() * mr_arms.len() * mr_waists.len() * mr_feets.len()
-    );
-
-    let ten_percent =
-        mr_helms.len() * mr_torsos.len() * mr_arms.len() * mr_waists.len() * mr_feets.len() / 10;
-
-    let mut index = 0;
+    let mut total_index = 0;
 
     let mut answers = Vec::new();
 
-    'outer: for helm in mr_helms.iter_mut() {
-        let mut selected_skills = selected_skills.clone();
+    'all_cases: for armors in &possible_unique_armors {
+        let mut helms = vec![armors[&ArmorPart::Helm].clone()];
+        let mut torsos = vec![armors[&ArmorPart::Torso].clone()];
+        let mut arms = vec![armors[&ArmorPart::Arm].clone()];
+        let mut waists = vec![armors[&ArmorPart::Waist].clone()];
+        let mut feets = vec![armors[&ArmorPart::Feet].clone()];
 
-        helm.subtract_skills(&mut selected_skills);
+        let mut local_armors = HashMap::<ArmorPart, &mut Vec<BaseArmor>>::new();
+        local_armors.insert(ArmorPart::Helm, &mut helms);
+        local_armors.insert(ArmorPart::Torso, &mut torsos);
+        local_armors.insert(ArmorPart::Arm, &mut arms);
+        local_armors.insert(ArmorPart::Waist, &mut waists);
+        local_armors.insert(ArmorPart::Feet, &mut feets);
 
-        for torso in mr_torsos.iter_mut() {
-            torso.subtract_skills(&mut selected_skills);
+        let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<BaseArmor>| {
+            if part_armors.len() == 1 && part_armors[0].id.starts_with("_empty_") {
+                part_armors.clear();
+                *part_armors = mr_armors[part].clone();
+            }
+        };
 
-            for arm in mr_arms.iter_mut() {
-                arm.subtract_skills(&mut selected_skills);
+        for (part, part_armors) in local_armors.iter_mut() {
+            modify_empty_parts(part, part_armors);
+        }
 
-                for waist in mr_waists.iter_mut() {
-                    waist.subtract_skills(&mut selected_skills);
+        let mut local_index = 0;
+        let mut total_count = 1;
 
-                    for feet in mr_feets.iter_mut() {
-                        // feet.subtract_skills(&mut selected_skills);
+        for (_, part_armors) in &local_armors {
+            total_count *= part_armors.len();
+        }
 
-                        let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
+        let ten_percent = total_count / 10;
 
-                        armors.insert(ArmorPart::Helm, &helm);
-                        armors.insert(ArmorPart::Torso, &torso);
-                        armors.insert(ArmorPart::Arm, &arm);
-                        armors.insert(ArmorPart::Waist, &waist);
-                        armors.insert(ArmorPart::Feet, &feet);
+        println!(
+            "Parts size: {} {} {} {} {}, total: {}, 10%: {}",
+            helms.len(),
+            torsos.len(),
+            arms.len(),
+            waists.len(),
+            feets.len(),
+            total_count,
+            ten_percent
+        );
 
-                        let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
-                        let all_possible_combs = full_equip.is_possible(
-                            selected_skills.clone(),
-                            &free_slots,
-                            &decos_possible,
-                        );
+        for (helm, torso, arm, waist, feet) in iproduct!(helms, torsos, arms, waists, feets) {
+            let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
 
-                        if 0 < all_possible_combs.len() {
-                            // println!(
-                            //     "Initial slots: {:?}, all skills: {:?}",
-                            //     full_equip.avail_slots, full_equip.all_skills
-                            // );
+            armors.insert(ArmorPart::Helm, &helm);
+            armors.insert(ArmorPart::Torso, &torso);
+            armors.insert(ArmorPart::Arm, &arm);
+            armors.insert(ArmorPart::Waist, &waist);
+            armors.insert(ArmorPart::Feet, &feet);
 
-                            // for comb in &all_possible_combs {
-                            //     println!("Possible comb: {:?}", comb);
-                            // }
+            let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
+            let all_possible_combs =
+                full_equip.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
 
-                            // println!();
+            if 0 < all_possible_combs.len() {
+                println!("Initial slots: {:?}", full_equip.avail_slots);
+                println!("All skills: {:?}", full_equip.all_skills);
+                println!("Requested skills: {:?}", selected_skills);
+                println!(
+                    "Decos possible: {:?}",
+                    &decos_possible
+                        .iter()
+                        .map(|deco| deco.0)
+                        .collect::<Vec<&String>>()
+                );
+                println!(
+                    "Armors ids: {:?}",
+                    &full_equip
+                        .armors
+                        .into_iter()
+                        .map(|(_, armor)| armor.id.clone())
+                        .collect::<Vec<String>>()
+                );
 
-                            answers.push(all_possible_combs);
-                        }
-
-                        if 200 <= answers.len() {
-                            println!("Iteration size too large, breaking at 200");
-                            break 'outer;
-                        }
-
-                        index += 1;
-
-                        if index % ten_percent == 0 {
-                            println!("{}% passed", index / ten_percent);
-                        }
-                    }
+                for comb in &all_possible_combs {
+                    println!("Possible comb: {:?}", comb);
                 }
+
+                println!("Answers length: {}", answers.len());
+
+                println!();
+
+                answers.push(all_possible_combs);
+            }
+
+            if 200 <= answers.len() {
+                println!("Iteration size too large, breaking at 200");
+                break 'all_cases;
+            }
+
+            total_index += 1;
+            local_index += 1;
+
+            if local_index % ten_percent == 0 {
+                println!("{}% passed", 10 * local_index / ten_percent);
             }
         }
     }
 
-    println!("All combinations size: {}", index + 1);
+    println!("All combinations size: {}", total_index + 1);
 
     return answers;
 }
