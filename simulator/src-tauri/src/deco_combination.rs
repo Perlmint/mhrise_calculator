@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use itertools::izip;
+
 use crate::data::{deco::Decoration, skill::Skill};
 
 pub struct DecorationCombinations {
@@ -89,6 +91,40 @@ impl DecorationCombinations {
 
                     self.combinations.insert(id.clone(), skill_done_combs);
                 }
+            }
+        }
+
+        for (id, combs) in self.combinations.iter_mut() {
+            let mut remove_comb_indices = Vec::new();
+
+            'remove_loop: for (index1, deco_comb1) in combs.iter().enumerate() {
+                for index2 in index1 + 1..combs.len() {
+                    // TODO: bug fix
+                    let deco_comb2 = &combs[index2];
+
+                    let mut is_inferior = true;
+
+                    for (count1, count2) in izip!(deco_comb1, deco_comb2) {
+                        if count1 > count2 {
+                            is_inferior = false;
+                            break;
+                        }
+                    }
+
+                    if is_inferior {
+                        remove_comb_indices.push(index1);
+                        continue 'remove_loop;
+                    }
+                }
+            }
+
+            if 0 < remove_comb_indices.len() {
+                println!("All combs: {} {:?}", id, combs);
+                println!("Remove indices: {:?}", remove_comb_indices);
+            }
+
+            for remove_index in remove_comb_indices.iter().rev() {
+                combs.remove(*remove_index);
             }
         }
 
