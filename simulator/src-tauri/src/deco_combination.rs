@@ -5,7 +5,7 @@ use itertools::izip;
 use crate::data::{deco::Decoration, skill::Skill};
 
 pub struct DecorationCombinations {
-    pub combinations: HashMap<String, Vec<Vec<i32>>>,
+    pub combinations: HashMap<String, Vec<Vec<Vec<i32>>>>,
 }
 
 impl DecorationCombinations {
@@ -15,12 +15,12 @@ impl DecorationCombinations {
         skills: &HashMap<String, Skill>,
     ) {
         for (id, decos) in decos_by_skill {
-            let mut skill_combs = Vec::new();
-
             let skill = skills.get(id).unwrap();
             let max_level = skill.max_level;
 
             if decos.len() == 1 {
+                let mut skill_combs = Vec::new();
+
                 let deco_skill_level = decos[0].skill_level;
 
                 for req_level in 1..max_level + 1 {
@@ -30,7 +30,7 @@ impl DecorationCombinations {
                         minimum_deco_count -= 1;
                     }
 
-                    skill_combs.push(vec![minimum_deco_count]);
+                    skill_combs.push(vec![vec![minimum_deco_count]]);
                 }
 
                 self.combinations.insert(id.clone(), skill_combs);
@@ -89,45 +89,41 @@ impl DecorationCombinations {
                         }
                     }
 
-                    self.combinations.insert(id.clone(), skill_done_combs);
+                    self.combinations.insert(id.clone(), vec![skill_done_combs]);
                 }
             }
         }
 
         for (id, combs) in self.combinations.iter_mut() {
-            let mut remove_comb_indices = Vec::new();
+            for deco_size_combs in combs {
+                let mut remove_comb_indices = Vec::new();
 
-            'remove_loop: for (index1, deco_comb1) in combs.iter().enumerate() {
-                for index2 in index1 + 1..combs.len() {
-                    // TODO: bug fix
-                    let deco_comb2 = &combs[index2];
+                'remove_loop: for index1 in 0..deco_size_combs.len() - 1 {
+                    let deco_comb1 = &deco_size_combs[index1];
 
-                    let mut is_inferior = true;
+                    for index2 in index1 + 1..deco_size_combs.len() {
+                        let deco_comb2 = &deco_size_combs[index2];
 
-                    for (count1, count2) in izip!(deco_comb1, deco_comb2) {
-                        if count1 > count2 {
-                            is_inferior = false;
-                            break;
+                        let mut is_inferior = true;
+
+                        for (count1, count2) in izip!(deco_comb1, deco_comb2) {
+                            if count1 < count2 {
+                                is_inferior = false;
+                                break;
+                            }
+                        }
+
+                        if is_inferior {
+                            remove_comb_indices.push(index1);
+                            continue 'remove_loop;
                         }
                     }
+                }
 
-                    if is_inferior {
-                        remove_comb_indices.push(index1);
-                        continue 'remove_loop;
-                    }
+                for remove_index in remove_comb_indices.iter().rev() {
+                    deco_size_combs.remove(*remove_index);
                 }
             }
-
-            if 0 < remove_comb_indices.len() {
-                println!("All combs: {} {:?}", id, combs);
-                println!("Remove indices: {:?}", remove_comb_indices);
-            }
-
-            for remove_index in remove_comb_indices.iter().rev() {
-                combs.remove(*remove_index);
-            }
         }
-
-        println!("All deco combs: {:?}", self.combinations);
     }
 }
