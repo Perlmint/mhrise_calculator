@@ -469,61 +469,115 @@ fn calculate_skillset(
             ten_percent
         );
 
-        for (p1, p2, p3, p4, p5) in iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
-        {
-            let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
+        let subtracted_armors = |parts: &BaseArmor,
+                                 req_skills: &mut HashMap<String, i32>|
+         -> (BaseArmor, HashMap<String, i32>) {
+            let mut parts = parts.clone();
+            let diff_skills = parts.subtract_skills(req_skills);
 
-            armors.insert(p1.part.clone(), p1);
-            armors.insert(p2.part.clone(), p2);
-            armors.insert(p3.part.clone(), p3);
-            armors.insert(p4.part.clone(), p4);
-            armors.insert(p5.part.clone(), p5);
+            return (parts, diff_skills);
+        };
 
-            let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
-            let all_possible_combs =
-                full_equip.is_possible(selected_skills.clone(), &free_slots, &decos_possible);
+        for p1 in &parts[0] {
+            let mut req_skills = selected_skills.clone();
+            let (p1, s1) = &subtracted_armors(p1, &mut req_skills);
 
-            if 0 < all_possible_combs.len() {
-                println!("Initial slots: {:?}", full_equip.avail_slots);
-                println!("All skills: {:?}", full_equip.all_skills);
-                println!("Requested skills: {:?}", selected_skills);
-                println!(
-                    "Decos possible: {:?}",
-                    &decos_possible
-                        .iter()
-                        .map(|deco| deco.0)
-                        .collect::<Vec<&String>>()
-                );
-                println!(
-                    "Armors ids: {:?}",
-                    &full_equip
-                        .armors
-                        .into_iter()
-                        .map(|(_, armor)| armor.id.clone())
-                        .collect::<Vec<String>>()
-                );
+            for p2 in &parts[1] {
+                let mut req_skills = req_skills.clone();
+                let (p2, s2) = &subtracted_armors(p2, &mut req_skills);
 
-                for comb in &all_possible_combs {
-                    println!("Possible comb: {:?}", comb);
+                for p3 in &parts[2] {
+                    let mut req_skills = req_skills.clone();
+                    let (p3, s3) = &subtracted_armors(p3, &mut req_skills);
+
+                    for p4 in &parts[3] {
+                        let mut req_skills = req_skills.clone();
+                        let (p4, s4) = &subtracted_armors(p4, &mut req_skills);
+
+                        for p5 in &parts[4] {
+                            let mut req_skills = req_skills.clone();
+                            let (p5, s5) = &subtracted_armors(p5, &mut req_skills);
+
+                            let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
+
+                            armors.insert(p1.part.clone(), p1);
+                            armors.insert(p2.part.clone(), p2);
+                            armors.insert(p3.part.clone(), p3);
+                            armors.insert(p4.part.clone(), p4);
+                            armors.insert(p5.part.clone(), p5);
+
+                            let full_equip =
+                                FullEquipments::new(weapon_slots.clone(), armors, None);
+                            let all_possible_combs = full_equip.is_possible(
+                                req_skills.clone(),
+                                &free_slots,
+                                &decos_possible,
+                            );
+
+                            if 0 < all_possible_combs.len() {
+                                let subtracts = vec![s1, s2, s3, s4, s5];
+
+                                let mut subtracted_skills = HashMap::<String, i32>::new();
+
+                                for s in subtracts {
+                                    for (s_id, s_level) in s {
+                                        let existing = subtracted_skills.get_mut(s_id);
+
+                                        match existing {
+                                            Some(prev_level) => *prev_level += s_level,
+                                            None => {
+                                                subtracted_skills.insert(s_id.clone(), *s_level);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                println!("Initial slots: {:?}", full_equip.avail_slots);
+                                println!("All skills: {:?}", full_equip.all_skills);
+                                println!("Subracted skills: {:?}", subtracted_skills);
+                                println!("Requested skills: {:?}", selected_skills);
+                                println!(
+                                    "Decos possible: {:?}",
+                                    &decos_possible
+                                        .iter()
+                                        .map(|deco| deco.0)
+                                        .collect::<Vec<&String>>()
+                                );
+                                println!("No decos {:?}", no_deco_skills);
+                                println!(
+                                    "Armors ids: {:?}",
+                                    &full_equip
+                                        .armors
+                                        .into_iter()
+                                        .map(|(_, armor)| armor.id.clone())
+                                        .collect::<Vec<String>>()
+                                );
+
+                                for comb in &all_possible_combs {
+                                    println!("Possible comb: {:?}", comb);
+                                }
+
+                                answers.push(all_possible_combs);
+
+                                println!("Answers length: {}", answers.len());
+                                println!();
+                            }
+
+                            if 200 <= answers.len() {
+                                println!("Iteration size too large, breaking at 200");
+                                break 'all_cases;
+                            }
+
+                            total_index += 1;
+                            local_index += 1;
+
+                            // if local_index % ten_percent == 0 {
+                            //     println!("{}% passed", 10 * local_index / ten_percent);
+                            // }
+                        }
+                    }
                 }
-
-                answers.push(all_possible_combs);
-
-                println!("Answers length: {}", answers.len());
-                println!();
             }
-
-            if 200 <= answers.len() {
-                println!("Iteration size too large, breaking at 200");
-                break 'all_cases;
-            }
-
-            total_index += 1;
-            local_index += 1;
-
-            // if local_index % ten_percent == 0 {
-            //     println!("{}% passed", 10 * local_index / ten_percent);
-            // }
         }
     }
 

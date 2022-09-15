@@ -106,7 +106,10 @@ impl ArmorPart {
 }
 
 impl BaseArmor {
-    pub fn subtract_skills(&mut self, outer_skills: &mut HashMap<String, i32>) {
+    pub fn subtract_skills(
+        &mut self,
+        outer_skills: &mut HashMap<String, i32>,
+    ) -> HashMap<String, i32> {
         let mut diffs = HashMap::new();
 
         for (id, skill) in self.skills.clone() {
@@ -129,15 +132,17 @@ impl BaseArmor {
             diffs.insert(id, taken);
         }
 
-        for (id, taken) in diffs {
-            let skill = self.skills.get_mut(&id).unwrap();
+        for (id, taken) in &diffs {
+            let skill = self.skills.get_mut(id).unwrap();
 
             skill.level -= taken;
 
             if skill.level == 0 {
-                self.skills.remove(&id);
+                self.skills.remove(id);
             }
         }
+
+        return diffs;
     }
 
     pub fn create_empty(part: ArmorPart) -> BaseArmor {
