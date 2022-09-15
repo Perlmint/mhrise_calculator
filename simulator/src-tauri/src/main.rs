@@ -3,9 +3,8 @@
     windows_subsystem = "windows"
 )]
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::fs::File;
-use std::hash::Hash;
 use std::io::BufReader;
 use std::sync::Mutex;
 
@@ -453,27 +452,32 @@ fn calculate_skillset(
             total_count *= part_armors.len();
         }
 
+        let mut parts = vec![helms, torsos, arms, waists, feets];
+
+        parts.sort_by_key(|p| p.len());
+
         let ten_percent = total_count / 10;
 
         println!(
             "Parts size: {} {} {} {} {}, total: {}, 10%: {}",
-            helms.len(),
-            torsos.len(),
-            arms.len(),
-            waists.len(),
-            feets.len(),
+            parts[0].len(),
+            parts[1].len(),
+            parts[2].len(),
+            parts[3].len(),
+            parts[4].len(),
             total_count,
             ten_percent
         );
 
-        for (helm, torso, arm, waist, feet) in iproduct!(helms, torsos, arms, waists, feets) {
+        for (p1, p2, p3, p4, p5) in iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
+        {
             let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
 
-            armors.insert(ArmorPart::Helm, &helm);
-            armors.insert(ArmorPart::Torso, &torso);
-            armors.insert(ArmorPart::Arm, &arm);
-            armors.insert(ArmorPart::Waist, &waist);
-            armors.insert(ArmorPart::Feet, &feet);
+            armors.insert(p1.part.clone(), p1);
+            armors.insert(p2.part.clone(), p2);
+            armors.insert(p3.part.clone(), p3);
+            armors.insert(p4.part.clone(), p4);
+            armors.insert(p5.part.clone(), p5);
 
             let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
             let all_possible_combs =
@@ -503,11 +507,10 @@ fn calculate_skillset(
                     println!("Possible comb: {:?}", comb);
                 }
 
-                println!("Answers length: {}", answers.len());
-
-                println!();
-
                 answers.push(all_possible_combs);
+
+                println!("Answers length: {}", answers.len());
+                println!();
             }
 
             if 200 <= answers.len() {
@@ -518,9 +521,9 @@ fn calculate_skillset(
             total_index += 1;
             local_index += 1;
 
-            if local_index % ten_percent == 0 {
-                println!("{}% passed", 10 * local_index / ten_percent);
-            }
+            // if local_index % ten_percent == 0 {
+            //     println!("{}% passed", 10 * local_index / ten_percent);
+            // }
         }
     }
 
