@@ -23,6 +23,7 @@ mod data {
     pub mod skill;
 }
 
+mod deco_combination;
 mod full_equipments;
 
 mod test;
@@ -30,6 +31,7 @@ mod test;
 use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
 use crate::data::deco::Decoration;
 use crate::data::skill::Skill;
+use crate::deco_combination::DecorationCombinations;
 use crate::full_equipments::FullEquipments;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {
@@ -261,6 +263,12 @@ fn calculate_skillset(
     free_slots: Vec<i32>,
     dm: &DataManager,
 ) -> Vec<Vec<SubSlotSkillCalculator>> {
+    let mut deco_combs = DecorationCombinations {
+        combinations: HashMap::new(),
+    };
+
+    deco_combs.calculate(&dm.decos_by_skill, &dm.skills);
+
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
     let mut no_deco_skills = HashMap::<String, i32>::new();
 
