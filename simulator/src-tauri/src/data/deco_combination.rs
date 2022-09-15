@@ -4,6 +4,8 @@ use itertools::izip;
 
 use crate::data::{deco::Decoration, skill::Skill};
 
+use super::skill::MAX_SLOT_LEVEL;
+
 #[derive(Default)]
 pub struct DecorationCombinations {
     pub combinations: HashMap<String, Vec<Vec<Vec<i32>>>>,
@@ -129,6 +131,39 @@ impl DecorationCombinations {
                 }
             }
         }
+
+        combinations = combinations
+            .iter_mut()
+            .map(|(skill_id, combs_per_skill)| {
+                let mut ret = Vec::new();
+
+                let decos = &decos_by_skill[skill_id];
+
+                for combs_per_level in combs_per_skill {
+                    let mut converted_level_combs = Vec::new();
+
+                    for comb in combs_per_level {
+                        let mut converted = Vec::new();
+                        for _ in 0..MAX_SLOT_LEVEL {
+                            converted.push(0);
+                        }
+
+                        for (deco_index, slot_count) in comb.iter().enumerate() {
+                            let deco = &decos[deco_index];
+                            let slot_size = deco.slot_size;
+
+                            converted[(slot_size - 1) as usize] = *slot_count;
+                        }
+
+                        converted_level_combs.push(converted);
+                    }
+
+                    ret.push(converted_level_combs);
+                }
+
+                (skill_id.clone(), ret)
+            })
+            .collect();
 
         DecorationCombinations { combinations }
     }
