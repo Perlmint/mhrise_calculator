@@ -31,7 +31,7 @@ mod test;
 use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
 use crate::data::deco::Decoration;
 use crate::data::deco_combination::DecorationCombinations;
-use crate::data::skill::Skill;
+use crate::data::skill::{Skill, MAX_SLOT_LEVEL};
 use crate::full_equipments::FullEquipments;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {
@@ -472,33 +472,45 @@ fn calculate_skillset(
         );
 
         let subtracted_armors = |parts: &BaseArmor,
-                                 req_skills: &mut HashMap<String, i32>|
+                                 req_skills: &mut HashMap<String, i32>,
+                                 req_slots: &mut Vec<i32>|
          -> (BaseArmor, HashMap<String, i32>) {
             let mut parts = parts.clone();
-            let diff_skills = parts.subtract_skills(req_skills);
+            let diff_skills = parts.subtract_skills(req_skills, req_slots);
 
             return (parts, diff_skills);
         };
 
         for p1 in &parts[0] {
             let mut req_skills = selected_skills.clone();
-            let (p1, s1) = &subtracted_armors(p1, &mut req_skills);
+            let mut free_slots = free_slots.clone();
+            let (p1, s1) = &subtracted_armors(p1, &mut req_skills, &mut free_slots);
 
             for p2 in &parts[1] {
                 let mut req_skills = req_skills.clone();
-                let (p2, s2) = &subtracted_armors(p2, &mut req_skills);
+                let mut free_slots = free_slots.clone();
+                let (p2, s2) = &subtracted_armors(p2, &mut req_skills, &mut free_slots);
 
                 for p3 in &parts[2] {
                     let mut req_skills = req_skills.clone();
-                    let (p3, s3) = &subtracted_armors(p3, &mut req_skills);
+                    let mut free_slots = free_slots.clone();
+                    let (p3, s3) = &subtracted_armors(p3, &mut req_skills, &mut free_slots);
 
                     for p4 in &parts[3] {
                         let mut req_skills = req_skills.clone();
-                        let (p4, s4) = &subtracted_armors(p4, &mut req_skills);
+                        let mut free_slots = free_slots.clone();
+                        let (p4, s4) = &subtracted_armors(p4, &mut req_skills, &mut free_slots);
 
-                        for p5 in &parts[4] {
+                        'final_armor: for p5 in &parts[4] {
                             let mut req_skills = req_skills.clone();
-                            let (p5, s5) = &subtracted_armors(p5, &mut req_skills);
+                            let mut free_slots = free_slots.clone();
+                            let (p5, s5) = &subtracted_armors(p5, &mut req_skills, &mut free_slots);
+
+                            for slot_count in &free_slots {
+                                if 0 < *slot_count {
+                                    continue 'final_armor;
+                                }
+                            }
 
                             let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
 
@@ -514,13 +526,32 @@ fn calculate_skillset(
                             let all_possible_slot_coms =
                                 dm.deco_combinations.get_possible_combs(&req_skills);
 
-                            let all_possible_combs = full_equip.is_possible(
-                                req_skills.clone(),
-                                &free_slots,
-                                &decos_possible,
-                            );
+                            let armor_possible_slot_combs = all_possible_slot_coms
+                                .iter()
+                                .filter_map(|possible_comb| {
+                                    let mut is_available = true;
 
-                            if 0 < all_possible_combs.len() {
+                                    for i in 0..MAX_SLOT_LEVEL {
+                                        let i = i as usize;
+
+                                        let armor_slot_count = full_equip.avail_slots[i];
+                                        let req_slot_count = possible_comb[i];
+
+                                        if armor_slot_count < req_slot_count {
+                                            is_available = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if is_available {
+                                        Some(possible_comb.clone())
+                                    } else {
+                                        None
+                                    }
+                                })
+                                .collect::<Vec<Vec<i32>>>();
+
+                            if 0 < armor_possible_slot_combs.len() {
                                 let subtracts = vec![s1, s2, s3, s4, s5];
 
                                 let mut subtracted_skills = HashMap::<String, i32>::new();
@@ -553,6 +584,11 @@ fn calculate_skillset(
                                     "Possible slot combinations: {:?}",
                                     all_possible_slot_coms
                                 );
+
+                                for comb in &armor_possible_slot_combs {
+                                    println!("Possible comb: {:?}", comb);
+                                }
+
                                 println!("No decos {:?}", no_deco_skills);
                                 println!(
                                     "Armors ids: {:?}",
@@ -563,11 +599,7 @@ fn calculate_skillset(
                                         .collect::<Vec<String>>()
                                 );
 
-                                for comb in &all_possible_combs {
-                                    println!("Possible comb: {:?}", comb);
-                                }
-
-                                answers.push(all_possible_combs);
+                                answers.push(armor_possible_slot_combs);
 
                                 println!("Answers length: {}", answers.len());
                                 println!();
@@ -593,7 +625,7 @@ fn calculate_skillset(
 
     println!("All combinations size: {}", total_index + 1);
 
-    return answers;
+    return Vec::new();
 }
 
 fn create_data_manager(

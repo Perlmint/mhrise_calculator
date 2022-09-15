@@ -2,6 +2,8 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
+use super::skill::MAX_SLOT_LEVEL;
+
 #[derive(Serialize, Deserialize, Debug, Clone, Hash, Eq, PartialEq)]
 pub enum ArmorPart {
     #[serde(rename = "helm")]
@@ -109,6 +111,7 @@ impl BaseArmor {
     pub fn subtract_skills(
         &mut self,
         outer_skills: &mut HashMap<String, i32>,
+        req_slots: &mut Vec<i32>,
     ) -> HashMap<String, i32> {
         let mut diffs = HashMap::new();
 
@@ -139,6 +142,20 @@ impl BaseArmor {
 
             if skill.level == 0 {
                 self.skills.remove(id);
+            }
+        }
+
+        for slot_size in &self.slots {
+            let slot_size = *slot_size as usize;
+
+            if slot_size == 0 {
+                continue;
+            }
+
+            let req_count_leftover = req_slots[slot_size - 1];
+
+            if 0 < req_count_leftover {
+                req_slots[slot_size - 1] -= 1;
             }
         }
 
