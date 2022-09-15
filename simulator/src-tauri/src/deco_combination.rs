@@ -34,16 +34,20 @@ impl DecorationCombinations {
                 self.combinations.insert(id.clone(), skill_combs);
             } else {
                 let mut max_deco_counts = Vec::new();
+                let mut init_case = Vec::new();
 
                 for deco in decos {
                     let max_required = max_level / deco.skill_level;
 
                     max_deco_counts.push(max_required);
+                    init_case.push(0);
                 }
 
                 for req_level in 1..max_level + 1 {
                     let mut skill_temp_combs = Vec::<Vec<i32>>::new();
                     let mut skill_done_combs = Vec::new();
+
+                    skill_temp_combs.push(init_case.clone());
 
                     for (slot_size_index, max_deco_count) in max_deco_counts.iter().enumerate() {
                         let deco = &decos[slot_size_index];
