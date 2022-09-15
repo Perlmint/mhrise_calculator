@@ -37,6 +37,8 @@ impl DecorationCombinations {
 
                 combinations.insert(id.clone(), skill_combs);
             } else {
+                combinations.insert(id.clone(), vec![]);
+
                 let mut max_deco_counts = Vec::new();
                 let mut init_case = Vec::new();
 
@@ -91,7 +93,7 @@ impl DecorationCombinations {
                         }
                     }
 
-                    combinations.insert(id.clone(), vec![skill_done_combs]);
+                    combinations.get_mut(id).unwrap().push(skill_done_combs);
                 }
             }
         }
