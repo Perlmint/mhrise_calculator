@@ -20,18 +20,18 @@ mod data {
     pub mod armor;
     pub mod data_manager;
     pub mod deco;
+    pub mod deco_combination;
     pub mod skill;
 }
 
-mod deco_combination;
 mod full_equipments;
 
 mod test;
 
 use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
 use crate::data::deco::Decoration;
+use crate::data::deco_combination::DecorationCombinations;
 use crate::data::skill::Skill;
-use crate::deco_combination::DecorationCombinations;
 use crate::full_equipments::FullEquipments;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {

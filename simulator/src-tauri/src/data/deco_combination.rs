@@ -94,7 +94,7 @@ impl DecorationCombinations {
             }
         }
 
-        for (id, combs) in self.combinations.iter_mut() {
+        for (_, combs) in self.combinations.iter_mut() {
             for deco_size_combs in combs {
                 let mut remove_comb_indices = Vec::new();
 
