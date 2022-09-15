@@ -92,6 +92,6 @@ impl DecorationCombinations {
             }
         }
 
-        panic!("All deco combs: {:?}", self.combinations);
+        println!("All deco combs: {:?}", self.combinations);
     }
 }
