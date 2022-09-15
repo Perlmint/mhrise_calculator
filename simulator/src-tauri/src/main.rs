@@ -510,6 +510,10 @@ fn calculate_skillset(
 
                             let full_equip =
                                 FullEquipments::new(weapon_slots.clone(), armors, None);
+
+                            let all_possible_slot_coms =
+                                dm.deco_combinations.get_possible_combs(&req_skills);
+
                             let all_possible_combs = full_equip.is_possible(
                                 req_skills.clone(),
                                 &free_slots,
@@ -544,6 +548,10 @@ fn calculate_skillset(
                                         .iter()
                                         .map(|deco| deco.0)
                                         .collect::<Vec<&String>>()
+                                );
+                                println!(
+                                    "Possible slot combinations: {:?}",
+                                    all_possible_slot_coms
                                 );
                                 println!("No decos {:?}", no_deco_skills);
                                 println!(

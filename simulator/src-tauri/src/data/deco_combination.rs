@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use itertools::izip;
+use itertools::{iproduct, izip};
 
 use crate::data::{deco::Decoration, skill::Skill};
 
@@ -166,5 +166,52 @@ impl DecorationCombinations {
             .collect();
 
         DecorationCombinations { combinations }
+    }
+
+    pub fn get(&self, skill_id: &String) -> Option<&Vec<Vec<Vec<i32>>>> {
+        self.combinations.get(skill_id)
+    }
+
+    pub fn get_by_level(&self, skill_id: &String, req_level: i32) -> Vec<Vec<i32>> {
+        match self.combinations.get(skill_id) {
+            Some(val) => val[req_level as usize].clone(),
+            None => Vec::new(),
+        }
+    }
+
+    pub fn get_possible_combs(&self, req_skills: &HashMap<String, i32>) -> Vec<Vec<i32>> {
+        let mut all_possible_combs = Vec::<Vec<i32>>::new();
+        let mut combs_per_skill = HashMap::new();
+
+        let skill_ids = req_skills
+            .iter()
+            .map(|(skill_id, _)| skill_id)
+            .collect::<Vec<&String>>();
+
+        for (skill_id, level) in req_skills {
+            let combs = &self.combinations[skill_id][(level - 1) as usize];
+
+            combs_per_skill.insert(skill_id, combs);
+        }
+
+        all_possible_combs.extend(combs_per_skill[skill_ids[0]].clone());
+
+        for i in 1..skill_ids.len() {
+            let skill_combs = combs_per_skill[skill_ids[i]];
+            let prev_combs = all_possible_combs.clone();
+            all_possible_combs.clear();
+
+            for (skill_comb, prev_comb) in iproduct!(skill_combs, prev_combs) {
+                let mut sum_comb = Vec::new();
+
+                for (slot1, slot2) in izip!(skill_comb, prev_comb) {
+                    sum_comb.push(slot1 + slot2);
+                }
+
+                all_possible_combs.push(sum_comb);
+            }
+        }
+
+        all_possible_combs
     }
 }
