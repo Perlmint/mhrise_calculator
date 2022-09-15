@@ -4,16 +4,18 @@ use itertools::izip;
 
 use crate::data::{deco::Decoration, skill::Skill};
 
+#[derive(Default)]
 pub struct DecorationCombinations {
     pub combinations: HashMap<String, Vec<Vec<Vec<i32>>>>,
 }
 
 impl DecorationCombinations {
-    pub fn calculate(
-        &mut self,
+    pub fn new(
         decos_by_skill: &HashMap<String, Vec<Decoration>>,
         skills: &HashMap<String, Skill>,
-    ) {
+    ) -> DecorationCombinations {
+        let mut combinations = HashMap::<String, Vec<Vec<Vec<i32>>>>::new();
+
         for (id, decos) in decos_by_skill {
             let skill = skills.get(id).unwrap();
             let max_level = skill.max_level;
@@ -33,7 +35,7 @@ impl DecorationCombinations {
                     skill_combs.push(vec![vec![minimum_deco_count]]);
                 }
 
-                self.combinations.insert(id.clone(), skill_combs);
+                combinations.insert(id.clone(), skill_combs);
             } else {
                 let mut max_deco_counts = Vec::new();
                 let mut init_case = Vec::new();
@@ -89,12 +91,12 @@ impl DecorationCombinations {
                         }
                     }
 
-                    self.combinations.insert(id.clone(), vec![skill_done_combs]);
+                    combinations.insert(id.clone(), vec![skill_done_combs]);
                 }
             }
         }
 
-        for (_, combs) in self.combinations.iter_mut() {
+        for (_, combs) in combinations.iter_mut() {
             for deco_size_combs in combs {
                 let mut remove_comb_indices = Vec::new();
 
@@ -125,5 +127,7 @@ impl DecorationCombinations {
                 }
             }
         }
+
+        DecorationCombinations { combinations }
     }
 }

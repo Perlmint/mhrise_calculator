@@ -263,12 +263,6 @@ fn calculate_skillset(
     free_slots: Vec<i32>,
     dm: &DataManager,
 ) -> Vec<Vec<SubSlotSkillCalculator>> {
-    let mut deco_combs = DecorationCombinations {
-        combinations: HashMap::new(),
-    };
-
-    deco_combs.calculate(&dm.decos_by_skill, &dm.skills);
-
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
     let mut no_deco_skills = HashMap::<String, i32>::new();
 

@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use super::armor::{AnomalyArmor, ArmorPart, BaseArmor, Talisman};
 use super::deco::Decoration;
+use super::deco_combination::DecorationCombinations;
 use super::skill::Skill;
 
 #[derive(Default)]
@@ -11,6 +12,7 @@ pub struct DataManager {
     pub decos: HashMap<String, Decoration>,
 
     pub decos_by_skill: HashMap<String, Vec<Decoration>>,
+    pub deco_combinations: DecorationCombinations,
 
     pub anomaly_armors: Vec<AnomalyArmor>,
 
@@ -70,6 +72,8 @@ impl DataManager {
             pair.1.sort_by_key(|a| a.skill_level);
         }
 
+        let deco_combinations = DecorationCombinations::new(&decos_by_skill, &skills);
+
         let mut bases_by_part = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
         bases_by_part.insert(ArmorPart::Helm, Vec::new());
@@ -90,6 +94,7 @@ impl DataManager {
             skills,
             decos,
             decos_by_skill,
+            deco_combinations,
             armor_name_dict,
             skill_name_dict,
             bases_by_part,
