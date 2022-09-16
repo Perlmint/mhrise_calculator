@@ -19,6 +19,24 @@ const weaponSlots = ref([0,0,0]) as Ref<number[]>;
 const allSkillSelections = ref({}) as Ref<{[key: string]: number}>;
 const freeSlots = ref([0,0,0,0]) as Ref<number[]>;
 
+const prevCalcInputStr = window.localStorage.getItem("calc_input");
+
+if (prevCalcInputStr) {
+  const prevCalcInput = JSON.parse(prevCalcInputStr);
+  weaponSlots.value = prevCalcInput.weaponSlots;
+  freeSlots.value = prevCalcInput.freeSlots;
+  const prevSelectedSkills = prevCalcInput.selectedSkills as {[key:string]:number};
+
+  for(const skillId in prevSelectedSkills) {
+    let level = prevSelectedSkills[skillId];
+    
+    if(level !== 0) {
+      allSkillSelections.value[skillId] = level;
+    }
+  }
+}
+
+
 const calc_answers = ref("");
 
 for(const skill of skillsVec.value) {
@@ -47,6 +65,8 @@ async function calculate()
     selectedSkills,
     freeSlots: freeSlots.value
   };
+
+  window.localStorage.setItem("calc_choices", JSON.stringify(calcInput));
 
   console.log(calcInput);
 
