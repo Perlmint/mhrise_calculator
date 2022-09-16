@@ -551,72 +551,71 @@ fn calculate_skillset(
                                 })
                                 .collect::<Vec<Vec<i32>>>();
 
-                            if 0 < armor_possible_slot_combs.len() {
-                                let subtracts = vec![s1, s2, s3, s4, s5];
+                            if armor_possible_slot_combs.len() == 0 {
+                                continue;
+                            }
 
-                                let mut subtracted_skills = HashMap::<String, i32>::new();
+                            let subtracts = vec![s1, s2, s3, s4, s5];
 
-                                for s in subtracts {
-                                    for (s_id, s_level) in s {
-                                        let existing = subtracted_skills.get_mut(s_id);
+                            let mut subtracted_skills = HashMap::<String, i32>::new();
 
-                                        match existing {
-                                            Some(prev_level) => *prev_level += s_level,
-                                            None => {
-                                                subtracted_skills.insert(s_id.clone(), *s_level);
-                                            }
+                            for s in subtracts {
+                                for (s_id, s_level) in s {
+                                    let existing = subtracted_skills.get_mut(s_id);
+
+                                    match existing {
+                                        Some(prev_level) => *prev_level += s_level,
+                                        None => {
+                                            subtracted_skills.insert(s_id.clone(), *s_level);
                                         }
                                     }
                                 }
-
-                                println!("Initial slots: {:?}", full_equip.avail_slots);
-                                println!("All skills: {:?}", full_equip.all_skills);
-                                println!("Subracted skills: {:?}", subtracted_skills);
-                                println!("Requested skills: {:?}", selected_skills);
-                                println!(
-                                    "Decos possible: {:?}",
-                                    &decos_possible
-                                        .iter()
-                                        .map(|deco| deco.0)
-                                        .collect::<Vec<&String>>()
-                                );
-                                println!(
-                                    "Possible slot combinations: {:?}",
-                                    all_possible_slot_coms
-                                );
-
-                                for comb in &armor_possible_slot_combs {
-                                    println!("Possible comb: {:?}", comb);
-                                }
-
-                                println!("No decos {:?}", no_deco_skills);
-                                println!(
-                                    "Armors ids: {:?}",
-                                    &full_equip
-                                        .armors
-                                        .into_iter()
-                                        .map(|(_, armor)| armor.id.clone())
-                                        .collect::<Vec<String>>()
-                                );
-
-                                answers.push(armor_possible_slot_combs);
-
-                                println!("Answers length: {}", answers.len());
-                                println!();
                             }
 
-                            if 200 <= answers.len() {
-                                println!("Iteration size too large, breaking at 200");
-                                break 'all_cases;
+                            println!("Initial slots: {:?}", full_equip.avail_slots);
+                            println!("All skills: {:?}", full_equip.all_skills);
+                            println!("Subracted skills: {:?}", subtracted_skills);
+                            println!("Requested skills: {:?}", selected_skills);
+                            println!(
+                                "Decos possible: {:?}",
+                                &decos_possible
+                                    .iter()
+                                    .map(|deco| deco.0)
+                                    .collect::<Vec<&String>>()
+                            );
+                            println!("Possible slot combinations: {:?}", all_possible_slot_coms);
+
+                            for comb in &armor_possible_slot_combs {
+                                println!("Possible comb: {:?}", comb);
                             }
 
-                            total_index += 1;
-                            local_index += 1;
+                            println!("No decos {:?}", no_deco_skills);
+                            println!(
+                                "Armors ids: {:?}",
+                                &full_equip
+                                    .armors
+                                    .into_iter()
+                                    .map(|(_, armor)| armor.id.clone())
+                                    .collect::<Vec<String>>()
+                            );
 
-                            // if local_index % ten_percent == 0 {
-                            //     println!("{}% passed", 10 * local_index / ten_percent);
-                            // }
+                            answers.push(armor_possible_slot_combs);
+
+                            println!("Answers length: {}", answers.len());
+                            println!();
                         }
+
+                        if 200 <= answers.len() {
+                            println!("Iteration size too large, breaking at 200");
+                            break 'all_cases;
+                        }
+
+                        total_index += 1;
+                        local_index += 1;
+
+                        // if local_index % ten_percent == 0 {
+                        //     println!("{}% passed", 10 * local_index / ten_percent);
+                        // }
                     }
                 }
             }
