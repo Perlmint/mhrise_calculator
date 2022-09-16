@@ -32,6 +32,7 @@ use crate::data::armor::{
     AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill, EMPTY_ARMOR_PREFIX,
 };
 use crate::data::deco::Decoration;
+use crate::data::deco_combination::DecorationCombination;
 use crate::data::skill::{Skill, MAX_SLOT_LEVEL};
 use crate::full_equipments::FullEquipments;
 
@@ -594,7 +595,7 @@ fn calculate_skillset(
                                         let i = i as usize;
 
                                         let armor_slot_count = full_equip.avail_slots[i];
-                                        let req_slot_count = possible_comb[i];
+                                        let req_slot_count = possible_comb.sum[i];
 
                                         if armor_slot_count < req_slot_count {
                                             is_available = false;
@@ -608,7 +609,7 @@ fn calculate_skillset(
                                         None
                                     }
                                 })
-                                .collect::<Vec<Vec<i32>>>();
+                                .collect::<Vec<DecorationCombination>>();
 
                             if armor_possible_slot_combs.len() == 0 {
                                 continue;
@@ -642,7 +643,17 @@ fn calculate_skillset(
                                     .map(|deco| deco.0)
                                     .collect::<Vec<&String>>()
                             );
-                            println!("Possible slot combinations: {:?}", all_possible_slot_coms);
+                            println!(
+                                "Possible slot combinations: {:?} {:?}",
+                                all_possible_slot_coms
+                                    .iter()
+                                    .map(|comb| comb.combs_per_skill.clone())
+                                    .collect::<Vec<HashMap<String, Vec<i32>>>>(),
+                                all_possible_slot_coms
+                                    .iter()
+                                    .map(|comb| comb.sum.clone())
+                                    .collect::<Vec<Vec<i32>>>()
+                            );
 
                             for comb in &armor_possible_slot_combs {
                                 println!("Possible comb: {:?}", comb);

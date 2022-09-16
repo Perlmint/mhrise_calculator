@@ -11,6 +11,12 @@ pub struct DecorationCombinations {
     pub combinations: HashMap<String, Vec<Vec<Vec<i32>>>>,
 }
 
+#[derive(Clone, Debug)]
+pub struct DecorationCombination {
+    pub combs_per_skill: HashMap<String, Vec<i32>>,
+    pub sum: Vec<i32>,
+}
+
 impl DecorationCombinations {
     pub fn new(
         decos_by_skill: &HashMap<String, Vec<Decoration>>,
@@ -179,12 +185,14 @@ impl DecorationCombinations {
         }
     }
 
-    pub fn get_possible_combs(&self, req_skills: &HashMap<String, i32>) -> Vec<Vec<i32>> {
+    pub fn get_possible_combs(
+        &self,
+        req_skills: &HashMap<String, i32>,
+    ) -> Vec<DecorationCombination> {
         if req_skills.len() == 0 {
             return Vec::new();
         }
 
-        let mut all_possible_combs = Vec::<Vec<i32>>::new();
         let mut combs_per_skill = HashMap::new();
 
         let skill_ids = req_skills
@@ -198,7 +206,20 @@ impl DecorationCombinations {
             combs_per_skill.insert(skill_id, combs);
         }
 
-        all_possible_combs.extend(combs_per_skill[skill_ids[0]].clone());
+        let mut all_possible_combs = Vec::<DecorationCombination>::new();
+
+        for comb in combs_per_skill[skill_ids[0]] {
+            let mut combs_per_skill = HashMap::new();
+
+            combs_per_skill.insert(skill_ids[0].clone(), comb.clone());
+
+            let deco_comb = DecorationCombination {
+                combs_per_skill,
+                sum: comb.clone(),
+            };
+
+            all_possible_combs.push(deco_comb);
+        }
 
         for i in 1..skill_ids.len() {
             let skill_combs = combs_per_skill[skill_ids[i]];
@@ -208,11 +229,19 @@ impl DecorationCombinations {
             for (skill_comb, prev_comb) in iproduct!(skill_combs, prev_combs) {
                 let mut sum_comb = Vec::new();
 
-                for (slot1, slot2) in izip!(skill_comb, prev_comb) {
+                for (slot1, slot2) in izip!(skill_comb, prev_comb.sum) {
                     sum_comb.push(slot1 + slot2);
                 }
 
-                all_possible_combs.push(sum_comb);
+                let mut combs_per_skill = prev_comb.combs_per_skill.clone();
+                combs_per_skill.insert(skill_ids[i].clone(), skill_comb.clone());
+
+                let new_deco_comb = DecorationCombination {
+                    combs_per_skill,
+                    sum: sum_comb,
+                };
+
+                all_possible_combs.push(new_deco_comb);
             }
         }
 
