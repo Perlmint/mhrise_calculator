@@ -43,7 +43,7 @@
             "it": "Mantenimento acutezza: +20%",
             "pl": "Przyznaje 20% szansę na brak utraty ostrości po aktywacji."
         },
-        "skillId": "master's_touch",
+        "skillId": "masters_touch",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -523,7 +523,7 @@
             "it": "Aumenta leggermente la potenza dei proiettili normali e delle frecce rapide.",
             "pl": "Zwiększa nieco siłę normalnej amunicji i strzał typu szybkiego."
         },
-        "skillId": "normal/rapid_up",
+        "skillId": "normalrapid_up",
         "skillLevel": 1,
         "slotSize": 3
     },
@@ -1488,7 +1488,7 @@
         "slotSize": 2
     },
     {
-        "id": "mind's_eye_jewel_2_1",
+        "id": "minds_eye_jewel_2_1",
         "names": {
             "ja": "心眼珠【２】",
             "zh": "心眼珠【2】",
@@ -1531,7 +1531,7 @@
             "it": "ATT non respinti: 50% di probabilità Danno obiettivi: +10%",
             "pl": "50% szansa, że twoje ataki nie zostaną odbite. (Po aktywacji +10% obrażeń trudnych celów)."
         },
-        "skillId": "mind's_eye",
+        "skillId": "minds_eye",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -5376,7 +5376,7 @@
         "slotSize": 4
     },
     {
-        "id": "blaze_jewel+_2_2",
+        "id": "blaze_jewel_2_2",
         "names": {
             "ja": "火炎珠Ⅱ【２】",
             "zh": "火炎珠Ⅱ【2】",
@@ -5472,7 +5472,7 @@
         "slotSize": 3
     },
     {
-        "id": "stream_jewel+_2_2",
+        "id": "stream_jewel_2_2",
         "names": {
             "ja": "流水珠Ⅱ【２】",
             "zh": "流水珠Ⅱ【2】",
@@ -5568,7 +5568,7 @@
         "slotSize": 3
     },
     {
-        "id": "frost_jewel+_2_2",
+        "id": "frost_jewel_2_2",
         "names": {
             "ja": "氷結珠Ⅱ【２】",
             "zh": "冰结珠Ⅱ【2】",
@@ -5664,7 +5664,7 @@
         "slotSize": 3
     },
     {
-        "id": "bolt_jewel+_2_2",
+        "id": "bolt_jewel_2_2",
         "names": {
             "ja": "雷光珠Ⅱ【２】",
             "zh": "雷光珠Ⅱ【2】",
@@ -5760,7 +5760,7 @@
         "slotSize": 3
     },
     {
-        "id": "dragon_jewel+_2_2",
+        "id": "dragon_jewel_2_2",
         "names": {
             "ja": "破龍珠Ⅱ【２】",
             "zh": "破龙珠Ⅱ【2】",
@@ -5856,7 +5856,7 @@
         "slotSize": 3
     },
     {
-        "id": "defense_jewel+_2_2",
+        "id": "defense_jewel_2_2",
         "names": {
             "ja": "防御珠Ⅱ【２】",
             "zh": "防御珠Ⅱ【2】",
@@ -5952,7 +5952,7 @@
         "slotSize": 3
     },
     {
-        "id": "hard_defense_jewel++_4_5",
+        "id": "hard_defense_jewel_4_5",
         "names": {
             "ja": "防御珠Ⅴ【４】",
             "zh": "防御珠Ⅴ【4】",
@@ -6096,7 +6096,7 @@
         "slotSize": 4
     },
     {
-        "id": "medicine_jewel+_4_2",
+        "id": "medicine_jewel_4_2",
         "names": {
             "ja": "治癒珠Ⅱ【４】",
             "zh": "治愈珠Ⅱ【4】",
@@ -6144,7 +6144,7 @@
         "slotSize": 4
     },
     {
-        "id": "physique_jewel+_4_2",
+        "id": "physique_jewel_4_2",
         "names": {
             "ja": "体術珠Ⅱ【４】",
             "zh": "体术珠Ⅱ【4】",
@@ -6192,7 +6192,7 @@
         "slotSize": 4
     },
     {
-        "id": "wirebug_jewel+_4_2",
+        "id": "wirebug_jewel_4_2",
         "names": {
             "ja": "翔蟲珠Ⅱ【４】",
             "zh": "翔虫珠Ⅱ【4】",
@@ -6336,7 +6336,7 @@
         "slotSize": 4
     },
     {
-        "id": "protection_jewel+_4_2",
+        "id": "protection_jewel_4_2",
         "names": {
             "ja": "加護珠Ⅱ【４】",
             "zh": "加护珠Ⅱ【4】",
@@ -6384,7 +6384,7 @@
         "slotSize": 4
     },
     {
-        "id": "gobbler_jewel+_4_2",
+        "id": "gobbler_jewel_4_2",
         "names": {
             "ja": "早食珠Ⅱ【４】",
             "zh": "快吃珠Ⅱ【4】",
@@ -6432,7 +6432,7 @@
         "slotSize": 4
     },
     {
-        "id": "resistor_jewel+_4_2",
+        "id": "resistor_jewel_4_2",
         "names": {
             "ja": "耐属珠Ⅱ【４】",
             "zh": "耐属珠Ⅱ【4】",
@@ -6528,7 +6528,7 @@
         "slotSize": 3
     },
     {
-        "id": "hard_friendship_jewel+_4_4",
+        "id": "hard_friendship_jewel_4_4",
         "names": {
             "ja": "友愛珠Ⅳ【４】",
             "zh": "友爱珠Ⅳ【4】",
@@ -6576,7 +6576,7 @@
         "slotSize": 4
     },
     {
-        "id": "evasion_jewel+_4_2",
+        "id": "evasion_jewel_4_2",
         "names": {
             "ja": "回避珠Ⅱ【４】",
             "zh": "回避珠Ⅱ【4】",
@@ -6624,7 +6624,7 @@
         "slotSize": 4
     },
     {
-        "id": "gambit_jewel+_4_2",
+        "id": "gambit_jewel_4_2",
         "names": {
             "ja": "抜打珠Ⅱ【４】",
             "zh": "拔打珠Ⅱ【4】",
@@ -6720,7 +6720,7 @@
         "slotSize": 4
     },
     {
-        "id": "bubble_jewel+_4_2",
+        "id": "bubble_jewel_4_2",
         "names": {
             "ja": "泡沫珠Ⅱ【４】",
             "zh": "泡沫珠Ⅱ【4】",
@@ -6768,7 +6768,7 @@
         "slotSize": 4
     },
     {
-        "id": "ko_jewel+_4_2",
+        "id": "ko_jewel_4_2",
         "names": {
             "ja": "ＫＯ珠Ⅱ【４】",
             "zh": "击晕珠Ⅱ【4】",
@@ -6816,7 +6816,7 @@
         "slotSize": 4
     },
     {
-        "id": "jumping_jewel+_4_2",
+        "id": "jumping_jewel_4_2",
         "names": {
             "ja": "跳躍珠Ⅱ【４】",
             "zh": "跳跃珠Ⅱ【4】",
@@ -6912,7 +6912,7 @@
         "slotSize": 4
     },
     {
-        "id": "refresh_jewel+_4_2",
+        "id": "refresh_jewel_4_2",
         "names": {
             "ja": "早気珠Ⅱ【４】",
             "zh": "早气珠Ⅱ【4】",
@@ -6960,7 +6960,7 @@
         "slotSize": 4
     },
     {
-        "id": "ironwall_jewel+_3_2",
+        "id": "ironwall_jewel_3_2",
         "names": {
             "ja": "鉄壁珠Ⅱ【３】",
             "zh": "铁壁珠Ⅱ【4】",
@@ -7008,7 +7008,7 @@
         "slotSize": 3
     },
     {
-        "id": "shield_jewel+_4_2",
+        "id": "shield_jewel_4_2",
         "names": {
             "ja": "強壁珠Ⅱ【４】",
             "zh": "强壁珠Ⅱ【4】",
@@ -7056,7 +7056,7 @@
         "slotSize": 4
     },
     {
-        "id": "precise_jewel+_4_2",
+        "id": "precise_jewel_4_2",
         "names": {
             "ja": "射法珠Ⅱ【４】",
             "zh": "射法珠Ⅱ【4】",
@@ -7104,7 +7104,7 @@
         "slotSize": 4
     },
     {
-        "id": "crit_element_jewel+_4_2",
+        "id": "crit_element_jewel_4_2",
         "names": {
             "ja": "属会珠Ⅱ【４】",
             "zh": "属会珠Ⅱ【4】",
@@ -7152,7 +7152,7 @@
         "slotSize": 4
     },
     {
-        "id": "charger_jewel+_4_2",
+        "id": "charger_jewel_4_2",
         "names": {
             "ja": "短縮珠Ⅱ【４】",
             "zh": "缩短珠Ⅱ【4】",
@@ -7200,7 +7200,7 @@
         "slotSize": 4
     },
     {
-        "id": "sprinter_jewel+_4_2",
+        "id": "sprinter_jewel_4_2",
         "names": {
             "ja": "強走珠Ⅱ【４】",
             "zh": "强走珠Ⅱ【4】",
@@ -7248,7 +7248,7 @@
         "slotSize": 4
     },
     {
-        "id": "draw_jewel+_4_2",
+        "id": "draw_jewel_4_2",
         "names": {
             "ja": "抜刀珠Ⅱ【４】",
             "zh": "拔刀珠Ⅱ【4】",
@@ -7296,7 +7296,7 @@
         "slotSize": 4
     },
     {
-        "id": "fungiform_jewel+_4_2",
+        "id": "fungiform_jewel_4_2",
         "names": {
             "ja": "茸好珠Ⅱ【４】",
             "zh": "茸好珠Ⅱ【4】",
@@ -7392,7 +7392,7 @@
         "slotSize": 4
     },
     {
-        "id": "mind's_eye_jewel+_4_2",
+        "id": "minds_eye_jewel_4_2",
         "names": {
             "ja": "心眼珠Ⅱ【４】",
             "zh": "心眼珠Ⅱ【4】",
@@ -7435,12 +7435,12 @@
             "it": "ATT non respinti: 100% di probabilità Danno obiettivi: +15%",
             "pl": "100% szansa, że twoje ataki nie zostaną odbite. (Po aktywacji +15% obrażeń trudnych celów)."
         },
-        "skillId": "mind's_eye",
+        "skillId": "minds_eye",
         "skillLevel": 2,
         "slotSize": 4
     },
     {
-        "id": "earplug_jewel+_4_2",
+        "id": "earplug_jewel_4_2",
         "names": {
             "ja": "防音珠Ⅱ【４】",
             "zh": "防音珠Ⅱ【4】",
@@ -7488,7 +7488,7 @@
         "slotSize": 4
     },
     {
-        "id": "enhancer_jewel+_4_2",
+        "id": "enhancer_jewel_4_2",
         "names": {
             "ja": "昂揚珠Ⅱ【４】",
             "zh": "昂扬珠Ⅱ【4】",
@@ -7536,7 +7536,7 @@
         "slotSize": 4
     },
     {
-        "id": "footing_jewel+_4_2",
+        "id": "footing_jewel_4_2",
         "names": {
             "ja": "耐震珠Ⅱ【４】",
             "zh": "耐震珠Ⅱ【4】",
@@ -7584,7 +7584,7 @@
         "slotSize": 4
     },
     {
-        "id": "hellfire_jewel+_4_2",
+        "id": "hellfire_jewel_4_2",
         "names": {
             "ja": "鬼火珠Ⅱ【４】",
             "zh": "鬼火珠Ⅱ【4】",
@@ -7632,7 +7632,7 @@
         "slotSize": 4
     },
     {
-        "id": "fate_jewel+_4_2",
+        "id": "fate_jewel_4_2",
         "names": {
             "ja": "運気珠Ⅱ【４】",
             "zh": "运气珠Ⅱ【4】",
@@ -7867,7 +7867,7 @@
             "it": "",
             "pl": ""
         },
-        "skillId": "wall_runner_(boost)",
+        "skillId": "wall_runner_boost",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -7920,7 +7920,7 @@
         "slotSize": 4
     },
     {
-        "id": "sniper_jewel+_4_2",
+        "id": "sniper_jewel_4_2",
         "names": {
             "ja": "点射珠Ⅱ【４】",
             "zh": "点射珠Ⅱ【4】",
@@ -8016,7 +8016,7 @@
         "slotSize": 4
     },
     {
-        "id": "quickswitch_jewel+_4_2",
+        "id": "quickswitch_jewel_4_2",
         "names": {
             "ja": "速変珠Ⅱ【４】",
             "zh": "速变珠Ⅱ【4】",
@@ -8064,7 +8064,7 @@
         "slotSize": 4
     },
     {
-        "id": "magazine_jewel+_4_2",
+        "id": "magazine_jewel_4_2",
         "names": {
             "ja": "増弾珠Ⅱ【４】",
             "zh": "增弹珠Ⅱ【4】",
@@ -8112,7 +8112,7 @@
         "slotSize": 4
     },
     {
-        "id": "trueshot_jewel+_4_2",
+        "id": "trueshot_jewel_4_2",
         "names": {
             "ja": "特射珠Ⅱ【４】",
             "zh": "特射珠Ⅱ【4】",
@@ -8160,7 +8160,7 @@
         "slotSize": 4
     },
     {
-        "id": "artillery_jewel+_4_2",
+        "id": "artillery_jewel_4_2",
         "names": {
             "ja": "砲術珠Ⅱ【４】",
             "zh": "炮术珠Ⅱ【4】",
@@ -8256,7 +8256,7 @@
         "slotSize": 2
     },
     {
-        "id": "sheath_jewel+_4_2",
+        "id": "sheath_jewel_4_2",
         "names": {
             "ja": "速納珠Ⅱ【４】",
             "zh": "速纳珠Ⅱ【4】",
@@ -8304,7 +8304,7 @@
         "slotSize": 4
     },
     {
-        "id": "crisis_jewel+_4_2",
+        "id": "crisis_jewel_4_2",
         "names": {
             "ja": "窮地珠Ⅱ【４】",
             "zh": "绝路珠Ⅱ【4】",
@@ -8352,7 +8352,7 @@
         "slotSize": 4
     },
     {
-        "id": "destroyer_jewel+_4_2",
+        "id": "destroyer_jewel_4_2",
         "names": {
             "ja": "重撃珠Ⅱ【４】",
             "zh": "重击珠Ⅱ【4】",
@@ -8400,7 +8400,7 @@
         "slotSize": 4
     },
     {
-        "id": "counter_jewel+_4_2",
+        "id": "counter_jewel_4_2",
         "names": {
             "ja": "逆襲珠Ⅱ【４】",
             "zh": "逆袭珠Ⅱ【4】",
@@ -8448,7 +8448,7 @@
         "slotSize": 4
     },
     {
-        "id": "sharp_jewel+_4_2",
+        "id": "sharp_jewel_4_2",
         "names": {
             "ja": "剛刃珠Ⅱ【４】",
             "zh": "刚刃珠Ⅱ【4】",
@@ -8544,7 +8544,7 @@
         "slotSize": 4
     },
     {
-        "id": "razor_jewel+_4_2",
+        "id": "razor_jewel_4_2",
         "names": {
             "ja": "斬鉄珠Ⅱ【４】",
             "zh": "斩铁珠Ⅱ【4】",
@@ -8832,7 +8832,7 @@
         "slotSize": 4
     },
     {
-        "id": "mastery_jewel+_4_2",
+        "id": "mastery_jewel_4_2",
         "names": {
             "ja": "達芸珠Ⅱ【４】",
             "zh": "达艺珠Ⅱ【4】",
@@ -8875,12 +8875,12 @@
             "it": "Mantenimento acutezza: +40%",
             "pl": "Przyznaje 40% szansę na brak utraty ostrości po aktywacji."
         },
-        "skillId": "master's_touch",
+        "skillId": "masters_touch",
         "skillLevel": 2,
         "slotSize": 4
     },
     {
-        "id": "spiribird's_call_jewel_1_1",
+        "id": "spiribirds_call_jewel_1_1",
         "names": {
             "ja": "供応珠【１】",
             "zh": "提供珠【1】",
@@ -8923,7 +8923,7 @@
             "it": "",
             "pl": ""
         },
-        "skillId": "spiribird's_call",
+        "skillId": "spiribirds_call",
         "skillLevel": 1,
         "slotSize": 1
     },
@@ -8971,7 +8971,7 @@
             "it": "",
             "pl": ""
         },
-        "skillId": "grinder_(s)",
+        "skillId": "grinder_s",
         "skillLevel": 1,
         "slotSize": 3
     },

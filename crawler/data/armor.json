@@ -576,7 +576,7 @@
         ]
     },
     {
-        "id": "hunter's_helm",
+        "id": "hunters_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -614,7 +614,7 @@
         ]
     },
     {
-        "id": "hunter's_mail",
+        "id": "hunters_mail",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -652,7 +652,7 @@
         ]
     },
     {
-        "id": "hunter's_vambraces",
+        "id": "hunters_vambraces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -690,7 +690,7 @@
         ]
     },
     {
-        "id": "hunter's_coil",
+        "id": "hunters_coil",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -728,7 +728,7 @@
         ]
     },
     {
-        "id": "hunter's_greaves",
+        "id": "hunters_greaves",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -2603,7 +2603,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -3332,7 +3332,7 @@
         ]
     },
     {
-        "id": "s._studded_hat",
+        "id": "s_studded_hat",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -3370,7 +3370,7 @@
         ]
     },
     {
-        "id": "s._studded_vest",
+        "id": "s_studded_vest",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -3408,7 +3408,7 @@
         ]
     },
     {
-        "id": "s._studded_gloves",
+        "id": "s_studded_gloves",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -3446,7 +3446,7 @@
         ]
     },
     {
-        "id": "s._studded_sash",
+        "id": "s_studded_sash",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -3484,7 +3484,7 @@
         ]
     },
     {
-        "id": "s._studded_sandals",
+        "id": "s_studded_sandals",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -3970,7 +3970,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -8206,7 +8206,7 @@
         ]
     },
     {
-        "id": "utsushi_mask_(v)",
+        "id": "utsushi_mask_v",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -8247,7 +8247,7 @@
         ]
     },
     {
-        "id": "utsushi_chest_(v)",
+        "id": "utsushi_chest_v",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -8285,7 +8285,7 @@
         ]
     },
     {
-        "id": "utsushi_braces_(v)",
+        "id": "utsushi_braces_v",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -8323,7 +8323,7 @@
         ]
     },
     {
-        "id": "utsushi_tassets_(v)",
+        "id": "utsushi_tassets_v",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -8361,7 +8361,7 @@
         ]
     },
     {
-        "id": "utsushi_greaves_(v)",
+        "id": "utsushi_greaves_v",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -8399,7 +8399,7 @@
         ]
     },
     {
-        "id": "channeler's_hair-tie",
+        "id": "channelers_hair-tie",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -8440,7 +8440,7 @@
         ]
     },
     {
-        "id": "channeler's_robe",
+        "id": "channelers_robe",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -8481,7 +8481,7 @@
         ]
     },
     {
-        "id": "channeler's_hope",
+        "id": "channelers_hope",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -8522,7 +8522,7 @@
         ]
     },
     {
-        "id": "channeler's_obi",
+        "id": "channelers_obi",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -8560,7 +8560,7 @@
         ]
     },
     {
-        "id": "channeler's_hakama",
+        "id": "channelers_hakama",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -8601,7 +8601,7 @@
         ]
     },
     {
-        "id": "utsushi_mask_(h)",
+        "id": "utsushi_mask_h",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -8642,7 +8642,7 @@
         ]
     },
     {
-        "id": "utsushi_chest_(h)",
+        "id": "utsushi_chest_h",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -8683,7 +8683,7 @@
         ]
     },
     {
-        "id": "utsushi_braces_(h)",
+        "id": "utsushi_braces_h",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -8724,7 +8724,7 @@
         ]
     },
     {
-        "id": "utsushi_tassets_(h)",
+        "id": "utsushi_tassets_h",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -8762,7 +8762,7 @@
         ]
     },
     {
-        "id": "utsushi_greaves_(h)",
+        "id": "utsushi_greaves_h",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -8803,7 +8803,7 @@
         ]
     },
     {
-        "id": "medium's_hair-tie",
+        "id": "mediums_hair-tie",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -8844,7 +8844,7 @@
         ]
     },
     {
-        "id": "medium's_robe",
+        "id": "mediums_robe",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -8882,7 +8882,7 @@
         ]
     },
     {
-        "id": "medium's_prayer",
+        "id": "mediums_prayer",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -8920,7 +8920,7 @@
         ]
     },
     {
-        "id": "medium's_obi",
+        "id": "mediums_obi",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -8958,7 +8958,7 @@
         ]
     },
     {
-        "id": "medium's_hakama",
+        "id": "mediums_hakama",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -11995,7 +11995,7 @@
         ]
     },
     {
-        "id": "hunter's_helm_s",
+        "id": "hunters_helm_s",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -12033,7 +12033,7 @@
         ]
     },
     {
-        "id": "hunter's_mail_s",
+        "id": "hunters_mail_s",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -12074,7 +12074,7 @@
         ]
     },
     {
-        "id": "hunter's_vambraces_s",
+        "id": "hunters_vambraces_s",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -12112,7 +12112,7 @@
         ]
     },
     {
-        "id": "hunter's_coil_s",
+        "id": "hunters_coil_s",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -12150,7 +12150,7 @@
         ]
     },
     {
-        "id": "hunter's_greaves_s",
+        "id": "hunters_greaves_s",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -13040,7 +13040,7 @@
             "poison_resistance": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -13239,7 +13239,7 @@
             "poison_resistance": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -13479,7 +13479,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "speed_eating": {
@@ -13520,7 +13520,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "evade_extender": {
@@ -13640,7 +13640,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "hunger_resistance": {
@@ -17733,7 +17733,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             }
         },
@@ -17771,7 +17771,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -17820,7 +17820,7 @@
         ]
     },
     {
-        "id": "utsushi_mask_(v)_s",
+        "id": "utsushi_mask_v_s",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -17864,7 +17864,7 @@
         ]
     },
     {
-        "id": "utsushi_chest_(v)_s",
+        "id": "utsushi_chest_v_s",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -17905,7 +17905,7 @@
         ]
     },
     {
-        "id": "utsushi_braces_(v)_s",
+        "id": "utsushi_braces_v_s",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -17943,7 +17943,7 @@
         ]
     },
     {
-        "id": "utsushi_tassets_(v)_s",
+        "id": "utsushi_tassets_v_s",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -17984,7 +17984,7 @@
         ]
     },
     {
-        "id": "utsushi_greaves_(v)_s",
+        "id": "utsushi_greaves_v_s",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -18028,7 +18028,7 @@
         ]
     },
     {
-        "id": "channeler's_hair-tie_s",
+        "id": "channelers_hair-tie_s",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -18072,7 +18072,7 @@
         ]
     },
     {
-        "id": "channeler's_robe_s",
+        "id": "channelers_robe_s",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -18119,7 +18119,7 @@
         ]
     },
     {
-        "id": "channeler's_hope_s",
+        "id": "channelers_hope_s",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -18160,7 +18160,7 @@
         ]
     },
     {
-        "id": "channeler's_obi_s",
+        "id": "channelers_obi_s",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -18201,7 +18201,7 @@
         ]
     },
     {
-        "id": "channeler's_hakama_s",
+        "id": "channelers_hakama_s",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -18242,7 +18242,7 @@
         ]
     },
     {
-        "id": "utsushi_mask_(h)_s",
+        "id": "utsushi_mask_h_s",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -18286,7 +18286,7 @@
         ]
     },
     {
-        "id": "utsushi_chest_(h)_s",
+        "id": "utsushi_chest_h_s",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -18333,7 +18333,7 @@
         ]
     },
     {
-        "id": "utsushi_braces_(h)_s",
+        "id": "utsushi_braces_h_s",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -18374,7 +18374,7 @@
         ]
     },
     {
-        "id": "utsushi_tassets_(h)_s",
+        "id": "utsushi_tassets_h_s",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -18415,7 +18415,7 @@
         ]
     },
     {
-        "id": "utsushi_greaves_(h)_s",
+        "id": "utsushi_greaves_h_s",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -18456,7 +18456,7 @@
         ]
     },
     {
-        "id": "medium's_hair-tie_s",
+        "id": "mediums_hair-tie_s",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -18500,7 +18500,7 @@
         ]
     },
     {
-        "id": "medium's_robe_s",
+        "id": "mediums_robe_s",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -18541,7 +18541,7 @@
         ]
     },
     {
-        "id": "medium's_prayer_s",
+        "id": "mediums_prayer_s",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -18579,7 +18579,7 @@
         ]
     },
     {
-        "id": "medium's_obi_s",
+        "id": "mediums_obi_s",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -18620,7 +18620,7 @@
         ]
     },
     {
-        "id": "medium's_hakama_s",
+        "id": "mediums_hakama_s",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -18664,7 +18664,7 @@
         ]
     },
     {
-        "id": "s._studded_hat_s",
+        "id": "s_studded_hat_s",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -18702,7 +18702,7 @@
         ]
     },
     {
-        "id": "s._studded_vest_s",
+        "id": "s_studded_vest_s",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -18729,7 +18729,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "pierce_up": {
@@ -18743,7 +18743,7 @@
         ]
     },
     {
-        "id": "s._studded_gloves_s",
+        "id": "s_studded_gloves_s",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -18773,7 +18773,7 @@
             "spread_up": {
                 "level": 1
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -18784,7 +18784,7 @@
         ]
     },
     {
-        "id": "s._studded_sash_s",
+        "id": "s_studded_sash_s",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -18822,7 +18822,7 @@
         ]
     },
     {
-        "id": "s._studded_sandals_s",
+        "id": "s_studded_sandals_s",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -20616,7 +20616,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "critical_eye": {
@@ -20695,7 +20695,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             }
         },
@@ -22614,7 +22614,7 @@
             "bludgeoner": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -22693,7 +22693,7 @@
             "speed_eating": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -24223,7 +24223,7 @@
         ]
     },
     {
-        "id": "ibushi's_helm",
+        "id": "ibushis_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -24267,7 +24267,7 @@
         ]
     },
     {
-        "id": "ibushi's_breastplate",
+        "id": "ibushis_breastplate",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -24311,7 +24311,7 @@
         ]
     },
     {
-        "id": "ibushi's_pauldrons",
+        "id": "ibushis_pauldrons",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -24355,7 +24355,7 @@
         ]
     },
     {
-        "id": "ibushi's_fauld",
+        "id": "ibushis_fauld",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -24399,7 +24399,7 @@
         ]
     },
     {
-        "id": "ibushi's_foot",
+        "id": "ibushis_foot",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -24443,7 +24443,7 @@
         ]
     },
     {
-        "id": "narwa's_helm",
+        "id": "narwas_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -24487,7 +24487,7 @@
         ]
     },
     {
-        "id": "narwa's_breastplate",
+        "id": "narwas_breastplate",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -24531,7 +24531,7 @@
         ]
     },
     {
-        "id": "narwa's_pauldrons",
+        "id": "narwas_pauldrons",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -24575,7 +24575,7 @@
         ]
     },
     {
-        "id": "narwa's_fauld",
+        "id": "narwas_fauld",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -24619,7 +24619,7 @@
         ]
     },
     {
-        "id": "narwa's_foot",
+        "id": "narwas_foot",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -24693,7 +24693,7 @@
             "handicraft": {
                 "level": 2
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             }
         },
@@ -24910,7 +24910,7 @@
             "dragonRes": -3
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             },
             "ballistics": {
@@ -24960,7 +24960,7 @@
             "poison_attack": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "ballistics": {
@@ -25177,7 +25177,7 @@
             "critical_eye": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             }
         },
@@ -25303,7 +25303,7 @@
             "teostra_blessing": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             }
         },
@@ -26688,7 +26688,7 @@
         ]
     },
     {
-        "id": "hunter's_helm_x",
+        "id": "hunters_helm_x",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -26729,7 +26729,7 @@
         ]
     },
     {
-        "id": "hunter's_mail_x",
+        "id": "hunters_mail_x",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -26773,7 +26773,7 @@
         ]
     },
     {
-        "id": "hunter's_vambraces_x",
+        "id": "hunters_vambraces_x",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -26817,7 +26817,7 @@
         ]
     },
     {
-        "id": "hunter's_coil_x",
+        "id": "hunters_coil_x",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -26861,7 +26861,7 @@
         ]
     },
     {
-        "id": "hunter's_greaves_x",
+        "id": "hunters_greaves_x",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -29419,7 +29419,7 @@
             "poison_resistance": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             }
         },
@@ -29753,7 +29753,7 @@
             "ice_attack": {
                 "level": 2
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "reload_speed": {
@@ -29800,7 +29800,7 @@
             "constitution": {
                 "level": 2
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "reload_speed": {
@@ -29926,7 +29926,7 @@
             "critical_eye": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "reload_speed": {
@@ -30873,7 +30873,7 @@
             "load_shells": {
                 "level": 1
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "ammo_up": {
@@ -30920,7 +30920,7 @@
             "guard_up": {
                 "level": 1
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             }
         },
@@ -31046,7 +31046,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             },
             "speed_eating": {
@@ -31087,7 +31087,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "evade_extender": {
@@ -31506,7 +31506,7 @@
             "latent_power": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -31632,7 +31632,7 @@
             "poison_resistance": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             }
         },
@@ -31714,7 +31714,7 @@
             "latent_power": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             }
         },
@@ -31840,7 +31840,7 @@
             "poison_resistance": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             }
         },
@@ -32138,7 +32138,7 @@
         ]
     },
     {
-        "id": "s._studded_hat_x",
+        "id": "s_studded_hat_x",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -32182,7 +32182,7 @@
         ]
     },
     {
-        "id": "s._studded_vest_x",
+        "id": "s_studded_vest_x",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -32209,7 +32209,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "pierce_up": {
@@ -32226,7 +32226,7 @@
         ]
     },
     {
-        "id": "s._studded_gloves_x",
+        "id": "s_studded_gloves_x",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -32256,7 +32256,7 @@
             "spread_up": {
                 "level": 2
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -32267,7 +32267,7 @@
         ]
     },
     {
-        "id": "s._studded_sash_x",
+        "id": "s_studded_sash_x",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -32297,7 +32297,7 @@
             "ballistics": {
                 "level": 1
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -32308,7 +32308,7 @@
         ]
     },
     {
-        "id": "s._studded_sandals_x",
+        "id": "s_studded_sandals_x",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -32596,7 +32596,7 @@
             "hellfire_cloak": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "ballistics": {
@@ -32640,7 +32640,7 @@
             "blight_resistance": {
                 "level": 1
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             }
         },
@@ -32774,7 +32774,7 @@
         ]
     },
     {
-        "id": "squire's_earrings",
+        "id": "squires_earrings",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -32815,7 +32815,7 @@
         ]
     },
     {
-        "id": "squire's_cuirass",
+        "id": "squires_cuirass",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -32859,7 +32859,7 @@
         ]
     },
     {
-        "id": "squire's_braces",
+        "id": "squires_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -32900,7 +32900,7 @@
         ]
     },
     {
-        "id": "squire's_belt",
+        "id": "squires_belt",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -32944,7 +32944,7 @@
         ]
     },
     {
-        "id": "squire's_greaves",
+        "id": "squires_greaves",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -33698,7 +33698,7 @@
             "maximum_might": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "speed_eating": {
@@ -34821,7 +34821,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "agitator": {
@@ -34906,7 +34906,7 @@
             "critical_element": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "ice_attack": {
@@ -34947,7 +34947,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "ice_attack": {
@@ -35296,7 +35296,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "critical_eye": {
@@ -35381,7 +35381,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             },
             "critical_element": {
@@ -36026,7 +36026,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             },
             "hunger_resistance": {
@@ -36070,7 +36070,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             },
             "recovery_speed": {
@@ -37415,7 +37415,7 @@
         ]
     },
     {
-        "id": "scholar's_beret",
+        "id": "scholars_beret",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -37456,7 +37456,7 @@
         ]
     },
     {
-        "id": "scholar's_blouse",
+        "id": "scholars_blouse",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -37500,7 +37500,7 @@
         ]
     },
     {
-        "id": "scholar's_gloves",
+        "id": "scholars_gloves",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -37544,7 +37544,7 @@
         ]
     },
     {
-        "id": "scholar's_skirt",
+        "id": "scholars_skirt",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -37588,7 +37588,7 @@
         ]
     },
     {
-        "id": "scholar's_socks",
+        "id": "scholars_socks",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -37961,7 +37961,7 @@
             "geologist": {
                 "level": 2
             },
-            "spiribird's_call": {
+            "spiribirds_call": {
                 "level": 1
             },
             "divine_blessing": {
@@ -39081,7 +39081,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "spiribird's_call": {
+            "spiribirds_call": {
                 "level": 1
             },
             "focus": {
@@ -39210,7 +39210,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "grinder_(s)": {
+            "grinder_s": {
                 "level": 1
             },
             "marathon_runner": {
@@ -39254,7 +39254,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "grinder_(s)": {
+            "grinder_s": {
                 "level": 1
             },
             "peak_performance": {
@@ -39301,7 +39301,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "grinder_(s)": {
+            "grinder_s": {
                 "level": 1
             },
             "handicraft": {
@@ -40215,7 +40215,7 @@
         ]
     },
     {
-        "id": "utsushi_true_mask_(v)",
+        "id": "utsushi_true_mask_v",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -40259,7 +40259,7 @@
         ]
     },
     {
-        "id": "utsushi_true_chest_(v)",
+        "id": "utsushi_true_chest_v",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -40303,7 +40303,7 @@
         ]
     },
     {
-        "id": "utsushi_true_braces_(v)",
+        "id": "utsushi_true_braces_v",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -40344,7 +40344,7 @@
         ]
     },
     {
-        "id": "utsushi_true_tassets_(v)",
+        "id": "utsushi_true_tassets_v",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -40388,7 +40388,7 @@
         ]
     },
     {
-        "id": "utsushi_true_greaves_(v)",
+        "id": "utsushi_true_greaves_v",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -40432,7 +40432,7 @@
         ]
     },
     {
-        "id": "channeler's_hair_tie_(spring)",
+        "id": "channelers_hair_tie_spring",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -40479,7 +40479,7 @@
         ]
     },
     {
-        "id": "channeler's_robe_(spring)",
+        "id": "channelers_robe_spring",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -40526,7 +40526,7 @@
         ]
     },
     {
-        "id": "channeler's_hope_(spring)",
+        "id": "channelers_hope_spring",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -40570,7 +40570,7 @@
         ]
     },
     {
-        "id": "channeler's_obi_(spring)",
+        "id": "channelers_obi_spring",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -40614,7 +40614,7 @@
         ]
     },
     {
-        "id": "channeler's_hakama_(spring)",
+        "id": "channelers_hakama_spring",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -40658,7 +40658,7 @@
         ]
     },
     {
-        "id": "utsushi_true_mask_(h)",
+        "id": "utsushi_true_mask_h",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -40705,7 +40705,7 @@
         ]
     },
     {
-        "id": "utsushi_true_chest_(h)",
+        "id": "utsushi_true_chest_h",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -40752,7 +40752,7 @@
         ]
     },
     {
-        "id": "utsushi_true_braces_(h)",
+        "id": "utsushi_true_braces_h",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -40796,7 +40796,7 @@
         ]
     },
     {
-        "id": "utsushi_true_tassets_(h)",
+        "id": "utsushi_true_tassets_h",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -40840,7 +40840,7 @@
         ]
     },
     {
-        "id": "utsushi_true_greaves_(h)",
+        "id": "utsushi_true_greaves_h",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -40884,7 +40884,7 @@
         ]
     },
     {
-        "id": "medium's_hair_tie_(light)",
+        "id": "mediums_hair_tie_light",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -40928,7 +40928,7 @@
         ]
     },
     {
-        "id": "medium's_robe_(light)",
+        "id": "mediums_robe_light",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -40972,7 +40972,7 @@
         ]
     },
     {
-        "id": "medium's_prayer_(light)",
+        "id": "mediums_prayer_light",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -41013,7 +41013,7 @@
         ]
     },
     {
-        "id": "medium's_obi_(light)",
+        "id": "mediums_obi_light",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -41057,7 +41057,7 @@
         ]
     },
     {
-        "id": "medium's_hakama_(light)",
+        "id": "mediums_hakama_light",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -42233,7 +42233,7 @@
             "dragonRes": -2
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "peak_performance": {
@@ -42242,7 +42242,7 @@
             "stun_resistance": {
                 "level": 3
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -42324,10 +42324,10 @@
             "speed_eating": {
                 "level": 2
             },
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -42898,7 +42898,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wall_runner_(boost)": {
+            "wall_runner_boost": {
                 "level": 1
             },
             "wall_runner": {
@@ -43580,7 +43580,7 @@
         ]
     },
     {
-        "id": "hoplite's_helm",
+        "id": "hoplites_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -43624,7 +43624,7 @@
         ]
     },
     {
-        "id": "hoplite's_armor",
+        "id": "hoplites_armor",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -43668,7 +43668,7 @@
         ]
     },
     {
-        "id": "hoplite's_braces",
+        "id": "hoplites_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -43712,7 +43712,7 @@
         ]
     },
     {
-        "id": "hoplite's_belt",
+        "id": "hoplites_belt",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -43756,7 +43756,7 @@
         ]
     },
     {
-        "id": "hoplite's_greaves",
+        "id": "hoplites_greaves",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -44017,7 +44017,7 @@
         ]
     },
     {
-        "id": "lecturer's_hood",
+        "id": "lecturers_hood",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -44061,7 +44061,7 @@
         ]
     },
     {
-        "id": "lecturer's_suit",
+        "id": "lecturers_suit",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -44149,7 +44149,7 @@
         ]
     },
     {
-        "id": "lecturer's_skirt",
+        "id": "lecturers_skirt",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -44190,7 +44190,7 @@
         ]
     },
     {
-        "id": "lecturer's_boots",
+        "id": "lecturers_boots",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -44701,7 +44701,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "grinder_(s)": {
+            "grinder_s": {
                 "level": 1
             },
             "stamina_thief": {
@@ -44877,7 +44877,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "grinder_(s)": {
+            "grinder_s": {
                 "level": 1
             },
             "latent_power": {
@@ -44894,7 +44894,7 @@
         ]
     },
     {
-        "id": "grand_god's_peer_mask",
+        "id": "grand_gods_peer_mask",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -44935,7 +44935,7 @@
         ]
     },
     {
-        "id": "grand_god's_peer_robe",
+        "id": "grand_gods_peer_robe",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -44979,7 +44979,7 @@
         ]
     },
     {
-        "id": "grand_god's_peer_belt",
+        "id": "grand_gods_peer_belt",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -45023,7 +45023,7 @@
         ]
     },
     {
-        "id": "grand_god's_peer_feet",
+        "id": "grand_gods_peer_feet",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -45534,7 +45534,7 @@
             "handicraft": {
                 "level": 2
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 2
             }
         },
@@ -45704,7 +45704,7 @@
             "handicraft": {
                 "level": 1
             },
-            "normal/rapid_up": {
+            "normalrapid_up": {
                 "level": 1
             }
         },
@@ -45742,7 +45742,7 @@
             "dragonRes": -3
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 2
             },
             "ballistics": {
@@ -45786,7 +45786,7 @@
             "dragonRes": -3
         },
         "skills": {
-            "mind's_eye": {
+            "minds_eye": {
                 "level": 1
             },
             "ballistics": {
@@ -46006,7 +46006,7 @@
             "critical_eye": {
                 "level": 2
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 2
             },
             "ballistics": {
@@ -46135,7 +46135,7 @@
             "teostra_blessing": {
                 "level": 1
             },
-            "master's_touch": {
+            "masters_touch": {
                 "level": 1
             },
             "critical_boost": {
@@ -46794,7 +46794,7 @@
         ]
     },
     {
-        "id": "professor's_goggles",
+        "id": "professors_goggles",
         "part": "helm",
         "sexType": "male",
         "names": {
@@ -46835,7 +46835,7 @@
         ]
     },
     {
-        "id": "professor's_jacket",
+        "id": "professors_jacket",
         "part": "torso",
         "sexType": "male",
         "names": {
@@ -46876,7 +46876,7 @@
         ]
     },
     {
-        "id": "professor's_mittens",
+        "id": "professors_mittens",
         "part": "arm",
         "sexType": "male",
         "names": {
@@ -46917,7 +46917,7 @@
         ]
     },
     {
-        "id": "professor's_bottoms",
+        "id": "professors_bottoms",
         "part": "waist",
         "sexType": "male",
         "names": {
@@ -46958,7 +46958,7 @@
         ]
     },
     {
-        "id": "professor's_boots",
+        "id": "professors_boots",
         "part": "feet",
         "sexType": "male",
         "names": {
@@ -46999,7 +46999,7 @@
         ]
     },
     {
-        "id": "charité_barrette",
+        "id": "charit_barrette",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -47040,7 +47040,7 @@
         ]
     },
     {
-        "id": "charité_jacket",
+        "id": "charit_jacket",
         "part": "torso",
         "sexType": "female",
         "names": {
@@ -47081,7 +47081,7 @@
         ]
     },
     {
-        "id": "charité_gloves",
+        "id": "charit_gloves",
         "part": "arm",
         "sexType": "female",
         "names": {
@@ -47122,7 +47122,7 @@
         ]
     },
     {
-        "id": "charité_skirt",
+        "id": "charit_skirt",
         "part": "waist",
         "sexType": "female",
         "names": {
@@ -47163,7 +47163,7 @@
         ]
     },
     {
-        "id": "charité_boots",
+        "id": "charit_boots",
         "part": "feet",
         "sexType": "female",
         "names": {
@@ -47858,7 +47858,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "spiribird's_call": {
+            "spiribirds_call": {
                 "level": 1
             }
         },
@@ -48151,7 +48151,7 @@
             "coalescence": {
                 "level": 1
             },
-            "wall_runner_(boost)": {
+            "wall_runner_boost": {
                 "level": 1
             }
         },
@@ -48452,7 +48452,7 @@
         ]
     },
     {
-        "id": "ibushi's_pure_helm",
+        "id": "ibushis_pure_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -48499,7 +48499,7 @@
         ]
     },
     {
-        "id": "ibushi's_pure_breastplate",
+        "id": "ibushis_pure_breastplate",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -48546,7 +48546,7 @@
         ]
     },
     {
-        "id": "ibushi's_pure_pauldrons",
+        "id": "ibushis_pure_pauldrons",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -48593,7 +48593,7 @@
         ]
     },
     {
-        "id": "ibushi's_pure_fauld",
+        "id": "ibushis_pure_fauld",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -48640,7 +48640,7 @@
         ]
     },
     {
-        "id": "ibushi's_pure_foot",
+        "id": "ibushis_pure_foot",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -48687,7 +48687,7 @@
         ]
     },
     {
-        "id": "narwa's_pure_helm",
+        "id": "narwas_pure_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -48734,7 +48734,7 @@
         ]
     },
     {
-        "id": "narwa's_pure_breastplate",
+        "id": "narwas_pure_breastplate",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -48781,7 +48781,7 @@
         ]
     },
     {
-        "id": "narwa's_pure_pauldrons",
+        "id": "narwas_pure_pauldrons",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -48828,7 +48828,7 @@
         ]
     },
     {
-        "id": "narwa's_pure_fauld",
+        "id": "narwas_pure_fauld",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -48875,7 +48875,7 @@
         ]
     },
     {
-        "id": "narwa's_pure_foot",
+        "id": "narwas_pure_foot",
         "part": "feet",
         "sexType": "all",
         "names": {

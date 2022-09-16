@@ -352,7 +352,7 @@
         }
     },
     {
-        "id": "master's_touch",
+        "id": "masters_touch",
         "maxLevel": 3,
         "names": {
             "ja": "達人芸",
@@ -800,7 +800,7 @@
         }
     },
     {
-        "id": "mind's_eye",
+        "id": "minds_eye",
         "maxLevel": 3,
         "names": {
             "ja": "心眼",
@@ -1504,7 +1504,7 @@
         }
     },
     {
-        "id": "normal/rapid_up",
+        "id": "normalrapid_up",
         "maxLevel": 3,
         "names": {
             "ja": "通常弾・連射矢強化",
@@ -3872,7 +3872,7 @@
         }
     },
     {
-        "id": "spiribird's_call",
+        "id": "spiribirds_call",
         "maxLevel": 1,
         "names": {
             "ja": "供応",
@@ -4000,8 +4000,8 @@
         }
     },
     {
-        "id": "grinder_(s)",
-        "maxLevel": 3,
+        "id": "grinder_s",
+        "maxLevel": 1,
         "names": {
             "ja": "研磨術【鋭】",
             "zh": "打磨术【锐】",
@@ -4064,7 +4064,7 @@
         }
     },
     {
-        "id": "wall_runner_(boost)",
+        "id": "wall_runner_boost",
         "maxLevel": 1,
         "names": {
             "ja": "壁面移動【翔】",
