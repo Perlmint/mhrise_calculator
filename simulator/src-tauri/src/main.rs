@@ -333,7 +333,13 @@ fn calculate_skillset(
         });
 
         armors.clear();
-        armors.extend(armors_by_sex);
+        **armors = armors_by_sex;
+    }
+
+    let mut all_slot_armors = HashMap::<ArmorPart, &HashMap<String, BaseArmor>>::new();
+
+    for part in ArmorPart::get_all() {
+        all_slot_armors.insert(part.clone(), dm.slot_only_armors.get(&part).unwrap());
     }
 
     let mut all_unique_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
@@ -417,6 +423,25 @@ fn calculate_skillset(
         empty_count2.cmp(&empty_count1)
     });
 
+    let mut armors_with_deco_skills = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+
+    for (part, armors) in &all_armors {
+        let part_armors = armors
+            .iter()
+            .filter_map(|armor| {
+                for (skill_id, _) in &decos_possible {
+                    if armor.skills.contains_key(skill_id) {
+                        return Some(armor.clone());
+                    }
+                }
+
+                return None;
+            })
+            .collect();
+
+        armors_with_deco_skills.insert(part.clone(), part_armors);
+    }
+
     let mut mr_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
     for (part, armors) in &all_armors {
@@ -464,7 +489,16 @@ fn calculate_skillset(
         let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<BaseArmor>| {
             if part_armors.len() == 1 && part_armors[0].id.starts_with(EMPTY_ARMOR_PREFIX) {
                 part_armors.clear();
-                *part_armors = mr_armors[part].clone();
+
+                let mut deco_armors = armors_with_deco_skills[part].clone();
+
+                *part_armors = all_slot_armors[part]
+                    .values()
+                    .map(|armor| armor.clone())
+                    .collect::<Vec<BaseArmor>>()
+                    .clone();
+
+                part_armors.append(&mut deco_armors);
             }
         };
 
