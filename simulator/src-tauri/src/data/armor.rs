@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use super::skill::MAX_SLOT_LEVEL;
+pub static EMPTY_ARMOR_PREFIX: &str = "__empty_";
 
 #[derive(Serialize, Deserialize, Debug, Clone, Hash, Eq, PartialEq)]
 pub enum ArmorPart {
@@ -164,7 +164,7 @@ impl BaseArmor {
 
     pub fn create_empty(part: ArmorPart) -> BaseArmor {
         Self {
-            id: format!("_empty_{}", part.as_str()),
+            id: format!("{}_{}", EMPTY_ARMOR_PREFIX, part.as_str()),
             names: HashMap::new(),
             part,
             rarity: 10,

@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::BufReader;
 use std::sync::Mutex;
+use std::time::Instant;
 
 use csv::StringRecord;
 use data::armor::ArmorPart;
@@ -28,9 +29,10 @@ mod full_equipments;
 
 mod test;
 
-use crate::data::armor::{AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill};
+use crate::data::armor::{
+    AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill, EMPTY_ARMOR_PREFIX,
+};
 use crate::data::deco::Decoration;
-use crate::data::deco_combination::DecorationCombinations;
 use crate::data::skill::{Skill, MAX_SLOT_LEVEL};
 use crate::full_equipments::FullEquipments;
 
@@ -249,7 +251,7 @@ fn cmd_calculate_skillset(
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     mutex_dm: tauri::State<Mutex<DataManager>>,
-) -> Vec<Vec<SubSlotSkillCalculator>> {
+) -> String {
     println!("Start calculating...");
 
     let dm = mutex_dm.lock().unwrap();
@@ -262,7 +264,9 @@ fn calculate_skillset(
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     dm: &DataManager,
-) -> Vec<Vec<SubSlotSkillCalculator>> {
+) -> String {
+    let start_time = Instant::now();
+
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
     let mut no_deco_skills = HashMap::<String, i32>::new();
 
@@ -377,7 +381,7 @@ fn calculate_skillset(
         let mut count = 0;
 
         for (_, armor) in armors {
-            if armor.id.starts_with("_empty_") == false {
+            if armor.id.starts_with(EMPTY_ARMOR_PREFIX) == false {
                 count += 1;
             }
         }
@@ -437,7 +441,7 @@ fn calculate_skillset(
         );
 
         let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<BaseArmor>| {
-            if part_armors.len() == 1 && part_armors[0].id.starts_with("_empty_") {
+            if part_armors.len() == 1 && part_armors[0].id.starts_with(EMPTY_ARMOR_PREFIX) {
                 part_armors.clear();
                 *part_armors = mr_armors[part].clone();
             }
@@ -603,19 +607,15 @@ fn calculate_skillset(
 
                             println!("Answers length: {}", answers.len());
                             println!();
+
+                            if 200 <= answers.len() {
+                                println!("Iteration size too large, breaking at 200");
+                                break 'all_cases;
+                            }
+
+                            total_index += 1;
+                            local_index += 1;
                         }
-
-                        if 200 <= answers.len() {
-                            println!("Iteration size too large, breaking at 200");
-                            break 'all_cases;
-                        }
-
-                        total_index += 1;
-                        local_index += 1;
-
-                        // if local_index % ten_percent == 0 {
-                        //     println!("{}% passed", 10 * local_index / ten_percent);
-                        // }
                     }
                 }
             }
@@ -624,7 +624,13 @@ fn calculate_skillset(
 
     println!("All combinations size: {}", total_index + 1);
 
-    return Vec::new();
+    let elapsed = start_time.elapsed();
+
+    let mut ret = String::new();
+    ret = format!("calculate_skillset elapsed: {:?}", elapsed);
+    println!("calculate_skillset elapsed: {:?}", elapsed);
+
+    return ret;
 }
 
 fn create_data_manager(
