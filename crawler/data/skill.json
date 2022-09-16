@@ -2816,7 +2816,7 @@
         }
     },
     {
-        "id": "wide-range",
+        "id": "wide_range",
         "maxLevel": 5,
         "names": {
             "ja": "広域化",
@@ -3968,8 +3968,8 @@
         }
     },
     {
-        "id": "tune-up",
-        "maxLevel": 2,
+        "id": "tune_up",
+        "maxLevel": 1,
         "names": {
             "ja": "チューンアップ",
             "zh": "零件改造",

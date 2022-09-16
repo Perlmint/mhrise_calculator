@@ -2875,7 +2875,7 @@
             "it": "Efficacia condivisa: +33%",
             "pl": "Przedmioty działają na pobliskich sojuszników z 33% efektywnością."
         },
-        "skillId": "wide-range",
+        "skillId": "wide_range",
         "skillLevel": 1,
         "slotSize": 2
     },
@@ -6523,7 +6523,7 @@
             "it": "Efficacia condivisa: +66% Area più ampia.",
             "pl": "Przedmioty działają na sojuszników z 66% efektywnością na większym obszarze."
         },
-        "skillId": "wide-range",
+        "skillId": "wide_range",
         "skillLevel": 3,
         "slotSize": 3
     },
@@ -6571,7 +6571,7 @@
             "it": "Efficacia condivisa: +66% Area molto più ampia.",
             "pl": "Przedmioty działają na sojuszników z 66% efektywnością na znacznie większym obszarze."
         },
-        "skillId": "wide-range",
+        "skillId": "wide_range",
         "skillLevel": 4,
         "slotSize": 4
     },
@@ -8635,7 +8635,7 @@
             "it": "",
             "pl": ""
         },
-        "skillId": "tune-up",
+        "skillId": "tune_up",
         "skillLevel": 1,
         "slotSize": 3
     },

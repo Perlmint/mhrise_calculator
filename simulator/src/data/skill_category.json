@@ -58,7 +58,7 @@
             "bow_charge_plus",
             "steadiness",
             "recoil_down",
-            "tune-up",
+            "tune_up",
             "rapid_fire_up",
             "ammo_up"
         ]
@@ -202,7 +202,7 @@
             "ko": "아이템 사용"
         },
         "skills": [
-            "wide-range",
+            "wide_range",
             "item_prolonger",
             "free_meal",
             "mushroomancer",

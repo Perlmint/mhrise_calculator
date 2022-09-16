@@ -1,4 +1,4 @@
-const replacRegex = new RegExp(/\s+/g);
+const replacRegex = new RegExp(/[-\s]+/g);
 const idPartRegex = new RegExp(/([a-zA-Z0-9_-\s]+)/g);
 
 export function makeId(value: string) {

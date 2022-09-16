@@ -3590,7 +3590,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -6578,7 +6578,7 @@
             "recovery_up": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -6826,7 +6826,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_helm",
+        "id": "kulu_ya_ku_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -6864,7 +6864,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_mail",
+        "id": "kulu_ya_ku_mail",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -6902,7 +6902,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_braces",
+        "id": "kulu_ya_ku_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -6940,7 +6940,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_coil",
+        "id": "kulu_ya_ku_coil",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -6978,7 +6978,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_greaves",
+        "id": "kulu_ya_ku_greaves",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -7019,7 +7019,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_helm",
+        "id": "pukei_pukei_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -7057,7 +7057,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_mail",
+        "id": "pukei_pukei_mail",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -7095,7 +7095,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_braces",
+        "id": "pukei_pukei_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -7133,7 +7133,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_coil",
+        "id": "pukei_pukei_coil",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -7247,7 +7247,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_mail",
+        "id": "tobi_kadachi_mail",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -7285,7 +7285,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_braces",
+        "id": "tobi_kadachi_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -7323,7 +7323,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_coil",
+        "id": "tobi_kadachi_coil",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -8274,7 +8274,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -8312,7 +8312,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -8388,7 +8388,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -8399,7 +8399,7 @@
         ]
     },
     {
-        "id": "channelers_hair-tie",
+        "id": "channelers_hair_tie",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -8803,7 +8803,7 @@
         ]
     },
     {
-        "id": "mediums_hair-tie",
+        "id": "mediums_hair_tie",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -8871,7 +8871,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -8909,7 +8909,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -8985,7 +8985,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -11372,7 +11372,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -15980,7 +15980,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_helm_s",
+        "id": "kulu_ya_ku_helm_s",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -16018,7 +16018,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_mail_s",
+        "id": "kulu_ya_ku_mail_s",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -16059,7 +16059,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_braces_s",
+        "id": "kulu_ya_ku_braces_s",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -16100,7 +16100,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_coil_s",
+        "id": "kulu_ya_ku_coil_s",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -16141,7 +16141,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_greaves_s",
+        "id": "kulu_ya_ku_greaves_s",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -17891,7 +17891,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "good_luck": {
@@ -17932,7 +17932,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -18011,7 +18011,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "free_meal": {
@@ -18028,7 +18028,7 @@
         ]
     },
     {
-        "id": "channelers_hair-tie_s",
+        "id": "channelers_hair_tie_s",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -18456,7 +18456,7 @@
         ]
     },
     {
-        "id": "mediums_hair-tie_s",
+        "id": "mediums_hair_tie_s",
         "part": "helm",
         "sexType": "female",
         "names": {
@@ -18527,7 +18527,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "good_luck": {
@@ -18568,7 +18568,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -18647,7 +18647,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "free_meal": {
@@ -18893,7 +18893,7 @@
             "item_prolonger": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "stun_resistance": {
@@ -18934,7 +18934,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -19844,7 +19844,7 @@
             "blight_resistance": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -19885,7 +19885,7 @@
             "recovery_up": {
                 "level": 2
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -20142,7 +20142,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_helm_s",
+        "id": "pukei_pukei_helm_s",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -20183,7 +20183,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_mail_s",
+        "id": "pukei_pukei_mail_s",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -20224,7 +20224,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_braces_s",
+        "id": "pukei_pukei_braces_s",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -20265,7 +20265,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_coil_s",
+        "id": "pukei_pukei_coil_s",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -20589,7 +20589,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_mail_s",
+        "id": "tobi_kadachi_mail_s",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -20668,7 +20668,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_coil_s",
+        "id": "tobi_kadachi_coil_s",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -29090,7 +29090,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_helm_x",
+        "id": "kulu_ya_ku_helm_x",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -29134,7 +29134,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_mail_x",
+        "id": "kulu_ya_ku_mail_x",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -29175,7 +29175,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_braces_x",
+        "id": "kulu_ya_ku_braces_x",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -29219,7 +29219,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_coil_x",
+        "id": "kulu_ya_ku_coil_x",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -29260,7 +29260,7 @@
         ]
     },
     {
-        "id": "kulu-ya-ku_greaves_x",
+        "id": "kulu_ya_ku_greaves_x",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -30958,7 +30958,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             },
             "handicraft": {
@@ -31002,7 +31002,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             },
             "handicraft": {
@@ -32004,7 +32004,7 @@
             "recovery_up": {
                 "level": 2
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -32045,7 +32045,7 @@
             "capture_master": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 3
             }
         },
@@ -32086,7 +32086,7 @@
             "recovery_up": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             }
         },
@@ -32171,7 +32171,7 @@
             "steadiness": {
                 "level": 2
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -32215,7 +32215,7 @@
             "pierce_up": {
                 "level": 1
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -33528,7 +33528,7 @@
             "item_prolonger": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "stun_resistance": {
@@ -33569,7 +33569,7 @@
             "dragonRes": 2
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 3
             }
         },
@@ -33929,7 +33929,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_helm_x",
+        "id": "pukei_pukei_helm_x",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -33973,7 +33973,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_mail_x",
+        "id": "pukei_pukei_mail_x",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -34017,7 +34017,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_braces_x",
+        "id": "pukei_pukei_braces_x",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -34058,7 +34058,7 @@
         ]
     },
     {
-        "id": "pukei-pukei_coil_x",
+        "id": "pukei_pukei_coil_x",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -34220,7 +34220,7 @@
             "resentment": {
                 "level": 1
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -35123,7 +35123,7 @@
             "blight_resistance": {
                 "level": 1
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "free_meal": {
@@ -35167,7 +35167,7 @@
             "recovery_up": {
                 "level": 2
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "agitator": {
@@ -35269,7 +35269,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_mail_x",
+        "id": "tobi_kadachi_mail_x",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -35354,7 +35354,7 @@
         ]
     },
     {
-        "id": "tobi-kadachi_coil_x",
+        "id": "tobi_kadachi_coil_x",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -36199,7 +36199,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             },
             "steadiness": {
@@ -36328,7 +36328,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             },
             "steadiness": {
@@ -39609,7 +39609,7 @@
             "reload_speed": {
                 "level": 1
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -39738,7 +39738,7 @@
             "spare_shot": {
                 "level": 1
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -40001,7 +40001,7 @@
         ]
     },
     {
-        "id": "pyre-kadaki_helm",
+        "id": "pyre_kadaki_helm",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -40045,7 +40045,7 @@
         ]
     },
     {
-        "id": "pyre-kadaki_mail",
+        "id": "pyre_kadaki_mail",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -40086,7 +40086,7 @@
         ]
     },
     {
-        "id": "pyre-kadaki_braces",
+        "id": "pyre_kadaki_braces",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -40122,7 +40122,7 @@
             "blast_resistance": {
                 "level": 1
             },
-            "tune-up": {
+            "tune_up": {
                 "level": 1
             }
         },
@@ -40133,7 +40133,7 @@
         ]
     },
     {
-        "id": "pyre-kadaki_coil",
+        "id": "pyre_kadaki_coil",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -40174,7 +40174,7 @@
         ]
     },
     {
-        "id": "pyre-kadaki_greaves",
+        "id": "pyre_kadaki_greaves",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -40286,7 +40286,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "good_luck": {
@@ -40330,7 +40330,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "recovery_up": {
@@ -40415,7 +40415,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "free_meal": {
@@ -40955,7 +40955,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 1
             },
             "good_luck": {
@@ -40999,7 +40999,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "recovery_up": {
@@ -41084,7 +41084,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             },
             "free_meal": {
@@ -47231,7 +47231,7 @@
             "dragonRes": 0
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 3
             },
             "capture_master": {
@@ -47398,7 +47398,7 @@
             "item_prolonger": {
                 "level": 3
             },
-            "wide-range": {
+            "wide_range": {
                 "level": 2
             }
         },
@@ -48922,7 +48922,7 @@
         ]
     },
     {
-        "id": "valstrax_helm_-_eclipse",
+        "id": "valstrax_helm_eclipse",
         "part": "helm",
         "sexType": "all",
         "names": {
@@ -48963,7 +48963,7 @@
         ]
     },
     {
-        "id": "valstrax_mail_-_eclipse",
+        "id": "valstrax_mail_eclipse",
         "part": "torso",
         "sexType": "all",
         "names": {
@@ -49004,7 +49004,7 @@
         ]
     },
     {
-        "id": "valstrax_braces_-_eclipse",
+        "id": "valstrax_braces_eclipse",
         "part": "arm",
         "sexType": "all",
         "names": {
@@ -49045,7 +49045,7 @@
         ]
     },
     {
-        "id": "valstrax_coil_-_eclipse",
+        "id": "valstrax_coil_eclipse",
         "part": "waist",
         "sexType": "all",
         "names": {
@@ -49089,7 +49089,7 @@
         ]
     },
     {
-        "id": "valstrax_greaves_-_eclipse",
+        "id": "valstrax_greaves_eclipse",
         "part": "feet",
         "sexType": "all",
         "names": {
@@ -49591,7 +49591,7 @@
             "dragonRes": 1
         },
         "skills": {
-            "wide-range": {
+            "wide_range": {
                 "level": 3
             },
             "focus": {
