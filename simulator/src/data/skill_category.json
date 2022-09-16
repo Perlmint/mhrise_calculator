@@ -30,12 +30,12 @@
         },
         "skills": [
             "razor_sharp",
-            "master's_touch",
+            "masters_touch",
             "speed_sharpening",
             "handicraft",
-            "grinder_(s)",
+            "grinder_s",
             "protective_polish",
-            "mind's_eye",
+            "minds_eye",
             "load_shells",
             "horn_maestro",
             "rapid_morph"
@@ -50,7 +50,7 @@
         "skills": [
             "pierce_up",
             "spread_up",
-            "normal/rapid_up",
+            "normalrapid_up",
             "special_ammo_boost",
             "ballistics",
             "spare_shot",
@@ -146,7 +146,7 @@
             "marathon_runner",
             "wirebug_whisperer",
             "wall_runner",
-            "wall_runner_(boost)",
+            "wall_runner_boost",
             "constitution",
             "stamina_surge"
         ]
@@ -164,7 +164,7 @@
             "diversion",
             "master_mounter",
             "partbreaker",
-            "spiribird's_call"
+            "spiribirds_call"
         ]
     },
     {
