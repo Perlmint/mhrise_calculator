@@ -180,6 +180,10 @@ impl DecorationCombinations {
     }
 
     pub fn get_possible_combs(&self, req_skills: &HashMap<String, i32>) -> Vec<Vec<i32>> {
+        if req_skills.len() == 0 {
+            return Vec::new();
+        }
+
         let mut all_possible_combs = Vec::<Vec<i32>>::new();
         let mut combs_per_skill = HashMap::new();
 
