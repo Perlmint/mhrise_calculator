@@ -14,6 +14,8 @@ pub struct DataManager {
     pub decos_by_skill: HashMap<String, Vec<Decoration>>,
     pub deco_combinations: DecorationCombinations,
 
+    pub slot_only_armors: HashMap<ArmorPart, HashMap<String, BaseArmor>>,
+    pub armors_by_slot: HashMap<ArmorPart, HashMap<String, Vec<BaseArmor>>>,
     pub anomaly_armors: Vec<AnomalyArmor>,
 
     pub bases_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
@@ -74,6 +76,40 @@ impl DataManager {
 
         let deco_combinations = DecorationCombinations::new(&decos_by_skill, &skills);
 
+        let mut slot_only_armors = HashMap::<ArmorPart, HashMap<String, BaseArmor>>::new();
+        let mut armors_by_slot = HashMap::<ArmorPart, HashMap<String, Vec<BaseArmor>>>::new();
+
+        for part in ArmorPart::get_all() {
+            slot_only_armors.insert(part.clone(), HashMap::new());
+            armors_by_slot.insert(part, HashMap::new());
+        }
+
+        for (_, armor) in &armors {
+            let slot_armor_id = BaseArmor::get_slot_armor_id(armor);
+
+            let part_slot_only_armors = slot_only_armors.get_mut(&armor.part).unwrap();
+            if part_slot_only_armors.contains_key(&slot_armor_id) == false {
+                part_slot_only_armors.insert(
+                    slot_armor_id.clone(),
+                    BaseArmor::get_slot_armor(armor.part.clone(), slot_armor_id.clone()),
+                );
+            }
+
+            let part_slot_armors = armors_by_slot.get_mut(&armor.part).unwrap();
+
+            let existing = part_slot_armors.get_mut(&slot_armor_id);
+            let slot_armors;
+
+            if existing.is_none() {
+                part_slot_armors.insert(slot_armor_id.clone(), Vec::new());
+                slot_armors = part_slot_armors.get_mut(&slot_armor_id).unwrap();
+            } else {
+                slot_armors = existing.unwrap();
+            }
+
+            slot_armors.push(armor.clone());
+        }
+
         let mut bases_by_part = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
         bases_by_part.insert(ArmorPart::Helm, Vec::new());
@@ -95,11 +131,14 @@ impl DataManager {
             decos,
             decos_by_skill,
             deco_combinations,
+            slot_only_armors,
+            armors_by_slot,
             armor_name_dict,
             skill_name_dict,
             bases_by_part,
             anomalies_by_part,
-            ..Default::default()
+            anomaly_armors: Default::default(),
+            talismans: Default::default(),
         };
 
         dm

@@ -1,8 +1,16 @@
 use std::collections::HashMap;
 
+use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
+use tauri::regex::Regex;
 
-pub static EMPTY_ARMOR_PREFIX: &str = "__empty_";
+pub static EMPTY_ARMOR_PREFIX: &str = "__empty";
+pub static SLOT_ARMOR_PREFIX: &str = "__slot";
+
+lazy_static! {
+    pub static ref SLOT_ARMOR_REGEX: Regex =
+        Regex::new(&format!("{}_{}", SLOT_ARMOR_PREFIX, r"(\d+)-(\d+)-(\d+)")).unwrap();
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, Hash, Eq, PartialEq)]
 pub enum ArmorPart {
@@ -171,6 +179,45 @@ impl BaseArmor {
             sex_type: SexType::All,
             skills: HashMap::new(),
             slots: vec![0, 0, 0],
+            stat: ArmorStat {
+                defense: 0,
+                fire_res: 0,
+                water_res: 0,
+                ice_res: 0,
+                elec_res: 0,
+                dragon_res: 0,
+            },
+        }
+    }
+
+    pub fn get_slot_armor_id(armor: &BaseArmor) -> String {
+        format!(
+            "{}_{}-{}-{}",
+            SLOT_ARMOR_PREFIX, armor.slots[0], armor.slots[1], armor.slots[2]
+        )
+    }
+
+    pub fn parse_slot_armor_id(slot_armor_id: &String) -> Vec<i32> {
+        let mut ret = Vec::new();
+
+        for cap in SLOT_ARMOR_REGEX.captures_iter(slot_armor_id) {
+            ret.push(cap.get(1).unwrap().as_str().parse::<i32>().unwrap());
+            ret.push(cap.get(2).unwrap().as_str().parse::<i32>().unwrap());
+            ret.push(cap.get(3).unwrap().as_str().parse::<i32>().unwrap());
+        }
+
+        ret
+    }
+
+    pub fn get_slot_armor(part: ArmorPart, slot_armor_id: String) -> BaseArmor {
+        Self {
+            id: slot_armor_id.clone(),
+            names: HashMap::new(),
+            part,
+            rarity: 10,
+            sex_type: SexType::All,
+            skills: HashMap::new(),
+            slots: BaseArmor::parse_slot_armor_id(&slot_armor_id),
             stat: ArmorStat {
                 defense: 0,
                 fire_res: 0,
