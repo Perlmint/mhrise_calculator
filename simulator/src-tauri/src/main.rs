@@ -10,9 +10,8 @@ use std::sync::Mutex;
 use std::time::Instant;
 
 use csv::StringRecord;
-use data::armor::ArmorPart;
+use data::armor::{ArmorPart, SexType};
 use data::data_manager::DataManager;
-use full_equipments::SubSlotSkillCalculator;
 use itertools::iproduct;
 use serde::de;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
@@ -256,13 +255,21 @@ fn cmd_calculate_skillset(
 
     let dm = mutex_dm.lock().unwrap();
 
-    calculate_skillset(weapon_slots, selected_skills, free_slots, &dm)
+    // TODO get sex_type as input
+    calculate_skillset(
+        weapon_slots,
+        selected_skills,
+        free_slots,
+        SexType::Female,
+        &dm,
+    )
 }
 
 fn calculate_skillset(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
+    sex_type: SexType,
     dm: &DataManager,
 ) -> String {
     let start_time = Instant::now();
@@ -297,8 +304,19 @@ fn calculate_skillset(
     all_armors.insert(ArmorPart::Feet, &mut feets);
 
     for (_, armors) in all_armors.iter_mut() {
-        armors.sort_by_key(|armor| std::cmp::Reverse(armor.rarity));
-        armors.sort_by(|a1, a2| {
+        let mut armors_by_sex = armors
+            .iter()
+            .filter_map(|armor| {
+                if armor.sex_type == sex_type || armor.sex_type == SexType::All {
+                    return Some(armor.clone());
+                } else {
+                    return None;
+                }
+            })
+            .collect::<Vec<BaseArmor>>();
+
+        armors_by_sex.sort_by_key(|armor| std::cmp::Reverse(armor.rarity));
+        armors_by_sex.sort_by(|a1, a2| {
             let slots1 = &a1.slots;
             let slots2 = &a2.slots;
 
@@ -313,6 +331,9 @@ fn calculate_skillset(
 
             return std::cmp::Ordering::Equal;
         });
+
+        armors.clear();
+        armors.extend(armors_by_sex);
     }
 
     let mut all_unique_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
