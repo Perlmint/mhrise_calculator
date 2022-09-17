@@ -1,6 +1,9 @@
-use std::collections::HashMap;
+use std::{cmp::Reverse, collections::HashMap};
 
-use crate::data::armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType};
+use crate::data::{
+    armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType},
+    deco::Decoration,
+};
 
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
@@ -70,6 +73,10 @@ impl<'a> CalcArmor<'a> {
         &self.slots
     }
 
+    pub fn point(&self) -> i32 {
+        self.point
+    }
+
     pub fn subtract_skills(
         &mut self,
         outer_skills: &mut HashMap<String, i32>,
@@ -122,5 +129,42 @@ impl<'a> CalcArmor<'a> {
         }
 
         return diffs;
+    }
+
+    pub fn calculate_point(
+        &mut self,
+        decos_possible: &HashMap<String, Vec<&Decoration>>,
+        yes_deco_skills: &HashMap<String, i32>,
+        no_deco_skills: &HashMap<String, i32>,
+    ) {
+        let mut point = 0;
+
+        for (id, skill) in &self.skills {
+            match yes_deco_skills.get(id) {
+                Some(level) => {
+                    let mut decos = decos_possible.get(id).unwrap().clone();
+                    decos.sort_by_key(|deco| Reverse(deco.slot_size));
+                    let max_slot_size = decos[0].slot_size;
+
+                    point += skill.level.min(*level) * 2 * max_slot_size;
+                }
+                None => {}
+            };
+        }
+
+        for (id, skill) in &self.skills {
+            match no_deco_skills.get(id) {
+                Some(level) => point += skill.level.min(*level) * 10,
+                None => {}
+            };
+        }
+
+        for (slot_size_index, count) in self.slots.iter().enumerate() {
+            let slot_size = slot_size_index as i32 + 1;
+
+            point += 3 * slot_size * count;
+        }
+
+        self.point = point;
     }
 }

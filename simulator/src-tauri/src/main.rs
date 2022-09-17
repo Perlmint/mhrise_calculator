@@ -297,6 +297,7 @@ fn calculate_skillset<'a>(
     let start_time = Instant::now();
 
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
+    let mut yes_deco_skills = HashMap::<String, i32>::new();
     let mut no_deco_skills = HashMap::<String, i32>::new();
 
     for (skill_id, level) in &selected_skills {
@@ -304,11 +305,13 @@ fn calculate_skillset<'a>(
 
         if 0 < decos.len() {
             decos_possible.insert(skill_id.clone(), decos);
+            yes_deco_skills.insert(skill_id.clone(), *level);
         } else {
             no_deco_skills.insert(skill_id.clone(), *level);
         }
     }
 
+    println!("Skills with yes deco: {:?}", yes_deco_skills);
     println!("Skills with no deco: {:?}", no_deco_skills);
 
     let helms = dm.get_parts(ArmorPart::Helm);
@@ -350,8 +353,11 @@ fn calculate_skillset<'a>(
             })
             .collect::<Vec<CalcArmor<'a>>>();
 
-        armors.sort_by_key(|armor| sort_by_rarity(armor));
-        armors.sort_by(|a1, a2| sort_by_slot(a1, a2));
+        for part_armor in armors.iter_mut() {
+            part_armor.calculate_point(&decos_possible, &yes_deco_skills, &no_deco_skills);
+        }
+
+        armors.sort_by_key(|armor| armor.point());
     }
 
     let mut all_slot_armors = HashMap::<ArmorPart, HashMap<String, CalcArmor<'a>>>::new();
@@ -361,7 +367,9 @@ fn calculate_skillset<'a>(
         let mut part_slot_armors = HashMap::<String, CalcArmor<'a>>::new();
 
         for (id, armor) in slot_only_armors {
-            let calc_armor = CalcArmor::<'a>::new(armor);
+            let mut calc_armor = CalcArmor::<'a>::new(armor);
+            calc_armor.calculate_point(&decos_possible, &yes_deco_skills, &no_deco_skills);
+
             part_slot_armors.insert(id.clone(), calc_armor);
         }
 
@@ -515,14 +523,10 @@ fn calculate_skillset<'a>(
                     .collect::<Vec<CalcArmor<'a>>>()
                     .clone();
 
-                deco_armors.sort_by_key(sort_by_rarity);
-                deco_armors.sort_by(sort_by_slot);
-
-                part_slot_armors.sort_by_key(sort_by_rarity);
-                part_slot_armors.sort_by(sort_by_slot);
-
                 part_armors.append(&mut deco_armors);
                 part_armors.append(&mut part_slot_armors);
+
+                part_armors.sort_by_key(|armor| armor.point());
             }
         };
 
