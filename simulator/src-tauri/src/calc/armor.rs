@@ -146,7 +146,7 @@ impl<'a> CalcArmor<'a> {
                     decos.sort_by_key(|deco| Reverse(deco.slot_size));
                     let max_slot_size = decos[0].slot_size;
 
-                    point += skill.level.min(*level) * 2 * max_slot_size;
+                    point += skill.level.min(*level) * 50 * max_slot_size;
                 }
                 None => {}
             };
@@ -154,7 +154,7 @@ impl<'a> CalcArmor<'a> {
 
         for (id, skill) in &self.skills {
             match no_deco_skills.get(id) {
-                Some(level) => point += skill.level.min(*level) * 10,
+                Some(level) => point += skill.level.min(*level) * 1000,
                 None => {}
             };
         }
@@ -162,7 +162,7 @@ impl<'a> CalcArmor<'a> {
         for (slot_size_index, count) in self.slots.iter().enumerate() {
             let slot_size = slot_size_index as i32 + 1;
 
-            point += 3 * slot_size * count;
+            point += 10 * slot_size * count;
         }
 
         self.point = point;

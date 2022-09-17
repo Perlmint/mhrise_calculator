@@ -485,8 +485,8 @@ fn calculate_skillset<'a>(
     let mut total_index = 0;
     let mut answers = Vec::new();
 
-    for possible_unique_comb in &possible_unique_armors {
-        let mut possible_unique_vec = possible_unique_comb.values().collect::<Vec<&CalcArmor>>();
+    'all_cases: for possible_unique_comb in &possible_unique_armors {
+        let possible_unique_vec = possible_unique_comb.values().collect::<Vec<&CalcArmor>>();
 
         println!(
             "Parts sorted id: {} {} {} {} {}",
@@ -518,7 +518,7 @@ fn calculate_skillset<'a>(
 
                     ret.append(part_unique_armors);
                     ret.append(part_deco_armors);
-                    // ret.append(part_slot_armors);
+                    ret.append(part_slot_armors);
                 } else {
                     ret.push((*armor).clone());
                 }
@@ -558,7 +558,7 @@ fn calculate_skillset<'a>(
 
         let mut failed_slot_armors = HashSet::<String>::new();
 
-        'all_cases: for p1 in &parts[0] {
+        for p1 in &parts[0] {
             let mut req_skills = selected_skills.clone();
             let mut free_slots = free_slots.clone();
             let (p1, s1) = subtracted_armors(p1, &mut req_skills, &mut free_slots);
@@ -629,36 +629,6 @@ fn calculate_skillset<'a>(
             }
         }
     }
-
-    /*
-    let mut loop_part_armors = HashMap::<ArmorPart, Vec<CalcArmor>>::new();
-
-    for part in ArmorPart::get_all() {
-        let mut part_armors = Vec::new();
-
-        let part_unique_armors = &mut all_unique_armors[&part].clone();
-        let part_deco_armors = &mut armors_with_deco_skills[&part].clone();
-        let part_slot_armors = &mut all_slot_armors[&part]
-            .iter()
-            .map(|(_, armor)| armor.clone())
-            .collect::<Vec<CalcArmor>>();
-
-        part_unique_armors.sort_by_key(|armor| armor.point());
-        part_deco_armors.sort_by_key(|armor| armor.point());
-        part_slot_armors.sort_by_key(|armor| armor.point());
-
-        part_armors.append(part_unique_armors);
-        part_armors.append(part_deco_armors);
-        part_armors.append(part_slot_armors);
-
-        loop_part_armors.insert(part, part_armors);
-    }
-
-    let mut parts = loop_part_armors
-        .iter()
-        .map(|(_, armors)| armors)
-        .collect::<Vec<&Vec<CalcArmor>>>();
-    */
 
     println!("All combinations size: {}", total_index + 1);
 

@@ -11,7 +11,7 @@ use crate::{
     },
 };
 
-#[derive(Default, Clone)]
+#[derive(Debug, Default, Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
     pub armors: HashMap<ArmorPart, CalcArmor<'a>>,
