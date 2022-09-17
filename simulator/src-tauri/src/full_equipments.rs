@@ -11,7 +11,7 @@ use crate::data::{
 #[derive(Default, Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
-    pub armors: HashMap<ArmorPart, &'a BaseArmor>,
+    pub armors: HashMap<ArmorPart, BaseArmor>,
     pub talisman: Option<&'a Talisman>,
 
     pub all_skills: HashMap<String, i32>,
@@ -266,7 +266,7 @@ impl<'a> SlotSkillCalculation<'a> {
 impl<'a> FullEquipments<'a> {
     pub fn new(
         weapon_slots: Vec<i32>,
-        armors: HashMap<ArmorPart, &'a BaseArmor>,
+        armors: HashMap<ArmorPart, BaseArmor>,
         talisman: Option<&'a Talisman>,
     ) -> FullEquipments<'a> {
         let mut ret = FullEquipments {

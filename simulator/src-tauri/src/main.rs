@@ -3,7 +3,8 @@
     windows_subsystem = "windows"
 )]
 
-use std::collections::HashMap;
+use std::cmp::Ordering;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::BufReader;
 use std::sync::Mutex;
@@ -12,6 +13,7 @@ use std::time::Instant;
 use csv::StringRecord;
 use data::armor::{ArmorPart, SexType};
 use data::data_manager::DataManager;
+use data::deco_combination::DecorationCombinations;
 use itertools::iproduct;
 use serde::de;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
@@ -266,6 +268,17 @@ fn cmd_calculate_skillset(
     )
 }
 
+fn sort_by_rarity(armor: &BaseArmor) -> std::cmp::Reverse<i32> {
+    std::cmp::Reverse(armor.rarity)
+}
+
+fn sort_by_slot(a1: &BaseArmor, a2: &BaseArmor) -> std::cmp::Ordering {
+    let slots1 = &a1.slots;
+    let slots2 = &a2.slots;
+
+    return DecorationCombinations::compare(slots2, slots1);
+}
+
 fn calculate_skillset(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
@@ -316,22 +329,8 @@ fn calculate_skillset(
             })
             .collect::<Vec<BaseArmor>>();
 
-        armors_by_sex.sort_by_key(|armor| std::cmp::Reverse(armor.rarity));
-        armors_by_sex.sort_by(|a1, a2| {
-            let slots1 = &a1.slots;
-            let slots2 = &a2.slots;
-
-            for i in (0..slots1.len()).rev() {
-                let slot_count1 = slots1[i];
-                let slot_count2 = slots2[i];
-
-                if slot_count1 != slot_count2 {
-                    return slot_count2.cmp(&slot_count1);
-                }
-            }
-
-            return std::cmp::Ordering::Equal;
-        });
+        armors_by_sex.sort_by_key(sort_by_rarity);
+        armors_by_sex.sort_by(sort_by_slot);
 
         armors.clear();
         **armors = armors_by_sex;
@@ -378,11 +377,11 @@ fn calculate_skillset(
         all_unique_armors[&ArmorPart::Feet].iter()
     ) {
         let mut armors = HashMap::new();
-        armors.insert(ArmorPart::Helm, helm);
-        armors.insert(ArmorPart::Torso, torso);
-        armors.insert(ArmorPart::Arm, arm);
-        armors.insert(ArmorPart::Waist, waist);
-        armors.insert(ArmorPart::Feet, feet);
+        armors.insert(ArmorPart::Helm, helm.clone());
+        armors.insert(ArmorPart::Torso, torso.clone());
+        armors.insert(ArmorPart::Arm, arm.clone());
+        armors.insert(ArmorPart::Waist, waist.clone());
+        armors.insert(ArmorPart::Feet, feet.clone());
 
         let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
         let possible_combs =
@@ -405,7 +404,7 @@ fn calculate_skillset(
         }
     }
 
-    let get_not_empty_count = |armors: &HashMap<ArmorPart, &BaseArmor>| -> i32 {
+    let get_not_empty_count = |armors: &HashMap<ArmorPart, BaseArmor>| -> i32 {
         let mut count = 0;
 
         for (_, armor) in armors {
@@ -492,14 +491,20 @@ fn calculate_skillset(
                 part_armors.clear();
 
                 let mut deco_armors = armors_with_deco_skills[part].clone();
-
-                *part_armors = all_slot_armors[part]
+                let mut part_slot_armors = all_slot_armors[part]
                     .values()
                     .map(|armor| armor.clone())
                     .collect::<Vec<BaseArmor>>()
                     .clone();
 
+                deco_armors.sort_by_key(sort_by_rarity);
+                deco_armors.sort_by(sort_by_slot);
+
+                part_slot_armors.sort_by_key(sort_by_rarity);
+                part_slot_armors.sort_by(sort_by_slot);
+
                 part_armors.append(&mut deco_armors);
+                part_armors.append(&mut part_slot_armors);
             }
         };
 
@@ -507,7 +512,6 @@ fn calculate_skillset(
             modify_empty_parts(part, part_armors);
         }
 
-        let mut local_index = 0;
         let mut total_count = 1;
 
         for (_, part_armors) in &local_armors {
@@ -518,18 +522,16 @@ fn calculate_skillset(
 
         parts.sort_by_key(|p| p.len());
 
-        let ten_percent = total_count / 10;
-
         println!(
-            "Parts size: {} {} {} {} {}, total: {}, 10%: {}",
+            "Parts size: {} {} {} {} {}, total: {}",
             parts[0].len(),
             parts[1].len(),
             parts[2].len(),
             parts[3].len(),
             parts[4].len(),
             total_count,
-            ten_percent
         );
+        println!();
 
         let subtracted_armors = |parts: &BaseArmor,
                                  req_skills: &mut HashMap<String, i32>,
@@ -544,41 +546,92 @@ fn calculate_skillset(
         for p1 in &parts[0] {
             let mut req_skills = selected_skills.clone();
             let mut free_slots = free_slots.clone();
-            let (p1, s1) = &subtracted_armors(p1, &mut req_skills, &mut free_slots);
+            let (p1, s1) = subtracted_armors(p1, &mut req_skills, &mut free_slots);
 
             for p2 in &parts[1] {
                 let mut req_skills = req_skills.clone();
                 let mut free_slots = free_slots.clone();
-                let (p2, s2) = &subtracted_armors(p2, &mut req_skills, &mut free_slots);
+                let (p2, s2) = subtracted_armors(p2, &mut req_skills, &mut free_slots);
 
                 for p3 in &parts[2] {
                     let mut req_skills = req_skills.clone();
                     let mut free_slots = free_slots.clone();
-                    let (p3, s3) = &subtracted_armors(p3, &mut req_skills, &mut free_slots);
+                    let (p3, s3) = subtracted_armors(p3, &mut req_skills, &mut free_slots);
 
                     for p4 in &parts[3] {
                         let mut req_skills = req_skills.clone();
                         let mut free_slots = free_slots.clone();
-                        let (p4, s4) = &subtracted_armors(p4, &mut req_skills, &mut free_slots);
+                        let (p4, s4) = subtracted_armors(p4, &mut req_skills, &mut free_slots);
+
+                        let mut failed_slot_armors = HashSet::<String>::new();
+
+                        let compare_failed_slot_armors =
+                            |slot_armors: &mut HashSet<String>, armor: &BaseArmor| {
+                                if BaseArmor::is_slot_armor(&armor.id) == false {
+                                    return;
+                                }
+
+                                let mut no_superior_exists = true;
+                                let mut remove_ids = Vec::new();
+
+                                for failed_id in slot_armors.clone() {
+                                    let failed_slots = BaseArmor::parse_slot_armor_id(&failed_id);
+
+                                    let cmp_result = DecorationCombinations::compare(
+                                        &failed_slots,
+                                        &armor.slots,
+                                    );
+
+                                    if cmp_result == Ordering::Less {
+                                        remove_ids.push(failed_id);
+                                        break;
+                                    } else if cmp_result == Ordering::Greater {
+                                        no_superior_exists = false;
+                                        break;
+                                    }
+                                }
+
+                                for remove_id in remove_ids {
+                                    slot_armors.remove(&remove_id);
+                                }
+
+                                if no_superior_exists {
+                                    slot_armors.insert(armor.id.clone());
+                                }
+                            };
 
                         'final_armor: for p5 in &parts[4] {
+                            total_index += 1;
+
+                            for failed_id in failed_slot_armors.clone() {
+                                if DecorationCombinations::compare(
+                                    &BaseArmor::parse_slot_armor_id(&failed_id),
+                                    &p5.slots,
+                                ) != Ordering::Less
+                                {
+                                    continue;
+                                }
+                            }
+
                             let mut req_skills = req_skills.clone();
                             let mut free_slots = free_slots.clone();
-                            let (p5, s5) = &subtracted_armors(p5, &mut req_skills, &mut free_slots);
+                            let (p5, s5) = subtracted_armors(p5, &mut req_skills, &mut free_slots);
 
                             for slot_count in &free_slots {
                                 if 0 < *slot_count {
+                                    compare_failed_slot_armors(&mut failed_slot_armors, &p5);
+
                                     continue 'final_armor;
                                 }
                             }
 
-                            let mut armors = HashMap::<ArmorPart, &BaseArmor>::new();
+                            let mut armors = HashMap::<ArmorPart, BaseArmor>::new();
 
-                            armors.insert(p1.part.clone(), p1);
-                            armors.insert(p2.part.clone(), p2);
-                            armors.insert(p3.part.clone(), p3);
-                            armors.insert(p4.part.clone(), p4);
-                            armors.insert(p5.part.clone(), p5);
+                            armors.insert(p1.part.clone(), p1.clone());
+                            armors.insert(p2.part.clone(), p2.clone());
+                            armors.insert(p3.part.clone(), p3.clone());
+                            armors.insert(p4.part.clone(), p4.clone());
+                            armors.insert(p5.part.clone(), p5.clone());
 
                             let full_equip =
                                 FullEquipments::new(weapon_slots.clone(), armors, None);
@@ -612,10 +665,11 @@ fn calculate_skillset(
                                 .collect::<Vec<DecorationCombination>>();
 
                             if armor_possible_slot_combs.len() == 0 {
+                                compare_failed_slot_armors(&mut failed_slot_armors, &p5);
                                 continue;
                             }
 
-                            let subtracts = vec![s1, s2, s3, s4, s5];
+                            let subtracts = vec![&s1, &s2, &s3, &s4, &s5];
 
                             let mut subtracted_skills = HashMap::<String, i32>::new();
 
@@ -633,6 +687,8 @@ fn calculate_skillset(
                             }
 
                             println!("Initial slots: {:?}", full_equip.avail_slots);
+
+                            /*
                             println!("All skills: {:?}", full_equip.all_skills);
                             println!("Subracted skills: {:?}", subtracted_skills);
                             println!("Requested skills: {:?}", selected_skills);
@@ -660,27 +716,73 @@ fn calculate_skillset(
                             }
 
                             println!("No decos {:?}", no_deco_skills);
+                            */
+
                             println!(
-                                "Armors ids: {:?}",
-                                &full_equip
-                                    .armors
-                                    .into_iter()
-                                    .map(|(_, armor)| armor.id.clone())
-                                    .collect::<Vec<String>>()
+                                "Armors ids: ({}), ({}), ({}), ({}), ({})",
+                                full_equip.armors[&ArmorPart::Helm].id,
+                                full_equip.armors[&ArmorPart::Torso].id,
+                                full_equip.armors[&ArmorPart::Arm].id,
+                                full_equip.armors[&ArmorPart::Waist].id,
+                                full_equip.armors[&ArmorPart::Feet].id,
                             );
 
-                            answers.push(armor_possible_slot_combs);
+                            let mut real_armors = Vec::<Vec<BaseArmor>>::new();
 
-                            println!("Answers length: {}", answers.len());
+                            for (part, armor) in full_equip.armors {
+                                if BaseArmor::is_slot_armor(&armor.id) {
+                                    let all_real_armors = dm
+                                        .armors_by_slot
+                                        .get(&part)
+                                        .unwrap()
+                                        .get(&armor.id)
+                                        .unwrap();
+
+                                    real_armors.push(all_real_armors.clone());
+                                } else {
+                                    real_armors.push(vec![armor]);
+                                }
+                            }
+
+                            let mut answers_equip = Vec::new();
+
+                            for (a1, a2, a3, a4, a5) in iproduct!(
+                                &real_armors[0],
+                                &real_armors[1],
+                                &real_armors[2],
+                                &real_armors[3],
+                                &real_armors[4]
+                            ) {
+                                let mut armors = HashMap::new();
+                                armors.insert(a1.part.clone(), a1.clone());
+                                armors.insert(a2.part.clone(), a2.clone());
+                                armors.insert(a3.part.clone(), a3.clone());
+                                armors.insert(a4.part.clone(), a4.clone());
+                                armors.insert(a5.part.clone(), a5.clone());
+
+                                let final_equip =
+                                    FullEquipments::new(weapon_slots.clone(), armors, None);
+
+                                answers_equip.push(final_equip);
+                            }
+
+                            for (equip, slot_comb) in
+                                iproduct!(answers_equip, armor_possible_slot_combs)
+                            {
+                                answers.push((equip, slot_comb));
+                            }
+
+                            println!(
+                                "Answers length: {}, total_index: {}",
+                                answers.len(),
+                                total_index
+                            );
                             println!();
 
                             if 200 <= answers.len() {
                                 println!("Iteration size too large, breaking at 200");
                                 break 'all_cases;
                             }
-
-                            total_index += 1;
-                            local_index += 1;
                         }
                     }
                 }

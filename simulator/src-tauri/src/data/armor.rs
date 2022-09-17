@@ -209,6 +209,10 @@ impl BaseArmor {
         ret
     }
 
+    pub fn is_slot_armor(armor_id: &String) -> bool {
+        armor_id.starts_with(SLOT_ARMOR_PREFIX)
+    }
+
     pub fn get_slot_armor(part: ArmorPart, slot_armor_id: String) -> BaseArmor {
         Self {
             id: slot_armor_id.clone(),

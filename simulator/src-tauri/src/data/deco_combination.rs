@@ -247,4 +247,16 @@ impl DecorationCombinations {
 
         all_possible_combs
     }
+
+    pub fn compare(slots1: &Vec<i32>, slots2: &Vec<i32>) -> std::cmp::Ordering {
+        for (slot1, slot2) in izip!(slots1, slots2) {
+            if slot1 == slot2 {
+                continue;
+            }
+
+            return slot1.cmp(slot2);
+        }
+
+        return std::cmp::Ordering::Equal;
+    }
 }
