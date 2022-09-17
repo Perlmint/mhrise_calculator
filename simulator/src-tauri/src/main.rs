@@ -7,7 +7,7 @@ use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::BufReader;
-use std::sync::Mutex;
+use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 use csv::StringRecord;
@@ -26,10 +26,16 @@ mod data {
     pub mod skill;
 }
 
+mod calc {
+    pub mod armor;
+    pub mod deco;
+}
+
 mod full_equipments;
 
 mod test;
 
+use crate::calc::armor::CalcArmor;
 use crate::data::armor::{
     AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill, EMPTY_ARMOR_PREFIX,
 };
@@ -248,11 +254,11 @@ fn cmd_get_armor_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<St
 }
 
 #[tauri::command]
-fn cmd_calculate_skillset(
+fn cmd_calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
-    mutex_dm: tauri::State<Mutex<DataManager>>,
+    mutex_dm: tauri::State<'a, Mutex<DataManager>>,
 ) -> String {
     println!("Start calculating...");
 
@@ -268,24 +274,26 @@ fn cmd_calculate_skillset(
     )
 }
 
-fn sort_by_rarity(armor: &BaseArmor) -> std::cmp::Reverse<i32> {
-    std::cmp::Reverse(armor.rarity)
+fn sort_by_rarity(armor: &CalcArmor) -> std::cmp::Reverse<i32> {
+    std::cmp::Reverse(armor.rarity())
 }
 
-fn sort_by_slot(a1: &BaseArmor, a2: &BaseArmor) -> std::cmp::Ordering {
-    let slots1 = &a1.slots;
-    let slots2 = &a2.slots;
+fn sort_by_slot(a1: &CalcArmor, a2: &CalcArmor) -> std::cmp::Ordering {
+    let slots1 = &a1.slots();
+    let slots2 = &a2.slots();
 
     return DecorationCombinations::compare(slots2, slots1);
 }
 
-fn calculate_skillset(
+fn calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     sex_type: SexType,
-    dm: &DataManager,
+    dm: &'a DataManager,
 ) -> String {
+    type FullArmors<'a> = HashMap<ArmorPart, CalcArmor<'a>>;
+
     let start_time = Instant::now();
 
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
@@ -303,55 +311,73 @@ fn calculate_skillset(
 
     println!("Skills with no deco: {:?}", no_deco_skills);
 
-    let mut helms = dm.get_parts_clone(ArmorPart::Helm);
-    let mut torsos = dm.get_parts_clone(ArmorPart::Torso);
-    let mut arms = dm.get_parts_clone(ArmorPart::Arm);
-    let mut waists = dm.get_parts_clone(ArmorPart::Waist);
-    let mut feets = dm.get_parts_clone(ArmorPart::Feet);
+    let helms = dm.get_parts(ArmorPart::Helm);
+    let torsos = dm.get_parts(ArmorPart::Torso);
+    let arms = dm.get_parts(ArmorPart::Arm);
+    let waists = dm.get_parts(ArmorPart::Waist);
+    let feets = dm.get_parts(ArmorPart::Feet);
 
-    let mut all_armors = HashMap::new();
+    let mut base_armors = HashMap::<ArmorPart, Vec<&BaseArmor>>::new();
 
-    all_armors.insert(ArmorPart::Helm, &mut helms);
-    all_armors.insert(ArmorPart::Torso, &mut torsos);
-    all_armors.insert(ArmorPart::Arm, &mut arms);
-    all_armors.insert(ArmorPart::Waist, &mut waists);
-    all_armors.insert(ArmorPart::Feet, &mut feets);
+    base_armors.insert(ArmorPart::Helm, helms);
+    base_armors.insert(ArmorPart::Torso, torsos);
+    base_armors.insert(ArmorPart::Arm, arms);
+    base_armors.insert(ArmorPart::Waist, waists);
+    base_armors.insert(ArmorPart::Feet, feets);
+
+    let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor<'a>>>::new();
+
+    for (part, base_armors) in base_armors.iter() {
+        let mut calc_armors = Vec::new();
+
+        for base_armor in base_armors {
+            let calc_armor = CalcArmor::<'a>::new(base_armor);
+            calc_armors.push(calc_armor);
+        }
+
+        all_armors.insert(part.clone(), calc_armors);
+    }
 
     for (_, armors) in all_armors.iter_mut() {
-        let mut armors_by_sex = armors
-            .iter()
+        *armors = armors
+            .iter_mut()
             .filter_map(|armor| {
-                if armor.sex_type == sex_type || armor.sex_type == SexType::All {
+                if armor.sex_type() == &sex_type || armor.sex_type() == &SexType::All {
                     return Some(armor.clone());
                 } else {
                     return None;
                 }
             })
-            .collect::<Vec<BaseArmor>>();
+            .collect::<Vec<CalcArmor<'a>>>();
 
-        armors_by_sex.sort_by_key(sort_by_rarity);
-        armors_by_sex.sort_by(sort_by_slot);
-
-        armors.clear();
-        **armors = armors_by_sex;
+        armors.sort_by_key(|armor| sort_by_rarity(armor));
+        armors.sort_by(|a1, a2| sort_by_slot(a1, a2));
     }
 
-    let mut all_slot_armors = HashMap::<ArmorPart, &HashMap<String, BaseArmor>>::new();
+    let mut all_slot_armors = HashMap::<ArmorPart, HashMap<String, CalcArmor<'a>>>::new();
 
-    for part in ArmorPart::get_all() {
-        all_slot_armors.insert(part.clone(), dm.slot_only_armors.get(&part).unwrap());
+    for (part, _) in all_armors.iter() {
+        let slot_only_armors = dm.slot_only_armors.get(part).unwrap();
+        let mut part_slot_armors = HashMap::<String, CalcArmor<'a>>::new();
+
+        for (id, armor) in slot_only_armors {
+            let calc_armor = CalcArmor::<'a>::new(armor);
+            part_slot_armors.insert(id.clone(), calc_armor);
+        }
+
+        all_slot_armors.insert(part.clone(), part_slot_armors);
     }
 
-    let mut all_unique_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+    let mut all_unique_armors = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
 
     for (part, armors) in &all_armors {
         all_unique_armors.insert(
-            part.clone(),
+            part,
             armors
                 .iter()
                 .filter_map(|armor| {
                     for (skill_id, _) in &no_deco_skills {
-                        if armor.skills.contains_key(skill_id) {
+                        if armor.skills().contains_key(skill_id) {
                             return Some(armor.clone());
                         }
                     }
@@ -364,7 +390,7 @@ fn calculate_skillset(
         all_unique_armors
             .get_mut(part)
             .unwrap()
-            .push(BaseArmor::create_empty(part.clone()));
+            .push(CalcArmor::<'a>::new(dm.empty_armors.get(&part).unwrap()));
     }
 
     let mut possible_unique_armors = Vec::new();
@@ -376,12 +402,12 @@ fn calculate_skillset(
         all_unique_armors[&ArmorPart::Waist].iter(),
         all_unique_armors[&ArmorPart::Feet].iter()
     ) {
-        let mut armors = HashMap::new();
-        armors.insert(ArmorPart::Helm, helm.clone());
-        armors.insert(ArmorPart::Torso, torso.clone());
-        armors.insert(ArmorPart::Arm, arm.clone());
-        armors.insert(ArmorPart::Waist, waist.clone());
-        armors.insert(ArmorPart::Feet, feet.clone());
+        let mut armors = FullArmors::new();
+        armors.insert(helm.part(), helm.clone());
+        armors.insert(torso.part(), torso.clone());
+        armors.insert(arm.part(), arm.clone());
+        armors.insert(waist.part(), waist.clone());
+        armors.insert(feet.part(), feet.clone());
 
         let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
         let possible_combs =
@@ -391,24 +417,18 @@ fn calculate_skillset(
             println!(
                 "Unique skills possible: {:?}, {:?}",
                 possible_combs,
-                vec![
-                    helm.id.clone(),
-                    torso.id.clone(),
-                    arm.id.clone(),
-                    waist.id.clone(),
-                    feet.id.clone()
-                ]
+                vec![helm.id(), torso.id(), arm.id(), waist.id(), feet.id()]
             );
 
             possible_unique_armors.push(armors);
         }
     }
 
-    let get_not_empty_count = |armors: &HashMap<ArmorPart, BaseArmor>| -> i32 {
+    let get_not_empty_count = |armors: &HashMap<ArmorPart, CalcArmor<'a>>| -> i32 {
         let mut count = 0;
 
         for (_, armor) in armors {
-            if armor.id.starts_with(EMPTY_ARMOR_PREFIX) == false {
+            if armor.id().starts_with(EMPTY_ARMOR_PREFIX) == false {
                 count += 1;
             }
         }
@@ -423,34 +443,32 @@ fn calculate_skillset(
         empty_count2.cmp(&empty_count1)
     });
 
-    let mut armors_with_deco_skills = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+    let mut armors_with_deco_skills = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
 
     for (part, armors) in &all_armors {
-        let part_armors = armors
-            .iter()
-            .filter_map(|armor| {
-                for (skill_id, _) in &decos_possible {
-                    if armor.skills.contains_key(skill_id) {
-                        return Some(armor.clone());
-                    }
+        let mut part_armors = Vec::<CalcArmor<'a>>::new();
+
+        for armor in armors {
+            for (skill_id, _) in &decos_possible {
+                if armor.skills().contains_key(skill_id) {
+                    part_armors.push(armor.clone());
+                    break;
                 }
+            }
+        }
 
-                return None;
-            })
-            .collect();
-
-        armors_with_deco_skills.insert(part.clone(), part_armors);
+        armors_with_deco_skills.insert(part, part_armors);
     }
 
-    let mut mr_armors = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
+    let mut mr_armors = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
 
     for (part, armors) in &all_armors {
         mr_armors.insert(
-            part.clone(),
+            part,
             armors
                 .iter()
                 .filter_map(|armor| {
-                    if 7 <= armor.rarity {
+                    if 7 <= armor.rarity() {
                         return Some(armor.clone());
                     } else {
                         return None;
@@ -471,30 +489,30 @@ fn calculate_skillset(
         let mut waists = vec![armors[&ArmorPart::Waist].clone()];
         let mut feets = vec![armors[&ArmorPart::Feet].clone()];
 
-        let mut local_armors = HashMap::<ArmorPart, &mut Vec<BaseArmor>>::new();
-        local_armors.insert(ArmorPart::Helm, &mut helms);
-        local_armors.insert(ArmorPart::Torso, &mut torsos);
-        local_armors.insert(ArmorPart::Arm, &mut arms);
-        local_armors.insert(ArmorPart::Waist, &mut waists);
-        local_armors.insert(ArmorPart::Feet, &mut feets);
+        let mut local_armors = HashMap::<&ArmorPart, &mut Vec<CalcArmor<'a>>>::new();
+        local_armors.insert(&ArmorPart::Helm, &mut helms);
+        local_armors.insert(&ArmorPart::Torso, &mut torsos);
+        local_armors.insert(&ArmorPart::Arm, &mut arms);
+        local_armors.insert(&ArmorPart::Waist, &mut waists);
+        local_armors.insert(&ArmorPart::Feet, &mut feets);
 
         println!(
             "Base armors ids: {:?}",
             &local_armors
                 .iter()
-                .map(|(_, armor)| armor[0].id.clone())
-                .collect::<Vec<String>>()
+                .map(|(_, armor)| armor[0].id())
+                .collect::<Vec<&String>>()
         );
 
-        let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<BaseArmor>| {
-            if part_armors.len() == 1 && part_armors[0].id.starts_with(EMPTY_ARMOR_PREFIX) {
+        let modify_empty_parts = |part: &ArmorPart, part_armors: &mut Vec<CalcArmor<'a>>| {
+            if part_armors.len() == 1 && part_armors[0].id().starts_with(EMPTY_ARMOR_PREFIX) {
                 part_armors.clear();
 
                 let mut deco_armors = armors_with_deco_skills[part].clone();
                 let mut part_slot_armors = all_slot_armors[part]
                     .values()
                     .map(|armor| armor.clone())
-                    .collect::<Vec<BaseArmor>>()
+                    .collect::<Vec<CalcArmor<'a>>>()
                     .clone();
 
                 deco_armors.sort_by_key(sort_by_rarity);
@@ -533,11 +551,11 @@ fn calculate_skillset(
         );
         println!();
 
-        let subtracted_armors = |parts: &BaseArmor,
+        let subtracted_armors = |parts: &CalcArmor<'a>,
                                  req_skills: &mut HashMap<String, i32>,
                                  req_slots: &mut Vec<i32>|
-         -> (BaseArmor, HashMap<String, i32>) {
-            let mut parts = parts.clone();
+         -> (CalcArmor<'a>, HashMap<String, i32>) {
+            let mut parts: CalcArmor<'a> = parts.clone();
             let diff_skills = parts.subtract_skills(req_skills, req_slots);
 
             return (parts, diff_skills);
@@ -566,8 +584,8 @@ fn calculate_skillset(
                         let mut failed_slot_armors = HashSet::<String>::new();
 
                         let compare_failed_slot_armors =
-                            |slot_armors: &mut HashSet<String>, armor: &BaseArmor| {
-                                if BaseArmor::is_slot_armor(&armor.id) == false {
+                            |slot_armors: &mut HashSet<String>, armor: &CalcArmor<'a>| {
+                                if BaseArmor::is_slot_armor(armor.id()) == false {
                                     return;
                                 }
 
@@ -579,7 +597,7 @@ fn calculate_skillset(
 
                                     let cmp_result = DecorationCombinations::compare(
                                         &failed_slots,
-                                        &armor.slots,
+                                        &armor.slots(),
                                     );
 
                                     if cmp_result == Ordering::Less {
@@ -596,7 +614,7 @@ fn calculate_skillset(
                                 }
 
                                 if no_superior_exists {
-                                    slot_armors.insert(armor.id.clone());
+                                    slot_armors.insert(armor.id().clone());
                                 }
                             };
 
@@ -606,7 +624,7 @@ fn calculate_skillset(
                             for failed_id in failed_slot_armors.clone() {
                                 if DecorationCombinations::compare(
                                     &BaseArmor::parse_slot_armor_id(&failed_id),
-                                    &p5.slots,
+                                    &p5.slots(),
                                 ) != Ordering::Less
                                 {
                                     continue;
@@ -625,13 +643,13 @@ fn calculate_skillset(
                                 }
                             }
 
-                            let mut armors = HashMap::<ArmorPart, BaseArmor>::new();
+                            let mut armors = FullArmors::new();
 
-                            armors.insert(p1.part.clone(), p1.clone());
-                            armors.insert(p2.part.clone(), p2.clone());
-                            armors.insert(p3.part.clone(), p3.clone());
-                            armors.insert(p4.part.clone(), p4.clone());
-                            armors.insert(p5.part.clone(), p5.clone());
+                            armors.insert(p1.part(), p1.clone());
+                            armors.insert(p2.part(), p2.clone());
+                            armors.insert(p3.part(), p3.clone());
+                            armors.insert(p4.part(), p4.clone());
+                            armors.insert(p5.part(), p5.clone());
 
                             let full_equip =
                                 FullEquipments::new(weapon_slots.clone(), armors, None);
@@ -720,23 +738,26 @@ fn calculate_skillset(
 
                             println!(
                                 "Armors ids: ({}), ({}), ({}), ({}), ({})",
-                                full_equip.armors[&ArmorPart::Helm].id,
-                                full_equip.armors[&ArmorPart::Torso].id,
-                                full_equip.armors[&ArmorPart::Arm].id,
-                                full_equip.armors[&ArmorPart::Waist].id,
-                                full_equip.armors[&ArmorPart::Feet].id,
+                                full_equip.armors[&ArmorPart::Helm].id(),
+                                full_equip.armors[&ArmorPart::Torso].id(),
+                                full_equip.armors[&ArmorPart::Arm].id(),
+                                full_equip.armors[&ArmorPart::Waist].id(),
+                                full_equip.armors[&ArmorPart::Feet].id(),
                             );
 
-                            let mut real_armors = Vec::<Vec<BaseArmor>>::new();
+                            let mut real_armors = Vec::<Vec<CalcArmor<'a>>>::new();
 
                             for (part, armor) in full_equip.armors {
-                                if BaseArmor::is_slot_armor(&armor.id) {
+                                if BaseArmor::is_slot_armor(armor.id()) {
                                     let all_real_armors = dm
                                         .armors_by_slot
                                         .get(&part)
                                         .unwrap()
-                                        .get(&armor.id)
-                                        .unwrap();
+                                        .get(armor.id())
+                                        .unwrap()
+                                        .iter()
+                                        .map(|base_armor| CalcArmor::<'a>::new(base_armor))
+                                        .collect::<Vec<CalcArmor<'a>>>();
 
                                     real_armors.push(all_real_armors.clone());
                                 } else {
@@ -754,11 +775,11 @@ fn calculate_skillset(
                                 &real_armors[4]
                             ) {
                                 let mut armors = HashMap::new();
-                                armors.insert(a1.part.clone(), a1.clone());
-                                armors.insert(a2.part.clone(), a2.clone());
-                                armors.insert(a3.part.clone(), a3.clone());
-                                armors.insert(a4.part.clone(), a4.clone());
-                                armors.insert(a5.part.clone(), a5.clone());
+                                armors.insert(a1.part(), a1.clone());
+                                armors.insert(a2.part(), a2.clone());
+                                armors.insert(a3.part(), a3.clone());
+                                armors.insert(a4.part(), a4.clone());
+                                armors.insert(a5.part(), a5.clone());
 
                                 let final_equip =
                                     FullEquipments::new(weapon_slots.clone(), armors, None);
@@ -794,9 +815,8 @@ fn calculate_skillset(
 
     let elapsed = start_time.elapsed();
 
-    let mut ret = String::new();
-    ret = format!("calculate_skillset elapsed: {:?}", elapsed);
-    println!("calculate_skillset elapsed: {:?}", elapsed);
+    let ret = format!("calculate_skillset elapsed: {:?}", elapsed);
+    println!("{}", ret);
 
     return ret;
 }

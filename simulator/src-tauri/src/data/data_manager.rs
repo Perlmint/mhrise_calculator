@@ -16,6 +16,7 @@ pub struct DataManager {
 
     pub slot_only_armors: HashMap<ArmorPart, HashMap<String, BaseArmor>>,
     pub armors_by_slot: HashMap<ArmorPart, HashMap<String, Vec<BaseArmor>>>,
+    pub empty_armors: HashMap<ArmorPart, BaseArmor>,
     pub anomaly_armors: Vec<AnomalyArmor>,
 
     pub bases_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
@@ -110,6 +111,12 @@ impl DataManager {
             slot_armors.push(armor.clone());
         }
 
+        let mut empty_armors = HashMap::<ArmorPart, BaseArmor>::new();
+
+        for part in ArmorPart::get_all() {
+            empty_armors.insert(part.clone(), BaseArmor::create_empty(part));
+        }
+
         let mut bases_by_part = HashMap::<ArmorPart, Vec<BaseArmor>>::new();
 
         bases_by_part.insert(ArmorPart::Helm, Vec::new());
@@ -133,6 +140,7 @@ impl DataManager {
             deco_combinations,
             slot_only_armors,
             armors_by_slot,
+            empty_armors,
             armor_name_dict,
             skill_name_dict,
             bases_by_part,

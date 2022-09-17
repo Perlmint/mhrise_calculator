@@ -2,16 +2,19 @@ use std::collections::HashMap;
 
 use serde::Serialize;
 
-use crate::data::{
-    armor::{ArmorPart, BaseArmor, Talisman},
-    deco::Decoration,
-    skill::MAX_SLOT_LEVEL,
+use crate::{
+    calc::armor::CalcArmor,
+    data::{
+        armor::{ArmorPart, Talisman},
+        deco::Decoration,
+        skill::MAX_SLOT_LEVEL,
+    },
 };
 
 #[derive(Default, Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
-    pub armors: HashMap<ArmorPart, BaseArmor>,
+    pub armors: HashMap<ArmorPart, CalcArmor<'a>>,
     pub talisman: Option<&'a Talisman>,
 
     pub all_skills: HashMap<String, i32>,
@@ -266,7 +269,7 @@ impl<'a> SlotSkillCalculation<'a> {
 impl<'a> FullEquipments<'a> {
     pub fn new(
         weapon_slots: Vec<i32>,
-        armors: HashMap<ArmorPart, BaseArmor>,
+        armors: HashMap<ArmorPart, CalcArmor<'a>>,
         talisman: Option<&'a Talisman>,
     ) -> FullEquipments<'a> {
         let mut ret = FullEquipments {
@@ -341,7 +344,7 @@ impl<'a> FullEquipments<'a> {
         }
 
         for armor in &self.armors {
-            for (id, skill_info) in &armor.1.skills {
+            for (id, skill_info) in armor.1.skills() {
                 let existing = skills.get(id);
 
                 let mut level_sum = skill_info.level;
@@ -353,7 +356,7 @@ impl<'a> FullEquipments<'a> {
                 skills.insert(id.clone(), level_sum);
             }
 
-            for (_, slot_size) in armor.1.slots.iter().enumerate() {
+            for (_, slot_size) in armor.1.slots().iter().enumerate() {
                 if *slot_size == 0 {
                     continue;
                 }

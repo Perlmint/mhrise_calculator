@@ -116,60 +116,6 @@ impl ArmorPart {
 }
 
 impl BaseArmor {
-    pub fn subtract_skills(
-        &mut self,
-        outer_skills: &mut HashMap<String, i32>,
-        req_slots: &mut Vec<i32>,
-    ) -> HashMap<String, i32> {
-        let mut diffs = HashMap::new();
-
-        for (id, skill) in self.skills.clone() {
-            let outer_skill = outer_skills.get_mut(&id);
-
-            if outer_skill.is_none() {
-                continue;
-            }
-
-            let outer_skill = outer_skill.unwrap();
-
-            let taken = skill.level.min(*outer_skill);
-
-            *outer_skill -= taken;
-
-            if *outer_skill == 0 {
-                outer_skills.remove(&id);
-            }
-
-            diffs.insert(id, taken);
-        }
-
-        for (id, taken) in &diffs {
-            let skill = self.skills.get_mut(id).unwrap();
-
-            skill.level -= taken;
-
-            if skill.level == 0 {
-                self.skills.remove(id);
-            }
-        }
-
-        for slot_size in &self.slots {
-            let slot_size = *slot_size as usize;
-
-            if slot_size == 0 {
-                continue;
-            }
-
-            let req_count_leftover = req_slots[slot_size - 1];
-
-            if 0 < req_count_leftover {
-                req_slots[slot_size - 1] -= 1;
-            }
-        }
-
-        return diffs;
-    }
-
     pub fn create_empty(part: ArmorPart) -> BaseArmor {
         Self {
             id: format!("{}_{}", EMPTY_ARMOR_PREFIX, part.as_str()),
