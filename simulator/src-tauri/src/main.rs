@@ -526,9 +526,7 @@ fn calculate_skillset<'a>(
         }
     }
 
-    let mut all_loop_tree = std::collections::BTreeMap::new();
-
-    let mut total_case_count = 0;
+    let mut all_parts = Vec::new();
 
     for possible_unique_comb in &possible_unique_armors {
         let possible_unique_vec = possible_unique_comb.values().collect::<Vec<&CalcArmor>>();
@@ -579,11 +577,15 @@ fn calculate_skillset<'a>(
                     ret.push((*armor).clone());
                 }
 
+                ret.sort_by_key(|armor| {
+                    armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills)
+                });
+
                 ret
             })
             .collect::<Vec<Vec<CalcArmor>>>();
 
-        parts.sort_by_key(|parts| parts.len());
+        parts.sort_by_key(|parts| Reverse(parts.len()));
 
         let mut total_count = 1;
 
@@ -602,6 +604,19 @@ fn calculate_skillset<'a>(
         );
         debug!("");
 
+        all_parts.push(parts);
+    }
+
+    ret.push_str(&format!(
+        "Empty armors expand: {:?}\n",
+        start_time.elapsed()
+    ));
+
+    let mut all_loop_tree = std::collections::BTreeMap::new();
+
+    let mut total_case_count = 0;
+
+    for parts in &all_parts {
         'final_armor: for (p0, p1, p2, p3, p4) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
         {
@@ -714,8 +729,9 @@ fn calculate_skillset<'a>(
     let elapsed_final = start_time.elapsed();
 
     ret.push_str(&format!(
-        "calculate_skillset elapsed: {:?}\n",
-        elapsed_final
+        "calculate_skillset elapsed: {:?}, answers length: {}\n",
+        elapsed_final,
+        answers.len()
     ));
     info!("{}", ret);
 
