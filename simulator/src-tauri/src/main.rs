@@ -458,10 +458,14 @@ fn calculate_skillset<'a>(
         armors.insert(feet.part(), feet.clone());
 
         let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
-        let possible_combs =
-            full_equip.is_possible(no_deco_skills.clone(), &free_slots, &decos_possible);
+        let (possible_result, possible_combs) = full_equip.get_possible_combs(
+            no_deco_skills.clone(),
+            &free_slots,
+            &no_deco_skills,
+            &dm.deco_combinations,
+        );
 
-        if 0 < possible_combs.len() {
+        if possible_result {
             println!(
                 "Unique skills possible: {:?}, {:?}",
                 possible_combs,
@@ -595,59 +599,43 @@ fn calculate_skillset<'a>(
         };
 
         for p0 in &parts[0] {
-            let mut req_skills = selected_skills.clone();
-            let mut free_slots = free_slots.clone();
-            let (p0, s1) = subtracted_armors(p0, &mut req_skills, &mut free_slots);
-
             if pre_check_point(0, p0.point()) < total_require_point {
                 println!(
                     "Part 0 highest: {} {}",
                     total_require_point,
                     pre_check_point(0, p0.point()),
                 );
-                continue;
+                //continue;
             }
 
             for p1 in &parts[1] {
-                let mut req_skills = req_skills.clone();
-                let mut free_slots = free_slots.clone();
-                let (p1, s2) = subtracted_armors(p1, &mut req_skills, &mut free_slots);
-
                 if pre_check_point(1, p1.point()) < total_require_point {
                     println!(
                         "Part 1 highest: {} {}",
                         total_require_point,
                         pre_check_point(1, p1.point()),
                     );
-                    continue;
+                    //continue;
                 }
 
                 for p2 in &parts[2] {
-                    let mut req_skills = req_skills.clone();
-                    let mut free_slots = free_slots.clone();
-                    let (p2, s3) = subtracted_armors(p2, &mut req_skills, &mut free_slots);
-
                     if pre_check_point(2, p2.point()) < total_require_point {
                         println!(
                             "Part 2 highest: {} {}",
                             total_require_point,
                             pre_check_point(2, p2.point()),
                         );
-                        continue;
+                        //continue;
                     }
 
                     for p3 in &parts[3] {
-                        let mut req_skills = req_skills.clone();
-                        let mut free_slots = free_slots.clone();
-                        let (p3, s4) = subtracted_armors(p3, &mut req_skills, &mut free_slots);
-
                         if pre_check_point(3, p3.point()) < total_require_point {
                             println!(
                                 "Part 3 highest: {} {}",
                                 total_require_point,
                                 pre_check_point(3, p3.point()),
                             );
-                            continue;
+                            //continue;
                         }
 
                         'final_armor: for p4 in &parts[4] {
@@ -663,12 +651,6 @@ fn calculate_skillset<'a>(
                                 }
                             }
 
-                            let mut req_skills = req_skills.clone();
-                            let mut free_slots = free_slots.clone();
-                            let (p4, s5) = subtracted_armors(p4, &mut req_skills, &mut free_slots);
-
-                            let subtracts = vec![&s1, &s2, &s3, &s4, &s5];
-
                             let mut armors = FullArmors::<'a>::new();
 
                             armors.insert(p0.part(), p0.clone());
@@ -680,12 +662,11 @@ fn calculate_skillset<'a>(
                             let result = calculate_full_equip(
                                 dm,
                                 &p4,
-                                &mut free_slots,
-                                &req_skills,
+                                &free_slots,
+                                &selected_skills,
                                 &no_deco_skills,
                                 &weapon_slots,
                                 armors,
-                                &subtracts,
                                 &mut failed_slot_armors,
                                 &mut answers,
                                 &mut total_index,
@@ -750,80 +731,42 @@ fn compare_failed_slot_armors(slot_armors: &mut HashSet<String>, armor: &CalcArm
 fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     p4: &CalcArmor,
-    free_slots: &mut Vec<i32>,
+    free_slots: &Vec<i32>,
     req_skills: &HashMap<String, i32>,
     no_deco_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
     armors: FullArmors<'a>,
-    subtracts: &Vec<&HashMap<String, i32>>,
     failed_slot_armors: &mut HashSet<String>,
     answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
     total_index: &mut i32,
 ) -> i32 {
     for slot_count in free_slots {
-        if 0 < *slot_count {
+        if 0 < *slot_count && BaseArmor::is_slot_armor(p4.id()) {
             compare_failed_slot_armors(failed_slot_armors, &p4);
 
             return 1;
         }
     }
-
     let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
 
-    for (id, _) in req_skills {
-        if no_deco_skills.contains_key(id) {
-            return 1;
-        }
-    }
+    let (local_result, local_answers) = full_equip.get_possible_combs(
+        req_skills.clone(),
+        &free_slots,
+        &no_deco_skills,
+        &dm.deco_combinations,
+    );
 
-    let all_possible_slot_coms = dm.deco_combinations.get_possible_combs(&req_skills);
-
-    let armor_possible_slot_combs = all_possible_slot_coms
-        .iter()
-        .filter_map(|possible_comb| {
-            let mut is_available = true;
-
-            for i in 0..MAX_SLOT_LEVEL {
-                let i = i as usize;
-
-                let armor_slot_count = full_equip.avail_slots[i];
-                let req_slot_count = possible_comb.sum[i];
-
-                if armor_slot_count < req_slot_count {
-                    is_available = false;
-                    break;
-                }
-            }
-
-            if is_available {
-                Some(possible_comb.clone())
-            } else {
-                None
-            }
-        })
-        .collect::<Vec<DecorationCombination>>();
-
-    if armor_possible_slot_combs.len() == 0 {
+    if local_result == false {
         compare_failed_slot_armors(failed_slot_armors, &p4);
         return 1;
     }
 
-    let mut subtracted_skills = HashMap::<String, i32>::new();
-
-    for s in subtracts {
-        for (s_id, s_level) in *s {
-            let existing = subtracted_skills.get_mut(s_id);
-
-            match existing {
-                Some(prev_level) => *prev_level += s_level,
-                None => {
-                    subtracted_skills.insert(s_id.clone(), *s_level);
-                }
-            }
-        }
-    }
-
     println!("Initial slots: {:?}", full_equip.avail_slots);
+    println!("Armor ids: {:?}", full_equip.all_skills);
+
+    for local_answer in &local_answers {
+        println!("Local answer: {:?}", local_answer);
+    }
 
     /*
     println!("All skills: {:?}", full_equip.all_skills);
@@ -905,7 +848,7 @@ fn calculate_full_equip<'a>(
         answers_equip.push(final_equip);
     }
 
-    for (equip, slot_comb) in iproduct!(answers_equip, armor_possible_slot_combs) {
+    for (equip, slot_comb) in iproduct!(answers_equip, local_answers) {
         answers.push((equip, slot_comb));
     }
 

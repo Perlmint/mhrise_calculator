@@ -1,12 +1,10 @@
-use std::collections::HashMap;
-
-use serde::Serialize;
+use std::{collections::HashMap, time::Instant};
 
 use crate::{
     calc::armor::CalcArmor,
     data::{
         armor::{ArmorPart, Talisman},
-        deco::Decoration,
+        deco_combination::{DecorationCombination, DecorationCombinations},
         skill::MAX_SLOT_LEVEL,
     },
 };
@@ -19,251 +17,6 @@ pub struct FullEquipments<'a> {
 
     pub all_skills: HashMap<String, i32>,
     pub avail_slots: Vec<i32>,
-}
-
-#[derive(Clone, Debug)]
-struct SlotSkillCalculation<'a> {
-    pub avail_slots: Vec<i32>,
-    pub req_skills: HashMap<String, i32>,
-    pub decos_possible: &'a HashMap<String, Vec<&'a Decoration>>,
-}
-
-#[derive(Serialize, Clone, Debug)]
-pub struct SubSlotSkillCalculator {
-    pub avail_slots: Vec<i32>,
-
-    pub combinations: HashMap<String, Vec<i32>>,
-}
-
-impl<'a> SlotSkillCalculation<'a> {
-    pub fn calculate(&mut self) -> Vec<SubSlotSkillCalculator> {
-        // println!("Calculate begin... {:?}", self.avail_slots);
-
-        let mut is_possible = true;
-        let mut single_deco_skills = Vec::new();
-
-        for (id, req_level) in &self.req_skills {
-            let req_level = *req_level;
-
-            if req_level <= 0 {
-                continue;
-            }
-
-            let decos = &self.decos_possible.get(id);
-
-            if decos.is_none() {
-                is_possible = false;
-                break;
-            }
-
-            let decos = decos.unwrap();
-
-            if decos.len() == 1 {
-                let size = decos[0].slot_size;
-
-                self.avail_slots[(size - 1) as usize] -= req_level;
-
-                if self.avail_slots[(size - 1) as usize] < 0 {
-                    is_possible = false;
-                    break;
-                }
-
-                single_deco_skills.push(id);
-            }
-        }
-
-        if is_possible == false {
-            return Vec::new();
-        }
-
-        let mut all_temp_combinations = Vec::<SubSlotSkillCalculator>::new();
-
-        all_temp_combinations.push(self.get_sub());
-
-        let mut idx = 0;
-
-        for (id, req_level) in &self.req_skills {
-            let req_level = *req_level;
-
-            if req_level <= 0 {
-                continue;
-            }
-
-            let decos = self.decos_possible.get(id).unwrap();
-
-            if decos.len() == 1 {
-                continue;
-            }
-
-            let mut max_deco_counts = Vec::new();
-
-            for deco in decos {
-                let max_required = req_level / deco.skill_level;
-
-                max_deco_counts.push(max_required);
-            }
-
-            let mut skill_temp_combs = all_temp_combinations.clone();
-            let mut skill_done_combs = Vec::new();
-
-            for (slot_size_index, max_deco_count) in max_deco_counts.iter().enumerate() {
-                let deco = decos[slot_size_index];
-
-                let deco_temp_combs = skill_temp_combs.clone();
-
-                for temp_comb in &deco_temp_combs {
-                    for count in (1..max_deco_count + 1).rev() {
-                        let mut cur_level_sum: i32 = temp_comb.combinations[id].iter().sum();
-                        cur_level_sum += count * deco.skill_level;
-
-                        let mut next_temp_comb = temp_comb.clone();
-                        next_temp_comb.combinations.get_mut(id).unwrap()[slot_size_index] = count;
-
-                        if req_level <= cur_level_sum {
-                            let mut has_better_slot_answer = false;
-
-                            for lower_deco_size in 0..slot_size_index {
-                                let lower_deco = decos[lower_deco_size];
-
-                                let mut lower_level_sum: i32 =
-                                    temp_comb.combinations[id].iter().sum();
-                                lower_level_sum += count * lower_deco.skill_level;
-
-                                if req_level <= lower_level_sum {
-                                    has_better_slot_answer = true;
-                                    break;
-                                }
-                            }
-
-                            if has_better_slot_answer == false {
-                                skill_done_combs.push(next_temp_comb);
-                            }
-                        } else {
-                            skill_temp_combs.push(next_temp_comb);
-                        }
-                    }
-                }
-            }
-
-            // println!(
-            //     "{} {} skill end check: req_level - {}, {:?}, {:?}",
-            //     idx,
-            //     id,
-            //     req_level,
-            //     skill_done_combs
-            //         .iter()
-            //         .map(|val| &val.combinations)
-            //         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-            //     skill_done_combs
-            //         .iter()
-            //         .map(|val| &val.avail_slots)
-            //         .collect::<Vec<&Vec<i32>>>(),
-            // );
-
-            all_temp_combinations = skill_done_combs
-                .iter_mut()
-                .filter_map(|comb| {
-                    let skill_combs = comb.combinations.get(id).unwrap();
-
-                    for (slot_size_index, deco) in decos.iter().enumerate() {
-                        let mut deco_count_required = skill_combs[slot_size_index];
-
-                        if deco_count_required == 0 {
-                            continue;
-                        }
-
-                        for avail_slot_size_index in deco.slot_size - 1..MAX_SLOT_LEVEL {
-                            let avail_slot_size_index = avail_slot_size_index as usize;
-
-                            let taken =
-                                deco_count_required.min(comb.avail_slots[avail_slot_size_index]);
-
-                            comb.avail_slots[avail_slot_size_index] -= taken;
-                            deco_count_required -= taken;
-
-                            if deco_count_required == 0 {
-                                break;
-                            }
-                        }
-
-                        if 0 < deco_count_required {
-                            return None;
-                        }
-                    }
-
-                    return Some(comb.clone());
-                })
-                .collect();
-
-            // println!(
-            //     "{} {} skill end check: {:?}, {:?}",
-            //     idx,
-            //     id,
-            //     all_temp_combinations
-            //         .iter()
-            //         .map(|val| &val.combinations)
-            //         .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-            //     all_temp_combinations
-            //         .iter()
-            //         .map(|val| &val.avail_slots)
-            //         .collect::<Vec<&Vec<i32>>>(),
-            // );
-
-            idx += 1;
-        }
-
-        for comb in all_temp_combinations.iter_mut() {
-            comb.combinations = comb
-                .combinations
-                .clone()
-                .into_iter()
-                .filter(|sub_comb| {
-                    let sum: i32 = sub_comb.1.iter().sum();
-
-                    return sum != 0;
-                })
-                .collect::<HashMap<String, Vec<i32>>>();
-
-            for skill_id in &single_deco_skills {
-                let req_level = self.req_skills.get(*skill_id).unwrap();
-
-                comb.combinations
-                    .insert(skill_id.to_string(), vec![*req_level]);
-            }
-        }
-
-        return all_temp_combinations;
-    }
-
-    fn get_sub(&self) -> SubSlotSkillCalculator {
-        let mut combinations = HashMap::<String, Vec<i32>>::new();
-
-        for (id, count) in &self.req_skills {
-            if *count == 0 {
-                continue;
-            }
-
-            let mut skill_combs = Vec::new();
-
-            let decos = self.decos_possible.get(id);
-
-            if decos.is_none() {
-                continue;
-            }
-
-            for _ in decos.unwrap() {
-                skill_combs.push(0);
-            }
-
-            combinations.insert(id.clone(), skill_combs);
-        }
-
-        SubSlotSkillCalculator {
-            avail_slots: self.avail_slots.clone(),
-
-            combinations,
-        }
-    }
 }
 
 impl<'a> FullEquipments<'a> {
@@ -283,12 +36,14 @@ impl<'a> FullEquipments<'a> {
 
         ret
     }
-    pub fn is_possible(
+
+    pub fn get_possible_combs(
         &self,
         mut req_skills: HashMap<String, i32>,
         req_slots: &Vec<i32>,
-        decos_possible: &HashMap<String, Vec<&Decoration>>,
-    ) -> Vec<SubSlotSkillCalculator> {
+        no_deco_skills: &HashMap<String, i32>,
+        deco_comb_calculator: &DecorationCombinations,
+    ) -> (bool, Vec<DecorationCombination>) {
         let mut avail_slots = self.avail_slots.clone();
 
         for (req_idx, req_slot_count) in req_slots.iter().enumerate() {
@@ -312,27 +67,46 @@ impl<'a> FullEquipments<'a> {
             }
 
             if 0 < req_count {
-                return Vec::new();
+                return (false, Vec::new());
             }
         }
 
-        for (id, level) in req_skills.iter_mut() {
-            let existing = self.all_skills.get(id);
+        let mut remove_ids = Vec::new();
+
+        for (id, level) in req_skills.clone() {
+            let existing = self.all_skills.get(&id);
 
             if existing.is_some() {
-                *level -= existing.unwrap();
+                if level - existing.unwrap() <= 0 {
+                    remove_ids.push(id);
+                }
             }
         }
 
-        let mut calculator = SlotSkillCalculation {
-            avail_slots: avail_slots.clone(),
-            req_skills: req_skills.clone(),
-            decos_possible,
-        };
+        for id in remove_ids {
+            req_skills.remove(&id);
+        }
 
-        let all_combs = calculator.calculate();
+        if req_skills.len() == 0 {
+            return (
+                true,
+                vec![DecorationCombination {
+                    combs_per_skill: HashMap::new(),
+                    sum: Vec::new(),
+                }],
+            );
+        }
 
-        return all_combs;
+        for (id, _) in &req_skills {
+            if no_deco_skills.contains_key(id) {
+                return (false, Vec::new());
+            }
+        }
+
+        let mut req_deco_combs = deco_comb_calculator.get_possible_combs(&req_skills);
+        req_deco_combs.retain(|comb| comb.is_possible(&avail_slots));
+
+        (req_deco_combs.len() != 0, req_deco_combs)
     }
 
     fn sum(&self) -> (HashMap<String, i32>, Vec<i32>) {

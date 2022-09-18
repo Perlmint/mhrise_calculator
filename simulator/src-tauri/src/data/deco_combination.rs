@@ -260,3 +260,15 @@ impl DecorationCombinations {
         return std::cmp::Ordering::Equal;
     }
 }
+
+impl DecorationCombination {
+    pub fn is_possible(&self, armor_slots: &Vec<i32>) -> bool {
+        for (slot1, slot2) in izip!(&self.sum, armor_slots) {
+            if slot2 < slot1 {
+                return false;
+            }
+        }
+
+        true
+    }
+}
