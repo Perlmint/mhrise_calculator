@@ -70,9 +70,9 @@ async function calculate()
 
   console.log(calcInput);
 
-  const result = await invoke("cmd_calculate_skillset", calcInput) as {};
+  const result = await invoke("cmd_calculate_skillset", calcInput) as string;
 
-  calc_answers.value = JSON.stringify(result, null, 4);
+  calc_answers.value = result;
 
   console.log(result);
 }
