@@ -137,10 +137,10 @@ impl BaseArmor {
         }
     }
 
-    pub fn get_slot_armor_id(armor: &BaseArmor) -> String {
+    pub fn get_slot_armor_id(slots: &Vec<i32>) -> String {
         format!(
             "{}_{}-{}-{}",
-            SLOT_ARMOR_PREFIX, armor.slots[0], armor.slots[1], armor.slots[2]
+            SLOT_ARMOR_PREFIX, slots[0], slots[1], slots[2]
         )
     }
 

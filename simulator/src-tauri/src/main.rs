@@ -3,14 +3,15 @@
     windows_subsystem = "windows"
 )]
 
+use csv::StringRecord;
+use log::{debug, info};
 use std::cmp::{Ordering, Reverse};
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::BufReader;
-use std::sync::{Mutex, MutexGuard};
+use std::sync::Mutex;
 use std::time::Instant;
 
-use csv::StringRecord;
 use data::armor::{ArmorPart, SexType};
 use data::data_manager::DataManager;
 use data::deco_combination::DecorationCombinations;
@@ -145,7 +146,7 @@ fn parse_anomaly(
                 anomaly_armors.push(anomaly_armor);
             }
 
-            println!("Anomaly parsed - count : {}", anomaly_armors.len());
+            debug!("Anomaly parsed - count : {}", anomaly_armors.len());
 
             anomaly_armors
         }
@@ -260,7 +261,7 @@ fn cmd_calculate_skillset<'a>(
     free_slots: Vec<i32>,
     mutex_dm: tauri::State<'a, Mutex<DataManager>>,
 ) -> String {
-    println!("Start calculating...");
+    debug!("Start calculating...");
 
     let dm = mutex_dm.lock().unwrap();
 
@@ -295,6 +296,7 @@ fn calculate_skillset<'a>(
     dm: &'a DataManager,
 ) -> String {
     let start_time = Instant::now();
+    let mut ret = String::from("\n");
 
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
     let mut yes_deco_skills = HashMap::<String, i32>::new();
@@ -311,8 +313,8 @@ fn calculate_skillset<'a>(
         }
     }
 
-    println!("Skills with yes deco: {:?}", yes_deco_skills);
-    println!("Skills with no deco: {:?}", no_deco_skills);
+    debug!("Skills with yes deco: {:?}", yes_deco_skills);
+    debug!("Skills with no deco: {:?}", no_deco_skills);
 
     let helms = dm.get_parts(ArmorPart::Helm);
     let torsos = dm.get_parts(ArmorPart::Torso);
@@ -466,7 +468,7 @@ fn calculate_skillset<'a>(
         );
 
         if possible_result {
-            println!(
+            debug!(
                 "Unique skills possible: {:?}, {:?}",
                 possible_combs,
                 vec![helm.id(), torso.id(), arm.id(), waist.id(), feet.id()]
@@ -507,13 +509,12 @@ fn calculate_skillset<'a>(
         }
     }
 
-    let mut total_index = 0;
-    let mut answers = Vec::new();
+    let mut all_loop_cases = Vec::new();
 
-    'all_cases: for possible_unique_comb in &possible_unique_armors {
+    for possible_unique_comb in &possible_unique_armors {
         let possible_unique_vec = possible_unique_comb.values().collect::<Vec<&CalcArmor>>();
 
-        println!(
+        debug!(
             "Parts sorted id: {} {} {} {} {}",
             possible_unique_vec[0].id(),
             possible_unique_vec[1].id(),
@@ -534,12 +535,23 @@ fn calculate_skillset<'a>(
                     let part_deco_armors = &mut armors_with_deco_skills[&part].clone();
                     let part_slot_armors = &mut all_slot_armors[&part]
                         .iter()
-                        .map(|(_, armor)| armor.clone())
-                        .collect::<Vec<CalcArmor>>();
+                        .filter_map(|(_, armor)| {
+                            for unique_armor in part_unique_armors.iter() {
+                                if &BaseArmor::get_slot_armor_id(unique_armor.slots()) == armor.id()
+                                {
+                                    return None;
+                                }
+                            }
 
-                    part_unique_armors.sort_by_key(|armor| armor.point());
-                    part_deco_armors.sort_by_key(|armor| armor.point());
-                    part_slot_armors.sort_by_key(|armor| armor.point());
+                            for deco_armor in part_deco_armors.iter() {
+                                if &BaseArmor::get_slot_armor_id(deco_armor.slots()) == armor.id() {
+                                    return None;
+                                }
+                            }
+
+                            return Some(armor.clone());
+                        })
+                        .collect::<Vec<CalcArmor>>();
 
                     ret.append(part_unique_armors);
                     ret.append(part_deco_armors);
@@ -548,11 +560,13 @@ fn calculate_skillset<'a>(
                     ret.push((*armor).clone());
                 }
 
+                ret.sort_by_key(|armor| armor.point());
+
                 ret
             })
             .collect::<Vec<Vec<CalcArmor>>>();
 
-        parts.sort_by_key(|p| Reverse(p[0].point()));
+        parts.sort_by_key(|parts| parts.len());
 
         let mut total_count = 1;
 
@@ -560,7 +574,7 @@ fn calculate_skillset<'a>(
             total_count *= part_armors.len();
         }
 
-        println!(
+        debug!(
             "Parts size: {} {} {} {} {}, total: {}",
             parts[0].len(),
             parts[1].len(),
@@ -569,130 +583,112 @@ fn calculate_skillset<'a>(
             parts[4].len(),
             total_count,
         );
-        println!();
+        debug!("");
 
-        let subtracted_armors = |parts: &CalcArmor<'a>,
-                                 req_skills: &mut HashMap<String, i32>,
-                                 req_slots: &mut Vec<i32>|
-         -> (CalcArmor<'a>, HashMap<String, i32>) {
-            let mut parts: CalcArmor<'a> = parts.clone();
-            let diff_skills = parts.subtract_skills(req_skills, req_slots);
+        'final_armor: for (p0, p1, p2, p3, p4) in
+            iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
+        {
+            let mut req_skills = selected_skills.clone();
+            let mut req_slots = free_slots.clone();
 
-            return (parts, diff_skills);
-        };
+            let mut real_parts = vec![p0.clone(), p1.clone(), p2.clone(), p3.clone(), p4.clone()];
 
-        let mut failed_slot_armors = HashSet::<String>::new();
-
-        let highest_points = vec![
-            parts[0][0].point(),
-            parts[1][0].point(),
-            parts[2][0].point(),
-            parts[3][0].point(),
-            parts[4][0].point(),
-        ];
-
-        let pre_check_point = |index: i32, point: i32| -> i32 {
-            let pre_highest: i32 =
-                highest_points.iter().sum::<i32>() + point - highest_points[index as usize];
-
-            pre_highest
-        };
-
-        for p0 in &parts[0] {
-            if pre_check_point(0, p0.point()) < total_require_point {
-                println!(
-                    "Part 0 highest: {} {}",
-                    total_require_point,
-                    pre_check_point(0, p0.point()),
-                );
-                //continue;
+            for part in real_parts.iter_mut() {
+                part.subtract_skills(&mut req_skills, &mut req_slots);
             }
 
-            for p1 in &parts[1] {
-                if pre_check_point(1, p1.point()) < total_require_point {
-                    println!(
-                        "Part 1 highest: {} {}",
-                        total_require_point,
-                        pre_check_point(1, p1.point()),
-                    );
-                    //continue;
-                }
-
-                for p2 in &parts[2] {
-                    if pre_check_point(2, p2.point()) < total_require_point {
-                        println!(
-                            "Part 2 highest: {} {}",
-                            total_require_point,
-                            pre_check_point(2, p2.point()),
-                        );
-                        //continue;
-                    }
-
-                    for p3 in &parts[3] {
-                        if pre_check_point(3, p3.point()) < total_require_point {
-                            println!(
-                                "Part 3 highest: {} {}",
-                                total_require_point,
-                                pre_check_point(3, p3.point()),
-                            );
-                            //continue;
-                        }
-
-                        'final_armor: for p4 in &parts[4] {
-                            total_index += 1;
-
-                            for failed_id in failed_slot_armors.clone() {
-                                if DecorationCombinations::compare(
-                                    &BaseArmor::parse_slot_armor_id(&failed_id),
-                                    &p4.slots(),
-                                ) != Ordering::Less
-                                {
-                                    continue;
-                                }
-                            }
-
-                            let mut armors = FullArmors::<'a>::new();
-
-                            armors.insert(p0.part(), p0.clone());
-                            armors.insert(p1.part(), p1.clone());
-                            armors.insert(p2.part(), p2.clone());
-                            armors.insert(p3.part(), p3.clone());
-                            armors.insert(p4.part(), p4.clone());
-
-                            let result = calculate_full_equip(
-                                dm,
-                                &p4,
-                                &free_slots,
-                                &selected_skills,
-                                &no_deco_skills,
-                                &weapon_slots,
-                                armors,
-                                &mut failed_slot_armors,
-                                &mut answers,
-                                &mut total_index,
-                            );
-
-                            if 200 <= answers.len() {
-                                println!("Iteration size too large, breaking at 200");
-                                break 'all_cases;
-                            }
-                        }
-                    }
+            for slot in &req_slots {
+                if 0 < *slot {
+                    continue 'final_armor;
                 }
             }
+
+            for (id, _) in &req_skills {
+                if no_deco_skills.contains_key(id) {
+                    continue 'final_armor;
+                }
+            }
+
+            all_loop_cases.push((real_parts, req_skills, req_slots));
         }
     }
 
-    println!(
+    all_loop_cases.sort_by_key(|(armors, _, _)| {
+        let total_point = armors.iter().map(|armor| armor.point()).sum::<i32>();
+
+        Reverse(total_point)
+    });
+
+    let elapsed_sort = start_time.elapsed();
+
+    ret.push_str(&format!(
+        "all_loop_cases sorting elapsed: {:?}\n",
+        elapsed_sort
+    ));
+
+    debug!(
+        "All loop cases calculated, start calculating: {}\n",
+        all_loop_cases.len()
+    );
+
+    let mut total_index = 0;
+    let mut answers = Vec::new();
+
+    let mut failed_slot_armors = HashSet::<String>::new();
+
+    'all_cases: for (loop_case, req_skills, req_slots) in all_loop_cases {
+        total_index += 1;
+        /*
+                for failed_id in failed_slot_armors.clone() {
+                    if DecorationCombinations::compare(
+                        &BaseArmor::parse_slot_armor_id(&failed_id),
+                        &loop_case[4].slots(),
+                    ) != Ordering::Less
+                    {
+                        continue;
+                    }
+                }
+        */
+        let mut armors = FullArmors::<'a>::new();
+
+        armors.insert(loop_case[0].part(), loop_case[0].clone());
+        armors.insert(loop_case[1].part(), loop_case[1].clone());
+        armors.insert(loop_case[2].part(), loop_case[2].clone());
+        armors.insert(loop_case[3].part(), loop_case[3].clone());
+        armors.insert(loop_case[4].part(), loop_case[4].clone());
+
+        let result = calculate_full_equip(
+            dm,
+            &loop_case[4],
+            &req_slots,
+            &req_skills,
+            &no_deco_skills,
+            &weapon_slots,
+            armors,
+            &mut failed_slot_armors,
+            &mut answers,
+            &mut total_index,
+        );
+
+        if 200 <= answers.len() {
+            debug!("Iteration size too large, breaking at 200");
+            break 'all_cases;
+        }
+    }
+
+    info!(
         "All combinations size: {}, answers size: {}",
         total_index + 1,
         answers.len()
     );
 
-    let elapsed = start_time.elapsed();
+    let elapsed_final = start_time.elapsed();
 
-    let ret = format!("calculate_skillset elapsed: {:?}", elapsed);
-    println!("{}", ret);
+    ret.push_str(&format!(
+        "calculate_skillset elapsed: {:?}\n",
+        elapsed_final
+    ));
+    info!("{}", ret);
 
     return ret;
 }
@@ -761,25 +757,25 @@ fn calculate_full_equip<'a>(
         return 1;
     }
 
-    println!("Initial slots: {:?}", full_equip.avail_slots);
-    println!("Armor ids: {:?}", full_equip.all_skills);
+    debug!("Initial slots: {:?}", full_equip.avail_slots);
+    debug!("Armor ids: {:?}", full_equip.all_skills);
 
     for local_answer in &local_answers {
-        println!("Local answer: {:?}", local_answer);
+        debug!("Local answer: {:?}", local_answer);
     }
 
     /*
-    println!("All skills: {:?}", full_equip.all_skills);
-    println!("Subracted skills: {:?}", subtracted_skills);
-    println!("Requested skills: {:?}", selected_skills);
-    println!(
+    debug!("All skills: {:?}", full_equip.all_skills);
+    debug!("Subracted skills: {:?}", subtracted_skills);
+    debug!("Requested skills: {:?}", selected_skills);
+    debug!(
         "Decos possible: {:?}",
         &decos_possible
             .iter()
             .map(|deco| deco.0)
             .collect::<Vec<&String>>()
     );
-    println!(
+    debug!(
         "Possible slot combinations: {:?} {:?}",
         all_possible_slot_coms
             .iter()
@@ -792,13 +788,13 @@ fn calculate_full_equip<'a>(
     );
 
     for comb in &armor_possible_slot_combs {
-        println!("Possible comb: {:?}", comb);
+        debug!("Possible comb: {:?}", comb);
     }
 
-    println!("No decos {:?}", no_deco_skills);
+    debug!("No decos {:?}", no_deco_skills);
     */
 
-    println!(
+    debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
         full_equip.armors[&ArmorPart::Helm].id(),
         full_equip.armors[&ArmorPart::Torso].id(),
@@ -852,12 +848,11 @@ fn calculate_full_equip<'a>(
         answers.push((equip, slot_comb));
     }
 
-    println!(
-        "Answers length: {}, total_index: {}",
+    info!(
+        "Answers length: {}, total_index: {}\n",
         answers.len(),
         total_index
     );
-    println!();
 
     return 0;
 }
@@ -893,9 +888,11 @@ fn create_data_manager(
 }
 
 fn main() {
+    env_logger::init();
+
     let dm = create_data_manager("./data/armor.json", "./data/skill.json", "./data/deco.json");
 
-    println!(
+    debug!(
         "Anomaly armor count: {}, talisman count: {}",
         dm.anomaly_armors.len(),
         dm.talismans.len()

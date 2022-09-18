@@ -86,7 +86,7 @@ impl DataManager {
         }
 
         for (_, armor) in &armors {
-            let slot_armor_id = BaseArmor::get_slot_armor_id(armor);
+            let slot_armor_id = BaseArmor::get_slot_armor_id(&armor.slots);
 
             let part_slot_only_armors = slot_only_armors.get_mut(&armor.part).unwrap();
             if part_slot_only_armors.contains_key(&slot_armor_id) == false {
