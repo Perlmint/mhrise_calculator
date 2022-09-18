@@ -500,6 +500,11 @@ fn calculate_skillset<'a>(
         Reverse(sum)
     });
 
+    ret.push_str(&format!(
+        "Unique armors calculation: {:?}\n",
+        start_time.elapsed()
+    ));
+
     let mut total_require_point = 0;
 
     for (id, level) in &selected_skills {
