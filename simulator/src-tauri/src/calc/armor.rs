@@ -137,6 +137,15 @@ impl<'a> CalcArmor<'a> {
         yes_deco_skills: &HashMap<String, i32>,
         no_deco_skills: &HashMap<String, i32>,
     ) {
+        self.point = self.get_point(decos_possible, yes_deco_skills, no_deco_skills);
+    }
+
+    pub fn get_point(
+        &self,
+        decos_possible: &HashMap<String, Vec<&Decoration>>,
+        yes_deco_skills: &HashMap<String, i32>,
+        no_deco_skills: &HashMap<String, i32>,
+    ) -> i32 {
         let mut point = 0;
 
         for (id, skill) in &self.skills {
@@ -172,6 +181,6 @@ impl<'a> CalcArmor<'a> {
             point += slot_point * count;
         }
 
-        self.point = point;
+        point
     }
 }
