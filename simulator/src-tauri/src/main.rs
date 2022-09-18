@@ -464,12 +464,13 @@ fn calculate_skillset<'a>(
         all_unique_armors[&ArmorPart::Waist].iter(),
         all_unique_armors[&ArmorPart::Feet].iter()
     ) {
-        let mut armors = FullArmors::new();
-        armors.insert(helm.part(), helm.clone());
-        armors.insert(torso.part(), torso.clone());
-        armors.insert(arm.part(), arm.clone());
-        armors.insert(waist.part(), waist.clone());
-        armors.insert(feet.part(), feet.clone());
+        let mut armors = vec![
+            helm.clone(),
+            torso.clone(),
+            arm.clone(),
+            waist.clone(),
+            feet.clone(),
+        ];
 
         let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
         let (possible_result, possible_combs) = full_equip.get_possible_combs(
@@ -493,7 +494,7 @@ fn calculate_skillset<'a>(
     possible_unique_armors.sort_by_key(|armors| {
         let mut sum = 0;
 
-        for (_, armor) in armors {
+        for armor in armors {
             sum += armor.point();
         }
 
@@ -528,9 +529,7 @@ fn calculate_skillset<'a>(
 
     let mut all_parts = Vec::new();
 
-    for possible_unique_comb in &possible_unique_armors {
-        let possible_unique_vec = possible_unique_comb.values().collect::<Vec<&CalcArmor>>();
-
+    for possible_unique_vec in &possible_unique_armors {
         debug!(
             "Parts sorted id: {} {} {} {} {}",
             possible_unique_vec[0].id(),
@@ -692,13 +691,6 @@ fn calculate_skillset<'a>(
                         }
                     }
             */
-            let mut armors = FullArmors::<'a>::new();
-
-            armors.insert(loop_case[0].part(), loop_case[0].clone());
-            armors.insert(loop_case[1].part(), loop_case[1].clone());
-            armors.insert(loop_case[2].part(), loop_case[2].clone());
-            armors.insert(loop_case[3].part(), loop_case[3].clone());
-            armors.insert(loop_case[4].part(), loop_case[4].clone());
 
             let result = calculate_full_equip(
                 dm,
@@ -707,7 +699,7 @@ fn calculate_skillset<'a>(
                 &req_skills,
                 &no_deco_skills,
                 &weapon_slots,
-                armors,
+                loop_case.clone(),
                 &mut failed_slot_armors,
                 &mut answers,
                 &mut total_index,
@@ -776,16 +768,11 @@ fn calculate_full_equip<'a>(
     req_skills: &HashMap<String, i32>,
     no_deco_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
-    armors: FullArmors<'a>,
+    armors: Vec<CalcArmor<'a>>,
     failed_slot_armors: &mut HashSet<String>,
     answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
     total_index: &mut i32,
 ) -> i32 {
-    for slot_count in free_slots {
-        if 0 < *slot_count && BaseArmor::is_slot_armor(p4.id()) {
-            return 1;
-        }
-    }
     let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
 
     let (local_result, local_answers) = full_equip.get_possible_combs(
@@ -838,20 +825,20 @@ fn calculate_full_equip<'a>(
 
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
-        full_equip.armors[&ArmorPart::Helm].id(),
-        full_equip.armors[&ArmorPart::Torso].id(),
-        full_equip.armors[&ArmorPart::Arm].id(),
-        full_equip.armors[&ArmorPart::Waist].id(),
-        full_equip.armors[&ArmorPart::Feet].id(),
+        full_equip.armors[0].id(),
+        full_equip.armors[1].id(),
+        full_equip.armors[2].id(),
+        full_equip.armors[3].id(),
+        full_equip.armors[4].id(),
     );
 
     let mut real_armors = Vec::<Vec<CalcArmor<'a>>>::new();
 
-    for (part, armor) in full_equip.armors {
+    for armor in full_equip.armors {
         if BaseArmor::is_slot_armor(armor.id()) {
             let all_real_armors = dm
                 .armors_by_slot
-                .get(&part)
+                .get(&armor.part())
                 .unwrap()
                 .get(armor.id())
                 .unwrap()
@@ -867,21 +854,18 @@ fn calculate_full_equip<'a>(
 
     let mut answers_equip = Vec::new();
 
-    for (a1, a2, a3, a4, a5) in iproduct!(
+    for (a0, a1, a2, a3, a4) in iproduct!(
         &real_armors[0],
         &real_armors[1],
         &real_armors[2],
         &real_armors[3],
         &real_armors[4]
     ) {
-        let mut armors = HashMap::new();
-        armors.insert(a1.part(), a1.clone());
-        armors.insert(a2.part(), a2.clone());
-        armors.insert(a3.part(), a3.clone());
-        armors.insert(a4.part(), a4.clone());
-        armors.insert(a5.part(), a5.clone());
-
-        let final_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
+        let final_equip = FullEquipments::new(
+            weapon_slots.clone(),
+            vec![a0.clone(), a1.clone(), a2.clone(), a3.clone(), a4.clone()],
+            None,
+        );
 
         answers_equip.push(final_equip);
     }
