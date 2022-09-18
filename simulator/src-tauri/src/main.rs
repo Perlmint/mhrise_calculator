@@ -654,7 +654,21 @@ fn calculate_skillset<'a>(
                 all_loop_tree.insert(Reverse(total_point), Vec::new());
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
+            /*
+                        let full_equipment =
+                            FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
+                        let (is_avail, _) = full_equipment.get_possible_combs(
+                            req_skills.clone(),
+                            &req_slots,
+                            &no_deco_skills,
+                            &dm.deco_combinations,
+                        );
+
+                        if is_avail == false {
+                            continue;
+                        }
+            */
             existing.unwrap().push((real_parts, req_skills, req_slots));
             total_case_count += 1;
         }
