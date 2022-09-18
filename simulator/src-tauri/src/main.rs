@@ -521,7 +521,6 @@ fn calculate_skillset<'a>(
         }
     }
 
-    let mut all_loop_cases = Vec::<(Vec<CalcArmor>, HashMap<String, i32>, Vec<i32>)>::new();
     let mut all_loop_tree = std::collections::BTreeMap::new();
 
     let mut total_case_count = 0;
@@ -630,8 +629,6 @@ fn calculate_skillset<'a>(
 
             let total_point = real_parts.iter().map(|armor| armor.point()).sum::<i32>();
 
-            // all_loop_cases.push((real_parts, req_skills, req_slots));
-
             let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
             if existing.is_none() {
@@ -643,12 +640,6 @@ fn calculate_skillset<'a>(
             total_case_count += 1;
         }
     }
-
-    all_loop_cases.sort_by_key(|(armors, _, _)| {
-        let total_point = armors.iter().map(|armor| armor.point()).sum::<i32>();
-
-        Reverse(total_point)
-    });
 
     let elapsed_sort = start_time.elapsed();
 
