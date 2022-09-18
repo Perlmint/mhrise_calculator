@@ -144,25 +144,32 @@ impl<'a> CalcArmor<'a> {
                 Some(level) => {
                     let mut decos = decos_possible.get(id).unwrap().clone();
                     decos.sort_by_key(|deco| Reverse(deco.slot_size));
+
                     let max_slot_size = decos[0].slot_size;
 
-                    point += skill.level.min(*level) * 50 * max_slot_size;
+                    point += skill.level.min(*level) * max_slot_size;
                 }
-                None => {}
-            };
-        }
-
-        for (id, skill) in &self.skills {
-            match no_deco_skills.get(id) {
-                Some(level) => point += skill.level.min(*level) * 1000,
-                None => {}
+                None => {
+                    match no_deco_skills.get(id) {
+                        Some(level) => point += skill.level.min(*level) * 1000,
+                        None => {}
+                    };
+                }
             };
         }
 
         for (slot_size_index, count) in self.slots.iter().enumerate() {
-            let slot_size = slot_size_index as i32 + 1;
+            let slot_level = slot_size_index as i32 + 1;
 
-            point += 10 * slot_size * count;
+            let slot_point;
+
+            if slot_level == 4 {
+                slot_point = slot_level + 2;
+            } else {
+                slot_point = slot_level
+            }
+
+            point += slot_point * count;
         }
 
         self.point = point;
