@@ -12,8 +12,8 @@ pub struct DecorationCombinations {
 }
 
 #[derive(Clone, Debug)]
-pub struct DecorationCombination {
-    pub combs_per_skill: HashMap<String, Vec<i32>>,
+pub struct DecorationCombination<'a> {
+    pub combs_per_skill: HashMap<String, &'a Vec<i32>>,
     pub sum: Vec<i32>,
 }
 
@@ -211,7 +211,7 @@ impl DecorationCombinations {
         for comb in combs_per_skill[skill_ids[0]] {
             let mut combs_per_skill = HashMap::new();
 
-            combs_per_skill.insert(skill_ids[0].clone(), comb.clone());
+            combs_per_skill.insert(skill_ids[0].clone(), comb);
 
             let deco_comb = DecorationCombination {
                 combs_per_skill,
@@ -234,7 +234,7 @@ impl DecorationCombinations {
                 }
 
                 let mut combs_per_skill = prev_comb.combs_per_skill.clone();
-                combs_per_skill.insert(skill_ids[i].clone(), skill_comb.clone());
+                combs_per_skill.insert(skill_ids[i].clone(), skill_comb);
 
                 let new_deco_comb = DecorationCombination {
                     combs_per_skill,
@@ -263,7 +263,7 @@ impl DecorationCombinations {
     }
 }
 
-impl DecorationCombination {
+impl<'a> DecorationCombination<'a> {
     pub fn is_possible(&self, armor_slots: &Vec<i32>) -> bool {
         for (slot1, slot2) in izip!(&self.sum, armor_slots) {
             if slot2 < slot1 {

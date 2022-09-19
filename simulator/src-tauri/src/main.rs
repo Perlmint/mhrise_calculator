@@ -30,6 +30,7 @@ mod data {
 mod calc {
     pub mod armor;
     pub mod deco;
+    pub mod skill;
 }
 
 mod full_equipments;
@@ -644,7 +645,7 @@ fn calculate_skillset<'a>(
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
 
-            existing.unwrap().push((real_parts, req_skills, req_slots));
+            existing.unwrap().push((real_parts, req_skills));
             total_case_count += 1;
         }
     }
@@ -664,32 +665,14 @@ fn calculate_skillset<'a>(
     let mut total_index = 0;
     let mut answers = Vec::new();
 
-    let mut failed_slot_armors = HashSet::<String>::new();
-
     'all_cases: for (_, case_vec) in all_loop_tree.iter() {
-        for (loop_case, req_skills, req_slots) in case_vec {
+        for (loop_case, req_skills) in case_vec {
             total_index += 1;
-            /*
-                    for failed_id in failed_slot_armors.clone() {
-                        if DecorationCombinations::compare(
-                            &BaseArmor::parse_slot_armor_id(&failed_id),
-                            &loop_case[4].slots(),
-                        ) != Ordering::Less
-                        {
-                            continue;
-                        }
-                    }
-            */
-
             let result = calculate_full_equip(
                 dm,
-                &loop_case[4],
-                &req_slots,
                 &req_skills,
-                &no_deco_skills,
                 &weapon_slots,
                 loop_case.clone(),
-                &mut failed_slot_armors,
                 &mut answers,
                 &mut total_index,
             );
@@ -752,24 +735,18 @@ fn compare_failed_slot_armors(slot_armors: &mut HashSet<String>, armor: &CalcArm
 
 fn calculate_full_equip<'a>(
     dm: &'a DataManager,
-    p4: &CalcArmor,
-    free_slots: &Vec<i32>,
     req_skills: &HashMap<String, i32>,
-    no_deco_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
     armors: Vec<CalcArmor<'a>>,
-    failed_slot_armors: &mut HashSet<String>,
-    answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
+    answers: &mut Vec<(FullEquipments<'a>, DecorationCombination<'a>)>,
     total_index: &mut i32,
 ) -> i32 {
-    let full_equip = FullEquipments::new(weapon_slots.clone(), armors, None);
+    let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), armors, None);
 
-    let (local_result, local_answers) = full_equip.get_possible_combs(
-        req_skills.clone(),
-        &free_slots,
-        &no_deco_skills,
-        &dm.deco_combinations,
-    );
+    let mut local_answers = dm.deco_combinations.get_possible_combs(&req_skills);
+    local_answers.retain(|comb| comb.is_possible(&full_equip.avail_slots));
+
+    let local_result = local_answers.len() != 0;
 
     if local_result == false {
         return 1;
@@ -823,7 +800,7 @@ fn calculate_full_equip<'a>(
 
     let mut real_armors = Vec::<Vec<CalcArmor<'a>>>::new();
 
-    for armor in full_equip.armors {
+    for armor in &full_equip.armors {
         if BaseArmor::is_slot_armor(armor.id()) {
             let all_real_armors = dm
                 .armors_by_slot
@@ -837,7 +814,7 @@ fn calculate_full_equip<'a>(
 
             real_armors.push(all_real_armors.clone());
         } else {
-            real_armors.push(vec![armor]);
+            real_armors.push(vec![armor.clone()]);
         }
     }
 

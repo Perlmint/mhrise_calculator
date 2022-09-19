@@ -42,7 +42,7 @@ impl<'a> FullEquipments<'a> {
         mut req_skills: HashMap<String, i32>,
         req_slots: &Vec<i32>,
         no_deco_skills: &HashMap<String, i32>,
-        deco_comb_calculator: &DecorationCombinations,
+        deco_comb_calculator: &'a DecorationCombinations,
     ) -> (bool, Vec<DecorationCombination>) {
         let mut avail_slots = self.avail_slots.clone();
 
