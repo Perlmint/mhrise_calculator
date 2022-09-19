@@ -739,7 +739,7 @@ fn calculate_full_equip<'a>(
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
     armors: Vec<CalcArmor<'a>>,
-    answers: &mut Vec<(FullEquipments<'a>, DecorationCombination<'a>)>,
+    answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
     total_index: &mut i32,
 ) -> i32 {
     let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), armors, None);
@@ -765,7 +765,7 @@ fn calculate_full_equip<'a>(
         local_answers
             .iter()
             .map(|comb| &comb.combs_per_skill)
-            .collect::<Vec<&HashMap<String, &Vec<i32>>>>(),
+            .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
         local_answers
             .iter()
             .map(|comb| &comb.sum)
