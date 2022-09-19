@@ -42,7 +42,7 @@ use crate::data::armor::{
 };
 use crate::data::deco::Decoration;
 use crate::data::deco_combination::DecorationCombination;
-use crate::data::skill::{Skill, MAX_SLOT_LEVEL};
+use crate::data::skill::Skill;
 use crate::full_equipments::FullEquipments;
 
 fn to_i32(record: &StringRecord, index: usize) -> i32 {
@@ -602,6 +602,8 @@ fn calculate_skillset<'a>(
 
     let mut total_case_count = 0;
 
+    let mut comb_calc_time = 0;
+
     for parts in &all_parts {
         'final_armor: for (p0, p1, p2, p3, p4) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
@@ -641,21 +643,7 @@ fn calculate_skillset<'a>(
                 all_loop_tree.insert(Reverse(total_point), Vec::new());
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
-            /*
-                        let full_equipment =
-                            FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
-                        let (is_avail, _) = full_equipment.get_possible_combs(
-                            req_skills.clone(),
-                            &req_slots,
-                            &no_deco_skills,
-                            &dm.deco_combinations,
-                        );
-
-                        if is_avail == false {
-                            continue;
-                        }
-            */
             existing.unwrap().push((real_parts, req_skills, req_slots));
             total_case_count += 1;
         }
