@@ -1,6 +1,7 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, hash::Hash};
 
 use itertools::{iproduct, izip};
+use log::debug;
 
 use crate::data::{deco::Decoration, skill::Skill};
 
@@ -247,6 +248,14 @@ impl DecorationCombinations {
             all_possible_combs = temp_combs;
         }
 
+        let mut all_possible_combs2 = Vec::<DecorationCombination>::new();
+
+        self.iter_possible_combs(&req_skills, |deco_comb| {
+            all_possible_combs2.push(deco_comb);
+
+            true
+        });
+
         all_possible_combs
     }
 
@@ -255,22 +264,39 @@ impl DecorationCombinations {
         req_skills: &HashMap<String, i32>,
         armor_slots: &Vec<i32>,
     ) -> bool {
+        self.iter_possible_combs(&req_skills, |deco_comb| {
+            DecorationCombination::is_possible_static(armor_slots, &deco_comb.sum)
+        });
+
+        return true;
+    }
+
+    pub fn iter_possible_combs<F>(&self, req_skills: &HashMap<String, i32>, mut f: F) -> bool
+    where
+        F: FnMut(DecorationCombination) -> bool,
+    {
         if req_skills.len() == 0 {
             return true;
         }
 
+        let skill_ids = req_skills
+            .iter()
+            .map(|(skill_id, _)| skill_id)
+            .collect::<Vec<&String>>();
+
         let mut combs_per_skill = Vec::new();
 
-        for (skill_id, level) in req_skills {
+        for &skill_id in &skill_ids {
+            let level = req_skills[skill_id];
             let combs = &self.combinations[skill_id][(level - 1) as usize];
 
             combs_per_skill.push(combs);
         }
 
-        let mut case = Vec::<usize>::new();
+        let mut level_indices = Vec::<usize>::new();
 
         for _ in &combs_per_skill {
-            case.push(0);
+            level_indices.push(0);
         }
 
         loop {
@@ -280,31 +306,42 @@ impl DecorationCombinations {
                 slot_combs.push(0);
             }
 
-            for (skill_index, &inner_index) in case.iter().enumerate() {
-                let skill_comb = &combs_per_skill[skill_index][inner_index];
+            let mut all_skill_combs = HashMap::new();
+
+            for (skill_index, &level_index) in level_indices.iter().enumerate() {
+                let skill_id = skill_ids[skill_index];
+                let skill_comb = &combs_per_skill[skill_index][level_index];
+
+                all_skill_combs.insert(skill_id.clone(), skill_comb);
 
                 for (slot_size_index, count) in skill_comb.iter().enumerate() {
                     slot_combs[slot_size_index] += count;
                 }
             }
 
-            let is_possible = DecorationCombination::is_possible_static(armor_slots, &slot_combs);
+            let deco_comb = DecorationCombination {
+                combs_per_skill: all_skill_combs,
+                sum: slot_combs,
+            };
 
-            if is_possible {
-                return true;
+            let result = f(deco_comb);
+
+            if result == false {
+                break;
             }
 
             let mut promote = 0;
 
-            for index in 0..case.len() {
+            for index in 0..level_indices.len() {
                 let index = index as usize;
 
-                case[index as usize] += promote + 1;
+                level_indices[index as usize] += 1;
 
-                if case[index] == combs_per_skill[index].len() {
-                    case[index] = 0;
+                if level_indices[index] == combs_per_skill[index].len() {
+                    level_indices[index] = 0;
                     promote = 1;
                 } else {
+                    promote = 0;
                     break;
                 }
             }
