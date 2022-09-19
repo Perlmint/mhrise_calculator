@@ -646,7 +646,7 @@ fn calculate_skillset<'a>(
     let elapsed_sort = start_time.elapsed();
 
     ret.push_str(&format!(
-        "total case count: {}, all_loop_cases sorting elapsed: {:?}\n",
+        "total case count: {},\nall_loop_cases sorting elapsed: {:?}\n",
         total_case_count, elapsed_sort
     ));
 
@@ -686,7 +686,7 @@ fn calculate_skillset<'a>(
     let elapsed_final = start_time.elapsed();
 
     ret.push_str(&format!(
-        "calculate_skillset elapsed: {:?}, answers length: {}\n",
+        "calculate_skillset elapsed: {:?},\nanswers length: {}\n",
         elapsed_final,
         answers.len()
     ));
