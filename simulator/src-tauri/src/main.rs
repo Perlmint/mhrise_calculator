@@ -613,6 +613,8 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
+            debug!("Possible candidiate: left skills: {:?}", req_skills);
+
             let total_point = real_parts
                 .iter()
                 .map(|armor| armor.get_point(&decos_possible, &multi_deco_skills, &no_deco_skills))

@@ -1,5 +1,7 @@
 use std::{cmp::Reverse, collections::HashMap};
 
+use log::debug;
+
 use crate::data::{
     armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType},
     deco::Decoration,
@@ -113,8 +115,14 @@ impl<'a> CalcArmor<'a> {
         return diffs;
     }
 
-    pub fn subtract_slots(&mut self, single_deco_skills: &mut HashMap<String, (i32, i32)>) {
-        for (_, (slot_size, count)) in single_deco_skills {
+    pub fn subtract_slots(&mut self, single_deco_skills: &mut HashMap<String, (i32, i32)>) -> bool {
+        let mut success = true;
+
+        for (skill_id, (slot_size, count)) in single_deco_skills.iter_mut() {
+            if *count == 0 {
+                continue;
+            }
+
             let init_size_index = *slot_size - 1;
 
             let mut promote = 0;
@@ -135,9 +143,12 @@ impl<'a> CalcArmor<'a> {
             }
 
             if promote != 0 {
+                success = false;
                 break;
             }
         }
+
+        success
     }
 
     pub fn get_point(
