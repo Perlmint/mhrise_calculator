@@ -126,6 +126,17 @@ impl<'a> CalcArmor<'a> {
         return diffs;
     }
 
+    pub fn subtract_slots(&mut self, single_deco_skills: &mut HashMap<String, (i32, i32)>) {
+        for (_, (slot_size, count)) in single_deco_skills {
+            let slot_size_index = *slot_size as usize - 1;
+
+            let taken = (*count).min(self.slots[slot_size_index]);
+
+            self.slots[slot_size_index] -= taken;
+            *count -= taken;
+        }
+    }
+
     pub fn calculate_point(
         &mut self,
         decos_possible: &HashMap<String, Vec<&Decoration>>,

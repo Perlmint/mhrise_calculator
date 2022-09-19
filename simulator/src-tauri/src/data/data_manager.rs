@@ -237,4 +237,32 @@ impl DataManager {
 
         (yes_deco_skills, no_deco_skills)
     }
+
+    pub fn get_skils_by_deco(
+        &self,
+        req_skills: &HashMap<String, i32>,
+    ) -> (
+        HashMap<String, i32>,
+        HashMap<String, (i32, i32)>,
+        HashMap<String, i32>,
+    ) {
+        let mut no_deco_skills = HashMap::<String, i32>::new();
+        let mut single_deco_skills = HashMap::<String, (i32, i32)>::new();
+        let mut multi_deco_skills = HashMap::<String, i32>::new();
+
+        for (skill_id, level) in req_skills {
+            let decos = self.get_deco_by_skill_id(skill_id);
+
+            if decos.len() == 0 {
+                no_deco_skills.insert(skill_id.clone(), *level);
+            } else if decos.len() == 1 {
+                let slot_size = self.decos_by_skill[skill_id][0].slot_size;
+                single_deco_skills.insert(skill_id.clone(), (slot_size, *level));
+            } else {
+                multi_deco_skills.insert(skill_id.clone(), *level);
+            }
+        }
+
+        (no_deco_skills, single_deco_skills, multi_deco_skills)
+    }
 }

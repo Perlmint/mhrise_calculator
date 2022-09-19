@@ -610,10 +610,23 @@ fn calculate_skillset<'a>(
                 }
             }
 
-            let (yes_deco_skills, no_deco_skills) = dm.get_leftover_skills(&req_skills);
+            let (no_deco_skills, mut single_deco_skills, multi_deco_skills) =
+                dm.get_skils_by_deco(&req_skills);
 
             for part in real_parts.iter_mut() {
-                part.calculate_point(&decos_possible, &yes_deco_skills, &no_deco_skills);
+                part.subtract_slots(&mut single_deco_skills);
+            }
+
+            for (id, (_, count)) in single_deco_skills {
+                if count != 0 {
+                    continue 'final_armor;
+                }
+
+                req_skills.remove(&id);
+            }
+
+            for part in real_parts.iter_mut() {
+                part.calculate_point(&decos_possible, &multi_deco_skills, &no_deco_skills);
             }
 
             let total_point = real_parts.iter().map(|armor| armor.point()).sum::<i32>();
