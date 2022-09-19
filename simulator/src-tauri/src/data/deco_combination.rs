@@ -233,15 +233,15 @@ impl DecorationCombinations {
 
         let (skill_ids, combs_per_skill, mut level_indices) = self.get_iter_init_data(&req_skills);
 
-        let mut ret = true;
+        let mut ret = false;
 
         loop {
             let deco_comb = self.get_next_deco_comb(&req_skills, &skill_ids, &level_indices);
 
             let result = f(deco_comb);
 
-            if result == false {
-                ret = false;
+            if result == true {
+                ret = true;
                 break;
             }
 
