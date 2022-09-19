@@ -250,6 +250,73 @@ impl DecorationCombinations {
         all_possible_combs
     }
 
+    pub fn has_possible_combs(
+        &self,
+        req_skills: &HashMap<String, i32>,
+        armor_slots: &Vec<i32>,
+    ) -> bool {
+        if req_skills.len() == 0 {
+            return true;
+        }
+
+        let mut combs_per_skill = Vec::new();
+
+        for (skill_id, level) in req_skills {
+            let combs = &self.combinations[skill_id][(level - 1) as usize];
+
+            combs_per_skill.push(combs);
+        }
+
+        let mut case = Vec::<usize>::new();
+
+        for _ in &combs_per_skill {
+            case.push(0);
+        }
+
+        loop {
+            let mut slot_combs = Vec::new();
+
+            for _ in 0..MAX_SLOT_LEVEL {
+                slot_combs.push(0);
+            }
+
+            for (skill_index, &inner_index) in case.iter().enumerate() {
+                let skill_comb = &combs_per_skill[skill_index][inner_index];
+
+                for (slot_size_index, count) in skill_comb.iter().enumerate() {
+                    slot_combs[slot_size_index] += count;
+                }
+            }
+
+            let is_possible = DecorationCombination::is_possible_static(armor_slots, &slot_combs);
+
+            if is_possible {
+                return true;
+            }
+
+            let mut promote = 0;
+
+            for index in 0..case.len() {
+                let index = index as usize;
+
+                case[index as usize] += promote + 1;
+
+                if case[index] == combs_per_skill[index].len() {
+                    case[index] = 0;
+                    promote = 1;
+                } else {
+                    break;
+                }
+            }
+
+            if promote == 1 {
+                break;
+            }
+        }
+
+        return false;
+    }
+
     pub fn compare(slots1: &Vec<i32>, slots2: &Vec<i32>) -> std::cmp::Ordering {
         for (slot1, slot2) in izip!(slots1, slots2) {
             if slot1 == slot2 {
@@ -265,12 +332,20 @@ impl DecorationCombinations {
 
 impl<'a> DecorationCombination<'a> {
     pub fn is_possible(&self, armor_slots: &Vec<i32>) -> bool {
-        for (slot1, slot2) in izip!(&self.sum, armor_slots) {
-            if slot2 < slot1 {
-                return false;
+        Self::is_possible_static(armor_slots, &self.sum)
+    }
+
+    pub fn is_possible_static(free_slots: &Vec<i32>, req_slots: &Vec<i32>) -> bool {
+        let mut promote = 0;
+
+        for (&free_slot, &req_slot) in izip!(free_slots, req_slots) {
+            let taken = free_slot.min(req_slot + promote);
+
+            if taken == free_slot {
+                promote += req_slot - taken;
             }
         }
 
-        true
+        promote == 0
     }
 }
