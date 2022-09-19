@@ -223,10 +223,10 @@ impl DecorationCombinations {
 
         for i in 1..skill_ids.len() {
             let skill_combs = combs_per_skill[skill_ids[i]];
-            let prev_combs = all_possible_combs.clone();
-            all_possible_combs.clear();
 
-            for (skill_comb, prev_comb) in iproduct!(skill_combs, prev_combs) {
+            let mut temp_combs = Vec::new();
+
+            for (skill_comb, prev_comb) in iproduct!(skill_combs, all_possible_combs) {
                 let mut sum_comb = Vec::new();
 
                 for (slot1, slot2) in izip!(skill_comb, prev_comb.sum) {
@@ -241,8 +241,10 @@ impl DecorationCombinations {
                     sum: sum_comb,
                 };
 
-                all_possible_combs.push(new_deco_comb);
+                temp_combs.push(new_deco_comb);
             }
+
+            all_possible_combs = temp_combs;
         }
 
         all_possible_combs
