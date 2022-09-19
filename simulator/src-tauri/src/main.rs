@@ -625,15 +625,15 @@ fn calculate_skillset<'a>(
                 part.calculate_point(&decos_possible, &multi_deco_skills, &no_deco_skills);
             }
 
-            let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
+            // let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
-            let has_possible_comb = dm
-                .deco_combinations
-                .has_possible_combs(&req_skills, &full_equip.avail_slots);
+            // let has_possible_comb = dm
+            //     .deco_combinations
+            //     .has_possible_combs(&req_skills, &full_equip.avail_slots);
 
-            if has_possible_comb == false {
-                continue;
-            }
+            // if has_possible_comb == false {
+            //     continue;
+            // }
 
             let total_point = real_parts.iter().map(|armor| armor.point()).sum::<i32>();
 
