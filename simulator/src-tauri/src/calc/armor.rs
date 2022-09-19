@@ -18,8 +18,6 @@ pub struct CalcArmor<'a> {
     rarity: i32,
     skills: HashMap<String, ArmorSkill>,
     slots: Vec<i32>,
-
-    point: i32,
 }
 
 impl<'a> CalcArmor<'a> {
@@ -32,7 +30,6 @@ impl<'a> CalcArmor<'a> {
             rarity: base.rarity,
             skills: base.skills.clone(),
             slots: Self::convert_from_base_slots(&base.slots),
-            point: 0,
         }
     }
 
@@ -47,7 +44,6 @@ impl<'a> CalcArmor<'a> {
             rarity: base.rarity,
             skills: base.skills.clone(),
             slots: Self::convert_from_base_slots(&base.slots),
-            point: 0,
         }
     }
 
@@ -73,10 +69,6 @@ impl<'a> CalcArmor<'a> {
 
     pub fn slots(&self) -> &Vec<i32> {
         &self.slots
-    }
-
-    pub fn point(&self) -> i32 {
-        self.point
     }
 
     pub fn subtract_skills(
@@ -130,15 +122,6 @@ impl<'a> CalcArmor<'a> {
             self.slots[slot_size_index] -= taken;
             *count -= taken;
         }
-    }
-
-    pub fn calculate_point(
-        &mut self,
-        decos_possible: &HashMap<String, Vec<&Decoration>>,
-        yes_deco_skills: &HashMap<String, i32>,
-        no_deco_skills: &HashMap<String, i32>,
-    ) {
-        self.point = self.get_point(decos_possible, yes_deco_skills, no_deco_skills);
     }
 
     pub fn get_point(

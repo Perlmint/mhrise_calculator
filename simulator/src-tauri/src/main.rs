@@ -340,7 +340,9 @@ fn calculate_skillset<'a>(
             })
             .collect::<Vec<CalcArmor<'a>>>();
 
-        armors.sort_by_key(|armor| armor.point());
+        armors.sort_by_key(|armor| {
+            armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills)
+        });
     }
 
     let mut all_slot_armors = HashMap::<ArmorPart, HashMap<String, CalcArmor<'a>>>::new();
@@ -420,7 +422,9 @@ fn calculate_skillset<'a>(
         all_unique_armors
             .get_mut(part)
             .unwrap()
-            .sort_by_key(|armor| armor.point());
+            .sort_by_key(|armor| {
+                armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills)
+            });
     }
 
     let mut possible_unique_armors = Vec::new();
@@ -463,7 +467,7 @@ fn calculate_skillset<'a>(
         let mut sum = 0;
 
         for armor in armors {
-            sum += armor.point();
+            sum += armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills);
         }
 
         Reverse(sum)
@@ -473,27 +477,6 @@ fn calculate_skillset<'a>(
         "Unique armors calculation: {:?}\n",
         start_time.elapsed()
     ));
-
-    let mut total_require_point = 0;
-
-    for (id, level) in &selected_skills {
-        match yes_deco_skills.get(id) {
-            Some(_) => {
-                let mut decos = decos_possible.get(id).unwrap().clone();
-                decos.sort_by_key(|deco| deco.slot_size);
-
-                let min_slot_size = decos[0].slot_size;
-
-                total_require_point += level * min_slot_size;
-            }
-            None => match no_deco_skills.get(id) {
-                Some(_) => {
-                    total_require_point += level * 990;
-                }
-                None => (),
-            },
-        }
-    }
 
     let mut all_parts = Vec::new();
 
@@ -569,7 +552,6 @@ fn calculate_skillset<'a>(
             parts[4].len(),
             total_count,
         );
-        debug!("");
 
         all_parts.push(parts);
     }
@@ -621,10 +603,6 @@ fn calculate_skillset<'a>(
                 req_skills.remove(&id);
             }
 
-            for part in real_parts.iter_mut() {
-                part.calculate_point(&decos_possible, &multi_deco_skills, &no_deco_skills);
-            }
-
             let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
             let has_possible_comb = dm
@@ -635,7 +613,10 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
-            let total_point = real_parts.iter().map(|armor| armor.point()).sum::<i32>();
+            let total_point = real_parts
+                .iter()
+                .map(|armor| armor.get_point(&decos_possible, &multi_deco_skills, &no_deco_skills))
+                .sum::<i32>();
 
             let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
