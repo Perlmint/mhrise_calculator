@@ -276,26 +276,6 @@ fn cmd_calculate_skillset<'a>(
     )
 }
 
-fn get_leftover_skills(
-    dm: &DataManager,
-    req_skills: &HashMap<String, i32>,
-) -> (HashMap<String, i32>, HashMap<String, i32>) {
-    let mut yes_deco_skills = HashMap::<String, i32>::new();
-    let mut no_deco_skills = HashMap::<String, i32>::new();
-
-    for (skill_id, level) in req_skills {
-        let decos = dm.get_deco_by_skill_id(skill_id);
-
-        if 0 < decos.len() {
-            yes_deco_skills.insert(skill_id.clone(), *level);
-        } else {
-            no_deco_skills.insert(skill_id.clone(), *level);
-        }
-    }
-
-    (yes_deco_skills, no_deco_skills)
-}
-
 fn calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
@@ -308,7 +288,7 @@ fn calculate_skillset<'a>(
 
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
 
-    let (yes_deco_skills, no_deco_skills) = get_leftover_skills(&dm, &selected_skills);
+    let (yes_deco_skills, no_deco_skills) = dm.get_leftover_skills(&selected_skills);
 
     for (skill_id, _) in &selected_skills {
         let decos = dm.get_deco_by_skill_id(skill_id);
@@ -630,7 +610,7 @@ fn calculate_skillset<'a>(
                 }
             }
 
-            let (yes_deco_skills, no_deco_skills) = get_leftover_skills(&dm, &req_skills);
+            let (yes_deco_skills, no_deco_skills) = dm.get_leftover_skills(&req_skills);
 
             for part in real_parts.iter_mut() {
                 part.calculate_point(&decos_possible, &yes_deco_skills, &no_deco_skills);

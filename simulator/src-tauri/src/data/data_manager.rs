@@ -217,4 +217,24 @@ impl DataManager {
     pub fn has_decoration(&self, skill_id: &String) -> bool {
         self.decos_by_skill.contains_key(skill_id)
     }
+
+    pub fn get_leftover_skills(
+        &self,
+        req_skills: &HashMap<String, i32>,
+    ) -> (HashMap<String, i32>, HashMap<String, i32>) {
+        let mut yes_deco_skills = HashMap::<String, i32>::new();
+        let mut no_deco_skills = HashMap::<String, i32>::new();
+
+        for (skill_id, level) in req_skills {
+            let decos = self.get_deco_by_skill_id(skill_id);
+
+            if 0 < decos.len() {
+                yes_deco_skills.insert(skill_id.clone(), *level);
+            } else {
+                no_deco_skills.insert(skill_id.clone(), *level);
+            }
+        }
+
+        (yes_deco_skills, no_deco_skills)
+    }
 }
