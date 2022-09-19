@@ -13,8 +13,8 @@ pub struct DecorationCombinations {
 }
 
 #[derive(Clone, Debug)]
-pub struct DecorationCombination<'a> {
-    pub combs_per_skill: HashMap<String, &'a Vec<i32>>,
+pub struct DecorationCombination {
+    pub combs_per_skill: HashMap<String, Vec<i32>>,
     pub sum: Vec<i32>,
 }
 
@@ -301,7 +301,7 @@ impl DecorationCombinations {
             let level_index = req_skills[skill_id] as usize - 1;
             let skill_comb = &self.combinations[skill_id][level_index][inside_level_index];
 
-            all_skill_combs.insert(skill_id.clone(), skill_comb);
+            all_skill_combs.insert(skill_id.clone(), skill_comb.clone());
 
             for (slot_size_index, count) in skill_comb.iter().enumerate() {
                 slot_combs[slot_size_index] += count;
@@ -351,7 +351,7 @@ impl DecorationCombinations {
     }
 }
 
-impl<'a> DecorationCombination<'a> {
+impl DecorationCombination {
     pub fn is_possible(&self, armor_slots: &Vec<i32>) -> bool {
         Self::is_possible_static(armor_slots, &self.sum)
     }
