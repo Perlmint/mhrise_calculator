@@ -3,6 +3,7 @@ use std::{cmp::Reverse, collections::HashMap};
 use crate::data::{
     armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType},
     deco::Decoration,
+    skill::MAX_SLOT_LEVEL,
 };
 
 #[derive(Clone, Debug)]
@@ -29,7 +30,7 @@ impl<'a> CalcArmor<'a> {
             sex_type: base.sex_type.clone(),
             rarity: base.rarity,
             skills: base.skills.clone(),
-            slots: base.slots.clone(),
+            slots: Self::convert_from_base_slots(&base.slots),
             point: 0,
         }
     }
@@ -44,7 +45,7 @@ impl<'a> CalcArmor<'a> {
             sex_type: base.sex_type.clone(),
             rarity: base.rarity,
             skills: base.skills.clone(),
-            slots: base.slots.clone(),
+            slots: Self::convert_from_base_slots(&base.slots),
             point: 0,
         }
     }
@@ -114,17 +115,11 @@ impl<'a> CalcArmor<'a> {
             }
         }
 
-        for slot_size in &self.slots {
-            let slot_size = *slot_size as usize;
-
-            if slot_size == 0 {
-                continue;
-            }
-
-            let req_count_leftover = req_slots[slot_size - 1];
+        for (slot_size_index, count) in self.slots.iter().enumerate() {
+            let req_count_leftover = req_slots[slot_size_index];
 
             if 0 < req_count_leftover {
-                req_slots[slot_size - 1] -= 1;
+                req_slots[slot_size_index] -= 1;
             }
         }
 
@@ -182,5 +177,23 @@ impl<'a> CalcArmor<'a> {
         }
 
         point
+    }
+
+    fn convert_from_base_slots(base_slots: &Vec<i32>) -> Vec<i32> {
+        let mut ret = Vec::new();
+
+        for _ in 0..MAX_SLOT_LEVEL {
+            ret.push(0);
+        }
+
+        for slot_size in base_slots {
+            if *slot_size == 0 {
+                continue;
+            }
+
+            ret[*slot_size as usize - 1] += 1;
+        }
+
+        ret
     }
 }
