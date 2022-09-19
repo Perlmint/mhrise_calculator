@@ -258,11 +258,7 @@ impl DecorationCombinations {
     fn get_iter_init_data<'a>(
         &self,
         req_skills: &'a HashMap<String, i32>,
-    ) -> (
-        Vec<&'a std::string::String>,
-        Vec<&Vec<Vec<i32>>>,
-        Vec<usize>,
-    ) {
+    ) -> (Vec<&'a std::string::String>, Vec<Vec<Vec<i32>>>, Vec<usize>) {
         let skill_ids = req_skills
             .iter()
             .map(|(skill_id, _)| skill_id)
@@ -272,7 +268,7 @@ impl DecorationCombinations {
 
         for &skill_id in &skill_ids {
             let level = req_skills[skill_id];
-            let combs = &self.combinations[skill_id][(level - 1) as usize];
+            let combs = self.combinations[skill_id][(level - 1) as usize].clone();
 
             combs_per_skill.push(combs);
         }
@@ -321,7 +317,7 @@ impl DecorationCombinations {
     fn proceed_next_iter(
         &self,
         level_indices: &mut Vec<usize>,
-        combs_per_skill: &Vec<&Vec<Vec<i32>>>,
+        combs_per_skill: &Vec<Vec<Vec<i32>>>,
     ) -> bool {
         let mut promote = 0;
 
