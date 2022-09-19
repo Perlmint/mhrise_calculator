@@ -3,6 +3,7 @@ use std::{cmp::Reverse, collections::HashMap};
 use crate::data::{
     armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType},
     deco::Decoration,
+    deco_combination::DecorationCombination,
     skill::MAX_SLOT_LEVEL,
 };
 
@@ -115,13 +116,7 @@ impl<'a> CalcArmor<'a> {
             }
         }
 
-        for (slot_size_index, count) in self.slots.iter().enumerate() {
-            let req_count_leftover = req_slots[slot_size_index];
-
-            if 0 < req_count_leftover {
-                req_slots[slot_size_index] -= 1;
-            }
-        }
+        DecorationCombination::is_possible_static_mut(&mut self.slots, req_slots);
 
         return diffs;
     }

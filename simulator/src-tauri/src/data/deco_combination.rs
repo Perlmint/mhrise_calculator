@@ -376,7 +376,7 @@ impl DecorationCombination {
         promote == 0
     }
 
-    pub fn is_possible_static_mut(free_slots: &mut Vec<i32>, req_slots: &Vec<i32>) -> bool {
+    pub fn is_possible_static_mut(free_slots: &mut Vec<i32>, req_slots: &mut Vec<i32>) -> bool {
         let mut promote = 0;
 
         for (free_slot, req_slot) in izip!(free_slots, req_slots) {
@@ -386,9 +386,10 @@ impl DecorationCombination {
 
             let taken = (*free_slot).min(*req_slot + promote);
             *free_slot -= taken;
+            *req_slot -= taken;
 
             if *free_slot == 0 {
-                promote = *req_slot - taken;
+                promote = *req_slot;
             } else {
                 promote = 0;
             }

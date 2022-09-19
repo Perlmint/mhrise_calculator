@@ -47,7 +47,7 @@ impl<'a> FullEquipments<'a> {
         let mut avail_slots = self.avail_slots.clone();
 
         let slot_available =
-            DecorationCombination::is_possible_static_mut(&mut avail_slots, &req_slots);
+            DecorationCombination::is_possible_static_mut(&mut avail_slots, &mut req_slots.clone());
 
         if slot_available == false {
             return (false, Vec::new());

@@ -590,8 +590,6 @@ fn calculate_skillset<'a>(
             let mut req_skills = selected_skills.clone();
             let mut req_slots = free_slots.clone();
 
-            debug!("Req skills: {:?}, req slots: {:?}", req_skills, req_skills);
-
             let mut real_parts = vec![p0.clone(), p1.clone(), p2.clone(), p3.clone(), p4.clone()];
 
             for part in real_parts.iter_mut() {
@@ -604,19 +602,12 @@ fn calculate_skillset<'a>(
                 }
             }
 
-            for (id, _) in &req_skills {
-                if no_deco_skills.contains_key(id) {
-                    continue 'final_armor;
-                }
-            }
-
             let (no_deco_skills, mut single_deco_skills, multi_deco_skills) =
                 dm.get_skils_by_deco(&req_skills);
 
-            debug!(
-                "Req skills: {:?}, req slots: {:?}, {:?}, {:?}, {:?}",
-                req_skills, req_skills, no_deco_skills, single_deco_skills, multi_deco_skills
-            );
+            if no_deco_skills.len() != 0 {
+                continue 'final_armor;
+            }
 
             for part in real_parts.iter_mut() {
                 part.subtract_slots(&mut single_deco_skills);
