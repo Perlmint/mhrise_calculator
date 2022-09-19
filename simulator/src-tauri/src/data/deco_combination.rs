@@ -194,67 +194,21 @@ impl DecorationCombinations {
             return Vec::new();
         }
 
-        let mut combs_per_skill = HashMap::new();
-
-        let skill_ids = req_skills
-            .iter()
-            .map(|(skill_id, _)| skill_id)
-            .collect::<Vec<&String>>();
-
-        for (skill_id, level) in req_skills {
-            let combs = &self.combinations[skill_id][(level - 1) as usize];
-
-            combs_per_skill.insert(skill_id, combs);
-        }
-
         let mut all_possible_combs = Vec::<DecorationCombination>::new();
 
-        for comb in combs_per_skill[skill_ids[0]] {
-            let mut combs_per_skill = HashMap::new();
+        let (skill_ids, combs_per_skill, mut level_indices) = self.get_iter_init_data(&req_skills);
 
-            combs_per_skill.insert(skill_ids[0].clone(), comb);
-
-            let deco_comb = DecorationCombination {
-                combs_per_skill,
-                sum: comb.clone(),
-            };
+        loop {
+            let deco_comb = self.get_next_deco_comb(&req_skills, &skill_ids, &level_indices);
 
             all_possible_combs.push(deco_comb);
-        }
 
-        for i in 1..skill_ids.len() {
-            let skill_combs = combs_per_skill[skill_ids[i]];
+            let proceeded = self.proceed_next_iter(&mut level_indices, &combs_per_skill);
 
-            let mut temp_combs = Vec::new();
-
-            for (skill_comb, prev_comb) in iproduct!(skill_combs, all_possible_combs) {
-                let mut sum_comb = Vec::new();
-
-                for (slot1, slot2) in izip!(skill_comb, prev_comb.sum) {
-                    sum_comb.push(slot1 + slot2);
-                }
-
-                let mut combs_per_skill = prev_comb.combs_per_skill.clone();
-                combs_per_skill.insert(skill_ids[i].clone(), skill_comb);
-
-                let new_deco_comb = DecorationCombination {
-                    combs_per_skill,
-                    sum: sum_comb,
-                };
-
-                temp_combs.push(new_deco_comb);
+            if proceeded == false {
+                break;
             }
-
-            all_possible_combs = temp_combs;
         }
-
-        let mut all_possible_combs2 = Vec::<DecorationCombination>::new();
-
-        self.iter_possible_combs(&req_skills, |deco_comb| {
-            all_possible_combs2.push(deco_comb);
-
-            true
-        });
 
         all_possible_combs
     }
@@ -266,9 +220,7 @@ impl DecorationCombinations {
     ) -> bool {
         self.iter_possible_combs(&req_skills, |deco_comb| {
             DecorationCombination::is_possible_static(armor_slots, &deco_comb.sum)
-        });
-
-        return true;
+        })
     }
 
     pub fn iter_possible_combs<F>(&self, req_skills: &HashMap<String, i32>, mut f: F) -> bool
@@ -279,6 +231,38 @@ impl DecorationCombinations {
             return true;
         }
 
+        let (skill_ids, combs_per_skill, mut level_indices) = self.get_iter_init_data(&req_skills);
+
+        let mut ret = true;
+
+        loop {
+            let deco_comb = self.get_next_deco_comb(&req_skills, &skill_ids, &level_indices);
+
+            let result = f(deco_comb);
+
+            if result == false {
+                ret = false;
+                break;
+            }
+
+            let proceeded = self.proceed_next_iter(&mut level_indices, &combs_per_skill);
+
+            if proceeded == false {
+                break;
+            }
+        }
+
+        ret
+    }
+
+    fn get_iter_init_data<'a>(
+        &self,
+        req_skills: &'a HashMap<String, i32>,
+    ) -> (
+        Vec<&'a std::string::String>,
+        Vec<&Vec<Vec<i32>>>,
+        Vec<usize>,
+    ) {
         let skill_ids = req_skills
             .iter()
             .map(|(skill_id, _)| skill_id)
@@ -299,59 +283,63 @@ impl DecorationCombinations {
             level_indices.push(0);
         }
 
-        loop {
-            let mut slot_combs = Vec::new();
+        (skill_ids, combs_per_skill, level_indices)
+    }
 
-            for _ in 0..MAX_SLOT_LEVEL {
-                slot_combs.push(0);
+    fn get_next_deco_comb(
+        &self,
+        req_skills: &HashMap<String, i32>,
+        skill_ids: &Vec<&String>,
+        level_indices: &Vec<usize>,
+    ) -> DecorationCombination {
+        let mut slot_combs = Vec::new();
+
+        for _ in 0..MAX_SLOT_LEVEL {
+            slot_combs.push(0);
+        }
+
+        let mut all_skill_combs = HashMap::new();
+
+        for (skill_index, &inside_level_index) in level_indices.iter().enumerate() {
+            let skill_id = skill_ids[skill_index];
+            let level_index = req_skills[skill_id] as usize - 1;
+            let skill_comb = &self.combinations[skill_id][level_index][inside_level_index];
+
+            all_skill_combs.insert(skill_id.clone(), skill_comb);
+
+            for (slot_size_index, count) in skill_comb.iter().enumerate() {
+                slot_combs[slot_size_index] += count;
             }
+        }
 
-            let mut all_skill_combs = HashMap::new();
+        DecorationCombination {
+            combs_per_skill: all_skill_combs,
+            sum: slot_combs,
+        }
+    }
 
-            for (skill_index, &level_index) in level_indices.iter().enumerate() {
-                let skill_id = skill_ids[skill_index];
-                let skill_comb = &combs_per_skill[skill_index][level_index];
+    fn proceed_next_iter(
+        &self,
+        level_indices: &mut Vec<usize>,
+        combs_per_skill: &Vec<&Vec<Vec<i32>>>,
+    ) -> bool {
+        let mut promote = 0;
 
-                all_skill_combs.insert(skill_id.clone(), skill_comb);
+        for index in 0..level_indices.len() {
+            let index = index as usize;
 
-                for (slot_size_index, count) in skill_comb.iter().enumerate() {
-                    slot_combs[slot_size_index] += count;
-                }
-            }
+            level_indices[index as usize] += 1;
 
-            let deco_comb = DecorationCombination {
-                combs_per_skill: all_skill_combs,
-                sum: slot_combs,
-            };
-
-            let result = f(deco_comb);
-
-            if result == false {
-                break;
-            }
-
-            let mut promote = 0;
-
-            for index in 0..level_indices.len() {
-                let index = index as usize;
-
-                level_indices[index as usize] += 1;
-
-                if level_indices[index] == combs_per_skill[index].len() {
-                    level_indices[index] = 0;
-                    promote = 1;
-                } else {
-                    promote = 0;
-                    break;
-                }
-            }
-
-            if promote == 1 {
+            if level_indices[index] == combs_per_skill[index].len() {
+                level_indices[index] = 0;
+                promote = 1;
+            } else {
+                promote = 0;
                 break;
             }
         }
 
-        return false;
+        promote == 0
     }
 
     pub fn compare(slots1: &Vec<i32>, slots2: &Vec<i32>) -> std::cmp::Ordering {
