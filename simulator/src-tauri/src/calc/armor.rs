@@ -115,12 +115,28 @@ impl<'a> CalcArmor<'a> {
 
     pub fn subtract_slots(&mut self, single_deco_skills: &mut HashMap<String, (i32, i32)>) {
         for (_, (slot_size, count)) in single_deco_skills {
-            let slot_size_index = *slot_size as usize - 1;
+            let init_size_index = *slot_size - 1;
 
-            let taken = (*count).min(self.slots[slot_size_index]);
+            let mut promote = 0;
 
-            self.slots[slot_size_index] -= taken;
-            *count -= taken;
+            for slot_size_index in init_size_index..MAX_SLOT_LEVEL {
+                let slot_size_index = slot_size_index as usize;
+
+                let taken = (*count).min(self.slots[slot_size_index]);
+
+                self.slots[slot_size_index] -= taken;
+                *count -= taken;
+
+                promote = *count;
+
+                if promote == 0 {
+                    break;
+                }
+            }
+
+            if promote != 0 {
+                break;
+            }
         }
     }
 
