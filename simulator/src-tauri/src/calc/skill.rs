@@ -1,11 +1,11 @@
 use crate::data::{deco::Decoration, skill::Skill};
 
-pub struct CalcSkill {
-    base: &Skill,
-    decos: &Vec<Decoration>,
+pub struct CalcSkill<'a> {
+    base: &'a Skill,
+    decos: &'a Vec<Decoration>,
 }
 
-impl CalcSkill {
+impl<'a> CalcSkill<'a> {
     pub fn new(base: &Skill, decos: Option<Vec<&Decoration>>) -> Self {
         Self { base, decos }
     }
