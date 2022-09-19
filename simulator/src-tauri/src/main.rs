@@ -275,19 +275,6 @@ fn cmd_calculate_skillset<'a>(
     )
 }
 
-fn sort_by_rarity(armor: &CalcArmor) -> std::cmp::Reverse<i32> {
-    std::cmp::Reverse(armor.rarity())
-}
-
-fn sort_by_slot(a1: &CalcArmor, a2: &CalcArmor) -> std::cmp::Ordering {
-    let slots1 = &a1.slots();
-    let slots2 = &a2.slots();
-
-    return DecorationCombinations::compare(slots2, slots1);
-}
-
-type FullArmors<'a> = HashMap<ArmorPart, CalcArmor<'a>>;
-
 fn get_leftover_skills(
     dm: &DataManager,
     req_skills: &HashMap<String, i32>,
