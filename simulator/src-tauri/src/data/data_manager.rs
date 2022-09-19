@@ -235,7 +235,7 @@ impl DataManager {
             }
         }
 
-        (yes_deco_skills, no_deco_skills)
+        (no_deco_skills, yes_deco_skills)
     }
 
     pub fn get_skils_by_deco(

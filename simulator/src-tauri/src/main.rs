@@ -288,7 +288,7 @@ fn calculate_skillset<'a>(
 
     let mut decos_possible = HashMap::<String, Vec<&Decoration>>::new();
 
-    let (yes_deco_skills, no_deco_skills) = dm.get_leftover_skills(&selected_skills);
+    let (no_deco_skills, yes_deco_skills) = dm.get_leftover_skills(&selected_skills);
 
     for (skill_id, _) in &selected_skills {
         let decos = dm.get_deco_by_skill_id(skill_id);
