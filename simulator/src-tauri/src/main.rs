@@ -752,35 +752,17 @@ fn calculate_full_equip<'a>(
         debug!("Local answer: {:?}", local_answer);
     }
 
-    /*
-    debug!("All skills: {:?}", full_equip.all_skills);
-    debug!("Subracted skills: {:?}", subtracted_skills);
-    debug!("Requested skills: {:?}", selected_skills);
-    debug!(
-        "Decos possible: {:?}",
-        &decos_possible
-            .iter()
-            .map(|deco| deco.0)
-            .collect::<Vec<&String>>()
-    );
     debug!(
         "Possible slot combinations: {:?} {:?}",
-        all_possible_slot_coms
+        local_answers
             .iter()
-            .map(|comb| comb.combs_per_skill.clone())
-            .collect::<Vec<HashMap<String, Vec<i32>>>>(),
-        all_possible_slot_coms
+            .map(|comb| &comb.combs_per_skill)
+            .collect::<Vec<&HashMap<String, &Vec<i32>>>>(),
+        local_answers
             .iter()
-            .map(|comb| comb.sum.clone())
-            .collect::<Vec<Vec<i32>>>()
+            .map(|comb| &comb.sum)
+            .collect::<Vec<&Vec<i32>>>()
     );
-
-    for comb in &armor_possible_slot_combs {
-        debug!("Possible comb: {:?}", comb);
-    }
-
-    debug!("No decos {:?}", no_deco_skills);
-    */
 
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
