@@ -46,29 +46,11 @@ impl<'a> FullEquipments<'a> {
     ) -> (bool, Vec<DecorationCombination>) {
         let mut avail_slots = self.avail_slots.clone();
 
-        for (req_idx, req_slot_count) in req_slots.iter().enumerate() {
-            let mut req_count = *req_slot_count;
+        let slot_available =
+            DecorationCombination::is_possible_static_mut(&mut avail_slots, &req_slots);
 
-            if req_count == 0 {
-                continue;
-            }
-
-            for existing_idx in req_idx..avail_slots.len() {
-                let avail_count = avail_slots[existing_idx];
-
-                let taken_count = req_count.min(avail_count);
-
-                req_count -= taken_count;
-                avail_slots[existing_idx] -= taken_count;
-
-                if req_count == 0 {
-                    break;
-                }
-            }
-
-            if 0 < req_count {
-                return (false, Vec::new());
-            }
+        if slot_available == false {
+            return (false, Vec::new());
         }
 
         let mut remove_ids = Vec::new();

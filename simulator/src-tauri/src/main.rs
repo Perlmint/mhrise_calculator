@@ -350,7 +350,7 @@ fn calculate_skillset<'a>(
         let mut part_slot_armors = HashMap::<String, CalcArmor<'a>>::new();
 
         for (id, armor) in slot_only_armors {
-            let mut calc_armor = CalcArmor::<'a>::new(armor);
+            let calc_armor = CalcArmor::<'a>::new(armor);
 
             part_slot_armors.insert(id.clone(), calc_armor);
         }
@@ -432,7 +432,7 @@ fn calculate_skillset<'a>(
         all_unique_armors[&ArmorPart::Waist].iter(),
         all_unique_armors[&ArmorPart::Feet].iter()
     ) {
-        let mut armors = vec![
+        let armors = vec![
             helm.clone(),
             torso.clone(),
             arm.clone(),
@@ -443,7 +443,7 @@ fn calculate_skillset<'a>(
         let full_equip = FullEquipments::new(weapon_slots.clone(), armors.clone(), None);
         let (possible_result, possible_combs) = full_equip.get_possible_combs(
             no_deco_skills.clone(),
-            &free_slots,
+            &Vec::new(),
             &no_deco_skills,
             &dm.deco_combinations,
         );
@@ -590,6 +590,8 @@ fn calculate_skillset<'a>(
             let mut req_skills = selected_skills.clone();
             let mut req_slots = free_slots.clone();
 
+            debug!("Req skills: {:?}, req slots: {:?}", req_skills, req_skills);
+
             let mut real_parts = vec![p0.clone(), p1.clone(), p2.clone(), p3.clone(), p4.clone()];
 
             for part in real_parts.iter_mut() {
@@ -610,6 +612,11 @@ fn calculate_skillset<'a>(
 
             let (no_deco_skills, mut single_deco_skills, multi_deco_skills) =
                 dm.get_skils_by_deco(&req_skills);
+
+            debug!(
+                "Req skills: {:?}, req slots: {:?}, {:?}, {:?}, {:?}",
+                req_skills, req_skills, no_deco_skills, single_deco_skills, multi_deco_skills
+            );
 
             for part in real_parts.iter_mut() {
                 part.subtract_slots(&mut single_deco_skills);
