@@ -552,7 +552,7 @@ fn calculate_skillset<'a>(
             })
             .collect::<Vec<Vec<CalcArmor>>>();
 
-        parts.sort_by_key(|parts| Reverse(parts.len()));
+        parts.sort_by_key(|parts| parts.len());
 
         let mut total_count = 1;
 
@@ -582,8 +582,6 @@ fn calculate_skillset<'a>(
     let mut all_loop_tree = std::collections::BTreeMap::new();
 
     let mut total_case_count = 0;
-
-    let mut comb_calc_time = 0;
 
     for parts in &all_parts {
         'final_armor: for (p0, p1, p2, p3, p4) in
@@ -627,6 +625,16 @@ fn calculate_skillset<'a>(
 
             for part in real_parts.iter_mut() {
                 part.calculate_point(&decos_possible, &multi_deco_skills, &no_deco_skills);
+            }
+
+            let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
+
+            let has_possible_comb = dm
+                .deco_combinations
+                .has_possible_combs(&req_skills, &full_equip.avail_slots);
+
+            if has_possible_comb == false {
+                continue;
             }
 
             let total_point = real_parts.iter().map(|armor| armor.point()).sum::<i32>();
