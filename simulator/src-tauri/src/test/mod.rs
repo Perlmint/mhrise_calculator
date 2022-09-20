@@ -4,7 +4,10 @@ mod tests {
 
     use log::info;
 
-    use crate::{calculate_skillset, create_data_manager, data::armor::SexType};
+    use crate::{
+        calculate_skillset, create_data_manager,
+        data::{armor::SexType, deco_combination::DecorationCombination},
+    };
 
     #[test]
     fn it_works() {
@@ -40,6 +43,14 @@ mod tests {
             free_slots,
             SexType::Female,
             &dm,
+        );
+    }
+
+    #[test]
+    fn deco_comb_compare1() {
+        assert_eq!(
+            DecorationCombination::is_possible_static(&vec![3, 0, 2, 0], &vec![3, 2, 0, 0]),
+            true
         );
     }
 }
