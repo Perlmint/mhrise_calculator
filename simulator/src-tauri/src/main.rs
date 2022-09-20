@@ -725,7 +725,7 @@ fn calculate_skillset<'a>(
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
 
-            existing.unwrap().push((real_parts, req_skills));
+            existing.unwrap().push((full_equip, req_skills));
             total_case_count += 1;
 
             if MAX_ANSWER_LENGTH <= total_case_count {
@@ -758,14 +758,14 @@ fn calculate_skillset<'a>(
     let mut answers = Vec::new();
 
     'all_cases: for (_, case_vec) in all_loop_tree.iter() {
-        for (loop_case, req_skills) in case_vec {
+        for (full_equip, req_skills) in case_vec {
             total_index += 1;
 
             let result = calculate_full_equip(
                 dm,
                 &req_skills,
                 &weapon_slots,
-                loop_case.clone(),
+                &full_equip,
                 &mut answers,
                 &mut total_index,
             );
@@ -830,12 +830,10 @@ fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
-    armors: Vec<CalcArmor<'a>>,
+    full_equip: &FullEquipments<'a>,
     answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
     total_index: &mut i32,
 ) -> i32 {
-    let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), armors, None);
-
     let mut local_answers = dm.deco_combinations.get_possible_combs(&req_skills);
     local_answers.retain(|comb| comb.is_possible(&full_equip.avail_slots));
 
