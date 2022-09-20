@@ -55,6 +55,10 @@ impl<'a> CalcArmor<'a> {
         &self.base.id
     }
 
+    pub fn names(&self) -> &HashMap<String, String> {
+        &self.base.names
+    }
+
     pub fn sex_type(&self) -> &SexType {
         &self.base.sex_type
     }

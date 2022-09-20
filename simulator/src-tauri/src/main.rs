@@ -572,6 +572,7 @@ fn calculate_skillset<'a>(
     ));
 
     let mut all_loop_tree = std::collections::BTreeMap::new();
+    let mut all_parts_ids = HashSet::<String>::new();
 
     let mut total_case_count = 0;
 
@@ -660,6 +661,10 @@ fn calculate_skillset<'a>(
 
             let total_point = CalcDeco::get_point(&full_equip.avail_slots);
 
+            if all_parts_ids.contains(full_equip.id()) {
+                continue;
+            }
+
             debug!(
                 "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
                 real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
@@ -672,6 +677,7 @@ fn calculate_skillset<'a>(
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
 
+            all_parts_ids.insert(full_equip.id().clone());
             existing.unwrap().push((full_equip, req_skills));
             total_case_count += 1;
 
@@ -806,11 +812,11 @@ fn calculate_full_equip<'a>(
 
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
-        full_equip.get_by_part(&ArmorPart::Helm).id(),
-        full_equip.get_by_part(&ArmorPart::Torso).id(),
-        full_equip.get_by_part(&ArmorPart::Arm).id(),
-        full_equip.get_by_part(&ArmorPart::Waist).id(),
-        full_equip.get_by_part(&ArmorPart::Feet).id(),
+        full_equip.get_by_part(&ArmorPart::Helm).names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Torso).names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Arm).names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Waist).names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Feet).names()["ko"],
     );
 
     let mut real_armors = Vec::<Vec<CalcArmor<'a>>>::new();

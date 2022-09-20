@@ -19,6 +19,7 @@ pub struct FullEquipments<'a> {
     pub avail_slots: Vec<i32>,
 
     armor_by_part: HashMap<ArmorPart, CalcArmor<'a>>,
+    id: String,
 }
 
 impl<'a> FullEquipments<'a> {
@@ -44,7 +45,20 @@ impl<'a> FullEquipments<'a> {
 
         ret.armor_by_part = armors_by_part;
 
+        ret.id = format!(
+            "FULLEQUIP-{}-{}-{}-{}-{}",
+            ret.get_by_part(&ArmorPart::Helm).id(),
+            ret.get_by_part(&ArmorPart::Torso).id(),
+            ret.get_by_part(&ArmorPart::Arm).id(),
+            ret.get_by_part(&ArmorPart::Waist).id(),
+            ret.get_by_part(&ArmorPart::Feet).id(),
+        );
+
         ret
+    }
+
+    pub fn id(&self) -> &String {
+        &self.id
     }
 
     pub fn get_by_part(&self, part: &ArmorPart) -> &CalcArmor<'a> {
