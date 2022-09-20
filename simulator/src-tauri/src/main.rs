@@ -606,6 +606,7 @@ fn calculate_skillset<'a>(
             }
 
             for part in real_parts.iter_mut() {
+                // TODO don't subtract slot on each part, only on full equipment
                 part.subtract_skills(&mut req_skills, &mut req_slots);
             }
 

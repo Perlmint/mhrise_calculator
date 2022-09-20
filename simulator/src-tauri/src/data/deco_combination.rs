@@ -376,6 +376,7 @@ impl DecorationCombination {
         promote == 0
     }
 
+    // DO not execute on each part, only on full equipments
     pub fn is_possible_static_mut(free_slots: &mut Vec<i32>, req_slots: &mut Vec<i32>) -> bool {
         let mut promote = 0;
 

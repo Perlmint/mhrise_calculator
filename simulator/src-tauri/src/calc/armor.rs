@@ -112,6 +112,7 @@ impl<'a> CalcArmor<'a> {
             }
         }
 
+        // TODO don't subtract slot on each part, only on full equipment
         DecorationCombination::is_possible_static_mut(&mut self.slots, req_slots);
 
         return diffs;
