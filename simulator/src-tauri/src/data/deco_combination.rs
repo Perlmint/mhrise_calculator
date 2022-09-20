@@ -322,9 +322,7 @@ impl DecorationCombinations {
         let mut promote = 0;
 
         for index in 0..level_indices.len() {
-            let index = index as usize;
-
-            level_indices[index as usize] += 1;
+            level_indices[index] += 1;
 
             if level_indices[index] == combs_per_skill[index].len() {
                 level_indices[index] = 0;
@@ -368,8 +366,8 @@ impl DecorationCombination {
 
             let taken = free_slot.min(req_slot);
 
-            if taken == free_slot {
-                promote += req_slot - taken;
+            if free_slot == taken {
+                promote = req_slot - taken;
             } else {
                 promote = 0;
             }
