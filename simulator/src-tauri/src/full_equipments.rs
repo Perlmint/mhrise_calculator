@@ -55,6 +55,10 @@ impl<'a> FullEquipments<'a> {
             ret.get_by_part(&ArmorPart::Feet).id(),
         );
 
+        if talisman.is_some() {
+            ret.id = format!("{}-{}", ret.id, talisman.unwrap().id());
+        }
+
         ret
     }
 

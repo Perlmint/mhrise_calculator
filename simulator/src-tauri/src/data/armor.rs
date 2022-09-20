@@ -107,6 +107,7 @@ pub struct TalismanSkill {
 
 #[derive(Debug, Default, Clone, Serialize)]
 pub struct Talisman {
+    id: String,
     pub skills: Vec<TalismanSkill>,
     pub slot_sizes: Vec<i32>,
 }
@@ -239,9 +240,22 @@ impl AnomalyArmor {
 }
 
 impl Talisman {
+    pub fn new(id: String, skills: Vec<TalismanSkill>, slot_sizes: Vec<i32>) -> Self {
+        Self {
+            id,
+            skills,
+            slot_sizes,
+        }
+    }
+
     pub fn create_empty() -> Self {
         Self {
+            id: format!("{}-talisman", EMPTY_ARMOR_PREFIX),
             ..Default::default()
         }
+    }
+
+    pub fn id(&self) -> &String {
+        &self.id
     }
 }

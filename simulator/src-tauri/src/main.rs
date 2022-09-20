@@ -182,7 +182,7 @@ fn parse_talisman(filename: &str, skill_name_dict: &HashMap<String, String>) -> 
 
             let mut talismans = Vec::new();
 
-            for record in records {
+            for (index, record) in records.iter().enumerate() {
                 let skill_name1 = &record[0];
                 let skill_level1 = to_i32(&record, 1);
                 let skill_name2 = &record[2];
@@ -214,10 +214,8 @@ fn parse_talisman(filename: &str, skill_name_dict: &HashMap<String, String>) -> 
                     });
                 }
 
-                let talisman = Talisman {
-                    skills: talisman_skills,
-                    slot_sizes,
-                };
+                let talisman =
+                    Talisman::new(format!("talisman_{}", index), talisman_skills, slot_sizes);
 
                 talismans.push(talisman);
             }
