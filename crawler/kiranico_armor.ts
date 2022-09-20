@@ -9,7 +9,7 @@ import {
     SkillInfo,
     ArmorStatInfo,
     FinalArmorInfo,
-    FinalSkillInfo,
+    ArmorFinalSkillInfo,
     ArmorSlotCount,
 } from "./definition/armor_define.js";
 
@@ -203,7 +203,7 @@ export async function parse() {
                         names[lang] = langName;
                     }
 
-                    const skills = {} as { [key: string]: FinalSkillInfo };
+                    const skills = {} as { [key: string]: ArmorFinalSkillInfo };
 
                     enArmorInfo.skills.forEach((info) => {
                         const id = makeId(info.name);

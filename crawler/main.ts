@@ -10,7 +10,7 @@ import { parse as decoParse } from "./kiranico_deco.js";
 import {
     ArmorStatInfo,
     FinalArmorInfo,
-    FinalSkillInfo as ArmorFinalSkillInfo,
+    ArmorFinalSkillInfo,
 } from "./definition/armor_define.js";
 import { FinalSkillInfo } from "./definition/skill_define.js";
 
