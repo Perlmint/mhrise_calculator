@@ -572,19 +572,6 @@ fn calculate_skillset<'a>(
         'final_armor: for (p0, p1, p2, p3, p4) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
         {
-            let debug_case = vec![
-                "astalos_helm",
-                "storge_mail",
-                "silver_solbraces",
-                "rakna_greaves_x",
-                "lambent_sash",
-            ];
-
-            let debug_case = debug_case
-                .iter()
-                .map(|id| id.to_string())
-                .collect::<HashSet<String>>();
-
             let mut req_skills = selected_skills.clone();
             let mut req_slots = free_slots.clone();
 
@@ -594,20 +581,7 @@ fn calculate_skillset<'a>(
                 .map(|part| part.id().clone())
                 .collect::<HashSet<String>>();
 
-            let is_debug_case = debug_case == real_ids;
             let init_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
-
-            if is_debug_case == false {
-                continue;
-            }
-
-            if is_debug_case {
-                for part in &real_parts {
-                    debug!("Each part slots: {}, {:?}", part.id(), part.slots());
-                }
-
-                debug!("Init equip sum slots: {:?}", init_equip.avail_slots);
-            }
 
             for part in real_parts.iter_mut() {
                 part.subtract_skills(&mut req_skills);
@@ -618,13 +592,6 @@ fn calculate_skillset<'a>(
 
             if no_deco_skills.len() != 0 {
                 panic!("This shouldn't happen");
-            }
-
-            if is_debug_case {
-                debug!(
-                    "Single deco skills before: {:?}, {:?}",
-                    single_deco_skills, req_slots
-                );
             }
 
             let single_deco_skills = single_deco_skills
@@ -638,25 +605,13 @@ fn calculate_skillset<'a>(
                 req_slots[slot_size_index] += count;
             }
 
-            if is_debug_case {
-                debug!("Req slots summed up: {:?}", req_slots);
-            }
-
             let mut full_equip =
                 FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
             let slot_success = full_equip.subtract_slots(&mut req_slots);
 
             if slot_success == false {
-                if is_debug_case {
-                    debug!("Real slots: {:?}, {:?}", req_slots, req_skills);
-                }
-
                 continue;
-            } else {
-                if is_debug_case {
-                    debug!("Slots after: {:?}, {:?}", req_slots, req_skills);
-                }
             }
 
             for (id, _, count) in &single_deco_skills {
@@ -685,15 +640,7 @@ fn calculate_skillset<'a>(
             let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
 
             if equip_slot_sum < minimum_slot_sum {
-                if is_debug_case {
-                    debug!("Slot not much: {} {}", equip_slot_sum, minimum_slot_sum);
-                }
-
                 continue;
-            }
-
-            if is_debug_case {
-                debug!("Success case: {:?}", full_equip);
             }
 
             let has_possible_comb = dm
@@ -701,13 +648,6 @@ fn calculate_skillset<'a>(
                 .has_possible_combs(&req_skills, &full_equip.avail_slots);
 
             if has_possible_comb == false {
-                if is_debug_case {
-                    debug!(
-                        "No possible combs: {:?}, {:?}",
-                        req_skills, full_equip.avail_slots
-                    );
-                }
-
                 continue;
             }
 
@@ -769,11 +709,6 @@ fn calculate_skillset<'a>(
                 &mut answers,
                 &mut total_index,
             );
-
-            if MAX_ANSWER_LENGTH <= answers.len() as i32 {
-                debug!("Iteration size too large, breaking at 200");
-                break 'all_cases;
-            }
         }
     }
 
