@@ -597,6 +597,10 @@ fn calculate_skillset<'a>(
             let is_debug_case = debug_case == real_ids;
             let init_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
+            if is_debug_case == false {
+                continue;
+            }
+
             if is_debug_case {
                 for part in &real_parts {
                     debug!("Each part slots: {}, {:?}", part.id(), part.slots());
@@ -614,14 +618,16 @@ fn calculate_skillset<'a>(
 
             if no_deco_skills.len() != 0 {
                 panic!("This shouldn't happen");
-                continue 'final_armor;
             }
 
             if is_debug_case {
-                debug!("Single deco skills before: {:?}", single_deco_skills);
+                debug!(
+                    "Single deco skills before: {:?}, {:?}",
+                    single_deco_skills, req_slots
+                );
             }
 
-            let mut single_deco_skills = single_deco_skills
+            let single_deco_skills = single_deco_skills
                 .iter()
                 .map(|(id, (slot_size, count))| (id, *slot_size, *count))
                 .collect::<Vec<(&String, i32, i32)>>();
@@ -632,10 +638,14 @@ fn calculate_skillset<'a>(
                 req_slots[slot_size_index] += count;
             }
 
+            if is_debug_case {
+                debug!("Req slots summed up: {:?}", req_slots);
+            }
+
             let mut full_equip =
                 FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
 
-            let slot_success = full_equip.subtract_slots(&req_slots);
+            let slot_success = full_equip.subtract_slots(&mut req_slots);
 
             if slot_success == false {
                 if is_debug_case {
@@ -643,6 +653,10 @@ fn calculate_skillset<'a>(
                 }
 
                 continue;
+            } else {
+                if is_debug_case {
+                    debug!("Slots after: {:?}, {:?}", req_slots, req_skills);
+                }
             }
 
             for (id, _, count) in &single_deco_skills {
@@ -668,7 +682,6 @@ fn calculate_skillset<'a>(
                 minimum_slot_sum += deco_sum_per_level[0];
             }
 
-            let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
             let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
 
             if equip_slot_sum < minimum_slot_sum {

@@ -360,11 +360,13 @@ impl DecorationCombination {
         let mut promote = 0;
 
         for (&free_slot, &req_slot) in izip!(free_slots, req_slots) {
+            let req_slot = req_slot + promote;
+
             if req_slot == 0 {
                 continue;
             }
 
-            let taken = free_slot.min(req_slot + promote);
+            let taken = free_slot.min(req_slot);
 
             if taken == free_slot {
                 promote += req_slot - taken;
@@ -381,11 +383,13 @@ impl DecorationCombination {
         let mut promote = 0;
 
         for (free_slot, req_slot) in izip!(free_slots, req_slots) {
+            *req_slot += promote;
+
             if *req_slot == 0 {
                 continue;
             }
 
-            let taken = (*free_slot).min(*req_slot + promote);
+            let taken = (*free_slot).min(*req_slot);
             *free_slot -= taken;
             *req_slot -= taken;
 

@@ -37,7 +37,7 @@ impl<'a> CalcDeco<'a> {
         }
 
         for (_, slot_size, count) in single_deco_skills {
-            let slot_size_index = slot_size as usize - 1;
+            let slot_size_index = *slot_size as usize - 1;
 
             slots[slot_size_index] += count;
         }

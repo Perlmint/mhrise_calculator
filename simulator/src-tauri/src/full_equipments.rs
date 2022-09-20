@@ -91,12 +91,8 @@ impl<'a> FullEquipments<'a> {
         (req_deco_combs.len() != 0, req_deco_combs)
     }
 
-    pub fn subtract_slots(&mut self, req_slots: &Vec<i32>) -> bool {
-        let success = true;
-
-        // TODO: implement
-
-        success
+    pub fn subtract_slots(&mut self, req_slots: &mut Vec<i32>) -> bool {
+        DecorationCombination::is_possible_static_mut(&mut self.avail_slots, req_slots)
     }
 
     fn sum(&self) -> (HashMap<String, i32>, Vec<i32>) {
