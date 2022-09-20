@@ -38,6 +38,7 @@ mod full_equipments;
 mod test;
 
 use crate::calc::armor::CalcArmor;
+use crate::calc::deco::CalcDeco;
 use crate::data::armor::{
     AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill, EMPTY_ARMOR_PREFIX,
 };
@@ -603,7 +604,31 @@ fn calculate_skillset<'a>(
                 req_skills.remove(&id);
             }
 
+            // This only calculate number of slots regardless of slot size, just for candidate optimization
+            let mut minimum_slot_sum = 0;
+
+            for (skill_id, &level) in &req_skills {
+                let mut deco_sum_per_level = dm
+                    .deco_combinations
+                    .get(skill_id)
+                    .unwrap()
+                    .get(level as usize - 1)
+                    .unwrap()
+                    .iter()
+                    .map(|comb| comb.iter().sum::<i32>())
+                    .collect::<Vec<i32>>();
+
+                deco_sum_per_level.sort();
+
+                minimum_slot_sum += deco_sum_per_level[0];
+            }
+
             let full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
+            let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
+
+            if equip_slot_sum < minimum_slot_sum {
+                continue;
+            }
 
             let has_possible_comb = dm
                 .deco_combinations
@@ -613,12 +638,12 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
-            debug!("Possible candidiate: left skills: {:?}", req_skills);
+            let total_point = CalcDeco::get_point(&full_equip.avail_slots);
 
-            let total_point = real_parts
-                .iter()
-                .map(|armor| armor.get_point(&decos_possible, &multi_deco_skills, &no_deco_skills))
-                .sum::<i32>();
+            debug!(
+                "Possible candidiate: left skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
+                req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
+            );
 
             let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
@@ -635,12 +660,12 @@ fn calculate_skillset<'a>(
     let elapsed_sort = start_time.elapsed();
 
     ret.push_str(&format!(
-        "total case count: {},\nall_loop_cases sorting elapsed: {:?}\n",
+        "Candidate cases count: {},\nall_loop_cases sorting elapsed: {:?}\n",
         total_case_count, elapsed_sort
     ));
 
     debug!(
-        "All loop cases calculated, start calculating: {}\n",
+        "Candidate cases calculated, start calculating: {}\n",
         total_case_count
     );
 
@@ -650,6 +675,7 @@ fn calculate_skillset<'a>(
     'all_cases: for (_, case_vec) in all_loop_tree.iter() {
         for (loop_case, req_skills) in case_vec {
             total_index += 1;
+
             let result = calculate_full_equip(
                 dm,
                 &req_skills,

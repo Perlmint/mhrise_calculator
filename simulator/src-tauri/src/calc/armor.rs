@@ -9,6 +9,8 @@ use crate::data::{
     skill::MAX_SLOT_LEVEL,
 };
 
+use super::deco::CalcDeco;
+
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
     base: &'a BaseArmor,
@@ -178,19 +180,7 @@ impl<'a> CalcArmor<'a> {
             };
         }
 
-        for (slot_size_index, count) in self.slots.iter().enumerate() {
-            let slot_level = slot_size_index as i32 + 1;
-
-            let slot_point;
-
-            if slot_level == 4 {
-                slot_point = slot_level + 2;
-            } else {
-                slot_point = slot_level
-            }
-
-            point += slot_point * count;
-        }
+        point += CalcDeco::get_point(&self.slots);
 
         point
     }
