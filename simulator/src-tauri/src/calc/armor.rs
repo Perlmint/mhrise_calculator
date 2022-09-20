@@ -117,10 +117,10 @@ impl<'a> CalcArmor<'a> {
         return diffs;
     }
 
-    pub fn subtract_slots(&mut self, single_deco_skills: &mut HashMap<String, (i32, i32)>) -> bool {
+    pub fn subtract_slots(&mut self, single_deco_skills: &mut Vec<(&String, i32, i32)>) -> bool {
         let mut success = true;
 
-        for (skill_id, (slot_size, count)) in single_deco_skills.iter_mut() {
+        for (_, slot_size, count) in single_deco_skills.iter_mut() {
             if *count == 0 {
                 continue;
             }

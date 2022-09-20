@@ -589,6 +589,21 @@ fn calculate_skillset<'a>(
             let mut req_slots = free_slots.clone();
 
             let mut real_parts = vec![p0.clone(), p1.clone(), p2.clone(), p3.clone(), p4.clone()];
+            let real_ids = real_parts
+                .iter()
+                .map(|part| part.id().clone())
+                .collect::<HashSet<String>>();
+
+            let is_debug_case = debug_case == real_ids;
+            let init_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
+
+            if is_debug_case {
+                for part in &real_parts {
+                    debug!("Each part slots: {}, {:?}", part.id(), part.slots());
+                }
+
+                debug!("Init equip sum slots: {:?}", init_equip.avail_slots);
+            }
 
             for part in real_parts.iter_mut() {
                 part.subtract_skills(&mut req_skills, &mut req_slots);
@@ -596,27 +611,60 @@ fn calculate_skillset<'a>(
 
             for slot in &req_slots {
                 if 0 < *slot {
+                    if is_debug_case {
+                        debug!("Real slots: {:?}, {:?}", req_slots, req_skills);
+                    }
+
                     continue 'final_armor;
                 }
             }
 
-            let (no_deco_skills, mut single_deco_skills, multi_deco_skills) =
+            let (no_deco_skills, single_deco_skills, multi_deco_skills) =
                 dm.get_skils_by_deco(&req_skills);
 
             if no_deco_skills.len() != 0 {
+                panic!("This shouldn't happen");
                 continue 'final_armor;
             }
 
-            for part in real_parts.iter_mut() {
-                part.subtract_slots(&mut single_deco_skills);
+            if is_debug_case {
+                debug!("Single deco skills before: {:?}", single_deco_skills);
             }
 
-            for (id, (_, count)) in single_deco_skills {
-                if count != 0 {
+            let mut single_deco_skills = single_deco_skills
+                .iter()
+                .map(|(id, (slot_size, count))| (id, *slot_size, *count))
+                .collect::<Vec<(&String, i32, i32)>>();
+
+            single_deco_skills.sort_by_key(|(_, slot_size, _)| Reverse(*slot_size));
+
+            for part in real_parts.iter_mut() {
+                // TODO: do not subtract on each part, subtract on whole equipment
+                part.subtract_slots(&mut single_deco_skills);
+
+                if is_debug_case {
+                    debug!(
+                        "State after subtract: {}, {:?}, {:?}",
+                        part.id(),
+                        part.slots(),
+                        single_deco_skills
+                    );
+                }
+            }
+
+            for (id, _, count) in &single_deco_skills {
+                if *count != 0 {
+                    if is_debug_case {
+                        debug!(
+                            "Single deco skills unavailable: {:?}, {:?}",
+                            single_deco_skills, init_equip.avail_slots
+                        );
+                    }
+
                     continue 'final_armor;
                 }
 
-                req_skills.remove(&id);
+                req_skills.remove(*id);
             }
 
             // This only calculates the number of slots regardless of slot size, just for candidate optimization
@@ -642,7 +690,15 @@ fn calculate_skillset<'a>(
             let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
 
             if equip_slot_sum < minimum_slot_sum {
+                if is_debug_case {
+                    debug!("Slot not much: {} {}", equip_slot_sum, minimum_slot_sum);
+                }
+
                 continue;
+            }
+
+            if is_debug_case {
+                debug!("Success case: {:?}", full_equip);
             }
 
             let has_possible_comb = dm
@@ -650,6 +706,13 @@ fn calculate_skillset<'a>(
                 .has_possible_combs(&req_skills, &full_equip.avail_slots);
 
             if has_possible_comb == false {
+                if is_debug_case {
+                    debug!(
+                        "No possible combs: {:?}, {:?}",
+                        req_skills, full_equip.avail_slots
+                    );
+                }
+
                 continue;
             }
 
