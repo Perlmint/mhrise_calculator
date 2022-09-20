@@ -2,15 +2,21 @@
 mod tests {
     use std::collections::HashMap;
 
+    use log::info;
+
     use crate::{calculate_skillset, create_data_manager, data::armor::SexType};
 
     #[test]
     fn it_works() {
+        env_logger::init();
+
         let dm = create_data_manager(
             "./data/armor.json",
             "./data/armor.json",
             "./data/armor.json",
         );
+
+        info!("Armors length: {}", dm.armors.len());
 
         let mut selected_skills = HashMap::<String, i32>::new();
         let weapon_slots = vec![3, 0, 0];
@@ -35,7 +41,5 @@ mod tests {
             SexType::Female,
             &dm,
         );
-
-        println!("Armors length: {}", dm.armors.len());
     }
 }
