@@ -112,12 +112,12 @@ impl<'a> FullEquipments<'a> {
                 skills.insert(id.clone(), level_sum);
             }
 
-            for (_, slot_size) in armor.slots().iter().enumerate() {
-                if *slot_size == 0 {
+            for (slot_size_index, count) in armor.slots().iter().enumerate() {
+                if *count == 0 {
                     continue;
                 }
 
-                slots[(slot_size - 1) as usize] += 1;
+                slots[slot_size_index] += *count;
             }
         }
 
