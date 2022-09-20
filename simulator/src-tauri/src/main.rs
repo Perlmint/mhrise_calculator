@@ -568,7 +568,7 @@ fn calculate_skillset<'a>(
 
     let mut total_case_count = 0;
 
-    for parts in &all_parts {
+    'all_parts: for parts in &all_parts {
         'final_armor: for (p0, p1, p2, p3, p4) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
         {
@@ -658,11 +658,15 @@ fn calculate_skillset<'a>(
             total_case_count += 1;
 
             if MAX_ANSWER_LENGTH <= total_case_count {
-                debug!("Total case count reached {}, breaking", MAX_ANSWER_LENGTH);
+                debug!(
+                    "Candidate case count reached {}, breaking",
+                    MAX_ANSWER_LENGTH
+                );
                 ret.push_str(&format!(
-                    "Total case count reached {}, breaking\n",
+                    "Candidate case count reached {}, breaking\n",
                     MAX_ANSWER_LENGTH,
                 ));
+                break 'all_parts;
             }
         }
     }
