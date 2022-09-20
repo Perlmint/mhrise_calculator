@@ -786,7 +786,7 @@ fn calculate_full_equip<'a>(
     }
 
     debug!("Initial slots: {:?}", full_equip.avail_slots);
-    debug!("Armor ids: {:?}", full_equip.all_skills);
+    debug!("Skill ids: {:?}", full_equip.all_skills);
 
     for local_answer in &local_answers {
         debug!("Local answer: {:?}", local_answer);
@@ -806,11 +806,11 @@ fn calculate_full_equip<'a>(
 
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
-        full_equip.armors[0].id(),
-        full_equip.armors[1].id(),
-        full_equip.armors[2].id(),
-        full_equip.armors[3].id(),
-        full_equip.armors[4].id(),
+        full_equip.get_by_part(&ArmorPart::Helm).id(),
+        full_equip.get_by_part(&ArmorPart::Torso).id(),
+        full_equip.get_by_part(&ArmorPart::Arm).id(),
+        full_equip.get_by_part(&ArmorPart::Waist).id(),
+        full_equip.get_by_part(&ArmorPart::Feet).id(),
     );
 
     let mut real_armors = Vec::<Vec<CalcArmor<'a>>>::new();

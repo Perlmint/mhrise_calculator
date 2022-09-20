@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use crate::{
     calc::armor::CalcArmor,
     data::{
-        armor::Talisman,
+        armor::{ArmorPart, Talisman},
         deco_combination::{DecorationCombination, DecorationCombinations},
         skill::MAX_SLOT_LEVEL,
     },
@@ -17,6 +17,8 @@ pub struct FullEquipments<'a> {
 
     pub all_skills: HashMap<String, i32>,
     pub avail_slots: Vec<i32>,
+
+    armor_by_part: HashMap<ArmorPart, CalcArmor<'a>>,
 }
 
 impl<'a> FullEquipments<'a> {
@@ -34,7 +36,19 @@ impl<'a> FullEquipments<'a> {
 
         (ret.all_skills, ret.avail_slots) = ret.sum();
 
+        let mut armors_by_part = HashMap::<ArmorPart, CalcArmor<'a>>::new();
+
+        for armor in &ret.armors {
+            armors_by_part.insert(armor.part(), armor.clone());
+        }
+
+        ret.armor_by_part = armors_by_part;
+
         ret
+    }
+
+    pub fn get_by_part(&self, part: &ArmorPart) -> &CalcArmor<'a> {
+        &self.armor_by_part[part]
     }
 
     pub fn get_possible_combs(
