@@ -37,22 +37,8 @@ impl<'a> CalcArmor<'a> {
         }
     }
 
-    pub fn new_anomaly(anomaly: &'a AnomalyArmor) -> Self {
-        let base = &anomaly.affected;
-
-        Self {
-            base,
-            anomaly: Option::Some(anomaly),
-            part: base.part.clone(),
-            sex_type: base.sex_type.clone(),
-            rarity: base.rarity,
-            skills: base.skills.clone(),
-            slots: Self::convert_from_base_slots(&base.slots),
-        }
-    }
-
     pub fn id(&self) -> &String {
-        &self.base.id
+        &self.base.id()
     }
 
     pub fn names(&self) -> &HashMap<String, String> {

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use super::armor::{AnomalyArmor, ArmorPart, BaseArmor, Talisman};
+use super::armor::{AnomalyArmor, ArmorPart, BaseArmor, Talisman, ANOMALY_ARMOR_PREFIX};
 use super::deco::Decoration;
 use super::deco_combination::DecorationCombinations;
 use super::skill::Skill;
@@ -43,7 +43,7 @@ impl DataManager {
             for lang_name in &armor.names {
                 let name = lang_name.1;
 
-                armor_name_dict.insert(name.to_string(), armor.id.to_string());
+                armor_name_dict.insert(name.to_string(), armor.id().clone());
             }
         }
 
@@ -154,6 +154,11 @@ impl DataManager {
 
     pub fn set_anomalies(&mut self, anomalies: Vec<AnomalyArmor>) {
         self.anomaly_armors = anomalies;
+
+        for (index, armor) in self.anomaly_armors.iter_mut().enumerate() {
+            armor.affected.id =
+                format!("{}_{}_{}", ANOMALY_ARMOR_PREFIX, index, armor.original.id());
+        }
 
         for part_armors in self.anomalies_by_part.iter_mut() {
             part_armors.1.clear();

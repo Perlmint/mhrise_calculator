@@ -6,6 +6,7 @@ use tauri::regex::Regex;
 
 pub static EMPTY_ARMOR_PREFIX: &str = "__empty";
 pub static SLOT_ARMOR_PREFIX: &str = "__slot";
+pub static ANOMALY_ARMOR_PREFIX: &str = "__anomaly";
 
 lazy_static! {
     pub static ref SLOT_ARMOR_REGEX: Regex =
@@ -70,7 +71,7 @@ pub struct ArmorSkill {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct BaseArmor {
-    pub id: String,
+    pub(super) id: String,
     pub part: ArmorPart,
 
     #[serde(rename = "sexType")]
@@ -135,6 +136,10 @@ impl BaseArmor {
                 dragon_res: 0,
             },
         }
+    }
+
+    pub fn id(&self) -> &String {
+        &self.id
     }
 
     pub fn get_slot_armor_id(slots: &Vec<i32>) -> String {

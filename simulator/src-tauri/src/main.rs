@@ -933,7 +933,7 @@ fn create_data_manager(
     let mut decos = HashMap::<String, Decoration>::new();
 
     for armor in armors_vec {
-        armors.insert(armor.id.clone(), armor);
+        armors.insert(armor.id().clone(), armor);
     }
 
     for skill in skills_vec {
