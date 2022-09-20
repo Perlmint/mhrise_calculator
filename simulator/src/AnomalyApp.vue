@@ -76,6 +76,7 @@ let max_anomaly_skills = ref(5);
 
 let talisman_filename = ref("");
 let talismans = ref([]) as Ref<TalismanInfo[]>;
+let max_talisman_skills = ref(2);
 
 let selectedArmorId = ref("");
 
@@ -181,6 +182,24 @@ async function parse_talisman_file(filename: string) {
         </tr>
       </table>
     </template>
+
+    <table>
+      <tr>
+        <th>Rarity</th>
+        <template v-for="i in max_talisman_skills">
+          <th colspan="2">Skill {{ i }}</th>
+        </template>
+      </tr>
+
+      <tr v-for="tali in talismans">
+        <td>TO BE RARITY</td>
+
+        <template v-for="skillInfo in tali.skills">
+          <td>{{ skills[skillInfo.id].names[lang_data] }}</td>
+          <td>Lv {{ skillInfo.level }}</td>
+        </template>
+      </tr>
+    </table>
 
     <table>
       <tr>
