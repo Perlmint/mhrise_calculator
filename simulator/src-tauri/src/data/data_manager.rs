@@ -23,6 +23,7 @@ pub struct DataManager {
     pub anomalies_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
 
     pub talismans: Vec<Talisman>,
+    pub empty_talisman: Talisman,
 
     pub armor_name_dict: HashMap<String, String>,
     pub skill_name_dict: HashMap<String, String>,
@@ -145,6 +146,7 @@ impl DataManager {
             skill_name_dict,
             bases_by_part,
             anomalies_by_part,
+            empty_talisman: Talisman::create_empty(),
             anomaly_armors: Default::default(),
             talismans: Default::default(),
         };

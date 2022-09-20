@@ -237,3 +237,11 @@ impl AnomalyArmor {
         }
     }
 }
+
+impl Talisman {
+    pub fn create_empty() -> Self {
+        Self {
+            ..Default::default()
+        }
+    }
+}
