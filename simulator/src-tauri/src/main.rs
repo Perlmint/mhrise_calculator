@@ -3,6 +3,8 @@
     windows_subsystem = "windows"
 )]
 
+pub static MAX_ANSWER_LENGTH: i32 = 200;
+
 use csv::StringRecord;
 use log::{debug, info};
 use std::cmp::{Ordering, Reverse};
@@ -654,6 +656,14 @@ fn calculate_skillset<'a>(
 
             existing.unwrap().push((real_parts, req_skills));
             total_case_count += 1;
+
+            if MAX_ANSWER_LENGTH <= total_case_count {
+                debug!("Total case count reached {}, breaking", MAX_ANSWER_LENGTH);
+                ret.push_str(&format!(
+                    "Total case count reached {}, breaking\n",
+                    MAX_ANSWER_LENGTH,
+                ));
+            }
         }
     }
 
@@ -685,7 +695,7 @@ fn calculate_skillset<'a>(
                 &mut total_index,
             );
 
-            if 200 <= answers.len() {
+            if MAX_ANSWER_LENGTH <= answers.len() as i32 {
                 debug!("Iteration size too large, breaking at 200");
                 break 'all_cases;
             }
