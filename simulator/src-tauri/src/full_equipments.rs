@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use crate::{
     calc::armor::CalcArmor,
+    calc::calc_equipment::CalcEquipment,
     data::{
         armor::{ArmorPart, Talisman},
         deco_combination::{DecorationCombination, DecorationCombinations},
@@ -132,10 +133,10 @@ impl<'a> FullEquipments<'a> {
         }
 
         for armor in &self.armors {
-            for (id, skill_info) in armor.skills() {
+            for (id, &level) in armor.skills() {
                 let existing = skills.get(id);
 
-                let mut level_sum = skill_info.level;
+                let mut level_sum = level;
 
                 if existing.is_some() {
                     level_sum += existing.unwrap();

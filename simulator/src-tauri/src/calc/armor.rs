@@ -9,7 +9,7 @@ use crate::data::{
     skill::MAX_SLOT_LEVEL,
 };
 
-use super::deco::CalcDeco;
+use super::{calc_equipment::CalcEquipment, deco::CalcDeco};
 
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
@@ -20,19 +20,25 @@ pub struct CalcArmor<'a> {
     sex_type: SexType,
 
     rarity: i32,
-    skills: HashMap<String, ArmorSkill>,
+    skills: HashMap<String, i32>,
     slots: Vec<i32>,
 }
 
 impl<'a> CalcArmor<'a> {
     pub fn new(base: &'a BaseArmor) -> Self {
+        let mut skills = HashMap::new();
+
+        for (skill_id, armor_skill) in &base.skills {
+            skills.insert(skill_id.clone(), armor_skill.level);
+        }
+
         Self {
             base,
             anomaly: None,
             part: base.part.clone(),
             sex_type: base.sex_type.clone(),
             rarity: base.rarity,
-            skills: base.skills.clone(),
+            skills,
             slots: Self::convert_from_base_slots(&base.slots),
         }
     }
@@ -57,21 +63,13 @@ impl<'a> CalcArmor<'a> {
         self.part.clone()
     }
 
-    pub fn skills(&self) -> &HashMap<String, ArmorSkill> {
-        &self.skills
-    }
-
-    pub fn slots(&self) -> &Vec<i32> {
-        &self.slots
-    }
-
     pub fn subtract_skills(
         &mut self,
         req_skills: &mut HashMap<String, i32>,
     ) -> HashMap<String, i32> {
         let mut diffs = HashMap::new();
 
-        for (id, skill) in self.skills.clone() {
+        for (id, level) in self.skills.clone() {
             let outer_skill = req_skills.get_mut(&id);
 
             if outer_skill.is_none() {
@@ -80,7 +78,7 @@ impl<'a> CalcArmor<'a> {
 
             let req_skill = outer_skill.unwrap();
 
-            let taken = skill.level.min(*req_skill);
+            let taken = level.min(*req_skill);
 
             *req_skill -= taken;
 
@@ -92,11 +90,11 @@ impl<'a> CalcArmor<'a> {
         }
 
         for (id, taken) in &diffs {
-            let skill = self.skills.get_mut(id).unwrap();
+            let level = self.skills.get_mut(id).unwrap();
 
-            skill.level -= taken;
+            *level -= taken;
 
-            if skill.level == 0 {
+            if *level == 0 {
                 self.skills.remove(id);
             }
         }
@@ -148,19 +146,19 @@ impl<'a> CalcArmor<'a> {
     ) -> i32 {
         let mut point = 0;
 
-        for (id, skill) in &self.skills {
+        for (id, &level) in &self.skills {
             match yes_deco_skills.get(id) {
-                Some(level) => {
+                Some(&req_level) => {
                     let mut decos = decos_possible.get(id).unwrap().clone();
                     decos.sort_by_key(|deco| Reverse(deco.slot_size));
 
                     let max_slot_size = decos[0].slot_size;
 
-                    point += skill.level.min(*level) * max_slot_size;
+                    point += level.min(req_level) * max_slot_size;
                 }
                 None => {
                     match no_deco_skills.get(id) {
-                        Some(level) => point += skill.level.min(*level) * 1000,
+                        Some(&req_level) => point += level.min(req_level) * 1000,
                         None => {}
                     };
                 }
@@ -188,5 +186,15 @@ impl<'a> CalcArmor<'a> {
         }
 
         ret
+    }
+}
+
+impl<'a> CalcEquipment for CalcArmor<'a> {
+    fn skills(&self) -> &HashMap<String, i32> {
+        &self.skills
+    }
+
+    fn slots(&self) -> &Vec<i32> {
+        &self.slots
     }
 }

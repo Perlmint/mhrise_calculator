@@ -42,6 +42,7 @@ mod full_equipments;
 mod test;
 
 use crate::calc::armor::CalcArmor;
+use crate::calc::calc_equipment::CalcEquipment;
 use crate::calc::deco::CalcDeco;
 use crate::data::armor::{
     AnomalyArmor, ArmorSkill, ArmorStat, BaseArmor, Talisman, TalismanSkill, EMPTY_ARMOR_PREFIX,
