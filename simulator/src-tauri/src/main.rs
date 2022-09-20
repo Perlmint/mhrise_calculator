@@ -245,6 +245,17 @@ fn cmd_parse_anomaly(
 }
 
 #[tauri::command]
+fn cmd_parse_talisman(filename: &str, mutex_dm: tauri::State<Mutex<DataManager>>) -> Vec<Talisman> {
+    let mut dm = mutex_dm.lock().unwrap();
+
+    let talismans = parse_talisman(filename, &dm.skill_name_dict);
+
+    dm.set_talismans(talismans.clone());
+
+    return talismans;
+}
+
+#[tauri::command]
 fn cmd_get_skill_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<String, Skill> {
     let dm = mutex_dm.lock().unwrap();
 
@@ -992,6 +1003,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             cmd_parse_anomaly,
+            cmd_parse_talisman,
             cmd_get_skill_names,
             cmd_get_armor_names,
             cmd_calculate_skillset

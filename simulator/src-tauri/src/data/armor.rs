@@ -99,13 +99,13 @@ pub struct AnomalyArmor {
     pub skill_diffs: HashMap<String, ArmorSkill>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Serialize)]
 pub struct TalismanSkill {
     pub id: String,
     pub level: i32,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone, Serialize)]
 pub struct Talisman {
     pub skills: Vec<TalismanSkill>,
     pub slot_sizes: Vec<i32>,

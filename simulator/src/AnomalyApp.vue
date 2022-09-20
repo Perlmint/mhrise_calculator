@@ -21,6 +21,11 @@ interface AnomalyArmorInfo {
     skillDiffs: {[key: string]: ArmorFinalSkillInfo},
 }
 
+interface TalismanInfo {
+  skills: {id: string, level: number}[],
+  slot_sizes: number[]
+}
+
 let lang_data = ref("ko");
 
 let skills = ref({}) as Ref<{[key: string]: FinalSkillInfo}>;
@@ -69,6 +74,9 @@ let anomalyArmors = ref([]) as Ref<AnomalyArmorInfo[]>;
 let anomalyArmorsByPart = ref({}) as Ref<{[key: string]: AnomalyArmorInfo[]}>;
 let max_anomaly_skills = ref(5);
 
+let talisman_filename = ref("");
+let talismans = ref([]) as Ref<TalismanInfo[]>;
+
 let selectedArmorId = ref("");
 
 async function get_anomaly_file() {
@@ -85,6 +93,23 @@ async function get_anomaly_file() {
     anomaly_filename.value = file;
     
     parse_anomaly_file(file);
+  }
+}
+
+async function get_talisman_file() {
+  const file = await open({
+    multiple: false,
+    directory: false,
+    filters: [{
+      name: "talisman_list",
+      extensions: ["txt"]
+    }]
+  });
+
+  if(file !== null && !Array.isArray(file)) {
+    anomaly_filename.value = file;
+    
+    parse_talisman_file(file);
   }
 }
 
@@ -111,6 +136,14 @@ async function parse_anomaly_file(filename: string) {
   }
 }
 
+async function parse_talisman_file(filename: string) {
+  console.log(`Talisman filename: ${filename}`);
+
+  talismans.value = await invoke("cmd_parse_talisman", { filename });
+
+  console.log(talismans.value);
+}
+
 </script>
 
 <template>
@@ -121,7 +154,13 @@ async function parse_anomaly_file(filename: string) {
 
     <input v-model="anomaly_filename" placeholder="Anomaly crafting filename (exported via mod)" />
 
-    <button @click="parse_anomaly_file(anomaly_filename)">Parse</button>
+    <button @click="parse_anomaly_file(anomaly_filename)">Parse Anomaly</button>
+
+    <button @click="get_talisman_file()">Load talisman file</button>
+
+    <input v-model="anomaly_filename" placeholder="Talisman list filename (exported via mod)" />
+
+    <button @click="parse_talisman_file(talisman_filename)">Parse Talisman</button>
 
     <template v-for="part in parts">
       <table>

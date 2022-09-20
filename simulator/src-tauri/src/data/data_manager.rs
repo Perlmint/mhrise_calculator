@@ -174,6 +174,10 @@ impl DataManager {
         }
     }
 
+    pub fn set_talismans(&mut self, talismans: Vec<Talisman>) {
+        self.talismans = talismans;
+    }
+
     pub fn get_parts(&self, part: ArmorPart) -> Vec<&BaseArmor> {
         let mut ret = Vec::new();
 
