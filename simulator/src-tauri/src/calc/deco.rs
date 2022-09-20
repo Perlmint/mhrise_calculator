@@ -1,4 +1,4 @@
-use crate::data::deco::Decoration;
+use crate::data::{deco::Decoration, skill::MAX_SLOT_LEVEL};
 
 pub struct CalcDeco<'a> {
     pub base: &'a Decoration,
@@ -27,5 +27,21 @@ impl<'a> CalcDeco<'a> {
         }
 
         point
+    }
+
+    pub fn convert_to_slots(single_deco_skills: &Vec<(&String, i32, i32)>) -> Vec<i32> {
+        let mut slots = Vec::new();
+
+        for _ in 0..MAX_SLOT_LEVEL {
+            slots.push(0);
+        }
+
+        for (_, slot_size, count) in single_deco_skills {
+            let slot_size_index = slot_size as usize - 1;
+
+            slots[slot_size_index] += count;
+        }
+
+        slots
     }
 }

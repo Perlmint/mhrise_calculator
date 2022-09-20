@@ -91,6 +91,14 @@ impl<'a> FullEquipments<'a> {
         (req_deco_combs.len() != 0, req_deco_combs)
     }
 
+    pub fn subtract_slots(&mut self, req_slots: &Vec<i32>) -> bool {
+        let success = true;
+
+        // TODO: implement
+
+        success
+    }
+
     fn sum(&self) -> (HashMap<String, i32>, Vec<i32>) {
         let mut skills = HashMap::<String, i32>::new();
         let mut slots = Vec::<i32>::new();

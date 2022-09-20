@@ -606,18 +606,7 @@ fn calculate_skillset<'a>(
             }
 
             for part in real_parts.iter_mut() {
-                // TODO don't subtract slot on each part, only on full equipment
-                part.subtract_skills(&mut req_skills, &mut req_slots);
-            }
-
-            for slot in &req_slots {
-                if 0 < *slot {
-                    if is_debug_case {
-                        debug!("Real slots: {:?}, {:?}", req_slots, req_skills);
-                    }
-
-                    continue 'final_armor;
-                }
+                part.subtract_skills(&mut req_skills);
             }
 
             let (no_deco_skills, single_deco_skills, multi_deco_skills) =
@@ -637,34 +626,26 @@ fn calculate_skillset<'a>(
                 .map(|(id, (slot_size, count))| (id, *slot_size, *count))
                 .collect::<Vec<(&String, i32, i32)>>();
 
-            single_deco_skills.sort_by_key(|(_, slot_size, _)| Reverse(*slot_size));
+            let single_decos_as_slots = CalcDeco::convert_to_slots(&single_deco_skills);
 
-            for part in real_parts.iter_mut() {
-                // TODO: do not subtract on each part, subtract on whole equipment
-                part.subtract_slots(&mut single_deco_skills);
+            for (slot_size_index, count) in single_decos_as_slots.iter().enumerate() {
+                req_slots[slot_size_index] += count;
+            }
 
+            let mut full_equip =
+                FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
+
+            let slot_success = full_equip.subtract_slots(&req_slots);
+
+            if slot_success == false {
                 if is_debug_case {
-                    debug!(
-                        "State after subtract: {}, {:?}, {:?}",
-                        part.id(),
-                        part.slots(),
-                        single_deco_skills
-                    );
+                    debug!("Real slots: {:?}, {:?}", req_slots, req_skills);
                 }
+
+                continue;
             }
 
             for (id, _, count) in &single_deco_skills {
-                if *count != 0 {
-                    if is_debug_case {
-                        debug!(
-                            "Single deco skills unavailable: {:?}, {:?}",
-                            single_deco_skills, init_equip.avail_slots
-                        );
-                    }
-
-                    continue 'final_armor;
-                }
-
                 req_skills.remove(*id);
             }
 

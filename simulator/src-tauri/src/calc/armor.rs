@@ -77,26 +77,25 @@ impl<'a> CalcArmor<'a> {
 
     pub fn subtract_skills(
         &mut self,
-        outer_skills: &mut HashMap<String, i32>,
-        req_slots: &mut Vec<i32>,
+        req_skills: &mut HashMap<String, i32>,
     ) -> HashMap<String, i32> {
         let mut diffs = HashMap::new();
 
         for (id, skill) in self.skills.clone() {
-            let outer_skill = outer_skills.get_mut(&id);
+            let outer_skill = req_skills.get_mut(&id);
 
             if outer_skill.is_none() {
                 continue;
             }
 
-            let outer_skill = outer_skill.unwrap();
+            let req_skill = outer_skill.unwrap();
 
-            let taken = skill.level.min(*outer_skill);
+            let taken = skill.level.min(*req_skill);
 
-            *outer_skill -= taken;
+            *req_skill -= taken;
 
-            if *outer_skill == 0 {
-                outer_skills.remove(&id);
+            if *req_skill == 0 {
+                req_skills.remove(&id);
             }
 
             diffs.insert(id, taken);
@@ -111,9 +110,6 @@ impl<'a> CalcArmor<'a> {
                 self.skills.remove(id);
             }
         }
-
-        // TODO don't subtract slot on each part, only on full equipment
-        DecorationCombination::is_possible_static_mut(&mut self.slots, req_slots);
 
         return diffs;
     }
