@@ -572,6 +572,19 @@ fn calculate_skillset<'a>(
         'final_armor: for (p0, p1, p2, p3, p4) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4])
         {
+            let debug_case = vec![
+                "astalos_helm",
+                "storge_mail",
+                "silver_solbraces",
+                "rakna_greaves_x",
+                "lambent_sash",
+            ];
+
+            let debug_case = debug_case
+                .iter()
+                .map(|id| id.to_string())
+                .collect::<HashSet<String>>();
+
             let mut req_skills = selected_skills.clone();
             let mut req_slots = free_slots.clone();
 
@@ -606,7 +619,7 @@ fn calculate_skillset<'a>(
                 req_skills.remove(&id);
             }
 
-            // This only calculate number of slots regardless of slot size, just for candidate optimization
+            // This only calculates the number of slots regardless of slot size, just for candidate optimization
             let mut minimum_slot_sum = 0;
 
             for (skill_id, &level) in &req_skills {
@@ -643,8 +656,8 @@ fn calculate_skillset<'a>(
             let total_point = CalcDeco::get_point(&full_equip.avail_slots);
 
             debug!(
-                "Possible candidiate: left skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
-                req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
+                "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
+                real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
             );
 
             let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
