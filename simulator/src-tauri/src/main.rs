@@ -18,7 +18,7 @@ use data::armor::{ArmorPart, SexType};
 use data::data_manager::DataManager;
 use data::deco_combination::DecorationCombinations;
 use itertools::iproduct;
-use serde::de;
+use serde::{de, Serialize};
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
 
 mod data {
@@ -258,25 +258,32 @@ fn cmd_get_armor_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<St
     return dm.armors.clone();
 }
 
+#[derive(Serialize)]
+struct CalculateSkillsetReturn {
+    log: String,
+}
+
 #[tauri::command]
 fn cmd_calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
     mutex_dm: tauri::State<'a, Mutex<DataManager>>,
-) -> String {
+) -> CalculateSkillsetReturn {
     debug!("Start calculating...");
 
     let dm = mutex_dm.lock().unwrap();
 
     // TODO get sex_type as input
-    calculate_skillset(
+    let (log, answers) = calculate_skillset(
         weapon_slots,
         selected_skills,
         free_slots,
         SexType::Female,
         &dm,
-    )
+    );
+
+    CalculateSkillsetReturn { log }
 }
 
 fn calculate_skillset<'a>(
@@ -285,7 +292,7 @@ fn calculate_skillset<'a>(
     free_slots: Vec<i32>,
     sex_type: SexType,
     dm: &'a DataManager,
-) -> String {
+) -> (String, Vec<(FullEquipments, DecorationCombination)>) {
     let start_time = Instant::now();
     let mut ret = String::from("\n");
 
@@ -727,7 +734,7 @@ fn calculate_skillset<'a>(
     ));
     info!("{}", ret);
 
-    return ret;
+    return (ret, answers);
 }
 
 fn compare_failed_slot_armors(slot_armors: &mut HashSet<String>, armor: &CalcArmor) {
