@@ -7,12 +7,17 @@ import { parse as invenParse, InvenArmorInfo } from "./inven.js";
 import { parse as skillParse } from "./kiranico_skill.js";
 import { parse as decoParse } from "./kiranico_deco.js";
 
-import { FinalArmorInfo } from "./definition/armor_define.js";
+import {
+    ArmorStatInfo,
+    FinalArmorInfo,
+    FinalSkillInfo as ArmorFinalSkillInfo,
+} from "./definition/armor_define.js";
 import { FinalSkillInfo } from "./definition/skill_define.js";
 
 async function merge() {
     const kiraFile = path.join("temp_data", "armor.json");
     const invenFile = path.join("temp_data", "inven_data.json");
+    const armorOverrideFile = path.join("data", "armor_override.json");
 
     const invenDatas: InvenArmorInfo[] = JSON.parse(
         fs.readFileSync(invenFile).toString()
@@ -22,6 +27,15 @@ async function merge() {
         fs.readFileSync(kiraFile).toString()
     );
 
+    const overrideArmorDatas = JSON.parse(
+        fs.readFileSync(armorOverrideFile).toString()
+    ) as {
+        id: string;
+        stat: ArmorStatInfo;
+        skills: { [key: string]: ArmorFinalSkillInfo };
+        slots: number[];
+    }[];
+
     const realArmorInfos = [] as {
         rarity: number;
         kiraId: number;
@@ -30,9 +44,20 @@ async function merge() {
 
     invenDatas.forEach((invenData, invenIdx) => {
         kiraDatas.some((kiraData, kiraIdx) => {
-            if (kiraData.names["ko"] === invenData.name) {
+            if (
+                kiraData.names["ko"].replace("【", "[").replace("】", "]") ===
+                invenData.name
+            ) {
                 kiraData.part = invenData.part;
                 kiraData.sexType = invenData.sexType;
+
+                for (const ovData of overrideArmorDatas) {
+                    if (ovData.id === kiraData.id) {
+                        kiraData.stat = ovData.stat;
+                        kiraData.skills = ovData.skills;
+                        kiraData.slots = ovData.slots;
+                    }
+                }
 
                 realArmorInfos.push({
                     rarity: invenData.rarity,

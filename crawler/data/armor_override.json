@@ -1,0 +1,108 @@
+[
+    {
+        "id": "azure_age_hair",
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 2
+            },
+            "water_attack": {
+                "level": 2
+            }
+        },
+        "slots": [2, 1, 0]
+    },
+    {
+        "id": "azure_age_haori",
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 2
+            },
+            "weakness_exploit": {
+                "level": 1
+            }
+        },
+        "slots": [2, 0, 0]
+    },
+    {
+        "id": "azure_age_sleeve",
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 1
+            },
+            "weakness_exploit": {
+                "level": 1
+            },
+            "critical_element": {
+                "level": 2
+            }
+        },
+        "slots": [1, 0, 0]
+    },
+    {
+        "id": "azure_age_obi",
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "quick_sheathe": {
+                "level": 1
+            },
+            "water_attack": {
+                "level": 2
+            },
+            "critical_element": {
+                "level": 1
+            }
+        },
+        "slots": [3, 1, 0]
+    },
+    {
+        "id": "azure_age_geta",
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "quick_sheathe": {
+                "level": 2
+            },
+            "focus": {
+                "level": 1
+            }
+        },
+        "slots": [2, 1, 0]
+    }
+]

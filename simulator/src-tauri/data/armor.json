@@ -26055,6 +26055,217 @@
         ]
     },
     {
+        "id": "azure_age_hair",
+        "part": "helm",
+        "sexType": "all",
+        "names": {
+            "ja": "蒼世ノ侍【艶髪】",
+            "zh": "苍世武士【艳发】",
+            "zh-Hant": "蒼世武士【艷髮】",
+            "en": "Azure Age Hair",
+            "ko": "푸른빛무사【반짝이는 헤어】",
+            "ru": "Прическа лазурного воина",
+            "ar": "شعر عصر اللازوردي",
+            "de": "Azurära-Frisur",
+            "es": "Pelo Edad Celeste",
+            "fr": "Coiffure Âge d'azur",
+            "it": "Capelli epoca celeste",
+            "pl": "Fryzura Lazurowej Ery"
+        },
+        "rarity": 6,
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 2
+            },
+            "water_attack": {
+                "level": 2
+            }
+        },
+        "slots": [
+            2,
+            1,
+            0
+        ]
+    },
+    {
+        "id": "azure_age_haori",
+        "part": "torso",
+        "sexType": "all",
+        "names": {
+            "ja": "蒼世ノ侍【羽織】",
+            "zh": "苍世武士【羽织】",
+            "zh-Hant": "蒼世武士【羽織】",
+            "en": "Azure Age Haori",
+            "ko": "푸른빛무사【겉옷】",
+            "ru": "Хаори лазурного воина",
+            "ar": "هاوري عصر اللازوردي",
+            "de": "Azurära-Haori",
+            "es": "Haori Edad Celeste",
+            "fr": "Haori Âge d'azur",
+            "it": "Haori epoca celeste",
+            "pl": "Haori Lazurowej Ery"
+        },
+        "rarity": 6,
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 2
+            },
+            "weakness_exploit": {
+                "level": 1
+            }
+        },
+        "slots": [
+            2,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "azure_age_sleeve",
+        "part": "arm",
+        "sexType": "all",
+        "names": {
+            "ja": "蒼世ノ侍【袖】",
+            "zh": "苍世武士【袖】",
+            "zh-Hant": "蒼世武士【袖】",
+            "en": "Azure Age Sleeve",
+            "ko": "푸른빛무사【소매】",
+            "ru": "Наручи лазурного воина",
+            "ar": "أكمام عصر اللازوردي",
+            "de": "Azurära-Kote",
+            "es": "Mangas Edad Celeste",
+            "fr": "Manches Âge d'azur",
+            "it": "Guanti epoca celeste",
+            "pl": "Rękaw Lazurowej Ery"
+        },
+        "rarity": 6,
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "constitution": {
+                "level": 1
+            },
+            "weakness_exploit": {
+                "level": 1
+            },
+            "critical_element": {
+                "level": 2
+            }
+        },
+        "slots": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "azure_age_obi",
+        "part": "waist",
+        "sexType": "all",
+        "names": {
+            "ja": "蒼世ノ侍【帯】",
+            "zh": "苍世武士【带】",
+            "zh-Hant": "蒼世武士【帶】",
+            "en": "Azure Age Obi",
+            "ko": "푸른빛무사【띠】",
+            "ru": "Оби лазурного воина",
+            "ar": "أوبي عصر اللازوردي",
+            "de": "Azurära-Obi",
+            "es": "Obi Edad Celeste",
+            "fr": "Obi Âge d'azur",
+            "it": "Obi epoca celeste",
+            "pl": "Obi Lazurowej Ery"
+        },
+        "rarity": 6,
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "quick_sheathe": {
+                "level": 1
+            },
+            "water_attack": {
+                "level": 2
+            },
+            "critical_element": {
+                "level": 1
+            }
+        },
+        "slots": [
+            3,
+            1,
+            0
+        ]
+    },
+    {
+        "id": "azure_age_geta",
+        "part": "feet",
+        "sexType": "all",
+        "names": {
+            "ja": "蒼世ノ侍【履物】",
+            "zh": "苍世武士【足履】",
+            "zh-Hant": "蒼世武士【足履】",
+            "en": "Azure Age Geta",
+            "ko": "푸른빛무사【신발】",
+            "ru": "Гэта лазурного воина",
+            "ar": "حذاء غيتا عصر اللازوردي",
+            "de": "Azurära-Geta",
+            "es": "Geta Edad Celeste",
+            "fr": "Geta Âge d'azur",
+            "it": "Geta epoca celeste",
+            "pl": "Geta Lazurowej Ery"
+        },
+        "rarity": 6,
+        "stat": {
+            "defense": 72,
+            "fireRes": 2,
+            "waterRes": 2,
+            "iceRes": 0,
+            "elecRes": 0,
+            "dragonRes": 2
+        },
+        "skills": {
+            "quick_sheathe": {
+                "level": 2
+            },
+            "focus": {
+                "level": 1
+            }
+        },
+        "slots": [
+            2,
+            1,
+            0
+        ]
+    },
+    {
         "id": "kamura_legacy_head_scarf",
         "part": "helm",
         "sexType": "all",
@@ -37197,6 +37408,223 @@
         "slots": [
             2,
             1,
+            0
+        ]
+    },
+    {
+        "id": "artillery_corps_helm",
+        "part": "helm",
+        "sexType": "all",
+        "names": {
+            "ja": "砲術隊【兜】",
+            "zh": "炮术队【武士盔】",
+            "zh-Hant": "砲術隊【頭盔】",
+            "en": "Artillery Corps Helm",
+            "ko": "포술대【투구】",
+            "ru": "Шлем артилл. корп.",
+            "ar": "خوذة السلاح الملكي",
+            "de": "Artillerist-Helm",
+            "es": "Yelmo cuerpo artillero",
+            "fr": "Heaume du corps d'artillerie",
+            "it": "Elmo degli artiglieri",
+            "pl": "Hełm artylerii"
+        },
+        "rarity": 7,
+        "stat": {
+            "defense": 106,
+            "fireRes": 1,
+            "waterRes": 1,
+            "iceRes": 1,
+            "elecRes": 1,
+            "dragonRes": 1
+        },
+        "skills": {
+            "steadiness": {
+                "level": 2
+            },
+            "recoil_down": {
+                "level": 1
+            },
+            "evade_extender": {
+                "level": 2
+            }
+        },
+        "slots": [
+            3,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "artillery_corps_vest",
+        "part": "torso",
+        "sexType": "all",
+        "names": {
+            "ja": "砲術隊【胴】",
+            "zh": "炮术队【身体】",
+            "zh-Hant": "砲術隊【上衣】",
+            "en": "Artillery Corps Vest",
+            "ko": "포술대【몸통】",
+            "ru": "Жилет. артилл. корп.",
+            "ar": "درع السلاح الملكي",
+            "de": "Artillerist-Weste",
+            "es": "Chaleco cuerpo artillero",
+            "fr": "Tunique du corps d'artillerie",
+            "it": "Pettorina degli artiglieri",
+            "pl": "Kamizela artylerii"
+        },
+        "rarity": 7,
+        "stat": {
+            "defense": 106,
+            "fireRes": 1,
+            "waterRes": 1,
+            "iceRes": 1,
+            "elecRes": 1,
+            "dragonRes": 1
+        },
+        "skills": {
+            "ballistics": {
+                "level": 3
+            },
+            "recoil_down": {
+                "level": 1
+            },
+            "evade_extender": {
+                "level": 1
+            }
+        },
+        "slots": [
+            0,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "artillery_corps_gauntlets",
+        "part": "arm",
+        "sexType": "all",
+        "names": {
+            "ja": "砲術隊【篭手】",
+            "zh": "炮术队【臂甲】",
+            "zh-Hant": "砲術隊【臂甲】",
+            "en": "Artillery Corps Gauntlets",
+            "ko": "포술대【장갑】",
+            "ru": "Перчат. артил. корп.",
+            "ar": "قفازات السلاح الملكي",
+            "de": "Artillerist-Handschuhe",
+            "es": "Guant. cuerpo artillero",
+            "fr": "Gants du corps d'artillerie",
+            "it": "Guanti degli artiglieri",
+            "pl": "Rękawice artylerii"
+        },
+        "rarity": 7,
+        "stat": {
+            "defense": 106,
+            "fireRes": 1,
+            "waterRes": 1,
+            "iceRes": 1,
+            "elecRes": 1,
+            "dragonRes": 1
+        },
+        "skills": {
+            "ammo_up": {
+                "level": 1
+            },
+            "reload_speed": {
+                "level": 1
+            },
+            "artillery": {
+                "level": 2
+            }
+        },
+        "slots": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "artillery_corps_tassets",
+        "part": "waist",
+        "sexType": "all",
+        "names": {
+            "ja": "砲術隊【腰】",
+            "zh": "炮术队【腰】",
+            "zh-Hant": "砲術隊【腰具】",
+            "en": "Artillery Corps Tassets",
+            "ko": "포술대【허리】",
+            "ru": "Щитки артилл. корп.",
+            "ar": "درع فخذ السلاح الملكي",
+            "de": "Artillerist-Tassetten",
+            "es": "Muslera cuerpo artillero",
+            "fr": "Tassette du corps d'artillerie",
+            "it": "Fiancale degli artiglieri",
+            "pl": "Nabiodrki artylerii"
+        },
+        "rarity": 7,
+        "stat": {
+            "defense": 106,
+            "fireRes": 1,
+            "waterRes": 1,
+            "iceRes": 1,
+            "elecRes": 1,
+            "dragonRes": 1
+        },
+        "skills": {
+            "ammo_up": {
+                "level": 2
+            },
+            "reload_speed": {
+                "level": 1
+            }
+        },
+        "slots": [
+            2,
+            0,
+            0
+        ]
+    },
+    {
+        "id": "artillery_corps_greaves",
+        "part": "feet",
+        "sexType": "all",
+        "names": {
+            "ja": "砲術隊【脛当て】",
+            "zh": "炮术队【护腿】",
+            "zh-Hant": "砲術隊【脛甲】",
+            "en": "Artillery Corps Greaves",
+            "ko": "포술대【각반】",
+            "ru": "Поножи артилл. корп.",
+            "ar": "درع ساق السلاح الملكي",
+            "de": "Artillerist-Beinschienen",
+            "es": "Grebas cuerpo artillero",
+            "fr": "Grèves du corps d'artillerie",
+            "it": "Schinieri degli artiglieri",
+            "pl": "Nagolenice artylerii"
+        },
+        "rarity": 7,
+        "stat": {
+            "defense": 106,
+            "fireRes": 1,
+            "waterRes": 1,
+            "iceRes": 1,
+            "elecRes": 1,
+            "dragonRes": 1
+        },
+        "skills": {
+            "spare_shot": {
+                "level": 3
+            },
+            "special_ammo_boost": {
+                "level": 1
+            },
+            "artillery": {
+                "level": 1
+            }
+        },
+        "slots": [
+            0,
+            0,
             0
         ]
     },
