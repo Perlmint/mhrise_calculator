@@ -584,9 +584,23 @@ fn calculate_skillset<'a>(
             let mut req_slots = free_slots.clone();
 
             let mut real_parts = vec![p0.clone(), p1.clone(), p2.clone(), p3.clone(), p4.clone()];
+
             let real_ids = real_parts
                 .iter()
                 .map(|part| part.id().clone())
+                .collect::<HashSet<String>>();
+
+            let debug_case = vec![
+                "rakna_greaves_x",
+                "storge_helm",
+                "archfiend_armor_baulo",
+                "silver_solbraces",
+                "lambent_sash",
+            ];
+
+            let debug_case = debug_case
+                .iter()
+                .map(|id| id.to_string())
                 .collect::<HashSet<String>>();
 
             let init_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone(), None);
@@ -595,8 +609,19 @@ fn calculate_skillset<'a>(
                 part.subtract_skills(&mut req_skills);
             }
 
-            let (no_deco_skills, single_deco_skills, multi_deco_skills) =
-                dm.get_skils_by_deco(&req_skills);
+            let is_debug_case = false;
+
+            /*
+            let is_debug_case = debug_case == real_ids;
+
+            if is_debug_case == false {
+                continue;
+            } else {
+                debug!("Debug case reached");
+            }
+            */
+
+            let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
 
             if no_deco_skills.len() != 0 {
                 panic!("This shouldn't happen");
@@ -619,10 +644,16 @@ fn calculate_skillset<'a>(
             let slot_success = full_equip.subtract_slots(&mut req_slots);
 
             if slot_success == false {
+                if is_debug_case {
+                    debug!(
+                        "Debug slots: {:?}, {:?}, {:?}",
+                        single_deco_skills, init_equip.avail_slots, req_slots
+                    );
+                }
                 continue;
             }
 
-            for (id, _, count) in &single_deco_skills {
+            for (id, _, _) in &single_deco_skills {
                 req_skills.remove(*id);
             }
 
@@ -648,6 +679,9 @@ fn calculate_skillset<'a>(
             let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
 
             if equip_slot_sum < minimum_slot_sum {
+                if is_debug_case {
+                    debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
+                }
                 continue;
             }
 
@@ -656,6 +690,12 @@ fn calculate_skillset<'a>(
                 .has_possible_combs(&req_skills, &full_equip.avail_slots);
 
             if has_possible_comb == false {
+                if is_debug_case {
+                    debug!(
+                        "Debug case no possible combs: {:?}, {:?}",
+                        full_equip.avail_slots, req_skills
+                    );
+                }
                 continue;
             }
 
@@ -727,7 +767,7 @@ fn calculate_skillset<'a>(
 
     info!(
         "All combinations size: {}, answers size: {}",
-        total_index + 1,
+        total_index,
         answers.len()
     );
 
@@ -812,6 +852,15 @@ fn calculate_full_equip<'a>(
 
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({})",
+        full_equip.get_by_part(&ArmorPart::Helm).id(),
+        full_equip.get_by_part(&ArmorPart::Torso).id(),
+        full_equip.get_by_part(&ArmorPart::Arm).id(),
+        full_equip.get_by_part(&ArmorPart::Waist).id(),
+        full_equip.get_by_part(&ArmorPart::Feet).id(),
+    );
+
+    debug!(
+        "Armors names: ({}), ({}), ({}), ({}), ({})",
         full_equip.get_by_part(&ArmorPart::Helm).names()["ko"],
         full_equip.get_by_part(&ArmorPart::Torso).names()["ko"],
         full_equip.get_by_part(&ArmorPart::Arm).names()["ko"],
