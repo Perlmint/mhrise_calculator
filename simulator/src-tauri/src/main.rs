@@ -31,6 +31,7 @@ mod data {
 
 mod calc {
     pub mod armor;
+    pub mod calc_equipment;
     pub mod deco;
     pub mod skill;
     pub mod talisman;

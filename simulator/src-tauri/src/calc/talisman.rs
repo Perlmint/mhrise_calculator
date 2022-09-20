@@ -1,9 +1,14 @@
+use std::collections::HashMap;
+
 use crate::data::{armor::Talisman, skill::MAX_SLOT_LEVEL};
+
+use super::calc_equipment::CalcEquipment;
 
 pub struct CalcTalisman<'a> {
     tali: &'a Talisman,
 
     slots: Vec<i32>,
+    skills: HashMap<String, i32>,
 }
 
 impl<'a> CalcTalisman<'a> {
@@ -23,10 +28,26 @@ impl<'a> CalcTalisman<'a> {
             slots[slot_size_index] += 1;
         }
 
-        Self { tali, slots }
+        let mut skills = HashMap::new();
+
+        for tali_skill in &tali.skills {
+            skills.insert(tali_skill.id.clone(), tali_skill.level);
+        }
+
+        Self {
+            tali,
+            slots,
+            skills,
+        }
+    }
+}
+
+impl<'a> CalcEquipment for CalcTalisman<'a> {
+    fn slots(&self) -> &Vec<i32> {
+        &self.slots
     }
 
-    pub fn slots(&self) -> &Vec<i32> {
-        &self.slots
+    fn skills(&self) -> &HashMap<String, i32> {
+        &self.skills
     }
 }
