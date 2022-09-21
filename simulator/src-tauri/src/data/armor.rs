@@ -258,6 +258,14 @@ impl Talisman {
         }
     }
 
+    pub fn get_slot_talisman(slot_tali_id: String) -> Self {
+        Self {
+            id: slot_tali_id.clone(),
+            slot_sizes: BaseArmor::parse_slot_armor_id(&slot_tali_id),
+            skills: Default::default(),
+        }
+    }
+
     pub fn id(&self) -> &String {
         &self.id
     }

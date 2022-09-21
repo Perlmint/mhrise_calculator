@@ -22,6 +22,8 @@ pub struct DataManager {
     pub anomalies_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
 
     pub talismans: Vec<Talisman>,
+    pub slot_only_talismans: HashMap<String, Talisman>,
+    pub talismans_by_slot: HashMap<String, Vec<Talisman>>,
     pub empty_talisman: Talisman,
 
     pub armor_name_dict: HashMap<String, String>,
@@ -148,6 +150,8 @@ impl DataManager {
             empty_talisman: Talisman::create_empty(),
             anomaly_armors: Default::default(),
             talismans: Default::default(),
+            slot_only_talismans: Default::default(),
+            talismans_by_slot: Default::default(),
         };
 
         dm
@@ -177,6 +181,27 @@ impl DataManager {
 
     pub fn set_talismans(&mut self, talismans: Vec<Talisman>) {
         self.talismans = talismans;
+
+        self.slot_only_talismans.clear();
+
+        for tali in &self.talismans {
+            let slot_tali_id = BaseArmor::get_slot_armor_id(&tali.slot_sizes);
+
+            if self.slot_only_talismans.contains_key(&slot_tali_id) == false {
+                let slot_talisman = Talisman::get_slot_talisman(slot_tali_id.clone());
+
+                self.slot_only_talismans
+                    .insert(slot_tali_id.clone(), slot_talisman);
+
+                self.talismans_by_slot
+                    .insert(slot_tali_id.clone(), Vec::new());
+            }
+
+            self.talismans_by_slot
+                .get_mut(&slot_tali_id)
+                .unwrap()
+                .push(tali.clone());
+        }
     }
 
     pub fn get_parts(&self, part: ArmorPart) -> Vec<&BaseArmor> {

@@ -325,6 +325,8 @@ fn cmd_calculate_skillset(
     CalculateSkillsetReturn { log }
 }
 
+type BoxCalcEquipment<'a> = Box<dyn CalcEquipment<'a> + 'a>;
+
 fn calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
@@ -394,43 +396,64 @@ fn calculate_skillset<'a>(
         });
     }
 
-    let talismans = dm
+    let all_talismans = dm
         .talismans
         .iter()
         .map(|tali| CalcTalisman::<'a>::new(tali))
         .collect::<Vec<CalcTalisman<'a>>>();
 
-    let mut all_slot_armors = HashMap::<ArmorPart, HashMap<String, CalcArmor<'a>>>::new();
+    let mut all_slot_equips = HashMap::<ArmorPart, HashMap<String, BoxCalcEquipment<'a>>>::new();
 
     for (part, _) in all_armors.iter() {
         let slot_only_armors = dm.slot_only_armors.get(part).unwrap();
-        let mut part_slot_armors = HashMap::<String, CalcArmor<'a>>::new();
+        let mut part_slot_armors = HashMap::<String, BoxCalcEquipment<'a>>::new();
 
         for (id, armor) in slot_only_armors {
-            let calc_armor = CalcArmor::<'a>::new(armor);
+            let calc_armor = CalcArmor::<'a>::new(armor).clone_dyn();
 
             part_slot_armors.insert(id.clone(), calc_armor);
         }
 
-        all_slot_armors.insert(part.clone(), part_slot_armors);
+        all_slot_equips.insert(part.clone(), part_slot_armors);
     }
 
-    let mut armors_with_deco_skills = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
+    all_slot_equips.insert(
+        ArmorPart::Talisman,
+        dm.slot_only_talismans
+            .iter()
+            .map(|(id, tali)| (id.clone(), CalcTalisman::new(tali).clone_dyn()))
+            .collect::<HashMap<String, BoxCalcEquipment<'a>>>(),
+    );
+
+    let mut equips_with_deco_skills = HashMap::<&ArmorPart, Vec<BoxCalcEquipment<'a>>>::new();
 
     for (part, armors) in &all_armors {
-        let mut part_armors = Vec::<CalcArmor<'a>>::new();
+        let mut part_armors = Vec::<BoxCalcEquipment<'a>>::new();
 
         for armor in armors {
             for (skill_id, _) in &decos_possible {
                 if armor.skills().contains_key(skill_id) {
-                    part_armors.push(armor.clone());
+                    part_armors.push(armor.clone_dyn());
                     break;
                 }
             }
         }
 
-        armors_with_deco_skills.insert(part, part_armors);
+        equips_with_deco_skills.insert(part, part_armors);
     }
+
+    let mut tali_with_deco_skills = Vec::new();
+
+    for tali in &all_talismans {
+        for (skill_id, _) in &decos_possible {
+            if tali.skills().contains_key(skill_id) {
+                tali_with_deco_skills.push(tali.clone_dyn());
+                break;
+            }
+        }
+    }
+
+    equips_with_deco_skills.insert(&ArmorPart::Talisman, tali_with_deco_skills);
 
     let mut mr_armors = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
 
@@ -450,7 +473,7 @@ fn calculate_skillset<'a>(
         );
     }
 
-    let mut all_unique_armors = HashMap::<&ArmorPart, Vec<CalcArmor<'a>>>::new();
+    let mut all_unique_armors = HashMap::<&ArmorPart, Vec<BoxCalcEquipment<'a>>>::new();
 
     for (part, armors) in &all_armors {
         all_unique_armors.insert(
@@ -460,29 +483,49 @@ fn calculate_skillset<'a>(
                 .filter_map(|armor| {
                     for (skill_id, _) in &no_deco_skills {
                         if armor.skills().contains_key(skill_id) {
-                            return Some(armor.clone());
+                            return Some(armor.clone_dyn());
                         }
                     }
 
-                    return None;
+                    None
                 })
-                .collect(),
+                .collect::<Vec<BoxCalcEquipment<'a>>>(),
         );
 
         all_unique_armors
             .get_mut(part)
             .unwrap()
-            .push(CalcArmor::<'a>::new(dm.empty_armors.get(&part).unwrap()));
-
-        all_unique_armors
-            .get_mut(part)
-            .unwrap()
-            .sort_by_key(|armor| {
-                armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills)
-            });
+            .push(CalcArmor::<'a>::new(dm.empty_armors.get(&part).unwrap()).clone_dyn());
     }
 
-    let mut possible_unique_equips = Vec::<Vec<Box<dyn CalcEquipment<'a> + 'a>>>::new();
+    all_unique_armors.insert(
+        &ArmorPart::Talisman,
+        all_talismans
+            .iter()
+            .filter_map(|tali| {
+                for (skill_id, _) in &no_deco_skills {
+                    if tali.skills().contains_key(skill_id) {
+                        return Some(tali.clone_dyn());
+                    }
+                }
+
+                None
+            })
+            .collect(),
+    );
+
+    all_unique_armors
+        .get_mut(&ArmorPart::Talisman)
+        .unwrap()
+        .push(CalcTalisman::new(&dm.empty_talisman).clone_dyn());
+
+    for (_, unique_armors) in all_unique_armors.iter_mut() {
+        unique_armors.sort_by_key(|armor| {
+            armor.get_point(&decos_possible, &yes_deco_skills, &no_deco_skills)
+        });
+    }
+
+    let mut possible_unique_equips = Vec::<Vec<BoxCalcEquipment<'a>>>::new();
 
     for (helm, torso, arm, waist, feet, tali) in iproduct!(
         all_unique_armors[&ArmorPart::Helm].iter(),
@@ -490,9 +533,9 @@ fn calculate_skillset<'a>(
         all_unique_armors[&ArmorPart::Arm].iter(),
         all_unique_armors[&ArmorPart::Waist].iter(),
         all_unique_armors[&ArmorPart::Feet].iter(),
-        talismans.iter()
+        all_unique_armors[&ArmorPart::Talisman].iter()
     ) {
-        let equips: Vec<Box<dyn CalcEquipment<'a> + 'a>> = vec![
+        let equips: Vec<BoxCalcEquipment<'a>> = vec![
             helm.clone_dyn(),
             torso.clone_dyn(),
             arm.clone_dyn(),
@@ -513,7 +556,14 @@ fn calculate_skillset<'a>(
             debug!(
                 "Unique skills possible: {:?}, {:?}",
                 possible_combs,
-                vec![helm.id(), torso.id(), arm.id(), waist.id(), feet.id()]
+                vec![
+                    helm.id(),
+                    torso.id(),
+                    arm.id(),
+                    waist.id(),
+                    feet.id(),
+                    tali.id()
+                ]
             );
 
             possible_unique_equips.push(equips);
@@ -553,12 +603,12 @@ fn calculate_skillset<'a>(
             .map(|equipment| {
                 let part = equipment.part();
 
-                let mut ret = Vec::<Box<dyn CalcEquipment<'a> + 'a>>::new();
+                let mut ret = Vec::<BoxCalcEquipment<'a>>::new();
 
                 if equipment.id().starts_with(EMPTY_ARMOR_PREFIX) {
                     let part_unique_armors = &all_unique_armors[part];
-                    let part_deco_armors = &armors_with_deco_skills[part];
-                    let part_slot_armors = &all_slot_armors[part]
+                    let part_deco_armors = &equips_with_deco_skills[part];
+                    let part_slot_armors = &all_slot_equips[part]
                         .iter()
                         .filter_map(|(_, armor)| {
                             for unique_armor in part_unique_armors.iter() {
@@ -576,7 +626,7 @@ fn calculate_skillset<'a>(
 
                             return Some(armor.clone());
                         })
-                        .collect::<Vec<CalcArmor>>();
+                        .collect::<Vec<BoxCalcEquipment<'a>>>();
 
                     for armor in part_unique_armors.iter() {
                         ret.push(armor.clone_dyn());
@@ -599,7 +649,7 @@ fn calculate_skillset<'a>(
 
                 ret
             })
-            .collect::<Vec<Vec<Box<dyn CalcEquipment<'a> + 'a>>>>();
+            .collect::<Vec<Vec<BoxCalcEquipment<'a>>>>();
 
         parts.sort_by_key(|parts| parts.len());
 
@@ -923,13 +973,15 @@ fn calculate_full_equip<'a>(
     );
 
     debug!(
-        "Armors ids: ({}), ({}), ({}), ({}), ({})",
+        "Armors ids: ({}), ({}), ({}), ({}), ({}), ({})",
         full_equip.get_by_part(&ArmorPart::Helm).id(),
         full_equip.get_by_part(&ArmorPart::Torso).id(),
         full_equip.get_by_part(&ArmorPart::Arm).id(),
         full_equip.get_by_part(&ArmorPart::Waist).id(),
         full_equip.get_by_part(&ArmorPart::Feet).id(),
+        full_equip.get_by_part(&ArmorPart::Talisman).id(),
     );
+
     /* TODO: debug print names
         debug!(
             "Armors names: ({}), ({}), ({}), ({}), ({})",
@@ -940,22 +992,38 @@ fn calculate_full_equip<'a>(
             full_equip.get_by_part(&ArmorPart::Feet).names()["ko"],
         );
     */
-    let mut real_armors = Vec::<Vec<Box<dyn CalcEquipment<'a> + 'a>>>::new();
+
+    let mut real_armors = Vec::<Vec<BoxCalcEquipment<'a>>>::new();
 
     for equipment in full_equip.equipments() {
-        if BaseArmor::is_slot_armor(equipment.id()) {
-            let armors_by_slot = &dm.armors_by_slot[equipment.part()][equipment.id()];
+        let is_slot_equip = BaseArmor::is_slot_armor(equipment.id());
 
-            let mut all_real_armors = Vec::<Box<dyn CalcEquipment<'a> + 'a>>::new();
+        if is_slot_equip {
+            if equipment.part() == &ArmorPart::Talisman {
+                let talis_by_slot = dm.talismans_by_slot.get(equipment.id()).unwrap();
 
-            for base_armor in armors_by_slot {
-                let calc_armor = CalcArmor::<'a>::new(base_armor);
-                let box_armor = calc_armor.clone_dyn();
+                let mut all_real_talis = Vec::new();
 
-                all_real_armors.push(box_armor);
+                for base_tali in talis_by_slot {
+                    let box_tali = CalcTalisman::new(base_tali).clone_dyn();
+                    all_real_talis.push(box_tali);
+                }
+
+                real_armors.push(all_real_talis);
+            } else {
+                let armors_by_slot = &dm.armors_by_slot[equipment.part()][equipment.id()];
+
+                let mut all_real_armors = Vec::<BoxCalcEquipment<'a>>::new();
+
+                for base_armor in armors_by_slot {
+                    let calc_armor = CalcArmor::<'a>::new(base_armor);
+                    let box_armor = calc_armor.clone_dyn();
+
+                    all_real_armors.push(box_armor);
+                }
+
+                real_armors.push(all_real_armors);
             }
-
-            real_armors.push(all_real_armors);
         } else {
             real_armors.push(vec![equipment.clone_dyn()]);
         }
