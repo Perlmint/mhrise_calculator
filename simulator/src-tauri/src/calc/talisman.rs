@@ -1,9 +1,14 @@
+use core::panic;
 use std::collections::HashMap;
 
-use crate::data::{armor::Talisman, skill::MAX_SLOT_LEVEL};
+use crate::data::{
+    armor::{ArmorPart, Talisman},
+    skill::MAX_SLOT_LEVEL,
+};
 
 use super::calc_equipment::CalcEquipment;
 
+#[derive(Debug, Clone)]
 pub struct CalcTalisman<'a> {
     tali: &'a Talisman,
 
@@ -43,11 +48,31 @@ impl<'a> CalcTalisman<'a> {
 }
 
 impl<'a> CalcEquipment for CalcTalisman<'a> {
-    fn slots(&self) -> &Vec<i32> {
-        &self.slots
+    fn id(&self) -> &String {
+        &self.tali.id()
     }
 
     fn skills(&self) -> &HashMap<String, i32> {
         &self.skills
+    }
+
+    fn mut_skills(&mut self) -> &mut HashMap<String, i32> {
+        &mut self.skills
+    }
+
+    fn slots(&self) -> &Vec<i32> {
+        &self.slots
+    }
+
+    fn part(&self) -> &ArmorPart {
+        &ArmorPart::Talisman
+    }
+
+    fn as_armor(&self) -> &super::armor::CalcArmor {
+        panic!("This is not armor")
+    }
+
+    fn as_talisman(&self) -> &CalcTalisman {
+        self
     }
 }

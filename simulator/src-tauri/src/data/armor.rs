@@ -25,6 +25,8 @@ pub enum ArmorPart {
     Waist,
     #[serde(rename = "feet")]
     Feet,
+    #[serde(rename = "talisman")] // TODO Separate json ArmorPart data from calc ArmorPart data
+    Talisman,
 }
 
 impl ArmorPart {
@@ -35,6 +37,7 @@ impl ArmorPart {
             ArmorPart::Arm => "arm",
             ArmorPart::Waist => "waist",
             ArmorPart::Feet => "feet",
+            ArmorPart::Talisman => "talisman",
         }
     }
 }

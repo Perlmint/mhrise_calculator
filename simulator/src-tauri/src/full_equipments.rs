@@ -1,63 +1,61 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, marker::PhantomData};
 
 use crate::{
-    calc::armor::CalcArmor,
     calc::calc_equipment::CalcEquipment,
     data::{
-        armor::{ArmorPart, Talisman},
+        armor::ArmorPart,
         deco_combination::{DecorationCombination, DecorationCombinations},
         skill::MAX_SLOT_LEVEL,
     },
 };
 
-#[derive(Debug, Default, Clone)]
+#[derive(Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
-    pub armors: Vec<CalcArmor<'a>>,
-    pub talisman: Option<&'a Talisman>,
+    pub equipments: Vec<Box<dyn CalcEquipment>>,
 
     pub all_skills: HashMap<String, i32>,
     pub avail_slots: Vec<i32>,
 
-    armor_by_part: HashMap<ArmorPart, CalcArmor<'a>>,
+    equipments_by_part: HashMap<ArmorPart, Box<dyn CalcEquipment>>,
     id: String,
+    phantom: PhantomData<&'a i32>,
 }
 
 impl<'a> FullEquipments<'a> {
     pub fn new(
         weapon_slots: Vec<i32>,
-        armors: Vec<CalcArmor<'a>>,
-        talisman: Option<&'a Talisman>,
+        equipments: Vec<Box<dyn CalcEquipment>>,
     ) -> FullEquipments<'a> {
         let mut ret = FullEquipments {
             weapon_slots,
-            armors,
-            talisman,
-            ..Default::default()
+            equipments,
+            all_skills: Default::default(),
+            avail_slots: Default::default(),
+            equipments_by_part: Default::default(),
+            id: Default::default(),
+            phantom: Default::default(),
         };
 
         (ret.all_skills, ret.avail_slots) = ret.sum();
 
-        let mut armors_by_part = HashMap::<ArmorPart, CalcArmor<'a>>::new();
+        let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment>>::new();
 
-        for armor in &ret.armors {
-            armors_by_part.insert(armor.part(), armor.clone());
+        for equipment in ret.equipments() {
+            equipments_by_part.insert(equipment.part().clone(), equipment.clone());
         }
 
-        ret.armor_by_part = armors_by_part;
+        ret.equipments_by_part = equipments_by_part;
 
         ret.id = format!(
-            "FULLEQUIP-{}-{}-{}-{}-{}",
+            "FULLEQUIP-{}-{}-{}-{}-{}-{}",
             ret.get_by_part(&ArmorPart::Helm).id(),
             ret.get_by_part(&ArmorPart::Torso).id(),
             ret.get_by_part(&ArmorPart::Arm).id(),
             ret.get_by_part(&ArmorPart::Waist).id(),
             ret.get_by_part(&ArmorPart::Feet).id(),
+            ret.get_by_part(&ArmorPart::Talisman).id(),
         );
-
-        if talisman.is_some() {
-            ret.id = format!("{}-{}", ret.id, talisman.unwrap().id());
-        }
 
         ret
     }
@@ -66,8 +64,8 @@ impl<'a> FullEquipments<'a> {
         &self.id
     }
 
-    pub fn get_by_part(&self, part: &ArmorPart) -> &CalcArmor<'a> {
-        &self.armor_by_part[part]
+    pub fn get_by_part(&self, part: &ArmorPart) -> Box<dyn CalcEquipment> {
+        self.equipments_by_part[part].clone()
     }
 
     pub fn get_possible_combs(
@@ -75,7 +73,7 @@ impl<'a> FullEquipments<'a> {
         mut req_skills: HashMap<String, i32>,
         req_slots: &Vec<i32>,
         no_deco_skills: &HashMap<String, i32>,
-        deco_comb_calculator: &'a DecorationCombinations,
+        deco_comb_calculator: &DecorationCombinations,
     ) -> (bool, Vec<DecorationCombination>) {
         let mut avail_slots = self.avail_slots.clone();
 
@@ -136,8 +134,8 @@ impl<'a> FullEquipments<'a> {
             slots.push(0);
         }
 
-        for armor in &self.armors {
-            for (id, &level) in armor.skills() {
+        for equip in self.equipments() {
+            for (id, &level) in equip.skills() {
                 let existing = skills.get(id);
 
                 let mut level_sum = level;
@@ -149,7 +147,7 @@ impl<'a> FullEquipments<'a> {
                 skills.insert(id.clone(), level_sum);
             }
 
-            for (slot_size_index, count) in armor.slots().iter().enumerate() {
+            for (slot_size_index, count) in equip.slots().iter().enumerate() {
                 if *count == 0 {
                     continue;
                 }
@@ -166,29 +164,10 @@ impl<'a> FullEquipments<'a> {
             slots[(weapon_slot - 1) as usize] += 1;
         }
 
-        if self.talisman.is_some() {
-            for skill in &self.talisman.unwrap().skills {
-                let id = &skill.id;
-                let level = skill.level;
-
-                let existing = skills.get_mut(id);
-
-                if existing.is_some() {
-                    *existing.unwrap() += level;
-                } else {
-                    skills.insert(id.clone(), level);
-                }
-            }
-
-            for tali_slot in &self.talisman.unwrap().slot_sizes {
-                if *tali_slot == 0 {
-                    continue;
-                }
-
-                slots[(tali_slot - 1) as usize] += 1;
-            }
-        }
-
         return (skills, slots);
+    }
+
+    pub fn equipments(&self) -> Vec<Box<dyn CalcEquipment>> {
+        self.equipments.clone()
     }
 }
