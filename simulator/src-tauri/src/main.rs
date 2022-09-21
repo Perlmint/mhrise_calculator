@@ -923,15 +923,7 @@ fn calculate_full_equip<'a>(
 
             real_armors.push(all_real_armors);
         } else {
-            let new_box: Box<dyn CalcEquipment<'a>>;
-
-            if equipment.part() == &ArmorPart::Talisman {
-                new_box = Box::new(equipment.as_talisman().clone());
-            } else {
-                new_box = Box::new(equipment.as_armor().clone());
-            }
-
-            real_armors.push(vec![new_box]);
+            real_armors.push(vec![equipment.clone_inner()]);
         }
     }
 

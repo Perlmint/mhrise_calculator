@@ -11,8 +11,7 @@ pub trait CalcEquipment<'a> {
     fn slots(&self) -> &Vec<i32>;
     fn part(&self) -> &ArmorPart;
 
-    fn as_armor(&self) -> &'a CalcArmor<'a>;
-    fn as_talisman(&self) -> &'a CalcTalisman<'a>;
+    fn clone_inner(&self) -> Box<dyn CalcEquipment<'a>>;
 
     fn get_point(
         &self,
@@ -85,10 +84,6 @@ pub trait CalcEquipment<'a> {
 
 impl<'a> Clone for Box<dyn CalcEquipment<'a>> {
     fn clone(&self) -> Self {
-        if self.part() == &ArmorPart::Talisman {
-            return Box::new(self.as_talisman().clone());
-        } else {
-            return Box::new(self.as_armor().clone());
-        }
+        self.clone_inner()
     }
 }
