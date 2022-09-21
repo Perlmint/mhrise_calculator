@@ -982,16 +982,15 @@ fn calculate_full_equip<'a>(
         full_equip.get_by_part(&ArmorPart::Talisman).id(),
     );
 
-    /* TODO: debug print names
-        debug!(
-            "Armors names: ({}), ({}), ({}), ({}), ({})",
-            full_equip.get_by_part(&ArmorPart::Helm).names()["ko"],
-            full_equip.get_by_part(&ArmorPart::Torso).names()["ko"],
-            full_equip.get_by_part(&ArmorPart::Arm).names()["ko"],
-            full_equip.get_by_part(&ArmorPart::Waist).names()["ko"],
-            full_equip.get_by_part(&ArmorPart::Feet).names()["ko"],
-        );
-    */
+    // TODO: debug print names
+    debug!(
+        "Armors names: ({}), ({}), ({}), ({}), ({})",
+        full_equip.get_by_part(&ArmorPart::Helm).as_armor().names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Torso).as_armor().names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Arm).as_armor().names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Waist).as_armor().names()["ko"],
+        full_equip.get_by_part(&ArmorPart::Feet).as_armor().names()["ko"],
+    );
 
     let mut real_armors = Vec::<Vec<BoxCalcEquipment<'a>>>::new();
 

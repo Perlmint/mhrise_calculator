@@ -5,7 +5,7 @@ use crate::data::{
     skill::MAX_SLOT_LEVEL,
 };
 
-use super::calc_equipment::CalcEquipment;
+use super::{calc_equipment::CalcEquipment, talisman::CalcTalisman};
 
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
@@ -127,5 +127,13 @@ impl<'a> CalcEquipment<'a> for CalcArmor<'a> {
 
     fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a> + 'a> {
         Box::new(self.clone())
+    }
+
+    fn as_armor(&self) -> &CalcArmor<'a> {
+        self
+    }
+
+    fn as_talisman(&self) -> &CalcTalisman<'a> {
+        panic!("This is not talisman");
     }
 }

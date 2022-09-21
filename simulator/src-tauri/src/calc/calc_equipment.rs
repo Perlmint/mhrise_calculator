@@ -2,7 +2,7 @@ use std::{cmp::Reverse, collections::HashMap};
 
 use crate::data::{armor::ArmorPart, deco::Decoration};
 
-use super::deco::CalcDeco;
+use super::{armor::CalcArmor, deco::CalcDeco, talisman::CalcTalisman};
 
 pub trait CalcEquipment<'a> {
     fn id(&self) -> &String;
@@ -12,6 +12,9 @@ pub trait CalcEquipment<'a> {
     fn part(&self) -> &ArmorPart;
 
     fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a> + 'a>;
+
+    fn as_armor(&self) -> &CalcArmor<'a>;
+    fn as_talisman(&self) -> &CalcTalisman<'a>;
 
     fn get_point(
         &self,
