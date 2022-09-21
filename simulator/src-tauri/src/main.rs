@@ -303,11 +303,11 @@ struct ResultDecorationCombination {
 }
 
 #[tauri::command]
-fn cmd_calculate_skillset<'a>(
+fn cmd_calculate_skillset(
     weapon_slots: Vec<i32>,
     selected_skills: HashMap<String, i32>,
     free_slots: Vec<i32>,
-    mutex_dm: tauri::State<'a, Mutex<DataManager>>,
+    mutex_dm: tauri::State<Mutex<DataManager>>,
 ) -> CalculateSkillsetReturn {
     debug!("Start calculating...");
 
@@ -941,17 +941,16 @@ fn calculate_full_equip<'a>(
 
     for equipment in full_equip.equipments() {
         if BaseArmor::is_slot_armor(equipment.id()) {
-            let all_real_armors = dm
-                .armors_by_slot
-                .get(&equipment.part())
-                .unwrap()
-                .get(equipment.id())
-                .unwrap()
-                .iter()
-                .map(|base_armor| {
-                    Box::new(CalcArmor::<'a>::new(base_armor)) as Box<dyn CalcEquipment<'a>>
-                })
-                .collect::<Vec<Box<dyn CalcEquipment<'a>>>>();
+            let armors_by_slot = &dm.armors_by_slot[equipment.part()][equipment.id()];
+
+            let mut all_real_armors = Vec::<Box<dyn CalcEquipment<'a>>>::new();
+
+            for base_armor in armors_by_slot {
+                let calc_armor = CalcArmor::<'a>::new(base_armor);
+                let box_armor = Box::new(calc_armor) as Box<dyn CalcEquipment<'a> + 'a>;
+
+                all_real_armors.push(box_armor);
+            }
 
             real_armors.push(all_real_armors);
         } else {

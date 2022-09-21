@@ -167,7 +167,7 @@ impl<'a> FullEquipments<'a> {
         return (skills, slots);
     }
 
-    pub fn equipments(&self) -> Vec<Box<dyn CalcEquipment<'a>>> {
-        self.equipments.clone()
+    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a>>> {
+        &self.equipments
     }
 }
