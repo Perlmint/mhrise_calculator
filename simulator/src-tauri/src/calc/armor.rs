@@ -65,16 +65,21 @@ impl<'a> CalcArmor<'a> {
         &self.original.id()
     }
 
-    pub fn names(&self) -> &HashMap<String, String> {
-        &self.base.names
-    }
-
     pub fn sex_type(&self) -> &SexType {
         &self.base.sex_type
     }
 
     pub fn rarity(&self) -> i32 {
         self.base.rarity
+    }
+
+    pub fn name(&self, lang: &str) -> String {
+        let existing = self.base.names.get(lang);
+
+        match existing {
+            Some(name) => name.clone(),
+            None => "SYSTEM_PART".to_string(), // TODO: empty armor, slot only armor
+        }
     }
 
     pub fn subtract_slots(&mut self, single_deco_skills: &mut Vec<(&String, i32, i32)>) -> bool {
