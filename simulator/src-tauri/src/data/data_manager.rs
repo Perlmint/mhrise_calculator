@@ -5,7 +5,6 @@ use super::deco::Decoration;
 use super::deco_combination::DecorationCombinations;
 use super::skill::Skill;
 
-#[derive(Default)]
 pub struct DataManager {
     pub armors: HashMap<String, BaseArmor>,
     pub skills: HashMap<String, Skill>,

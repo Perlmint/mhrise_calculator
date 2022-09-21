@@ -33,7 +33,6 @@ mod calc {
     pub mod armor;
     pub mod calc_equipment;
     pub mod deco;
-    pub mod skill;
     pub mod talisman;
 }
 
@@ -305,7 +304,7 @@ fn calculate_skillset<'a>(
     free_slots: Vec<i32>,
     sex_type: SexType,
     dm: &'a DataManager,
-) -> (String, Vec<(FullEquipments, DecorationCombination)>) {
+) -> (String, Vec<(FullEquipments<'a>, DecorationCombination)>) {
     let start_time = Instant::now();
     let mut ret = String::from("\n");
 
@@ -456,7 +455,7 @@ fn calculate_skillset<'a>(
             });
     }
 
-    let mut possible_unique_equips = Vec::<Vec<Box<dyn CalcEquipment>>>::new();
+    let mut possible_unique_equips = Vec::<Vec<Box<dyn CalcEquipment<'a>>>>::new();
 
     for (helm, torso, arm, waist, feet, tali) in iproduct!(
         all_unique_armors[&ArmorPart::Helm].iter(),
@@ -466,16 +465,16 @@ fn calculate_skillset<'a>(
         all_unique_armors[&ArmorPart::Feet].iter(),
         talismans.iter()
     ) {
-        let equips: Vec<Box<dyn CalcEquipment>> = vec![
+        let equips: Vec<Box<dyn CalcEquipment<'a>>> = vec![
             Box::new(helm.clone()),
             Box::new(torso.clone()),
             Box::new(arm.clone()),
             Box::new(waist.clone()),
-            // Box::new(feet.clone()),
+            Box::new(feet.clone()),
             Box::new(tali.clone()),
         ];
 
-        let full_equip = FullEquipments::new(weapon_slots.clone(), equips.clone());
+        let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equips.clone());
         let (possible_result, possible_combs) = full_equip.get_possible_combs(
             no_deco_skills.clone(),
             &Vec::new(),
@@ -527,7 +526,7 @@ fn calculate_skillset<'a>(
             .map(|equipment| {
                 let part = equipment.part();
 
-                let mut ret = Vec::<Box<dyn CalcEquipment>>::new();
+                let mut ret = Vec::<Box<dyn CalcEquipment<'a>>>::new();
 
                 if equipment.id().starts_with(EMPTY_ARMOR_PREFIX) {
                     let part_unique_armors = &all_unique_armors[part];
@@ -573,7 +572,7 @@ fn calculate_skillset<'a>(
 
                 ret
             })
-            .collect::<Vec<Vec<Box<dyn CalcEquipment>>>>();
+            .collect::<Vec<Vec<Box<dyn CalcEquipment<'a>>>>>();
 
         parts.sort_by_key(|parts| parts.len());
 
@@ -641,7 +640,7 @@ fn calculate_skillset<'a>(
                 .map(|id| id.to_string())
                 .collect::<HashSet<String>>();
 
-            let init_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone());
+            let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
 
             for part in real_parts.iter_mut() {
                 part.subtract_skills(&mut req_skills);
@@ -676,7 +675,8 @@ fn calculate_skillset<'a>(
                 req_slots[slot_size_index] += count;
             }
 
-            let mut full_equip = FullEquipments::new(weapon_slots.clone(), real_parts.clone());
+            let mut full_equip =
+                FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
 
             let slot_success = full_equip.subtract_slots(&mut req_slots);
 
@@ -905,7 +905,7 @@ fn calculate_full_equip<'a>(
             full_equip.get_by_part(&ArmorPart::Feet).names()["ko"],
         );
     */
-    let mut real_armors = Vec::<Vec<Box<dyn CalcEquipment>>>::new();
+    let mut real_armors = Vec::<Vec<Box<dyn CalcEquipment<'a>>>>::new();
 
     for equipment in full_equip.equipments() {
         if BaseArmor::is_slot_armor(equipment.id()) {
@@ -917,18 +917,18 @@ fn calculate_full_equip<'a>(
                 .unwrap()
                 .iter()
                 .map(|base_armor| {
-                    Box::new(CalcArmor::<'a>::new(base_armor)) as Box<dyn CalcEquipment>
+                    Box::new(CalcArmor::<'a>::new(base_armor)) as Box<dyn CalcEquipment<'a>>
                 })
-                .collect::<Vec<Box<dyn CalcEquipment>>>();
+                .collect::<Vec<Box<dyn CalcEquipment<'a>>>>();
 
             real_armors.push(all_real_armors);
         } else {
-            let new_box;
+            let new_box: Box<dyn CalcEquipment<'a>>;
 
             if equipment.part() == &ArmorPart::Talisman {
-                new_box = Box::new(equipment.as_talisman().clone()) as Box<dyn CalcEquipment>;
+                new_box = Box::new(equipment.as_talisman().clone());
             } else {
-                new_box = Box::new(equipment.as_armor().clone()) as Box<dyn CalcEquipment>;
+                new_box = Box::new(equipment.as_armor().clone());
             }
 
             real_armors.push(vec![new_box]);
@@ -954,7 +954,7 @@ fn calculate_full_equip<'a>(
             a5.clone(),
         ];
 
-        let final_equip = FullEquipments::new(weapon_slots.clone(), equipments);
+        let final_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equipments);
 
         answers_equip.push(final_equip);
     }

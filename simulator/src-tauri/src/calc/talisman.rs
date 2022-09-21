@@ -47,7 +47,7 @@ impl<'a> CalcTalisman<'a> {
     }
 }
 
-impl<'a> CalcEquipment for CalcTalisman<'a> {
+impl<'a> CalcEquipment<'a> for CalcTalisman<'a> {
     fn id(&self) -> &String {
         &self.tali.id()
     }
@@ -68,11 +68,11 @@ impl<'a> CalcEquipment for CalcTalisman<'a> {
         &ArmorPart::Talisman
     }
 
-    fn as_armor(&self) -> &super::armor::CalcArmor {
+    fn as_armor(&self) -> &super::armor::CalcArmor<'a> {
         panic!("This is not armor")
     }
 
-    fn as_talisman(&self) -> &CalcTalisman {
+    fn as_talisman(&self) -> &CalcTalisman<'a> {
         self
     }
 }

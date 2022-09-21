@@ -4,15 +4,15 @@ use crate::data::{armor::ArmorPart, deco::Decoration};
 
 use super::{armor::CalcArmor, deco::CalcDeco, talisman::CalcTalisman};
 
-pub trait CalcEquipment {
+pub trait CalcEquipment<'a> {
     fn id(&self) -> &String;
     fn skills(&self) -> &HashMap<String, i32>;
     fn mut_skills(&mut self) -> &mut HashMap<String, i32>;
     fn slots(&self) -> &Vec<i32>;
     fn part(&self) -> &ArmorPart;
 
-    fn as_armor(&self) -> &CalcArmor;
-    fn as_talisman(&self) -> &CalcTalisman;
+    fn as_armor(&self) -> &CalcArmor<'a>;
+    fn as_talisman(&self) -> &CalcTalisman<'a>;
 
     fn get_point(
         &self,
@@ -83,7 +83,7 @@ pub trait CalcEquipment {
     }
 }
 
-impl Clone for Box<dyn CalcEquipment> {
+impl<'a> Clone for Box<dyn CalcEquipment<'a>> {
     fn clone(&self) -> Self {
         if self.part() == &ArmorPart::Talisman {
             return Box::new(self.as_talisman().clone());
