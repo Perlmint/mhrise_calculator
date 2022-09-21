@@ -482,7 +482,7 @@ fn calculate_skillset<'a>(
             });
     }
 
-    let mut possible_unique_equips = Vec::<Vec<Box<dyn CalcEquipment<'a>>>>::new();
+    let mut possible_unique_equips = Vec::<Vec<Box<dyn CalcEquipment<'a> + 'a>>>::new();
 
     for (helm, torso, arm, waist, feet, tali) in iproduct!(
         all_unique_armors[&ArmorPart::Helm].iter(),
@@ -492,7 +492,7 @@ fn calculate_skillset<'a>(
         all_unique_armors[&ArmorPart::Feet].iter(),
         talismans.iter()
     ) {
-        let equips: Vec<Box<dyn CalcEquipment<'a>>> = vec![
+        let equips: Vec<Box<dyn CalcEquipment<'a> + 'a>> = vec![
             helm.clone_dyn(),
             torso.clone_dyn(),
             arm.clone_dyn(),
@@ -553,7 +553,7 @@ fn calculate_skillset<'a>(
             .map(|equipment| {
                 let part = equipment.part();
 
-                let mut ret = Vec::<Box<dyn CalcEquipment<'a>>>::new();
+                let mut ret = Vec::<Box<dyn CalcEquipment<'a> + 'a>>::new();
 
                 if equipment.id().starts_with(EMPTY_ARMOR_PREFIX) {
                     let part_unique_armors = &all_unique_armors[part];
@@ -599,7 +599,7 @@ fn calculate_skillset<'a>(
 
                 ret
             })
-            .collect::<Vec<Vec<Box<dyn CalcEquipment<'a>>>>>();
+            .collect::<Vec<Vec<Box<dyn CalcEquipment<'a> + 'a>>>>();
 
         parts.sort_by_key(|parts| parts.len());
 
@@ -940,13 +940,13 @@ fn calculate_full_equip<'a>(
             full_equip.get_by_part(&ArmorPart::Feet).names()["ko"],
         );
     */
-    let mut real_armors = Vec::<Vec<Box<dyn CalcEquipment<'a>>>>::new();
+    let mut real_armors = Vec::<Vec<Box<dyn CalcEquipment<'a> + 'a>>>::new();
 
     for equipment in full_equip.equipments() {
         if BaseArmor::is_slot_armor(equipment.id()) {
             let armors_by_slot = &dm.armors_by_slot[equipment.part()][equipment.id()];
 
-            let mut all_real_armors = Vec::<Box<dyn CalcEquipment<'a>>>::new();
+            let mut all_real_armors = Vec::<Box<dyn CalcEquipment<'a> + 'a>>::new();
 
             for base_armor in armors_by_slot {
                 let calc_armor = CalcArmor::<'a>::new(base_armor);

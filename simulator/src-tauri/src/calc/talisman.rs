@@ -67,7 +67,7 @@ impl<'a> CalcEquipment<'a> for CalcTalisman<'a> {
         &ArmorPart::Talisman
     }
 
-    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a>> {
+    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a> + 'a> {
         Box::new(self.clone())
     }
 }

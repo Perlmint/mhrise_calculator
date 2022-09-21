@@ -12,12 +12,12 @@ use crate::{
 #[derive(Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
-    pub equipments: Vec<Box<dyn CalcEquipment<'a>>>,
+    pub equipments: Vec<Box<dyn CalcEquipment<'a> + 'a>>,
 
     pub all_skills: HashMap<String, i32>,
     pub avail_slots: Vec<i32>,
 
-    equipments_by_part: HashMap<ArmorPart, Box<dyn CalcEquipment<'a>>>,
+    equipments_by_part: HashMap<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>,
     id: String,
     phantom: PhantomData<&'a i32>,
 }
@@ -25,8 +25,8 @@ pub struct FullEquipments<'a> {
 impl<'a> FullEquipments<'a> {
     pub fn new(
         weapon_slots: Vec<i32>,
-        equipments: Vec<Box<dyn CalcEquipment<'a>>>,
-    ) -> FullEquipments<'a> {
+        equipments: Vec<Box<dyn CalcEquipment<'a> + 'a>>,
+    ) -> FullEquipments {
         let mut ret = FullEquipments {
             weapon_slots,
             equipments,
@@ -39,7 +39,7 @@ impl<'a> FullEquipments<'a> {
 
         (ret.all_skills, ret.avail_slots) = ret.sum();
 
-        let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment<'a>>>::new();
+        let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>::new();
 
         for equipment in ret.equipments() {
             equipments_by_part.insert(equipment.part().clone(), equipment.clone_dyn());
@@ -64,7 +64,7 @@ impl<'a> FullEquipments<'a> {
         &self.id
     }
 
-    pub fn get_by_part(&self, part: &ArmorPart) -> &Box<dyn CalcEquipment<'a>> {
+    pub fn get_by_part(&self, part: &ArmorPart) -> &Box<dyn CalcEquipment<'a> + 'a> {
         &self.equipments_by_part[part]
     }
 
@@ -167,7 +167,7 @@ impl<'a> FullEquipments<'a> {
         return (skills, slots);
     }
 
-    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a>>> {
+    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a> + 'a>> {
         &self.equipments
     }
 }

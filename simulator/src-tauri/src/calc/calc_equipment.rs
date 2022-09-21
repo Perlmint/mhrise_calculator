@@ -11,7 +11,7 @@ pub trait CalcEquipment<'a> {
     fn slots(&self) -> &Vec<i32>;
     fn part(&self) -> &ArmorPart;
 
-    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a>>;
+    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a> + 'a>;
 
     fn get_point(
         &self,
@@ -82,7 +82,7 @@ pub trait CalcEquipment<'a> {
     }
 }
 
-impl<'a> Clone for Box<dyn CalcEquipment<'a>> {
+impl<'a> Clone for Box<dyn CalcEquipment<'a> + 'a> {
     fn clone(&self) -> Self {
         self.clone_dyn()
     }
