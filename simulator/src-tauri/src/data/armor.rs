@@ -124,7 +124,7 @@ impl ArmorPart {
 impl BaseArmor {
     pub fn create_empty(part: ArmorPart) -> BaseArmor {
         Self {
-            id: format!("{}_{}", EMPTY_ARMOR_PREFIX, part.as_str()),
+            id: format!("{}-{}", EMPTY_ARMOR_PREFIX, part.as_str()),
             names: HashMap::new(),
             part,
             rarity: 10,
