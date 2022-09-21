@@ -13,4 +13,4 @@ pub struct Skill {
     // pub texts: HashMap<String, String>,
 }
 
-pub static MAX_SLOT_LEVEL: i32 = 4;
+pub static MAX_SLOT_LEVEL: usize = 4;
