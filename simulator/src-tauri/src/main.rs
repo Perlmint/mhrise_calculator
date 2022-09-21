@@ -275,6 +275,33 @@ struct CalculateSkillsetReturn {
     log: String,
 }
 
+struct CalculateResult {
+    full_equipments: Vec<ResultFullEquipments>,
+}
+
+struct ResultFullEquipments {
+    pub armors: HashMap<String, ResultArmor>,
+    pub tali: ResultTalisman,
+    pub deco_combs: Vec<ResultDecorationCombination>,
+}
+
+struct ResultArmor {
+    pub base_name: String,
+    pub is_anomaly: bool,
+
+    pub skills: HashMap<String, i32>,
+    pub slots: Vec<i32>,
+}
+
+struct ResultTalisman {
+    pub skills: HashMap<String, i32>,
+    pub slots: Vec<i32>,
+}
+
+struct ResultDecorationCombination {
+    pub skills: HashMap<String, Vec<i32>>,
+}
+
 #[tauri::command]
 fn cmd_calculate_skillset<'a>(
     weapon_slots: Vec<i32>,
@@ -304,7 +331,7 @@ fn calculate_skillset<'a>(
     free_slots: Vec<i32>,
     sex_type: SexType,
     dm: &'a DataManager,
-) -> (String, Vec<(FullEquipments<'a>, DecorationCombination)>) {
+) -> (String, CalculateResult) {
     let start_time = Instant::now();
     let mut ret = String::from("\n");
 
@@ -370,8 +397,8 @@ fn calculate_skillset<'a>(
     let talismans = dm
         .talismans
         .iter()
-        .map(|tali| CalcTalisman::new(tali))
-        .collect::<Vec<CalcTalisman>>();
+        .map(|tali| CalcTalisman::<'a>::new(tali))
+        .collect::<Vec<CalcTalisman<'a>>>();
 
     let mut all_slot_armors = HashMap::<ArmorPart, HashMap<String, CalcArmor<'a>>>::new();
 
@@ -817,7 +844,12 @@ fn calculate_skillset<'a>(
     ));
     info!("{}", ret);
 
-    return (ret, answers);
+    return (
+        ret,
+        CalculateResult {
+            full_equipments: Vec::new(),
+        },
+    );
 }
 
 fn compare_failed_slot_armors(slot_armors: &mut HashSet<String>, armor: &CalcArmor) {
