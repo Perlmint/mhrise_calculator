@@ -417,6 +417,44 @@ fn calculate_skillset<'a>(
         .map(|tali| CalcTalisman::<'a>::new(tali))
         .collect::<Vec<CalcTalisman<'a>>>();
 
+    let talisman_count_before = all_talismans.len();
+
+    let mut temp_talismans = Vec::new();
+
+    for (i1, tali1) in all_talismans.iter().enumerate() {
+        let mut is_le = false;
+
+        for i2 in i1 + 1..all_talismans.len() {
+            let tali2 = &all_talismans[i2];
+
+            if tali1.is_le(tali2) {
+                is_le = true;
+                break;
+            }
+        }
+
+        if is_le == false {
+            temp_talismans.push(tali1);
+        }
+    }
+
+    let all_talismans = temp_talismans
+        .iter_mut()
+        .map(|tali| tali.clone())
+        .collect::<Vec<CalcTalisman>>();
+
+    let talisman_count_after = all_talismans.len();
+
+    ret.push_str(&format!(
+        "Talisman count before & after: {} -> {}\n",
+        talisman_count_before, talisman_count_after
+    ));
+
+    debug!(
+        "Talisman count before & after: {} -> {}",
+        talisman_count_before, talisman_count_after
+    );
+
     let mut all_slot_equips = HashMap::<ArmorPart, HashMap<String, BoxCalcEquipment<'a>>>::new();
 
     for (part, _) in all_armors.iter() {

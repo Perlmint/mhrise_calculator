@@ -1,6 +1,6 @@
 use std::{cmp::Reverse, collections::HashMap};
 
-use crate::data::{armor::ArmorPart, deco::Decoration};
+use crate::data::{armor::ArmorPart, deco::Decoration, skill::MAX_SLOT_LEVEL};
 
 use super::{armor::CalcArmor, deco::CalcDeco, talisman::CalcTalisman};
 
@@ -15,6 +15,42 @@ pub trait CalcEquipment<'a> {
 
     fn as_armor(&self) -> &CalcArmor<'a>;
     fn as_talisman(&self) -> &CalcTalisman<'a>;
+
+    fn is_le(&self, other: &dyn CalcEquipment<'a>) -> bool {
+        let self_slots = self.slots();
+        let other_slots = other.slots();
+
+        for i in 0..MAX_SLOT_LEVEL {
+            if self_slots[i] > other_slots[i] {
+                return false;
+            }
+        }
+
+        let self_skills = self.skills();
+        let other_skills = other.skills();
+
+        if self_skills.len() > other_skills.len() {
+            return false;
+        }
+
+        let mut skill_condition_passed = 0;
+
+        for (skill_id, level) in other_skills {
+            let self_skill = self_skills.get(skill_id);
+
+            if self_skill.is_none() {
+                continue;
+            }
+
+            if level > self_skill.unwrap() {
+                return false;
+            } else {
+                skill_condition_passed += 1;
+            }
+        }
+
+        self_skills.len() == skill_condition_passed
+    }
 
     fn get_point(
         &self,
@@ -88,5 +124,15 @@ pub trait CalcEquipment<'a> {
 impl<'a> Clone for Box<dyn CalcEquipment<'a> + 'a> {
     fn clone(&self) -> Self {
         self.clone_dyn()
+    }
+}
+
+impl<'a> PartialEq for dyn CalcEquipment<'a> {
+    fn eq(&self, other: &Self) -> bool {
+        self.slots() == other.slots() && self.skills() == other.skills()
+    }
+
+    fn ne(&self, other: &Self) -> bool {
+        self.eq(other) == false
     }
 }
