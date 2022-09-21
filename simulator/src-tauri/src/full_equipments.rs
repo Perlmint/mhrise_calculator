@@ -42,7 +42,7 @@ impl<'a> FullEquipments<'a> {
         let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment<'a>>>::new();
 
         for equipment in ret.equipments() {
-            equipments_by_part.insert(equipment.part().clone(), equipment);
+            equipments_by_part.insert(equipment.part().clone(), equipment.clone_dyn());
         }
 
         ret.equipments_by_part = equipments_by_part;
@@ -64,7 +64,7 @@ impl<'a> FullEquipments<'a> {
         &self.id
     }
 
-    pub fn get_by_part(&self, part: &ArmorPart) -> &'a Box<dyn CalcEquipment<'a>> {
+    pub fn get_by_part(&self, part: &ArmorPart) -> &Box<dyn CalcEquipment<'a>> {
         &self.equipments_by_part[part]
     }
 
@@ -167,7 +167,7 @@ impl<'a> FullEquipments<'a> {
         return (skills, slots);
     }
 
-    pub fn equipments(&self) -> &'a Vec<Box<dyn CalcEquipment<'a>>> {
+    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a>>> {
         &self.equipments
     }
 }

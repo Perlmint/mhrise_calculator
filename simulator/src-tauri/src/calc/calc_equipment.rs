@@ -11,6 +11,8 @@ pub trait CalcEquipment<'a> {
     fn slots(&self) -> &Vec<i32>;
     fn part(&self) -> &ArmorPart;
 
+    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a>>;
+
     fn get_point(
         &self,
         decos_possible: &HashMap<String, Vec<&Decoration>>,
@@ -77,5 +79,11 @@ pub trait CalcEquipment<'a> {
         }
 
         return diffs;
+    }
+}
+
+impl<'a> Clone for Box<dyn CalcEquipment<'a>> {
+    fn clone(&self) -> Self {
+        self.clone_dyn()
     }
 }

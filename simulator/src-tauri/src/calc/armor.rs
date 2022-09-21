@@ -1,20 +1,15 @@
-use std::{cmp::Reverse, collections::HashMap};
-
-use log::debug;
+use std::collections::HashMap;
 
 use crate::data::{
-    armor::{AnomalyArmor, ArmorPart, ArmorSkill, BaseArmor, SexType},
-    deco::Decoration,
-    deco_combination::DecorationCombination,
+    armor::{ArmorPart, BaseArmor, SexType},
     skill::MAX_SLOT_LEVEL,
 };
 
-use super::{calc_equipment::CalcEquipment, deco::CalcDeco, talisman::CalcTalisman};
+use super::calc_equipment::CalcEquipment;
 
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
     base: &'a BaseArmor,
-    anomaly: Option<&'a AnomalyArmor>,
 
     part: ArmorPart,
     sex_type: SexType,
@@ -34,7 +29,6 @@ impl<'a> CalcArmor<'a> {
 
         Self {
             base,
-            anomaly: None,
             part: base.part.clone(),
             sex_type: base.sex_type.clone(),
             rarity: base.rarity,
@@ -129,5 +123,9 @@ impl<'a> CalcEquipment<'a> for CalcArmor<'a> {
 
     fn part(&self) -> &ArmorPart {
         &self.part
+    }
+
+    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a>> {
+        Box::new(self.clone())
     }
 }

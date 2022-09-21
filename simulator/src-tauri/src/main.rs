@@ -8,7 +8,7 @@ pub static MAX_ANSWER_LENGTH: i32 = 200;
 use csv::StringRecord;
 use log::{debug, info};
 use std::cmp::{Ordering, Reverse};
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::File;
 use std::io::BufReader;
 use std::sync::Mutex;
@@ -493,12 +493,12 @@ fn calculate_skillset<'a>(
         talismans.iter()
     ) {
         let equips: Vec<Box<dyn CalcEquipment<'a>>> = vec![
-            Box::new(helm.clone()),
-            Box::new(torso.clone()),
-            Box::new(arm.clone()),
-            Box::new(waist.clone()),
-            Box::new(feet.clone()),
-            Box::new(tali.clone()),
+            helm.clone_dyn(),
+            torso.clone_dyn(),
+            arm.clone_dyn(),
+            waist.clone_dyn(),
+            feet.clone_dyn(),
+            tali.clone_dyn(),
         ];
 
         let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equips.clone());
@@ -579,18 +579,18 @@ fn calculate_skillset<'a>(
                         .collect::<Vec<CalcArmor>>();
 
                     for armor in part_unique_armors.iter() {
-                        ret.push(Box::new(armor.clone()));
+                        ret.push(armor.clone_dyn());
                     }
 
                     for armor in part_deco_armors.iter() {
-                        ret.push(Box::new(armor.clone()));
+                        ret.push(armor.clone_dyn());
                     }
 
                     for armor in part_slot_armors.iter() {
-                        ret.push(Box::new(armor.clone()));
+                        ret.push(armor.clone_dyn());
                     }
                 } else {
-                    ret.push(equipment.clone());
+                    ret.push(equipment.clone_dyn());
                 }
 
                 ret.sort_by_key(|armor| {
@@ -628,7 +628,7 @@ fn calculate_skillset<'a>(
         start_time.elapsed()
     ));
 
-    let mut all_loop_tree = std::collections::BTreeMap::new();
+    let mut all_loop_tree = BTreeMap::new();
     let mut all_parts_ids = HashSet::<String>::new();
 
     let mut total_case_count = 0;
@@ -777,7 +777,10 @@ fn calculate_skillset<'a>(
             let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
             if existing.is_none() {
-                all_loop_tree.insert(Reverse(total_point), Vec::new());
+                all_loop_tree.insert(
+                    Reverse(total_point),
+                    Vec::<(FullEquipments<'a>, HashMap<String, i32>)>::new(),
+                );
                 existing = all_loop_tree.get_mut(&Reverse(total_point));
             }
 
@@ -814,11 +817,11 @@ fn calculate_skillset<'a>(
     let mut total_index = 0;
     let mut answers = Vec::new();
 
-    'all_cases: for (_, case_vec) in all_loop_tree.iter() {
+    for (_, case_vec) in &all_loop_tree {
         for (full_equip, req_skills) in case_vec {
             total_index += 1;
 
-            let result = calculate_full_equip(
+            calculate_full_equip(
                 dm,
                 &req_skills,
                 &weapon_slots,
@@ -887,7 +890,7 @@ fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
-    full_equip: &'a FullEquipments<'a>,
+    full_equip: &FullEquipments<'a>,
     answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
     total_index: &mut i32,
 ) -> i32 {
@@ -947,14 +950,14 @@ fn calculate_full_equip<'a>(
 
             for base_armor in armors_by_slot {
                 let calc_armor = CalcArmor::<'a>::new(base_armor);
-                let box_armor = Box::new(calc_armor) as Box<dyn CalcEquipment<'a> + 'a>;
+                let box_armor = calc_armor.clone_dyn();
 
                 all_real_armors.push(box_armor);
             }
 
             real_armors.push(all_real_armors);
         } else {
-            real_armors.push(vec![equipment.clone_inner()]);
+            real_armors.push(vec![equipment.clone_dyn()]);
         }
     }
 

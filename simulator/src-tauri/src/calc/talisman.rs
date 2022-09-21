@@ -1,4 +1,3 @@
-use core::panic;
 use std::collections::HashMap;
 
 use crate::data::{
@@ -6,7 +5,7 @@ use crate::data::{
     skill::MAX_SLOT_LEVEL,
 };
 
-use super::{armor::CalcArmor, calc_equipment::CalcEquipment};
+use super::calc_equipment::CalcEquipment;
 
 #[derive(Debug, Clone)]
 pub struct CalcTalisman<'a> {
@@ -66,5 +65,9 @@ impl<'a> CalcEquipment<'a> for CalcTalisman<'a> {
 
     fn part(&self) -> &ArmorPart {
         &ArmorPart::Talisman
+    }
+
+    fn clone_dyn(&self) -> Box<dyn CalcEquipment<'a>> {
+        Box::new(self.clone())
     }
 }
