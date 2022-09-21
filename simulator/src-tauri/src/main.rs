@@ -273,33 +273,40 @@ fn cmd_get_armor_names(mutex_dm: tauri::State<Mutex<DataManager>>) -> HashMap<St
 #[derive(Serialize)]
 struct CalculateSkillsetReturn {
     log: String,
+    result: CalculateResult,
 }
 
+#[derive(Serialize)]
 struct CalculateResult {
     full_equipments: Vec<ResultFullEquipments>,
 }
 
+#[derive(Serialize)]
 struct ResultFullEquipments {
     pub armors: HashMap<String, ResultArmor>,
-    pub tali: ResultTalisman,
+    pub talisman: ResultTalisman,
     pub deco_combs: Vec<ResultDecorationCombination>,
 }
 
+#[derive(Serialize)]
 struct ResultArmor {
-    pub base_name: String,
+    pub base_id: String,
     pub is_anomaly: bool,
 
     pub skills: HashMap<String, i32>,
     pub slots: Vec<i32>,
 }
 
+#[derive(Serialize)]
 struct ResultTalisman {
     pub skills: HashMap<String, i32>,
     pub slots: Vec<i32>,
 }
 
+#[derive(Serialize)]
 struct ResultDecorationCombination {
     pub skills: HashMap<String, Vec<i32>>,
+    pub slots_sum: Vec<i32>,
 }
 
 #[tauri::command]
@@ -314,7 +321,7 @@ fn cmd_calculate_skillset(
     let dm = mutex_dm.lock().unwrap();
 
     // TODO get sex_type as input
-    let (log, answers) = calculate_skillset(
+    let (log, result) = calculate_skillset(
         weapon_slots,
         selected_skills,
         free_slots,
@@ -322,7 +329,7 @@ fn cmd_calculate_skillset(
         &dm,
     );
 
-    CalculateSkillsetReturn { log }
+    CalculateSkillsetReturn { log, result }
 }
 
 type BoxCalcEquipment<'a> = Box<dyn CalcEquipment<'a> + 'a>;
@@ -372,7 +379,15 @@ fn calculate_skillset<'a>(
         let mut calc_armors = Vec::new();
 
         for base_armor in base_armors {
-            let calc_armor = CalcArmor::<'a>::new(base_armor);
+            let anomaly_base = dm.get_anomaly_armor(base_armor.id());
+
+            let calc_armor = match anomaly_base {
+                Some(anomaly_armor) => {
+                    CalcArmor::<'a>::new_anomaly(&anomaly_armor.affected, base_armor)
+                }
+                None => CalcArmor::<'a>::new_anomaly(base_armor, base_armor),
+            };
+
             calc_armors.push(calc_armor);
         }
 
@@ -890,17 +905,73 @@ fn calculate_skillset<'a>(
 
     let elapsed_final = start_time.elapsed();
 
+    let mut all_answers_length = 0;
+
+    for (_, deco_combs) in answers.iter() {
+        for _ in deco_combs.iter() {
+            all_answers_length += 1;
+        }
+    }
+
     ret.push_str(&format!(
         "calculate_skillset elapsed: {:?},\nanswers length: {}\n",
-        elapsed_final,
-        answers.len()
+        elapsed_final, all_answers_length
     ));
     info!("{}", ret);
+
+    let result_equipments = answers
+        .iter()
+        .map(|(full_equip, deco_combs)| {
+            let result_armors = full_equip
+                .equipments()
+                .iter()
+                .filter_map(|armor| {
+                    if armor.part() == &ArmorPart::Talisman {
+                        return None;
+                    }
+
+                    let armor = armor.as_armor();
+
+                    let result_armor = ResultArmor {
+                        base_id: armor.original_id().clone(),
+                        is_anomaly: BaseArmor::is_anomaly_armor(armor.id()),
+                        skills: armor.skills().clone(),
+                        slots: armor.slots().clone(),
+                    };
+
+                    Some((armor.part().as_str().to_string(), result_armor))
+                })
+                .collect::<HashMap<String, ResultArmor>>();
+
+            let result_deco_combs = deco_combs
+                .iter()
+                .map(|deco_comb| ResultDecorationCombination {
+                    skills: deco_comb.combs_per_skill.clone(),
+                    slots_sum: deco_comb.sum.clone(),
+                })
+                .collect::<Vec<ResultDecorationCombination>>();
+
+            let talisman = full_equip.get_by_part(&ArmorPart::Talisman).as_talisman();
+
+            let result_tali = ResultTalisman {
+                skills: talisman.skills().clone(),
+                slots: talisman.slots().clone(),
+            };
+
+            let result_equip = ResultFullEquipments {
+                armors: result_armors,
+                deco_combs: result_deco_combs,
+                talisman: result_tali,
+            };
+
+            result_equip
+        })
+        .collect::<Vec<ResultFullEquipments>>();
 
     return (
         ret,
         CalculateResult {
-            full_equipments: Vec::new(),
+            full_equipments: result_equipments,
         },
     );
 }
@@ -941,13 +1012,13 @@ fn calculate_full_equip<'a>(
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
     full_equip: &FullEquipments<'a>,
-    answers: &mut Vec<(FullEquipments<'a>, DecorationCombination)>,
+    answers: &mut Vec<(FullEquipments<'a>, Vec<DecorationCombination>)>,
     total_index: &mut i32,
 ) -> i32 {
-    let mut local_answers = dm.deco_combinations.get_possible_combs(&req_skills);
-    local_answers.retain(|comb| comb.is_possible(&full_equip.avail_slots));
+    let mut possible_deco_combs = dm.deco_combinations.get_possible_combs(&req_skills);
+    possible_deco_combs.retain(|comb| comb.is_possible(&full_equip.avail_slots));
 
-    let local_result = local_answers.len() != 0;
+    let local_result = possible_deco_combs.len() != 0;
 
     if local_result == false {
         return 1;
@@ -956,17 +1027,17 @@ fn calculate_full_equip<'a>(
     debug!("Initial slots: {:?}", full_equip.avail_slots);
     debug!("Skill ids: {:?}", full_equip.all_skills);
 
-    for local_answer in &local_answers {
+    for local_answer in &possible_deco_combs {
         debug!("Local answer: {:?}", local_answer);
     }
 
     debug!(
         "Possible slot combinations: {:?} {:?}",
-        local_answers
+        possible_deco_combs
             .iter()
             .map(|comb| &comb.combs_per_skill)
             .collect::<Vec<&HashMap<String, Vec<i32>>>>(),
-        local_answers
+        possible_deco_combs
             .iter()
             .map(|comb| &comb.sum)
             .collect::<Vec<&Vec<i32>>>()
@@ -982,7 +1053,6 @@ fn calculate_full_equip<'a>(
         full_equip.get_by_part(&ArmorPart::Talisman).id(),
     );
 
-    // TODO: debug print names
     debug!(
         "Armors names: ({}), ({}), ({}), ({}), ({})",
         full_equip.get_by_part(&ArmorPart::Helm).as_armor().names()["ko"],
@@ -1015,7 +1085,15 @@ fn calculate_full_equip<'a>(
                 let mut all_real_armors = Vec::<BoxCalcEquipment<'a>>::new();
 
                 for base_armor in armors_by_slot {
-                    let calc_armor = CalcArmor::<'a>::new(base_armor);
+                    let anomaly_base = dm.get_anomaly_armor(base_armor.id());
+
+                    let calc_armor = match anomaly_base {
+                        Some(anomaly_armor) => {
+                            CalcArmor::<'a>::new_anomaly(&anomaly_armor.affected, base_armor)
+                        }
+                        None => CalcArmor::<'a>::new_anomaly(base_armor, base_armor),
+                    };
+
                     let box_armor = calc_armor.clone_dyn();
 
                     all_real_armors.push(box_armor);
@@ -1052,8 +1130,8 @@ fn calculate_full_equip<'a>(
         answers_equip.push(final_equip);
     }
 
-    for (equip, slot_comb) in iproduct!(answers_equip, local_answers) {
-        answers.push((equip, slot_comb));
+    for equip in &answers_equip {
+        answers.push((equip.clone(), possible_deco_combs.clone()));
     }
 
     info!(

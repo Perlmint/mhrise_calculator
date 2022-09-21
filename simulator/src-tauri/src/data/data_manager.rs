@@ -16,7 +16,7 @@ pub struct DataManager {
     pub slot_only_armors: HashMap<ArmorPart, HashMap<String, BaseArmor>>,
     pub armors_by_slot: HashMap<ArmorPart, HashMap<String, Vec<BaseArmor>>>,
     pub empty_armors: HashMap<ArmorPart, BaseArmor>,
-    pub anomaly_armors: Vec<AnomalyArmor>,
+    pub anomaly_armors: HashMap<String, AnomalyArmor>,
 
     pub bases_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
     pub anomalies_by_part: HashMap<ArmorPart, Vec<BaseArmor>>,
@@ -158,18 +158,23 @@ impl DataManager {
     }
 
     pub fn set_anomalies(&mut self, anomalies: Vec<AnomalyArmor>) {
-        self.anomaly_armors = anomalies;
+        let mut anomalies = anomalies;
 
-        for (index, armor) in self.anomaly_armors.iter_mut().enumerate() {
+        for (index, armor) in anomalies.iter_mut().enumerate() {
             armor.affected.id =
                 format!("{}_{}_{}", ANOMALY_ARMOR_PREFIX, index, armor.original.id());
         }
+
+        self.anomaly_armors = anomalies
+            .iter_mut()
+            .map(|anomaly| (anomaly.affected.id.clone(), anomaly.clone()))
+            .collect::<HashMap<String, AnomalyArmor>>();
 
         for part_armors in self.anomalies_by_part.iter_mut() {
             part_armors.1.clear();
         }
 
-        for anomaly in &self.anomaly_armors {
+        for (_, anomaly) in &self.anomaly_armors {
             let part = &anomaly.original.part;
 
             self.anomalies_by_part
@@ -230,6 +235,14 @@ impl DataManager {
         }
 
         ret
+    }
+
+    pub fn get_anomaly_armor(&self, armor_id: &String) -> Option<&AnomalyArmor> {
+        if BaseArmor::is_anomaly_armor(armor_id) == false {
+            return None;
+        }
+
+        self.anomaly_armors.get(armor_id)
     }
 
     pub fn get_deco_by_skill_id(&self, skill_id: &String) -> Vec<&Decoration> {

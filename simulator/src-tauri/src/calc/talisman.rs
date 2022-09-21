@@ -17,20 +17,7 @@ pub struct CalcTalisman<'a> {
 
 impl<'a> CalcTalisman<'a> {
     pub fn new(tali: &'a Talisman) -> Self {
-        let mut slots = Vec::new();
-
-        for _ in 0..MAX_SLOT_LEVEL {
-            slots.push(0);
-        }
-
-        for &slot_size in &tali.slot_sizes {
-            if slot_size == 0 {
-                continue;
-            }
-
-            let slot_size_index = slot_size as usize - 1;
-            slots[slot_size_index] += 1;
-        }
+        let slots = CalcArmor::convert_from_base_slots(&tali.slot_sizes);
 
         let mut skills = HashMap::new();
 

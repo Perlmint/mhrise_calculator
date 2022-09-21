@@ -10,6 +10,7 @@ use super::{calc_equipment::CalcEquipment, talisman::CalcTalisman};
 #[derive(Clone, Debug)]
 pub struct CalcArmor<'a> {
     base: &'a BaseArmor,
+    original: &'a BaseArmor,
 
     part: ArmorPart,
     sex_type: SexType,
@@ -29,12 +30,39 @@ impl<'a> CalcArmor<'a> {
 
         Self {
             base,
+            original: base,
             part: base.part.clone(),
             sex_type: base.sex_type.clone(),
             rarity: base.rarity,
             skills,
             slots: Self::convert_from_base_slots(&base.slots),
         }
+    }
+
+    pub fn new_anomaly(base: &'a BaseArmor, original: &'a BaseArmor) -> Self {
+        let mut skills = HashMap::new();
+
+        for (skill_id, armor_skill) in &base.skills {
+            skills.insert(skill_id.clone(), armor_skill.level);
+        }
+
+        Self {
+            base,
+            original,
+            part: base.part.clone(),
+            sex_type: base.sex_type.clone(),
+            rarity: base.rarity,
+            skills,
+            slots: Self::convert_from_base_slots(&base.slots),
+        }
+    }
+
+    pub fn is_anomaly(&self) -> bool {
+        BaseArmor::is_anomaly_armor(&self.base.id())
+    }
+
+    pub fn original_id(&self) -> &String {
+        &self.original.id()
     }
 
     pub fn names(&self) -> &HashMap<String, String> {
@@ -85,7 +113,7 @@ impl<'a> CalcArmor<'a> {
         success
     }
 
-    fn convert_from_base_slots(base_slots: &Vec<i32>) -> Vec<i32> {
+    pub fn convert_from_base_slots(base_slots: &Vec<i32>) -> Vec<i32> {
         let mut ret = Vec::new();
 
         for _ in 0..MAX_SLOT_LEVEL {
