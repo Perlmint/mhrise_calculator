@@ -131,11 +131,11 @@ impl<'a> CalcEquipment<'a> for CalcArmor<'a> {
         &self.part
     }
 
-    fn as_armor(&self) -> &CalcArmor<'a> {
+    fn as_armor(&self) -> &'a CalcArmor<'a> {
         self
     }
 
-    fn as_talisman(&self) -> &CalcTalisman<'a> {
+    fn as_talisman(&self) -> &'a CalcTalisman<'a> {
         panic!("This is not talisman")
     }
 }

@@ -11,8 +11,8 @@ pub trait CalcEquipment<'a> {
     fn slots(&self) -> &Vec<i32>;
     fn part(&self) -> &ArmorPart;
 
-    fn as_armor(&self) -> &CalcArmor<'a>;
-    fn as_talisman(&self) -> &CalcTalisman<'a>;
+    fn as_armor(&self) -> &'a CalcArmor<'a>;
+    fn as_talisman(&self) -> &'a CalcTalisman<'a>;
 
     fn get_point(
         &self,
