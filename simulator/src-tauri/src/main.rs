@@ -356,8 +356,8 @@ fn calculate_skillset<'a>(
         }
     }
 
-    debug!("Skills with yes deco: {:?}", yes_deco_skills);
-    debug!("Skills with no deco: {:?}", no_deco_skills);
+    info!("Skills with yes deco: {:?}", yes_deco_skills);
+    info!("Skills with no deco: {:?}", no_deco_skills);
 
     let helms = dm.get_parts(ArmorPart::Helm);
     let torsos = dm.get_parts(ArmorPart::Torso);
@@ -374,6 +374,7 @@ fn calculate_skillset<'a>(
     base_armors.insert(ArmorPart::Feet, feets);
 
     let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor<'a>>>::new();
+    let mut armors_count_before = 0;
 
     for (part, base_armors) in base_armors.iter() {
         let mut calc_armors = Vec::new();
@@ -389,6 +390,7 @@ fn calculate_skillset<'a>(
             };
 
             calc_armors.push(calc_armor);
+            armors_count_before += 1;
         }
 
         all_armors.insert(part.clone(), calc_armors);
@@ -417,7 +419,6 @@ fn calculate_skillset<'a>(
         .map(|tali| CalcTalisman::<'a>::new(tali))
         .collect::<Vec<CalcTalisman<'a>>>();
 
-    let armors_count_before = all_armors.len();
     let talisman_count_before = all_talismans.len();
 
     let mut temp_armors = Vec::new();
@@ -461,6 +462,7 @@ fn calculate_skillset<'a>(
 
     // TODO: save inferior armors/talismans later in order to give choices to choose for defense stats
     let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor>>::new();
+    let mut armors_count_after = 0;
 
     for (part, armor) in temp_armors {
         let mut existing = all_armors.get_mut(&part);
@@ -471,6 +473,7 @@ fn calculate_skillset<'a>(
         }
 
         existing.unwrap().push(armor.clone());
+        armors_count_after += 1;
     }
 
     let all_talismans = temp_talismans
@@ -478,15 +481,14 @@ fn calculate_skillset<'a>(
         .map(|tali| tali.clone())
         .collect::<Vec<CalcTalisman>>();
 
-    let armors_count_after = all_armors.len();
     let talisman_count_after = all_talismans.len();
 
-    ret.push_str(&format!(
-        "Armors count before & after: {} -> {}\n",
+    info!(
+        "Armors count before & after: {} -> {}",
         armors_count_before, armors_count_after
-    ));
+    );
 
-    debug!(
+    info!(
         "Talisman count before & after: {} -> {}",
         talisman_count_before, talisman_count_after
     );
@@ -670,9 +672,16 @@ fn calculate_skillset<'a>(
     });
 
     ret.push_str(&format!(
-        "Unique armors calculation: {:?}\n",
+        "Unique armors count: {}, calculation: {:?}\n",
+        possible_unique_equips.len(),
         start_time.elapsed()
     ));
+
+    info!(
+        "Unique armors count: {}, calculation: {:?}\n",
+        possible_unique_equips.len(),
+        start_time.elapsed()
+    );
 
     let mut all_parts = Vec::new();
 
@@ -762,182 +771,200 @@ fn calculate_skillset<'a>(
         all_parts.push(parts);
     }
 
-    ret.push_str(&format!(
-        "Empty armors expand: {:?}\n",
-        start_time.elapsed()
-    ));
+    let mut all_unique_parts = HashMap::new();
+    let mut all_parts_before_len = 0;
 
-    let mut all_loop_tree = BTreeMap::new();
-    let mut all_parts_ids = HashSet::<String>::new();
-
-    let mut total_case_count = 0;
-
-    'all_parts: for parts in &all_parts {
+    for parts in &all_parts {
         for (p0, p1, p2, p3, p4, p5) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4], &parts[5])
         {
-            let mut req_skills = selected_skills.clone();
-            let mut req_slots = free_slots.clone();
+            all_parts_before_len += 1;
 
-            let mut real_parts = vec![
-                p0.clone(),
-                p1.clone(),
-                p2.clone(),
-                p3.clone(),
-                p4.clone(),
-                p5.clone(),
-            ];
+            let equipments = vec![p0, p1, p2, p3, p4, p5];
 
-            let real_ids = real_parts
-                .iter()
-                .map(|part| part.id().clone())
-                .collect::<HashSet<String>>();
+            let full_equip_id = FullEquipments::get_full_equip_id(&equipments);
 
-            let debug_case = vec![
-                "rakna_greaves_x",
-                "storge_helm",
-                "archfiend_armor_baulo",
-                "silver_solbraces",
-                "lambent_sash",
-            ];
-
-            let debug_case = debug_case
-                .iter()
-                .map(|id| id.to_string())
-                .collect::<HashSet<String>>();
-
-            let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
-
-            for part in real_parts.iter_mut() {
-                part.subtract_skills(&mut req_skills);
-            }
-
-            let is_debug_case = false;
-
-            /*
-            let is_debug_case = debug_case == real_ids;
-
-            if is_debug_case == false {
-                continue;
-            } else {
-                debug!("Debug case reached");
-            }
-            */
-
-            let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
-
-            if no_deco_skills.len() != 0 {
-                panic!("This shouldn't happen");
-            }
-
-            let single_deco_skills = single_deco_skills
-                .iter()
-                .map(|(id, (slot_size, count))| (id, *slot_size, *count))
-                .collect::<Vec<(&String, i32, i32)>>();
-
-            let single_decos_as_slots = CalcDeco::convert_to_slots(&single_deco_skills);
-
-            for (slot_size_index, count) in single_decos_as_slots.iter().enumerate() {
-                req_slots[slot_size_index] += count;
-            }
-
-            let mut full_equip =
-                FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
-
-            let slot_success = full_equip.subtract_slots(&mut req_slots);
-
-            if slot_success == false {
-                if is_debug_case {
-                    debug!(
-                        "Debug slots: {:?}, {:?}, {:?}",
-                        single_deco_skills, init_equip.avail_slots, req_slots
-                    );
-                }
+            if all_unique_parts.contains_key(&full_equip_id) {
                 continue;
             }
 
-            for (id, _, _) in &single_deco_skills {
-                req_skills.remove(*id);
+            all_unique_parts.insert(full_equip_id, equipments);
+        }
+    }
+
+    ret.push_str(&format!(
+        "Empty armors expand: before count: {}, after count: {}, time: {:?}\n",
+        all_parts_before_len,
+        all_unique_parts.len(),
+        start_time.elapsed()
+    ));
+
+    info!(
+        "Empty armors expand: before count: {}, after count: {}, time: {:?}\n",
+        all_parts_before_len,
+        all_unique_parts.len(),
+        start_time.elapsed()
+    );
+
+    let mut all_loop_tree = BTreeMap::new();
+    let mut total_case_count = 0;
+
+    for (_, equipments) in all_unique_parts {
+        let mut req_skills = selected_skills.clone();
+        let mut req_slots = free_slots.clone();
+
+        let mut real_parts = vec![
+            equipments[0].clone(),
+            equipments[1].clone(),
+            equipments[2].clone(),
+            equipments[3].clone(),
+            equipments[4].clone(),
+            equipments[5].clone(),
+        ];
+
+        let real_ids = real_parts
+            .iter()
+            .map(|part| part.id().clone())
+            .collect::<HashSet<String>>();
+
+        let debug_case = vec![
+            "rakna_greaves_x",
+            "storge_helm",
+            "archfiend_armor_baulo",
+            "silver_solbraces",
+            "lambent_sash",
+        ];
+
+        let debug_case = debug_case
+            .iter()
+            .map(|id| id.to_string())
+            .collect::<HashSet<String>>();
+
+        let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
+
+        for part in real_parts.iter_mut() {
+            part.subtract_skills(&mut req_skills);
+        }
+
+        let is_debug_case = false;
+
+        /*
+        let is_debug_case = debug_case == real_ids;
+
+        if is_debug_case == false {
+            continue;
+        } else {
+            debug!("Debug case reached");
+        }
+        */
+
+        let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
+
+        if no_deco_skills.len() != 0 {
+            panic!("This shouldn't happen");
+        }
+
+        let single_deco_skills = single_deco_skills
+            .iter()
+            .map(|(id, (slot_size, count))| (id, *slot_size, *count))
+            .collect::<Vec<(&String, i32, i32)>>();
+
+        let single_decos_as_slots = CalcDeco::convert_to_slots(&single_deco_skills);
+
+        for (slot_size_index, count) in single_decos_as_slots.iter().enumerate() {
+            req_slots[slot_size_index] += count;
+        }
+
+        let mut full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
+
+        let slot_success = full_equip.subtract_slots(&mut req_slots);
+
+        if slot_success == false {
+            if is_debug_case {
+                debug!(
+                    "Debug slots: {:?}, {:?}, {:?}",
+                    single_deco_skills, init_equip.avail_slots, req_slots
+                );
             }
+            continue;
+        }
 
-            // This only calculates the number of slots regardless of slot size, just for candidate optimization
-            let mut minimum_slot_sum = 0;
+        for (id, _, _) in &single_deco_skills {
+            req_skills.remove(*id);
+        }
 
-            for (skill_id, &level) in &req_skills {
-                let mut deco_sum_per_level = dm
-                    .deco_combinations
-                    .get(skill_id)
-                    .unwrap()
-                    .get(level as usize - 1)
-                    .unwrap()
-                    .iter()
-                    .map(|comb| comb.iter().sum::<i32>())
-                    .collect::<Vec<i32>>();
+        // This only calculates the number of slots regardless of slot size, just for candidate optimization
+        let mut minimum_slot_sum = 0;
 
-                deco_sum_per_level.sort();
-
-                minimum_slot_sum += deco_sum_per_level[0];
-            }
-
-            let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
-
-            if equip_slot_sum < minimum_slot_sum {
-                if is_debug_case {
-                    debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
-                }
-                continue;
-            }
-
-            let has_possible_comb = dm
+        for (skill_id, &level) in &req_skills {
+            let mut deco_sum_per_level = dm
                 .deco_combinations
-                .has_possible_combs(&req_skills, &full_equip.avail_slots);
+                .get(skill_id)
+                .unwrap()
+                .get(level as usize - 1)
+                .unwrap()
+                .iter()
+                .map(|comb| comb.iter().sum::<i32>())
+                .collect::<Vec<i32>>();
 
-            if has_possible_comb == false {
-                if is_debug_case {
-                    debug!(
-                        "Debug case no possible combs: {:?}, {:?}",
-                        full_equip.avail_slots, req_skills
-                    );
-                }
-                continue;
+            deco_sum_per_level.sort();
+
+            minimum_slot_sum += deco_sum_per_level[0];
+        }
+
+        let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
+
+        if equip_slot_sum < minimum_slot_sum {
+            if is_debug_case {
+                debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
             }
+            continue;
+        }
 
-            let total_point = CalcDeco::get_point(&full_equip.avail_slots);
+        let has_possible_comb = dm
+            .deco_combinations
+            .has_possible_combs(&req_skills, &full_equip.avail_slots);
 
-            if all_parts_ids.contains(full_equip.id()) {
-                continue;
+        if has_possible_comb == false {
+            if is_debug_case {
+                debug!(
+                    "Debug case no possible combs: {:?}, {:?}",
+                    full_equip.avail_slots, req_skills
+                );
             }
+            continue;
+        }
 
-            debug!(
+        let total_point = CalcDeco::get_point(&full_equip.avail_slots);
+
+        debug!(
                 "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
                 real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
             );
 
-            let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
+        let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
-            if existing.is_none() {
-                all_loop_tree.insert(
-                    Reverse(total_point),
-                    Vec::<(FullEquipments<'a>, HashMap<String, i32>)>::new(),
-                );
-                existing = all_loop_tree.get_mut(&Reverse(total_point));
-            }
+        if existing.is_none() {
+            all_loop_tree.insert(
+                Reverse(total_point),
+                Vec::<(FullEquipments<'a>, HashMap<String, i32>)>::new(),
+            );
+            existing = all_loop_tree.get_mut(&Reverse(total_point));
+        }
 
-            all_parts_ids.insert(full_equip.id().clone());
-            existing.unwrap().push((full_equip, req_skills));
-            total_case_count += 1;
+        existing.unwrap().push((full_equip, req_skills));
+        total_case_count += 1;
 
-            if MAX_ANSWER_LENGTH <= total_case_count {
-                debug!(
-                    "Candidate case count reached {}, breaking",
-                    MAX_ANSWER_LENGTH
-                );
-                ret.push_str(&format!(
-                    "Candidate case count reached {}, breaking\n",
-                    MAX_ANSWER_LENGTH,
-                ));
-                break 'all_parts;
-            }
+        if MAX_ANSWER_LENGTH <= total_case_count {
+            debug!(
+                "Candidate case count reached {}, breaking",
+                MAX_ANSWER_LENGTH
+            );
+            ret.push_str(&format!(
+                "Candidate case count reached {}, breaking\n",
+                MAX_ANSWER_LENGTH,
+            ));
+            break;
         }
     }
 

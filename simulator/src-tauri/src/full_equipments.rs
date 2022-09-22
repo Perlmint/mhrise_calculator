@@ -47,14 +47,13 @@ impl<'a> FullEquipments<'a> {
 
         ret.equipments_by_part = equipments_by_part;
 
-        ret.id = format!(
-            "FULLEQUIP-{}-{}-{}-{}-{}-{}",
-            ret.get_by_part(&ArmorPart::Helm).id(),
-            ret.get_by_part(&ArmorPart::Torso).id(),
-            ret.get_by_part(&ArmorPart::Arm).id(),
-            ret.get_by_part(&ArmorPart::Waist).id(),
-            ret.get_by_part(&ArmorPart::Feet).id(),
-            ret.get_by_part(&ArmorPart::Talisman).id(),
+        ret.id = Self::format_full_equip_id(
+            ret.equipments_by_part[&ArmorPart::Helm].id(),
+            ret.equipments_by_part[&ArmorPart::Torso].id(),
+            ret.equipments_by_part[&ArmorPart::Arm].id(),
+            ret.equipments_by_part[&ArmorPart::Waist].id(),
+            ret.equipments_by_part[&ArmorPart::Feet].id(),
+            ret.equipments_by_part[&ArmorPart::Talisman].id(),
         );
 
         ret
@@ -169,5 +168,36 @@ impl<'a> FullEquipments<'a> {
 
     pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a> + 'a>> {
         &self.equipments
+    }
+
+    pub fn get_full_equip_id(equipments: &Vec<&Box<dyn CalcEquipment<'a> + 'a>>) -> String {
+        let mut equipments_by_part = HashMap::new();
+
+        for equipment in equipments {
+            equipments_by_part.insert(equipment.part().clone(), equipment);
+        }
+
+        Self::format_full_equip_id(
+            equipments_by_part[&ArmorPart::Helm].id(),
+            equipments_by_part[&ArmorPart::Torso].id(),
+            equipments_by_part[&ArmorPart::Arm].id(),
+            equipments_by_part[&ArmorPart::Waist].id(),
+            equipments_by_part[&ArmorPart::Feet].id(),
+            equipments_by_part[&ArmorPart::Talisman].id(),
+        )
+    }
+
+    fn format_full_equip_id(
+        helm: &String,
+        torso: &String,
+        arm: &String,
+        waist: &String,
+        feet: &String,
+        tali: &String,
+    ) -> String {
+        format!(
+            "FULLEQUIP-{}-{}-{}-{}-{}-{}",
+            helm, torso, arm, waist, feet, tali,
+        )
     }
 }
