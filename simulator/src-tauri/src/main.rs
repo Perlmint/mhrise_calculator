@@ -417,9 +417,30 @@ fn calculate_skillset<'a>(
         .map(|tali| CalcTalisman::<'a>::new(tali))
         .collect::<Vec<CalcTalisman<'a>>>();
 
+    let armors_count_before = all_armors.len();
     let talisman_count_before = all_talismans.len();
 
+    let mut temp_armors = Vec::new();
     let mut temp_talismans = Vec::new();
+
+    for (part, part_armors) in &all_armors {
+        for (i1, armor1) in part_armors.iter().enumerate() {
+            let mut is_le = false;
+
+            for i2 in i1 + 1..all_armors.len() {
+                let armor2 = &part_armors[i2];
+
+                if armor1.is_le(armor2) {
+                    is_le = true;
+                    break;
+                }
+            }
+
+            if is_le == false {
+                temp_armors.push((part, armor1));
+            }
+        }
+    }
 
     for (i1, tali1) in all_talismans.iter().enumerate() {
         let mut is_le = false;
@@ -438,16 +459,31 @@ fn calculate_skillset<'a>(
         }
     }
 
+    // TODO: save inferior armors/talismans later in order to give choices to choose for defense stats
+    let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor>>::new();
+
+    for (part, armor) in temp_armors {
+        let mut existing = all_armors.get_mut(&part);
+
+        if existing.is_none() {
+            all_armors.insert(part.clone(), Vec::<CalcArmor>::new());
+            existing = all_armors.get_mut(&part);
+        }
+
+        existing.unwrap().push(armor.clone());
+    }
+
     let all_talismans = temp_talismans
         .iter_mut()
         .map(|tali| tali.clone())
         .collect::<Vec<CalcTalisman>>();
 
+    let armors_count_after = all_armors.len();
     let talisman_count_after = all_talismans.len();
 
     ret.push_str(&format!(
-        "Talisman count before & after: {} -> {}\n",
-        talisman_count_before, talisman_count_after
+        "Armors count before & after: {} -> {}\n",
+        armors_count_before, armors_count_after
     ));
 
     debug!(
