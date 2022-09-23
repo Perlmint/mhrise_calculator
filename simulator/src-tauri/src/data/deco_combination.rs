@@ -1,6 +1,6 @@
-use std::{collections::HashMap, hash::Hash};
+use std::collections::HashMap;
 
-use itertools::{iproduct, izip};
+use itertools::izip;
 use log::debug;
 
 use crate::data::{deco::Decoration, skill::Skill};
@@ -52,7 +52,11 @@ impl DecorationCombinations {
                 let mut init_case = Vec::new();
 
                 for deco in decos {
-                    let max_required = max_level / deco.skill_level;
+                    let mut max_required = max_level / deco.skill_level + 1;
+
+                    if max_level % deco.skill_level == 0 {
+                        max_required -= 1;
+                    }
 
                     max_deco_counts.push(max_required);
                     init_case.push(0);
@@ -62,16 +66,22 @@ impl DecorationCombinations {
                     let mut skill_temp_combs = Vec::<Vec<i32>>::new();
                     let mut skill_done_combs = Vec::new();
 
-                    skill_temp_combs.push(init_case.clone());
-
                     for (slot_size_index, max_deco_count) in max_deco_counts.iter().enumerate() {
                         let deco = &decos[slot_size_index];
 
+                        skill_temp_combs.push(init_case.clone());
                         let deco_temp_combs = skill_temp_combs.clone();
 
                         for temp_comb in &deco_temp_combs {
                             for count in (1..max_deco_count + 1).rev() {
-                                let mut cur_level_sum: i32 = temp_comb.iter().sum();
+                                let mut cur_level_sum: i32 = temp_comb
+                                    .iter()
+                                    .enumerate()
+                                    .map(|(prev_level_index, count)| {
+                                        (prev_level_index + 1) as i32 * count
+                                    })
+                                    .sum();
+
                                 cur_level_sum += count * deco.skill_level;
 
                                 let mut next_temp_comb = temp_comb.clone();
