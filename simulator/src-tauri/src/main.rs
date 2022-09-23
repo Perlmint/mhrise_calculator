@@ -494,6 +494,8 @@ fn calculate_skillset<'a>(
         }
     }
 
+    let decos_possible = decos_possible;
+
     info!("Skills with yes deco: {:?}", yes_deco_skills);
     info!("Skills with no deco: {:?}", no_deco_skills);
 
@@ -817,19 +819,10 @@ fn calculate_skillset<'a>(
         start_time.elapsed()
     );
 
-    let mut all_parts = Vec::new();
+    let mut all_calculate_cases = HashMap::new();
+    let mut all_parts_before_len = 0;
 
     for possible_unique_vec in &possible_unique_equips {
-        debug!(
-            "Parts sorted id: {} {} {} {} {} {}",
-            possible_unique_vec[0].id(),
-            possible_unique_vec[1].id(),
-            possible_unique_vec[2].id(),
-            possible_unique_vec[3].id(),
-            possible_unique_vec[4].id(),
-            possible_unique_vec[5].id(),
-        );
-
         let mut parts = possible_unique_vec
             .iter()
             .map(|equipment| {
@@ -892,6 +885,16 @@ fn calculate_skillset<'a>(
         }
 
         debug!(
+            "Parts sorted id: {} {} {} {} {} {}",
+            possible_unique_vec[0].id(),
+            possible_unique_vec[1].id(),
+            possible_unique_vec[2].id(),
+            possible_unique_vec[3].id(),
+            possible_unique_vec[4].id(),
+            possible_unique_vec[5].id(),
+        );
+
+        debug!(
             "Parts size: {} {} {} {} {} {}, total: {}",
             parts[0].len(),
             parts[1].len(),
@@ -902,13 +905,7 @@ fn calculate_skillset<'a>(
             total_count,
         );
 
-        all_parts.push(parts);
-    }
-
-    let mut all_calculate_cases = HashMap::new();
-    let mut all_parts_before_len = 0;
-
-    for parts in &all_parts {
+        // Check for static conditions
         for (p0, p1, p2, p3, p4, p5) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4], &parts[5])
         {
@@ -934,11 +931,16 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
+            let save_equipments = equipments
+                .iter()
+                .map(|equip| equip.clone_dyn())
+                .collect::<Vec<BoxCalcEquipment<'a>>>();
+
             let (multi_deco_req_skills, avail_slots) = multi_deco_leftovers.unwrap();
 
             all_calculate_cases.insert(
                 full_equip_id,
-                (equipments, multi_deco_req_skills, avail_slots),
+                (save_equipments, multi_deco_req_skills, avail_slots),
             );
         }
     }
@@ -960,7 +962,7 @@ fn calculate_skillset<'a>(
     let mut all_loop_tree = BTreeMap::new();
     let mut total_case_count = 0;
 
-    for (_, (equipments, multi_deco_req_skills, avail_slots)) in all_calculate_cases {
+    for (_, (equipments, multi_deco_req_skills, avail_slots)) in &all_calculate_cases {
         let has_possible_comb = dm
             .deco_combinations
             .has_possible_combs(&multi_deco_req_skills, &avail_slots);
@@ -991,9 +993,15 @@ fn calculate_skillset<'a>(
             existing = all_loop_tree.get_mut(&Reverse(total_point));
         }
 
-        existing
-            .unwrap()
-            .push((equipments, avail_slots, multi_deco_req_skills));
+        existing.unwrap().push((
+            equipments
+                .iter()
+                .map(|equip| equip)
+                .collect::<Vec<&BoxCalcEquipment<'a>>>(),
+            avail_slots.clone(),
+            multi_deco_req_skills.clone(),
+        ));
+
         total_case_count += 1;
 
         if MAX_ANSWER_LENGTH <= total_case_count {
