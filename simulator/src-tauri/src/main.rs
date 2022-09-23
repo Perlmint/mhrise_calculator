@@ -828,11 +828,19 @@ fn calculate_skillset<'a>(
             .map(|equipment| {
                 let part = equipment.part();
 
-                let mut ret = Vec::<BoxCalcEquipment<'a>>::new();
+                let mut ret = Vec::<&BoxCalcEquipment<'a>>::new();
 
                 if equipment.id().starts_with(EMPTY_ARMOR_PREFIX) {
-                    let part_unique_armors = &all_unique_armors[part];
-                    let part_deco_armors = &equips_with_deco_skills[part];
+                    let part_unique_armors = &all_unique_armors[part]
+                        .iter()
+                        .map(|armor| armor)
+                        .collect::<Vec<&BoxCalcEquipment<'a>>>();
+
+                    let part_deco_armors = &equips_with_deco_skills[part]
+                        .iter()
+                        .map(|armor| armor)
+                        .collect::<Vec<&BoxCalcEquipment<'a>>>();
+
                     let part_slot_armors = &all_slot_equips[part]
                         .iter()
                         .filter_map(|(_, armor)| {
@@ -849,23 +857,23 @@ fn calculate_skillset<'a>(
                                 }
                             }
 
-                            return Some(armor.clone());
+                            return Some(armor);
                         })
-                        .collect::<Vec<BoxCalcEquipment<'a>>>();
+                        .collect::<Vec<&BoxCalcEquipment<'a>>>();
 
                     for armor in part_unique_armors.iter() {
-                        ret.push(armor.clone_dyn());
+                        ret.push(armor);
                     }
 
                     for armor in part_deco_armors.iter() {
-                        ret.push(armor.clone_dyn());
+                        ret.push(armor);
                     }
 
                     for armor in part_slot_armors.iter() {
-                        ret.push(armor.clone_dyn());
+                        ret.push(armor);
                     }
                 } else {
-                    ret.push(equipment.clone_dyn());
+                    ret.push(equipment);
                 }
 
                 ret.sort_by_key(|armor| {
@@ -874,7 +882,7 @@ fn calculate_skillset<'a>(
 
                 ret
             })
-            .collect::<Vec<Vec<BoxCalcEquipment<'a>>>>();
+            .collect::<Vec<Vec<&BoxCalcEquipment<'a>>>>();
 
         parts.sort_by_key(|parts| parts.len());
 
@@ -906,7 +914,7 @@ fn calculate_skillset<'a>(
         );
 
         // Check for static conditions
-        for (p0, p1, p2, p3, p4, p5) in
+        for (&p0, &p1, &p2, &p3, &p4, &p5) in
             iproduct!(&parts[0], &parts[1], &parts[2], &parts[3], &parts[4], &parts[5])
         {
             all_parts_before_len += 1;
@@ -931,16 +939,11 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
-            let save_equipments = equipments
-                .iter()
-                .map(|equip| equip.clone_dyn())
-                .collect::<Vec<BoxCalcEquipment<'a>>>();
-
             let (multi_deco_req_skills, avail_slots) = multi_deco_leftovers.unwrap();
 
             all_calculate_cases.insert(
                 full_equip_id,
-                (save_equipments, multi_deco_req_skills, avail_slots),
+                (equipments, multi_deco_req_skills, avail_slots),
             );
         }
     }
@@ -994,10 +997,7 @@ fn calculate_skillset<'a>(
         }
 
         existing.unwrap().push((
-            equipments
-                .iter()
-                .map(|equip| equip)
-                .collect::<Vec<&BoxCalcEquipment<'a>>>(),
+            equipments.clone(),
             avail_slots.clone(),
             multi_deco_req_skills.clone(),
         ));
@@ -1040,7 +1040,7 @@ fn calculate_skillset<'a>(
                 dm,
                 &req_skills,
                 &weapon_slots,
-                &real_parts,
+                real_parts,
                 &avail_slots,
                 &mut answers,
                 &mut total_index,
