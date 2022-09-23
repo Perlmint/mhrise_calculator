@@ -794,17 +794,11 @@ fn calculate_skillset<'a>(
         ];
 
         let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equips.clone());
-        let (possible_result, possible_combs) = full_equip.get_possible_combs(
-            no_deco_skills.clone(),
-            &Vec::new(),
-            &no_deco_skills,
-            &dm.deco_combinations,
-        );
+        let possible_result = full_equip.contains_skills(&no_deco_skills.clone());
 
         if possible_result {
             debug!(
-                "Unique skills possible: {:?}, {:?}",
-                possible_combs,
+                "Unique skills possible: {:?}",
                 vec![
                     helm.id(),
                     torso.id(),

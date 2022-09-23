@@ -92,6 +92,22 @@ impl<'a> FullEquipments<'a> {
         (req_deco_combs.len() != 0, req_deco_combs)
     }
 
+    pub fn contains_skills(&self, req_skills: &HashMap<String, i32>) -> bool {
+        for (id, req_level) in req_skills.clone() {
+            let existing = self.all_skills.get(&id);
+
+            if existing.is_some() {
+                if req_level - existing.unwrap() <= 0 {
+                    continue;
+                }
+            }
+
+            return false;
+        }
+
+        true
+    }
+
     pub fn calculate_skills_slots(
         weapon_slots: &Vec<i32>,
         equipments: &Vec<BoxCalcEquipment<'a>>,
