@@ -333,11 +333,11 @@ fn check_possibility<'a>(
         .collect::<HashSet<String>>();
 
     let debug_case = vec![
-        "rakna_greaves_x",
-        "storge_helm",
-        "archfiend_armor_baulo",
-        "silver_solbraces",
-        "lambent_sash",
+        "archfiend_armor_cerato",
+        "astalos_mail",
+        "rakna_armguards_x",
+        "silver_solcoil",
+        "storge_greaves",
     ];
 
     let _debug_case = debug_case
@@ -353,15 +353,13 @@ fn check_possibility<'a>(
 
     let is_debug_case = false;
 
-    /*
-    let is_debug_case = debug_case == real_ids;
+    // let is_debug_case = _debug_case == _real_ids;
 
-    if is_debug_case == false {
-        continue;
-    } else {
-        debug!("Debug case reached");
-    }
-    */
+    // if is_debug_case == false {
+    //     return None;
+    // } else {
+    //     debug!("Debug case reached");
+    // }
 
     let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
 
