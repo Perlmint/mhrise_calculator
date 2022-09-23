@@ -1022,9 +1022,8 @@ fn calculate_skillset<'a>(
 
     let result_equipments = answers
         .iter()
-        .map(|(full_equip, deco_combs)| {
-            let result_armors = full_equip
-                .equipments()
+        .map(|(equipments, deco_combs)| {
+            let result_armors = equipments
                 .iter()
                 .filter_map(|armor| {
                     if armor.part() == &ArmorPart::Talisman {
@@ -1052,7 +1051,8 @@ fn calculate_skillset<'a>(
                 })
                 .collect::<Vec<ResultDecorationCombination>>();
 
-            let talisman = full_equip.get_by_part(&ArmorPart::Talisman).as_talisman();
+            let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equipments.clone());
+            let talisman = full_equip.get_by_part(&ArmorPart::Talisman).as_talisman(); // TODO: without FullEquipments
 
             let result_tali = ResultTalisman {
                 skills: talisman.skills().clone(),
@@ -1082,7 +1082,7 @@ fn calculate_full_equip<'a>(
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
     full_equip: &FullEquipments<'a>,
-    answers: &mut Vec<(FullEquipments<'a>, Vec<DecorationCombination>)>,
+    answers: &mut Vec<(Vec<BoxCalcEquipment<'a>>, Vec<DecorationCombination>)>,
     total_index: &mut i32,
 ) -> i32 {
     let mut possible_deco_combs = dm.deco_combinations.get_possible_combs(&req_skills);
@@ -1210,12 +1210,10 @@ fn calculate_full_equip<'a>(
             a5.clone(),
         ];
 
-        let final_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equipments);
-
-        answers_equip.push(final_equip);
+        answers_equip.push(equipments);
     }
 
-    for equip in &answers_equip {
+    for equip in answers_equip.iter() {
         answers.push((equip.clone(), possible_deco_combs.clone()));
     }
 
