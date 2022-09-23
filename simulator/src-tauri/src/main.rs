@@ -308,13 +308,13 @@ struct ResultDecorationCombination {
     pub slots_sum: Vec<i32>,
 }
 
-fn check_possibility<'a>(
+fn check_static_conditions<'a>(
     dm: &DataManager,
     weapon_slots: &Vec<i32>,
     req_skills: &HashMap<String, i32>,
     req_slots: &Vec<i32>,
-    equipments: &Vec<&'_ BoxCalcEquipment<'a>>,
-) -> Option<(Vec<BoxCalcEquipment<'a>>, Vec<i32>, HashMap<String, i32>)> {
+    equipments: &Vec<&BoxCalcEquipment<'a>>,
+) -> Option<(HashMap<String, i32>, Vec<i32>)> {
     let mut req_skills = req_skills.clone();
     let mut req_slots = req_slots.clone();
 
@@ -444,27 +444,7 @@ fn check_possibility<'a>(
         return None;
     }
 
-    let has_possible_comb = dm
-        .deco_combinations
-        .has_possible_combs(&req_skills, &avail_slots);
-
-    if has_possible_comb == false {
-        if is_debug_case {
-            debug!(
-                "Debug case no possible combs: {:?}, {:?}",
-                avail_slots, req_skills
-            );
-        }
-
-        return None;
-    }
-
-    debug!(
-            "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}",
-            real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, avail_slots, minimum_slot_sum,  equip_slot_sum
-        );
-
-    Some((real_parts, avail_slots, req_skills))
+    Some((req_skills, avail_slots))
 }
 
 #[tauri::command]
@@ -796,21 +776,23 @@ fn calculate_skillset<'a>(
         let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equips.clone());
         let possible_result = full_equip.contains_skills(&no_deco_skills.clone());
 
-        if possible_result {
-            debug!(
-                "Unique skills possible: {:?}",
-                vec![
-                    helm.id(),
-                    torso.id(),
-                    arm.id(),
-                    waist.id(),
-                    feet.id(),
-                    tali.id()
-                ]
-            );
-
-            possible_unique_equips.push(equips);
+        if possible_result == false {
+            continue;
         }
+
+        debug!(
+            "Unique skills possible: {:?}",
+            vec![
+                helm.id(),
+                torso.id(),
+                arm.id(),
+                waist.id(),
+                feet.id(),
+                tali.id()
+            ]
+        );
+
+        possible_unique_equips.push(equips);
     }
 
     possible_unique_equips.sort_by_key(|armors| {
@@ -940,7 +922,24 @@ fn calculate_skillset<'a>(
                 continue;
             }
 
-            all_calculate_cases.insert(full_equip_id, equipments);
+            let multi_deco_leftovers = check_static_conditions(
+                dm,
+                &weapon_slots,
+                &selected_skills,
+                &free_slots,
+                &equipments,
+            );
+
+            if multi_deco_leftovers.is_none() {
+                continue;
+            }
+
+            let (multi_deco_req_skills, avail_slots) = multi_deco_leftovers.unwrap();
+
+            all_calculate_cases.insert(
+                full_equip_id,
+                (equipments, multi_deco_req_skills, avail_slots),
+            );
         }
     }
 
@@ -961,20 +960,24 @@ fn calculate_skillset<'a>(
     let mut all_loop_tree = BTreeMap::new();
     let mut total_case_count = 0;
 
-    for (_, equipments) in all_calculate_cases {
-        let possibility_result = check_possibility(
-            dm,
-            &weapon_slots,
-            &selected_skills,
-            &free_slots,
-            &equipments,
-        );
+    for (_, (equipments, multi_deco_req_skills, avail_slots)) in all_calculate_cases {
+        let has_possible_comb = dm
+            .deco_combinations
+            .has_possible_combs(&multi_deco_req_skills, &avail_slots);
 
-        if possibility_result.is_none() {
+        if has_possible_comb == false {
             continue;
         }
 
-        let (real_parts, avail_slots, req_skills) = possibility_result.unwrap();
+        debug!(
+            "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}",
+            equipments
+                .iter()
+                .map(|part| part.id())
+                .collect::<Vec<&String>>(),
+            multi_deco_req_skills,
+            avail_slots
+        );
 
         let total_point = CalcDeco::get_point(&avail_slots);
 
@@ -983,14 +986,14 @@ fn calculate_skillset<'a>(
         if existing.is_none() {
             all_loop_tree.insert(
                 Reverse(total_point),
-                Vec::<(Vec<BoxCalcEquipment<'a>>, Vec<i32>, HashMap<String, i32>)>::new(),
+                Vec::<(Vec<&BoxCalcEquipment<'a>>, Vec<i32>, HashMap<String, i32>)>::new(),
             );
             existing = all_loop_tree.get_mut(&Reverse(total_point));
         }
 
         existing
             .unwrap()
-            .push((real_parts, avail_slots, req_skills));
+            .push((equipments, avail_slots, multi_deco_req_skills));
         total_case_count += 1;
 
         if MAX_ANSWER_LENGTH <= total_case_count {
@@ -1120,7 +1123,7 @@ fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
-    real_parts: &Vec<BoxCalcEquipment<'a>>,
+    real_parts: &Vec<&BoxCalcEquipment<'a>>,
     avail_slots: &Vec<i32>,
     answers: &mut Vec<(Vec<BoxCalcEquipment<'a>>, Vec<DecorationCombination>)>,
     total_index: &mut i32,
@@ -1134,7 +1137,12 @@ fn calculate_full_equip<'a>(
         return 1;
     }
 
-    let (all_skills, _) = FullEquipments::calculate_skills_slots(weapon_slots, real_parts);
+    let equipments = real_parts
+        .iter()
+        .map(|part| part.clone_dyn())
+        .collect::<Vec<BoxCalcEquipment<'a>>>();
+
+    let (all_skills, _) = FullEquipments::calculate_skills_slots(weapon_slots, &equipments);
 
     debug!("Initial slots: {:?}", avail_slots);
     debug!("Skill ids: {:?}", all_skills);
