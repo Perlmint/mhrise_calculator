@@ -18,8 +18,6 @@ pub struct FullEquipments<'a> {
     pub avail_slots: Vec<i32>,
 
     equipments_by_part: HashMap<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>,
-    id: String,
-    phantom: PhantomData<&'a i32>,
 }
 
 impl<'a> FullEquipments<'a> {
@@ -33,8 +31,6 @@ impl<'a> FullEquipments<'a> {
             all_skills: Default::default(),
             avail_slots: Default::default(),
             equipments_by_part: Default::default(),
-            id: Default::default(),
-            phantom: Default::default(),
         };
 
         (ret.all_skills, ret.avail_slots) = ret.sum();
@@ -47,20 +43,7 @@ impl<'a> FullEquipments<'a> {
 
         ret.equipments_by_part = equipments_by_part;
 
-        ret.id = Self::format_full_equip_id(
-            ret.equipments_by_part[&ArmorPart::Helm].id(),
-            ret.equipments_by_part[&ArmorPart::Torso].id(),
-            ret.equipments_by_part[&ArmorPart::Arm].id(),
-            ret.equipments_by_part[&ArmorPart::Waist].id(),
-            ret.equipments_by_part[&ArmorPart::Feet].id(),
-            ret.equipments_by_part[&ArmorPart::Talisman].id(),
-        );
-
         ret
-    }
-
-    pub fn id(&self) -> &String {
-        &self.id
     }
 
     pub fn get_by_part(&self, part: &ArmorPart) -> &Box<dyn CalcEquipment<'a> + 'a> {
