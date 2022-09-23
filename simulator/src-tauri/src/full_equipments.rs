@@ -33,7 +33,8 @@ impl<'a> FullEquipments<'a> {
             equipments_by_part: Default::default(),
         };
 
-        (ret.all_skills, ret.avail_slots) = ret.sum();
+        (ret.all_skills, ret.avail_slots) =
+            Self::calculate_skills_slots(&ret.weapon_slots, &ret.equipments);
 
         let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>::new();
 
@@ -108,7 +109,14 @@ impl<'a> FullEquipments<'a> {
         DecorationCombination::is_possible_static_mut(&mut self.avail_slots, req_slots)
     }
 
-    fn sum(&self) -> (HashMap<String, i32>, Vec<i32>) {
+    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a> + 'a>> {
+        &self.equipments
+    }
+
+    pub fn calculate_skills_slots(
+        weapon_slots: &Vec<i32>,
+        equipments: &Vec<Box<dyn CalcEquipment<'a> + 'a>>,
+    ) -> (HashMap<String, i32>, Vec<i32>) {
         let mut skills = HashMap::<String, i32>::new();
         let mut slots = Vec::<i32>::new();
 
@@ -116,7 +124,7 @@ impl<'a> FullEquipments<'a> {
             slots.push(0);
         }
 
-        for equip in self.equipments() {
+        for equip in equipments {
             for (id, &level) in equip.skills() {
                 let existing = skills.get(id);
 
@@ -138,7 +146,7 @@ impl<'a> FullEquipments<'a> {
             }
         }
 
-        for weapon_slot in &self.weapon_slots {
+        for weapon_slot in weapon_slots {
             if *weapon_slot == 0 {
                 continue;
             }
@@ -147,10 +155,6 @@ impl<'a> FullEquipments<'a> {
         }
 
         return (skills, slots);
-    }
-
-    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a> + 'a>> {
-        &self.equipments
     }
 
     pub fn get_full_equip_id(equipments: &Vec<&Box<dyn CalcEquipment<'a> + 'a>>) -> String {
