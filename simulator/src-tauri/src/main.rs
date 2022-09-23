@@ -338,6 +338,7 @@ fn check_possibility<'a>(
         "rakna_armguards_x",
         "silver_solcoil",
         "storge_greaves",
+        dm.empty_talisman.id(),
     ];
 
     let _debug_case = debug_case
@@ -414,6 +415,19 @@ fn check_possibility<'a>(
 
         deco_sum_per_level.sort();
 
+        if is_debug_case {
+            debug!(
+                "Slot combs per skill: id: {}, level: {}, combs: {:?}",
+                skill_id,
+                level,
+                dm.deco_combinations
+                    .get(skill_id)
+                    .unwrap()
+                    .get(level as usize - 1)
+                    .unwrap()
+            );
+        }
+
         minimum_slot_sum += deco_sum_per_level[0];
     }
 
@@ -421,7 +435,10 @@ fn check_possibility<'a>(
 
     if equip_slot_sum < minimum_slot_sum {
         if is_debug_case {
-            debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
+            debug!(
+                "Debug slots: {} < {}, avail_slots: {:?}, req_skills: {:?}",
+                equip_slot_sum, minimum_slot_sum, avail_slots, req_skills
+            );
         }
 
         return None;
