@@ -7,47 +7,35 @@ use crate::{
         deco_combination::{DecorationCombination, DecorationCombinations},
         skill::MAX_SLOT_LEVEL,
     },
+    BoxCalcEquipment,
 };
 
 #[derive(Clone)]
 pub struct FullEquipments<'a> {
     pub weapon_slots: Vec<i32>,
-    pub equipments: Vec<Box<dyn CalcEquipment<'a> + 'a>>,
+    pub equipments: Vec<BoxCalcEquipment<'a>>,
 
     pub all_skills: HashMap<String, i32>,
     pub avail_slots: Vec<i32>,
 
-    equipments_by_part: HashMap<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>,
+    equipments_by_part: HashMap<ArmorPart, BoxCalcEquipment<'a>>,
 }
 
 impl<'a> FullEquipments<'a> {
-    pub fn new(
-        weapon_slots: Vec<i32>,
-        equipments: Vec<Box<dyn CalcEquipment<'a> + 'a>>,
-    ) -> FullEquipments {
-        let mut ret = FullEquipments {
+    pub fn new(weapon_slots: Vec<i32>, equipments: Vec<BoxCalcEquipment<'a>>) -> FullEquipments {
+        let equipments_by_part = Self::save_by_part_clone(&equipments);
+        let (all_skills, avail_slots) = Self::calculate_skills_slots(&weapon_slots, &equipments);
+
+        FullEquipments {
             weapon_slots,
             equipments,
-            all_skills: Default::default(),
-            avail_slots: Default::default(),
-            equipments_by_part: Default::default(),
-        };
-
-        (ret.all_skills, ret.avail_slots) =
-            Self::calculate_skills_slots(&ret.weapon_slots, &ret.equipments);
-
-        let mut equipments_by_part = HashMap::<ArmorPart, Box<dyn CalcEquipment<'a> + 'a>>::new();
-
-        for equipment in ret.equipments() {
-            equipments_by_part.insert(equipment.part().clone(), equipment.clone_dyn());
+            all_skills,
+            avail_slots,
+            equipments_by_part,
         }
-
-        ret.equipments_by_part = equipments_by_part;
-
-        ret
     }
 
-    pub fn get_by_part(&self, part: &ArmorPart) -> &Box<dyn CalcEquipment<'a> + 'a> {
+    pub fn get_by_part(&self, part: &ArmorPart) -> &BoxCalcEquipment<'a> {
         &self.equipments_by_part[part]
     }
 
@@ -109,13 +97,13 @@ impl<'a> FullEquipments<'a> {
         DecorationCombination::is_possible_static_mut(&mut self.avail_slots, req_slots)
     }
 
-    pub fn equipments(&self) -> &Vec<Box<dyn CalcEquipment<'a> + 'a>> {
+    pub fn equipments(&self) -> &Vec<BoxCalcEquipment<'a>> {
         &self.equipments
     }
 
     pub fn calculate_skills_slots(
         weapon_slots: &Vec<i32>,
-        equipments: &Vec<Box<dyn CalcEquipment<'a> + 'a>>,
+        equipments: &Vec<BoxCalcEquipment<'a>>,
     ) -> (HashMap<String, i32>, Vec<i32>) {
         let mut skills = HashMap::<String, i32>::new();
         let mut slots = Vec::<i32>::new();
@@ -157,7 +145,32 @@ impl<'a> FullEquipments<'a> {
         return (skills, slots);
     }
 
-    pub fn get_full_equip_id(equipments: &Vec<&Box<dyn CalcEquipment<'a> + 'a>>) -> String {
+    // TODO: why lifetime error?
+    pub fn save_by_part(
+        equipments: &'a Vec<BoxCalcEquipment<'a>>,
+    ) -> HashMap<ArmorPart, &'a BoxCalcEquipment<'a>> {
+        let mut equipments_by_part = HashMap::new();
+
+        for equipment in equipments {
+            equipments_by_part.insert(equipment.part().clone(), equipment);
+        }
+
+        equipments_by_part
+    }
+
+    pub fn save_by_part_clone(
+        equipments: &Vec<BoxCalcEquipment<'a>>,
+    ) -> HashMap<ArmorPart, BoxCalcEquipment<'a>> {
+        let mut equipments_by_part = HashMap::new();
+
+        for equipment in equipments {
+            equipments_by_part.insert(equipment.part().clone(), equipment.clone());
+        }
+
+        equipments_by_part
+    }
+
+    pub fn get_full_equip_id(equipments: &Vec<&BoxCalcEquipment<'a>>) -> String {
         let mut equipments_by_part = HashMap::new();
 
         for equipment in equipments {

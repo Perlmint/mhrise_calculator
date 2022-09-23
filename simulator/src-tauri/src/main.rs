@@ -875,9 +875,11 @@ fn calculate_skillset<'a>(
             req_slots[slot_size_index] += count;
         }
 
-        let mut full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
+        let (avail_skills, mut avail_slots) =
+            FullEquipments::calculate_skills_slots(&weapon_slots, &real_parts);
 
-        let slot_success = full_equip.subtract_slots(&mut req_slots);
+        let slot_success =
+            DecorationCombination::is_possible_static_mut(&mut avail_slots, &mut req_slots);
 
         if slot_success == false {
             if is_debug_case {
@@ -912,7 +914,7 @@ fn calculate_skillset<'a>(
             minimum_slot_sum += deco_sum_per_level[0];
         }
 
-        let equip_slot_sum = full_equip.avail_slots.iter().sum::<i32>();
+        let equip_slot_sum = avail_slots.iter().sum::<i32>();
 
         if equip_slot_sum < minimum_slot_sum {
             if is_debug_case {
@@ -923,23 +925,23 @@ fn calculate_skillset<'a>(
 
         let has_possible_comb = dm
             .deco_combinations
-            .has_possible_combs(&req_skills, &full_equip.avail_slots);
+            .has_possible_combs(&req_skills, &avail_slots);
 
         if has_possible_comb == false {
             if is_debug_case {
                 debug!(
                     "Debug case no possible combs: {:?}, {:?}",
-                    full_equip.avail_slots, req_skills
+                    avail_slots, req_skills
                 );
             }
             continue;
         }
 
-        let total_point = CalcDeco::get_point(&full_equip.avail_slots);
+        let total_point = CalcDeco::get_point(&avail_slots);
 
         debug!(
                 "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
-                real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, full_equip.avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
+                real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
             );
 
         let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
@@ -947,12 +949,14 @@ fn calculate_skillset<'a>(
         if existing.is_none() {
             all_loop_tree.insert(
                 Reverse(total_point),
-                Vec::<(FullEquipments<'a>, HashMap<String, i32>)>::new(),
+                Vec::<(Vec<BoxCalcEquipment<'a>>, Vec<i32>, HashMap<String, i32>)>::new(),
             );
             existing = all_loop_tree.get_mut(&Reverse(total_point));
         }
 
-        existing.unwrap().push((full_equip, req_skills));
+        existing
+            .unwrap()
+            .push((real_parts, avail_slots, req_skills));
         total_case_count += 1;
 
         if MAX_ANSWER_LENGTH <= total_case_count {
@@ -984,14 +988,15 @@ fn calculate_skillset<'a>(
     let mut answers = Vec::new();
 
     for (_, case_vec) in &all_loop_tree {
-        for (full_equip, req_skills) in case_vec {
+        for (real_parts, avail_slots, req_skills) in case_vec {
             total_index += 1;
 
             calculate_full_equip(
                 dm,
                 &req_skills,
                 &weapon_slots,
-                &full_equip,
+                &real_parts,
+                &avail_slots,
                 &mut answers,
                 &mut total_index,
             );
@@ -1081,12 +1086,13 @@ fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     req_skills: &HashMap<String, i32>,
     weapon_slots: &Vec<i32>,
-    full_equip: &FullEquipments<'a>,
+    real_parts: &Vec<BoxCalcEquipment<'a>>,
+    avail_slots: &Vec<i32>,
     answers: &mut Vec<(Vec<BoxCalcEquipment<'a>>, Vec<DecorationCombination>)>,
     total_index: &mut i32,
 ) -> i32 {
     let mut possible_deco_combs = dm.deco_combinations.get_possible_combs(&req_skills);
-    possible_deco_combs.retain(|comb| comb.is_possible(&full_equip.avail_slots));
+    possible_deco_combs.retain(|comb| comb.is_possible(avail_slots));
 
     let local_result = possible_deco_combs.len() != 0;
 
@@ -1094,8 +1100,10 @@ fn calculate_full_equip<'a>(
         return 1;
     }
 
-    debug!("Initial slots: {:?}", full_equip.avail_slots);
-    debug!("Skill ids: {:?}", full_equip.all_skills);
+    let (all_skills, _) = FullEquipments::calculate_skills_slots(weapon_slots, real_parts);
+
+    debug!("Initial slots: {:?}", avail_slots);
+    debug!("Skill ids: {:?}", all_skills);
 
     for local_answer in &possible_deco_combs {
         debug!("Local answer: {:?}", local_answer);
@@ -1113,48 +1121,49 @@ fn calculate_full_equip<'a>(
             .collect::<Vec<&Vec<i32>>>()
     );
 
+    let mut equips_by_part = HashMap::new();
+
+    for equipment in real_parts {
+        equips_by_part.insert(equipment.part().clone(), equipment);
+    }
+
+    let helm = equips_by_part[&ArmorPart::Helm];
+    let torso = equips_by_part[&ArmorPart::Torso];
+    let arm = equips_by_part[&ArmorPart::Arm];
+    let waist = equips_by_part[&ArmorPart::Waist];
+    let feet = equips_by_part[&ArmorPart::Feet];
+    let tali = equips_by_part[&ArmorPart::Talisman];
+
     debug!(
         "Armors ids: ({}), ({}), ({}), ({}), ({}), ({})",
-        full_equip.get_by_part(&ArmorPart::Helm).id(),
-        full_equip.get_by_part(&ArmorPart::Torso).id(),
-        full_equip.get_by_part(&ArmorPart::Arm).id(),
-        full_equip.get_by_part(&ArmorPart::Waist).id(),
-        full_equip.get_by_part(&ArmorPart::Feet).id(),
-        full_equip.get_by_part(&ArmorPart::Talisman).id(),
+        helm.id(),
+        torso.id(),
+        arm.id(),
+        waist.id(),
+        feet.id(),
+        tali.id(),
     );
 
     debug!(
         "Armors names: ({}), ({}), ({}), ({}), ({})",
-        full_equip
-            .get_by_part(&ArmorPart::Helm)
-            .as_armor()
-            .name("ko"),
-        full_equip
-            .get_by_part(&ArmorPart::Torso)
-            .as_armor()
-            .name("ko"),
-        full_equip
-            .get_by_part(&ArmorPart::Arm)
-            .as_armor()
-            .name("ko"),
-        full_equip
-            .get_by_part(&ArmorPart::Waist)
-            .as_armor()
-            .name("ko"),
-        full_equip
-            .get_by_part(&ArmorPart::Feet)
-            .as_armor()
-            .name("ko"),
+        helm.as_armor().name("ko"),
+        torso.as_armor().name("ko"),
+        arm.as_armor().name("ko"),
+        waist.as_armor().name("ko"),
+        feet.as_armor().name("ko"),
     );
 
     let mut real_armors = Vec::<Vec<BoxCalcEquipment<'a>>>::new();
 
-    for equipment in full_equip.equipments() {
-        let is_slot_equip = BaseArmor::is_slot_armor(equipment.id());
+    for equipment in real_parts {
+        let equip_id = equipment.id();
+        let part = equipment.part();
+
+        let is_slot_equip = BaseArmor::is_slot_armor(equip_id);
 
         if is_slot_equip {
-            if equipment.part() == &ArmorPart::Talisman {
-                let talis_by_slot = dm.talismans_by_slot.get(equipment.id()).unwrap();
+            if part == &ArmorPart::Talisman {
+                let talis_by_slot = dm.talismans_by_slot.get(equip_id).unwrap();
 
                 let mut all_real_talis = Vec::new();
 
@@ -1165,7 +1174,7 @@ fn calculate_full_equip<'a>(
 
                 real_armors.push(all_real_talis);
             } else {
-                let armors_by_slot = &dm.armors_by_slot[equipment.part()][equipment.id()];
+                let armors_by_slot = &dm.armors_by_slot[part][equip_id];
 
                 let mut all_real_armors = Vec::<BoxCalcEquipment<'a>>::new();
 
