@@ -84,7 +84,7 @@ pub trait CalcEquipment<'a> {
         point
     }
 
-    fn subtract_skills(&mut self, req_skills: &mut HashMap<String, i32>) -> HashMap<String, i32> {
+    fn subtract_skills(&self, req_skills: &mut HashMap<String, i32>) -> HashMap<String, i32> {
         let mut diffs = HashMap::new();
 
         for (id, level) in self.skills().clone() {
@@ -105,16 +105,6 @@ pub trait CalcEquipment<'a> {
             }
 
             diffs.insert(id, taken);
-        }
-
-        for (id, taken) in &diffs {
-            let level = self.mut_skills().get_mut(id).unwrap();
-
-            *level -= taken;
-
-            if *level == 0 {
-                self.mut_skills().remove(id);
-            }
         }
 
         return diffs;

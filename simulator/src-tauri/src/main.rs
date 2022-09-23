@@ -812,7 +812,7 @@ fn calculate_skillset<'a>(
         let mut req_skills = selected_skills.clone();
         let mut req_slots = free_slots.clone();
 
-        let mut real_parts = vec![
+        let real_parts = vec![
             equipments[0].clone(),
             equipments[1].clone(),
             equipments[2].clone(),
@@ -841,7 +841,7 @@ fn calculate_skillset<'a>(
 
         let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
 
-        for part in real_parts.iter_mut() {
+        for part in real_parts.iter() {
             part.subtract_skills(&mut req_skills);
         }
 
