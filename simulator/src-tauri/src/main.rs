@@ -1077,37 +1077,6 @@ fn calculate_skillset<'a>(
     );
 }
 
-fn compare_failed_slot_armors(slot_armors: &mut HashSet<String>, armor: &CalcArmor) {
-    if BaseArmor::is_slot_armor(armor.id()) == false {
-        return;
-    }
-
-    let mut no_superior_exists = true;
-    let mut remove_ids = Vec::new();
-
-    for failed_id in slot_armors.clone() {
-        let failed_slots = BaseArmor::parse_slot_armor_id(&failed_id);
-
-        let cmp_result = DecorationCombinations::compare(&failed_slots, &armor.slots());
-
-        if cmp_result == Ordering::Less {
-            remove_ids.push(failed_id);
-            break;
-        } else if cmp_result == Ordering::Greater {
-            no_superior_exists = false;
-            break;
-        }
-    }
-
-    for remove_id in remove_ids {
-        slot_armors.remove(&remove_id);
-    }
-
-    if no_superior_exists {
-        slot_armors.insert(armor.id().clone());
-    }
-}
-
 fn calculate_full_equip<'a>(
     dm: &'a DataManager,
     req_skills: &HashMap<String, i32>,
