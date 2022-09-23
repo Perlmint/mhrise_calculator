@@ -1213,8 +1213,8 @@ fn calculate_full_equip<'a>(
         answers_equip.push(equipments);
     }
 
-    for equip in answers_equip.iter() {
-        answers.push((equip.clone(), possible_deco_combs.clone()));
+    for equip in answers_equip.into_iter() {
+        answers.push((equip, possible_deco_combs.clone()));
     }
 
     info!(
