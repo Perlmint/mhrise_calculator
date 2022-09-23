@@ -1021,7 +1021,7 @@ fn calculate_skillset<'a>(
     info!("{}", ret);
 
     let result_equipments = answers
-        .iter()
+        .into_iter()
         .map(|(equipments, deco_combs)| {
             let result_armors = equipments
                 .iter()
@@ -1051,7 +1051,7 @@ fn calculate_skillset<'a>(
                 })
                 .collect::<Vec<ResultDecorationCombination>>();
 
-            let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equipments.clone());
+            let full_equip = FullEquipments::<'a>::new(weapon_slots.clone(), equipments);
             let talisman = full_equip.get_by_part(&ArmorPart::Talisman).as_talisman(); // TODO: without FullEquipments
 
             let result_tali = ResultTalisman {
