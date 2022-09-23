@@ -7,7 +7,7 @@ pub static MAX_ANSWER_LENGTH: i32 = 200;
 
 use csv::StringRecord;
 use log::{debug, info};
-use std::cmp::{Ordering, Reverse};
+use std::cmp::Reverse;
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::File;
 use std::io::BufReader;
@@ -16,7 +16,6 @@ use std::time::Instant;
 
 use data::armor::{ArmorPart, SexType};
 use data::data_manager::DataManager;
-use data::deco_combination::DecorationCombinations;
 use itertools::iproduct;
 use serde::{de, Serialize};
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu, WindowBuilder};
@@ -822,7 +821,7 @@ fn calculate_skillset<'a>(
             equipments[5].clone(),
         ];
 
-        let real_ids = real_parts
+        let _real_ids = real_parts
             .iter()
             .map(|part| part.id().clone())
             .collect::<HashSet<String>>();
@@ -835,7 +834,7 @@ fn calculate_skillset<'a>(
             "lambent_sash",
         ];
 
-        let debug_case = debug_case
+        let _debug_case = debug_case
             .iter()
             .map(|id| id.to_string())
             .collect::<HashSet<String>>();
@@ -875,7 +874,7 @@ fn calculate_skillset<'a>(
             req_slots[slot_size_index] += count;
         }
 
-        let (avail_skills, mut avail_slots) =
+        let (_, mut avail_slots) =
             FullEquipments::calculate_skills_slots(&weapon_slots, &real_parts);
 
         let slot_success =

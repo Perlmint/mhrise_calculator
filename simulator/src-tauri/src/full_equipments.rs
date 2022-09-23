@@ -1,7 +1,6 @@
-use std::{collections::HashMap, marker::PhantomData};
+use std::collections::HashMap;
 
 use crate::{
-    calc::calc_equipment::CalcEquipment,
     data::{
         armor::ArmorPart,
         deco_combination::{DecorationCombination, DecorationCombinations},
@@ -93,14 +92,6 @@ impl<'a> FullEquipments<'a> {
         (req_deco_combs.len() != 0, req_deco_combs)
     }
 
-    pub fn subtract_slots(&mut self, req_slots: &mut Vec<i32>) -> bool {
-        DecorationCombination::is_possible_static_mut(&mut self.avail_slots, req_slots)
-    }
-
-    pub fn equipments(&self) -> &Vec<BoxCalcEquipment<'a>> {
-        &self.equipments
-    }
-
     pub fn calculate_skills_slots(
         weapon_slots: &Vec<i32>,
         equipments: &Vec<BoxCalcEquipment<'a>>,
@@ -146,7 +137,7 @@ impl<'a> FullEquipments<'a> {
     }
 
     // TODO: why lifetime error?
-    pub fn save_by_part(
+    pub fn _save_by_part(
         equipments: &'a Vec<BoxCalcEquipment<'a>>,
     ) -> HashMap<ArmorPart, &'a BoxCalcEquipment<'a>> {
         let mut equipments_by_part = HashMap::new();
