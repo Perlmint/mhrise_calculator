@@ -619,37 +619,37 @@ fn calculate_skillset<'a>(
     }
 
     // TODO: save inferior armors/talismans later in order to give choices to choose for defense stats
-    let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor>>::new();
-    let mut armors_count_after = 0;
+    // let mut all_armors = HashMap::<ArmorPart, Vec<CalcArmor>>::new();
+    // let mut armors_count_after = 0;
 
-    for (part, armor) in temp_armors {
-        let mut existing = all_armors.get_mut(&part);
+    // for (part, armor) in temp_armors {
+    //     let mut existing = all_armors.get_mut(&part);
 
-        if existing.is_none() {
-            all_armors.insert(part.clone(), Vec::<CalcArmor>::new());
-            existing = all_armors.get_mut(&part);
-        }
+    //     if existing.is_none() {
+    //         all_armors.insert(part.clone(), Vec::<CalcArmor>::new());
+    //         existing = all_armors.get_mut(&part);
+    //     }
 
-        existing.unwrap().push(armor.clone());
-        armors_count_after += 1;
-    }
+    //     existing.unwrap().push(armor.clone());
+    //     armors_count_after += 1;
+    // }
 
-    let all_talismans = temp_talismans
-        .iter_mut()
-        .map(|tali| tali.clone())
-        .collect::<Vec<CalcTalisman>>();
+    // let all_talismans = temp_talismans
+    //     .iter_mut()
+    //     .map(|tali| tali.clone())
+    //     .collect::<Vec<CalcTalisman>>();
 
-    let talisman_count_after = all_talismans.len();
+    // let talisman_count_after = all_talismans.len();
 
-    info!(
-        "Armors count before & after: {} -> {}",
-        armors_count_before, armors_count_after
-    );
+    // info!(
+    //     "Armors count before & after: {} -> {}",
+    //     armors_count_before, armors_count_after
+    // );
 
-    info!(
-        "Talisman count before & after: {} -> {}",
-        talisman_count_before, talisman_count_after
-    );
+    // info!(
+    //     "Talisman count before & after: {} -> {}",
+    //     talisman_count_before, talisman_count_after
+    // );
 
     let mut all_slot_equips = HashMap::<ArmorPart, HashMap<String, BoxCalcEquipment<'a>>>::new();
 
