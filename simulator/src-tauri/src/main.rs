@@ -308,6 +308,150 @@ struct ResultDecorationCombination {
     pub slots_sum: Vec<i32>,
 }
 
+fn check_possibility<'a>(
+    dm: &DataManager,
+    weapon_slots: &Vec<i32>,
+    req_skills: &HashMap<String, i32>,
+    req_slots: &Vec<i32>,
+    equipments: &Vec<&'_ BoxCalcEquipment<'a>>,
+) -> Option<(Vec<BoxCalcEquipment<'a>>, Vec<i32>, HashMap<String, i32>)> {
+    let mut req_skills = req_skills.clone();
+    let mut req_slots = req_slots.clone();
+
+    let real_parts = vec![
+        equipments[0].clone(),
+        equipments[1].clone(),
+        equipments[2].clone(),
+        equipments[3].clone(),
+        equipments[4].clone(),
+        equipments[5].clone(),
+    ];
+
+    let _real_ids = real_parts
+        .iter()
+        .map(|part| part.id().clone())
+        .collect::<HashSet<String>>();
+
+    let debug_case = vec![
+        "rakna_greaves_x",
+        "storge_helm",
+        "archfiend_armor_baulo",
+        "silver_solbraces",
+        "lambent_sash",
+    ];
+
+    let _debug_case = debug_case
+        .iter()
+        .map(|id| id.to_string())
+        .collect::<HashSet<String>>();
+
+    let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
+
+    for part in real_parts.iter() {
+        part.subtract_skills(&mut req_skills);
+    }
+
+    let is_debug_case = false;
+
+    /*
+    let is_debug_case = debug_case == real_ids;
+
+    if is_debug_case == false {
+        continue;
+    } else {
+        debug!("Debug case reached");
+    }
+    */
+
+    let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
+
+    if no_deco_skills.len() != 0 {
+        panic!("This shouldn't happen");
+    }
+
+    let single_deco_skills = single_deco_skills
+        .iter()
+        .map(|(id, (slot_size, count))| (id, *slot_size, *count))
+        .collect::<Vec<(&String, i32, i32)>>();
+
+    let single_decos_as_slots = CalcDeco::convert_to_slots(&single_deco_skills);
+
+    for (slot_size_index, count) in single_decos_as_slots.iter().enumerate() {
+        req_slots[slot_size_index] += count;
+    }
+
+    let (_, mut avail_slots) = FullEquipments::calculate_skills_slots(&weapon_slots, &real_parts);
+
+    let slot_success =
+        DecorationCombination::is_possible_static_mut(&mut avail_slots, &mut req_slots);
+
+    if slot_success == false {
+        if is_debug_case {
+            debug!(
+                "Debug slots: {:?}, {:?}, {:?}",
+                single_deco_skills, init_equip.avail_slots, req_slots
+            );
+        }
+
+        return None;
+    }
+
+    for (id, _, _) in &single_deco_skills {
+        req_skills.remove(*id);
+    }
+
+    // This only calculates the number of slots regardless of slot size, just for candidate optimization
+    let mut minimum_slot_sum = 0;
+
+    for (skill_id, &level) in &req_skills {
+        let mut deco_sum_per_level = dm
+            .deco_combinations
+            .get(skill_id)
+            .unwrap()
+            .get(level as usize - 1)
+            .unwrap()
+            .iter()
+            .map(|comb| comb.iter().sum::<i32>())
+            .collect::<Vec<i32>>();
+
+        deco_sum_per_level.sort();
+
+        minimum_slot_sum += deco_sum_per_level[0];
+    }
+
+    let equip_slot_sum = avail_slots.iter().sum::<i32>();
+
+    if equip_slot_sum < minimum_slot_sum {
+        if is_debug_case {
+            debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
+        }
+
+        return None;
+    }
+
+    let has_possible_comb = dm
+        .deco_combinations
+        .has_possible_combs(&req_skills, &avail_slots);
+
+    if has_possible_comb == false {
+        if is_debug_case {
+            debug!(
+                "Debug case no possible combs: {:?}, {:?}",
+                avail_slots, req_skills
+            );
+        }
+
+        return None;
+    }
+
+    debug!(
+            "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}",
+            real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, avail_slots, minimum_slot_sum,  equip_slot_sum
+        );
+
+    Some((real_parts, avail_slots, req_skills))
+}
+
 #[tauri::command]
 fn cmd_calculate_skillset(
     weapon_slots: Vec<i32>,
@@ -677,7 +821,7 @@ fn calculate_skillset<'a>(
     ));
 
     info!(
-        "Unique armors count: {}, calculation: {:?}\n",
+        "Unique armors count: {}, calculation: {:?}",
         possible_unique_equips.len(),
         start_time.elapsed()
     );
@@ -809,139 +953,21 @@ fn calculate_skillset<'a>(
     let mut total_case_count = 0;
 
     for (_, equipments) in all_calculate_cases {
-        let mut req_skills = selected_skills.clone();
-        let mut req_slots = free_slots.clone();
+        let possibility_result = check_possibility(
+            dm,
+            &weapon_slots,
+            &selected_skills,
+            &free_slots,
+            &equipments,
+        );
 
-        let real_parts = vec![
-            equipments[0].clone(),
-            equipments[1].clone(),
-            equipments[2].clone(),
-            equipments[3].clone(),
-            equipments[4].clone(),
-            equipments[5].clone(),
-        ];
-
-        let _real_ids = real_parts
-            .iter()
-            .map(|part| part.id().clone())
-            .collect::<HashSet<String>>();
-
-        let debug_case = vec![
-            "rakna_greaves_x",
-            "storge_helm",
-            "archfiend_armor_baulo",
-            "silver_solbraces",
-            "lambent_sash",
-        ];
-
-        let _debug_case = debug_case
-            .iter()
-            .map(|id| id.to_string())
-            .collect::<HashSet<String>>();
-
-        let init_equip = FullEquipments::<'a>::new(weapon_slots.clone(), real_parts.clone());
-
-        for part in real_parts.iter() {
-            part.subtract_skills(&mut req_skills);
-        }
-
-        let is_debug_case = false;
-
-        /*
-        let is_debug_case = debug_case == real_ids;
-
-        if is_debug_case == false {
-            continue;
-        } else {
-            debug!("Debug case reached");
-        }
-        */
-
-        let (no_deco_skills, single_deco_skills, _) = dm.get_skils_by_deco(&req_skills);
-
-        if no_deco_skills.len() != 0 {
-            panic!("This shouldn't happen");
-        }
-
-        let single_deco_skills = single_deco_skills
-            .iter()
-            .map(|(id, (slot_size, count))| (id, *slot_size, *count))
-            .collect::<Vec<(&String, i32, i32)>>();
-
-        let single_decos_as_slots = CalcDeco::convert_to_slots(&single_deco_skills);
-
-        for (slot_size_index, count) in single_decos_as_slots.iter().enumerate() {
-            req_slots[slot_size_index] += count;
-        }
-
-        let (_, mut avail_slots) =
-            FullEquipments::calculate_skills_slots(&weapon_slots, &real_parts);
-
-        let slot_success =
-            DecorationCombination::is_possible_static_mut(&mut avail_slots, &mut req_slots);
-
-        if slot_success == false {
-            if is_debug_case {
-                debug!(
-                    "Debug slots: {:?}, {:?}, {:?}",
-                    single_deco_skills, init_equip.avail_slots, req_slots
-                );
-            }
+        if possibility_result.is_none() {
             continue;
         }
 
-        for (id, _, _) in &single_deco_skills {
-            req_skills.remove(*id);
-        }
-
-        // This only calculates the number of slots regardless of slot size, just for candidate optimization
-        let mut minimum_slot_sum = 0;
-
-        for (skill_id, &level) in &req_skills {
-            let mut deco_sum_per_level = dm
-                .deco_combinations
-                .get(skill_id)
-                .unwrap()
-                .get(level as usize - 1)
-                .unwrap()
-                .iter()
-                .map(|comb| comb.iter().sum::<i32>())
-                .collect::<Vec<i32>>();
-
-            deco_sum_per_level.sort();
-
-            minimum_slot_sum += deco_sum_per_level[0];
-        }
-
-        let equip_slot_sum = avail_slots.iter().sum::<i32>();
-
-        if equip_slot_sum < minimum_slot_sum {
-            if is_debug_case {
-                debug!("Debug slots: {}, {}", equip_slot_sum, minimum_slot_sum);
-            }
-            continue;
-        }
-
-        let has_possible_comb = dm
-            .deco_combinations
-            .has_possible_combs(&req_skills, &avail_slots);
-
-        if has_possible_comb == false {
-            if is_debug_case {
-                debug!(
-                    "Debug case no possible combs: {:?}, {:?}",
-                    avail_slots, req_skills
-                );
-            }
-            continue;
-        }
+        let (real_parts, avail_slots, req_skills) = possibility_result.unwrap();
 
         let total_point = CalcDeco::get_point(&avail_slots);
-
-        debug!(
-                "Possible candidiate: {:?}\nleft skills: {:?}, slots: {:?}, minimum slots: {}, equip slot sum {}, point: {}",
-                real_parts.iter().map(|part| part.id()).collect::<Vec<&String>>(), req_skills, avail_slots, minimum_slot_sum,  equip_slot_sum, total_point
-            );
 
         let mut existing = all_loop_tree.get_mut(&Reverse(total_point));
 
