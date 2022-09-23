@@ -770,7 +770,7 @@ fn calculate_skillset<'a>(
         all_parts.push(parts);
     }
 
-    let mut all_unique_parts = HashMap::new();
+    let mut all_calculate_cases = HashMap::new();
     let mut all_parts_before_len = 0;
 
     for parts in &all_parts {
@@ -783,32 +783,32 @@ fn calculate_skillset<'a>(
 
             let full_equip_id = FullEquipments::get_full_equip_id(&equipments);
 
-            if all_unique_parts.contains_key(&full_equip_id) {
+            if all_calculate_cases.contains_key(&full_equip_id) {
                 continue;
             }
 
-            all_unique_parts.insert(full_equip_id, equipments);
+            all_calculate_cases.insert(full_equip_id, equipments);
         }
     }
 
     ret.push_str(&format!(
         "Empty armors expand: before count: {}, after count: {}, time: {:?}\n",
         all_parts_before_len,
-        all_unique_parts.len(),
+        all_calculate_cases.len(),
         start_time.elapsed()
     ));
 
     info!(
         "Empty armors expand: before count: {}, after count: {}, time: {:?}\n",
         all_parts_before_len,
-        all_unique_parts.len(),
+        all_calculate_cases.len(),
         start_time.elapsed()
     );
 
     let mut all_loop_tree = BTreeMap::new();
     let mut total_case_count = 0;
 
-    for (_, equipments) in all_unique_parts {
+    for (_, equipments) in all_calculate_cases {
         let mut req_skills = selected_skills.clone();
         let mut req_slots = free_slots.clone();
 
