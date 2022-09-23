@@ -108,7 +108,7 @@ async function get_talisman_file() {
   });
 
   if(file !== null && !Array.isArray(file)) {
-    anomaly_filename.value = file;
+    talisman_filename.value = file;
     
     parse_talisman_file(file);
   }
@@ -159,7 +159,7 @@ async function parse_talisman_file(filename: string) {
 
     <button @click="get_talisman_file()">Load talisman file</button>
 
-    <input v-model="anomaly_filename" placeholder="Talisman list filename (exported via mod)" />
+    <input v-model="talisman_filename" placeholder="Talisman list filename (exported via mod)" />
 
     <button @click="parse_talisman_file(talisman_filename)">Parse Talisman</button>
 
