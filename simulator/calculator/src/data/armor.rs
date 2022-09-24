@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 use lazy_static::lazy_static;
+use regex::Regex;
 use serde::{Deserialize, Serialize};
-use tauri::regex::Regex;
 
 pub static EMPTY_ARMOR_PREFIX: &str = "__empty";
 pub static SLOT_ARMOR_PREFIX: &str = "__slot";

@@ -1524,6 +1524,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "mhr-calculator"
+version = "0.1.0"
+dependencies = [
+ "csv",
+ "itertools",
+ "lazy_static",
+ "log",
+ "regex",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "mhr-sunbreak-anomaly-simulator"
 version = "0.0.0"
 dependencies = [
@@ -1532,6 +1545,7 @@ dependencies = [
  "itertools",
  "lazy_static",
  "log",
+ "mhr-calculator",
  "serde",
  "serde_json",
  "tauri",
